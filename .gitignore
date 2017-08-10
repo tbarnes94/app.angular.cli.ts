@@ -26,9 +26,9 @@ node_modules
 .vscode/*
 
 # misc
+*.lock
 *.log
 .sass-cache
-connect.lock
 coverage
 typings
 
