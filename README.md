@@ -18,7 +18,7 @@ yarn
 | `ng serve`                                | __Development Server__ with `webpack-dev-server`                           | [http://localhost:4200](http://localhost:4200) | Automatically reloaded on source file changes |
 | `ng serve --proxy-config proxy.conf.json` | __Development Server__ with `webpack-dev-server` and `proxy configuration` | [http://localhost:4200](http://localhost:4200) | Automatically reloaded on source file changes |
 |                                           |                                                                            |                                                |                                               |
-| `ng doc`                                  | __Documentation Generation__ with `typedoc`                                | `./docs`                                       |                                               |
+| `yarn doc`                                | __Documentation Generation__ with `typedoc`                                | `./docs`                                       |                                               |
 | `ng lint`                                 | __Static Code Analysis__ with `tslint`                                     |                                                |                                               |
 | `ng test`                                 | __Unit Tests__ with `karma`                                                |                                                |                                               |
 | `ng test --code-coverage`                 | __Unit Tests__ with `karma` and `coverage`                                 | `./coverage`                                   |                                               |

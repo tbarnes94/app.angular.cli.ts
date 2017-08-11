@@ -3,12 +3,23 @@
   "name": "app.angular.cli.ts",
   "license": "MIT",
   "scripts": {
+
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
+    "typedoc": "typedoc",
+
+    "start": "yarn run serve:proxy",
+    "serve": "ng serve",
+    "serve:proxy": "ng serve --proxy-config proxy.conf.json",
+
+    "doc": "typedoc --options 'typedoc.json' --exclude '**/*.(spec|d).ts' 'src'",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "test": "ng test",
+    "e2e": "ng e2e",
+
+    "build": "ng build -prod",
+
+    "ci": "ng help"
+
   },
   "private": true,
   "dependencies": {
