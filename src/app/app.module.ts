@@ -5,6 +5,9 @@ import { AppComponent } from './root/app.component';
 import { AppRouteModule } from './root/app-route.module';
 import { StoreModule } from './shared/store.module';
 
+import { CommonModule } from '../modules/commons';
+import { DashboardModule } from '../modules/dashboard';
+
 /**
  * https://angular.io/guide/styleguide#app-root-module
  */
@@ -19,6 +22,8 @@ import { StoreModule } from './shared/store.module';
     StoreModule.forRoot(),
 
     /** modules */
+    CommonModule.forRoot(),
+    DashboardModule.forRoot(),
 
   ],
   declarations: [

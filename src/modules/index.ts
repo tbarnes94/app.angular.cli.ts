@@ -1,1 +1,2 @@
-export const modules: boolean = true;
+export * from './commons';
+export * from './dashboard';
