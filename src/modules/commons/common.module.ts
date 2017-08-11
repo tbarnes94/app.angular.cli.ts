@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { CommonComponent } from './common/common.component';
-import { CommonReducers } from './shared/store/common.reducers';
+import { commonReducers } from './shared/store/common.reducers';
 
 /**
  * https://angular.io/guide/ngmodule#configure-core-services-with-coremoduleforroot
@@ -17,7 +17,7 @@ import { CommonReducers } from './shared/store/common.reducers';
 @NgModule({
   imports: [
     EffectsModule.forFeature([]),
-    StoreModule.forFeature('common', CommonReducers),
+    StoreModule.forFeature('common', commonReducers),
   ],
 })
 export class CommonRootModule {
