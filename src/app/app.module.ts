@@ -5,6 +5,7 @@ import { AppComponent } from './root/app.component';
 import { AppRouteModule } from './root/app-route.module';
 import { StoreModule } from './shared/store.module';
 
+import { ApiModule } from '../modules/api';
 import { CommonModule } from '../modules/commons';
 import { DashboardModule } from '../modules/dashboard';
 
@@ -12,6 +13,7 @@ import { DashboardModule } from '../modules/dashboard';
  * https://angular.io/guide/styleguide#app-root-module
  */
 @NgModule({
+
   imports: [
 
     /** node_modules */
@@ -22,6 +24,7 @@ import { DashboardModule } from '../modules/dashboard';
     StoreModule.forRoot(),
 
     /** modules */
+    ApiModule.forRoot({}),
     CommonModule.forRoot(),
     DashboardModule.forRoot(),
 
