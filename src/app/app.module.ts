@@ -5,6 +5,7 @@ import { AppComponent } from './root/app.component';
 import { AppRouteModule } from './root/app-route.module';
 import { StoreModule } from './shared/store.module';
 
+import { environment } from '../environments/environment';
 import { ApiModule } from '../modules/api';
 import { CommonModule } from '../modules/commons';
 import { DashboardModule } from '../modules/dashboard';
@@ -24,7 +25,7 @@ import { DashboardModule } from '../modules/dashboard';
     StoreModule.forRoot(),
 
     /** modules */
-    ApiModule.forRoot({}),
+    ApiModule.forRoot(environment.api),
     CommonModule.forRoot(),
     DashboardModule.forRoot(),
 
