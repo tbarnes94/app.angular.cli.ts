@@ -1,4 +1,3 @@
-/** @imports */
 import { HttpClient } from '@angular/common/http';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
@@ -68,13 +67,13 @@ export class ApiService {
    * @returns         http://reactivex.io/documentation/observable.html
    */
   public request<R, S>(host: string,
-                          path: string,
-                          method: string,
-                          headers: ObjectStrings,
-                          body?: R): Observable< ApiResponse<S> | ApiError > {
+                        path: string,
+                        method: string,
+                        headers: ObjectStrings,
+                        body?: R): Observable< ApiResponse<S> | ApiError > {
     return this.http.request<S>(
       method,
-      ( host ) ? `${ host }/${ path }` : path, {
+      ( host ) ? `${ host }/${ path }` : `${ this.options.root }/${ path }`, {
         headers: this.headers(headers),
         body: ( body ) ? body : undefined,
         observe: 'response',
