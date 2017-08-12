@@ -13,7 +13,7 @@ import { CommonComponent } from '../../modules/commons';
   styleUrls: [ './app.component.scss' ],
   encapsulation: ViewEncapsulation.Emulated,
   template: `
-    <div class="col-xs-12">
+    <div class='col-xs-12'>
       <div>
         <h1>Angular</h1>
       </div>
@@ -22,9 +22,9 @@ import { CommonComponent } from '../../modules/commons';
       </div>
       <div>
         <button
-          *ngIf="( this.token$ | async )"
-          (click)="onLogout()"
-          class="btn btn-primary"
+          *ngIf='( this.token$ | async )'
+          (click)='onLogout()'
+          class='btn btn-primary'
           >
           Logout
         </button>

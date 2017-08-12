@@ -27,7 +27,7 @@ export class AuthGuard extends CommonGuard {
   public canActivate(): Observable<boolean> {
     return this.auth.token$
       .map((o: boolean) => {
-        if (o) return true;
+        if (o) { return true; }
         this.common.redirect([ 'login' ]);
         return false;
       })

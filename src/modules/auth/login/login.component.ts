@@ -18,31 +18,31 @@ import { AuthCredentials } from '../shared/types/auth.credentials';
   encapsulation: ViewEncapsulation.Emulated,
   template: `
     <form
-      [formGroup]="this.formGroup"
-      (submit)="this.onSubmit(this.formGroup.value)"
+      [formGroup]='this.formGroup'
+      (submit)='this.onSubmit(this.formGroup.value)'
       >
-      <div class="row">
+      <div class='row'>
         <dynamic-bootstrap-form-control
-          *ngFor="let control of this.formModel" 
-          [hasErrorMessaging]="control.hasErrorMessages"
-          [group]="this.formGroup"
-          [model]="control"
+          *ngFor='let control of this.formModel'
+          [hasErrorMessaging]='control.hasErrorMessages'
+          [group]='this.formGroup'
+          [model]='control'
           >
         </dynamic-bootstrap-form-control>
       </div>
-      <div 
-        *ngIf="( this.error$ | async ) as error"
-        class="error"
+      <div
+        *ngIf='( this.error$ | async ) as error'
+        class='error'
         >
         {{ error.message }}
       </div>
-      <div *ngIf="( this.loader$ | async )">
+      <div *ngIf='( this.loader$ | async )'>
         Loading...
       </div>
       <button
-        [disabled]="this.formGroup.invalid"
-        class="btn btn-primary"
-        type="submit"
+        [disabled]='this.formGroup.invalid'
+        class='btn btn-primary'
+        type='submit'
         >
         Submit
       </button>
@@ -64,32 +64,32 @@ export class AuthLoginComponent extends CommonComponent {
   public formModel: Array<DynamicFormControlModel> = [
 
     new DynamicInputModel({
-      id: "username",
-      label: "Username",
+      id: 'username',
+      label: 'Username',
       errorMessages: {
-        required: "{{ label }} is required."
+        required: '{{ label }} is required.'
       },
       validators: {
         required: null,
       },
     }, {
       grid: {
-        container: "col-xs-12 col-sm-6"
+        container: 'col-xs-12 col-sm-6'
       }
     }),
 
     new DynamicInputModel({
-      id: "password",
-      label: "Password",
+      id: 'password',
+      label: 'Password',
       errorMessages: {
-        required: "{{ label }} is required."
+        required: '{{ label }} is required.'
       },
       validators: {
         required: null,
       },
     }, {
       grid: {
-        container: "col-xs-12 col-sm-6"
+        container: 'col-xs-12 col-sm-6'
       }
     }),
 

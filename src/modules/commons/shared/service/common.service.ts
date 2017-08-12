@@ -39,7 +39,7 @@ export class CommonService {
    */
   public select<T>(nodes: Array<string>,
                    filters: Observable<Array<Function>> | Array<Function> = new Array(),
-                   context: Object = this,): Observable<T> {
+                   context: Object = this): Observable<T> {
     let select$: Observable<any>;
     const filters$: Observable<Array<Function>> = ( filters instanceof Array )
         ? Observable.of(filters)

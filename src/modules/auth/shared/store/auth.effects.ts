@@ -30,7 +30,7 @@ export class AuthEffects extends CommonEffects {
     .map((o: AuthActions) => o.payload)
     .do((o) => this.common.dispatch(new AuthError(null)))
     .do((o) => this.common.dispatch(new AuthLoader(true)))
-    .switchMap((o) => this.api.request<null, ObjectStrings>("https://api.github.com", `users/kuwas`, "Get", {})) // undefined, login/webservices, Post
+    .switchMap((o) => this.api.request<null, ObjectStrings>('https://api.github.com', `users/kuwas`, 'Get', {})) // undefined, login/webservices, Post
     .do((o) => this.common.dispatch(new AuthLoader(false)))
     .map((o: any) => {
       if (!o.error) {
