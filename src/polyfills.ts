@@ -41,6 +41,7 @@ import 'core-js/es6/weak-map';
 import 'core-js/es6/reflect';
 import 'core-js/es7/reflect';
 
+/** rxjs/Observable */
 import 'rxjs/add/observable/concat';
 import 'rxjs/add/observable/empty';
 import 'rxjs/add/observable/forkJoin';
@@ -53,6 +54,7 @@ import 'rxjs/add/observable/merge';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/zip';
 
+/** rxjs/Operator */
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/combineAll';
 import 'rxjs/add/operator/combineLatest';
