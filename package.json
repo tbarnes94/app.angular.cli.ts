@@ -7,18 +7,34 @@
     "ng": "ng",
     "typedoc": "typedoc",
 
+    "clean:dist": "rm -rf 'dist'",
+    "clean:docs": "rm -rf 'docs'",
+    "clean:coverage": "rm -rf 'coverage'",
+
     "start": "yarn run serve:proxy",
     "serve": "ng serve",
-    "serve:proxy": "ng serve --proxy-config proxy.conf.json",
+    "serve:proxy": "ng serve --proxy-config 'proxy.conf.json'",
 
-    "doc": "typedoc --options 'typedoc.json' --exclude '**/*.(spec|d).ts' 'src'",
+    "predocs": "yarn run clean:docs",
+    "docs": "typedoc --options 'typedoc.json' --exclude '**/*.(spec|d).ts' 'src'",
+
+    "prelint": "",
     "lint": "ng lint",
-    "test": "ng test --code-coverage --single-run",
+
+    "test": "ng test",
+    "test:single": "ng test --single-run",
+    "pretest:coverage": "yarn run clean:coverage",
+    "test:coverage": "ng test --code-coverage",
+    "pretest:coverage:single": "yarn run clean:coverage",
+    "test:coverage:single": "ng test --code-coverage --single-run",
+
+    "pree2e": "",
     "e2e": "ng e2e",
 
-    "build": "ng build -prod",
+    "prebuild": "yarn run clean:dist",
+    "build": "ng build --target 'production'",
 
-    "preci": "yarn run doc && yarn run lint && yarn run test",
+    "preci": "yarn run docs && yarn run lint && yarn run test:single",
     "ci": "yarn run build"
 
   },

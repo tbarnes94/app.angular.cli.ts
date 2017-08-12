@@ -25,18 +25,18 @@ yarn
 | Command                                   | Description                                                                | Location                                       | Notes                                         |
 |-------------------------------------------|----------------------------------------------------------------------------|------------------------------------------------|-----------------------------------------------|
 |                                           |                                                                            |                                                |                                               |
-| `ng serve`                                | __Development Server__ with `webpack-dev-server`                           | [http://localhost:4200](http://localhost:4200) | Automatically reloaded on source file changes |
-| `ng serve --proxy-config proxy.conf.json` | __Development Server__ with `webpack-dev-server` and `proxy configuration` | [http://localhost:4200](http://localhost:4200) | Automatically reloaded on source file changes |
+| `yarn serve`                              | __Development Server__ with `webpack-dev-server`                           | [http://localhost:4200](http://localhost:4200) | Automatically reloaded on source file changes |
+| `yarn start` or `yarn serve:proxy`        | __Development Server__ with `webpack-dev-server` and `proxy configuration` | [http://localhost:4200](http://localhost:4200) | Automatically reloaded on source file changes |
 |                                           |                                                                            |                                                |                                               |
-| `yarn doc`                                | __Documentation Generation__ with `typedoc`                                | `./docs`                                       |                                               |
-| `ng lint`                                 | __Static Code Analysis__ with `tslint`                                     |                                                |                                               |
-| `ng test`                                 | __Unit Tests__ with `karma`                                                |                                                |                                               |
-| `ng test --code-coverage`                 | __Unit Tests__ with `karma` and `coverage`                                 | `./coverage`                                   |                                               |
-| `ng test --code-coverage --single-run`    | __Unit Tests__ with `karma`, `coverage`, and no `watch`                    | `./coverage`                                   |                                               |
-| `ng e2e`                                  | __End to End Tests__ with `protractor`                                     |                                                |                                               |
+| `yarn docs`                               | __Documentation Generation__ with `typedoc`                                | `./docs`                                       |                                               |
+| `yarn lint`                               | __Static Code Analysis__ with `tslint`                                     |                                                |                                               |
+| `yarn test`                               | __Unit Tests__ with `karma`                                                |                                                |                                               |
+| `yarn test:single`                        | __Unit Tests__ with `karma` and no `watch`                                 |                                                |                                               |
+| `yarn test:coverage`                      | __Unit Tests__ with `karma` and `coverage`                                 | `./coverage`                                   |                                               |
+| `yarn test:coverage:single`               | __Unit Tests__ with `karma`, `coverage`, and no `watch`                    | `./coverage`                                   |                                               |
+| `yarn e2e`                                | __End to End Tests__ with `protractor`                                     |                                                |                                               |
 |                                           |                                                                            |                                                |                                               |
-| `ng build`                                | __Build Artifact__ with `webpack`                                          | `./dist`                                       |                                               |
-| `ng build -prod`                          | __Build Artifact__ with `webpack` and `production mode`                    | `./dist`                                       |                                               |
+| `yarn build`                              | __Build Artifact__ with `webpack` and `production mode`                    | `./dist`                                       |                                               |
 |                                           |                                                                            |                                                |                                               |
 
 # Help
