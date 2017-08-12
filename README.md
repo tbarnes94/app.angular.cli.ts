@@ -32,6 +32,7 @@ yarn
 | `ng lint`                                 | __Static Code Analysis__ with `tslint`                                     |                                                |                                               |
 | `ng test`                                 | __Unit Tests__ with `karma`                                                |                                                |                                               |
 | `ng test --code-coverage`                 | __Unit Tests__ with `karma` and `coverage`                                 | `./coverage`                                   |                                               |
+| `ng test --code-coverage --single-run`    | __Unit Tests__ with `karma`, `coverage`, and no `watch`                    | `./coverage`                                   |                                               |
 | `ng e2e`                                  | __End to End Tests__ with `protractor`                                     |                                                |                                               |
 |                                           |                                                                            |                                                |                                               |
 | `ng build`                                | __Build Artifact__ with `webpack`                                          | `./dist`                                       |                                               |
