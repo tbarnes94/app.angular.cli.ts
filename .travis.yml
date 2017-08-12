@@ -16,7 +16,7 @@ notifications :
     on_failure : always
 
 before_install :
-  - echo $COVERALLS | base64 --decode >> ./etc/.coveralls.yml
+  - echo $COVERALLS | base64 --decode >> ./.coveralls.yml
   - npm install -g yarn
 
 install :
