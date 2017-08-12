@@ -11,7 +11,7 @@ import { CommonComponent } from '../../commons';
   styleUrls: [ './dashboard.component.scss' ],
   encapsulation: ViewEncapsulation.Emulated,
   template: `
-    Welcome to the Dashboard
+    <div>Welcome to the Dashboard</div>
   `,
 })
 export class DashboardComponent extends CommonComponent {
