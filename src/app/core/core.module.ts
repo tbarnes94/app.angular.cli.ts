@@ -12,15 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
   ],
   declarations: [],
+  providers: [],
   exports: [],
 })
-export class CoreModule {
-
-  /**
-   * https://angular.io/guide/ngmodule#configure-core-services-with-coremoduleforroot
-   */
-  public static forRoot(): ModuleWithProviders {
-    return { ngModule: CoreModule, providers: [] };
-  }
-
-}
+export class CoreModule {}

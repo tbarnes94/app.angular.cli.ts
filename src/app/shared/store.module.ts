@@ -19,15 +19,7 @@ import { reducers } from './store/reducers';
     // x StoreRouterConnectingModule ,
   ],
   declarations: [],
+  providers: [],
   exports: [],
 })
-export class StoreModule {
-
-  /**
-   * https://angular.io/guide/ngmodule#configure-core-services-with-coremoduleforroot
-   */
-  public static forRoot(): ModuleWithProviders {
-    return { ngModule: StoreModule, providers: [] };
-  }
-
-}
+export class StoreModule {}
