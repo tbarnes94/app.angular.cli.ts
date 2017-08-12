@@ -1,6 +1,6 @@
 import { ActionReducer } from '@ngrx/store';
-import { clone } from 'lodash';
 
+import { immutable } from '../helpers/common.helpers';
 import { CommonAction } from './common.action';
 
 /**
@@ -9,7 +9,7 @@ import { CommonAction } from './common.action';
 export function commonReducer<S, A extends CommonAction<any>>(type: string, start: S = null): ActionReducer<S, A> {
   return function (state: S = start, action: A): S {
     if (action.type === type) {
-      return clone(action.payload);
+      return immutable<S>(action.payload);
     }
     return state;
   };
