@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { DynamicFormsCoreModule } from '@ng2-dynamic-forms/core';
 
 import { CoreModule } from './core/core.module';
 import { AppComponent } from './root/app.component';
@@ -7,6 +8,7 @@ import { StoreModule } from './shared/store.module';
 
 import { environment } from '../environments/environment';
 import { ApiModule } from '../modules/api';
+import { AuthModule } from '../modules/auth';
 import { CommonModule } from '../modules/commons';
 import { DashboardModule } from '../modules/dashboard';
 
@@ -18,16 +20,19 @@ import { DashboardModule } from '../modules/dashboard';
   imports: [
 
     /** node_modules */
+    DynamicFormsCoreModule.forRoot(),
 
     /** application */
     AppRouteModule,
-    CoreModule.forRoot(),
-    StoreModule.forRoot(),
+    CoreModule,
+    StoreModule,
 
     /** modules */
     ApiModule.forRoot(environment.api),
+    AuthModule.forRoot(),
     CommonModule.forRoot(),
     DashboardModule.forRoot(),
+    CommonModule,
 
   ],
   declarations: [

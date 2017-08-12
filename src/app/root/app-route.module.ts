@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { Routes } from '@angular/router';
+
+import { AuthGuard } from '../../modules/auth';
+import { CommonPreloadStrategy } from '../../modules/commons';
 
 /**
  * https://angular.io/guide/router#milestone-6-asynchronous-routing
  */
 const route: Routes = [
-  { path: '', redirectTo: '', pathMatch: 'full' },
-  { path: 'dashboard', loadChildren: '../../modules/dashboard#DashboardModule' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: '', loadChildren: '../../modules/auth#AuthModule' },
+  { path: 'dashboard', loadChildren: '../../modules/dashboard#DashboardModule', canActivate: [AuthGuard] },
   { path: '**', redirectTo: '' },
 ];
 
@@ -16,7 +19,7 @@ const route: Routes = [
  * https://angular.io/guide/router#milestone-2-routing-module
  */
 @NgModule({
-  imports: [ RouterModule.forRoot(route, { preloadingStrategy: PreloadAllModules }) ],
+  imports: [ RouterModule.forRoot(route, { preloadingStrategy: CommonPreloadStrategy }) ],
   exports: [ RouterModule ],
 })
 export class AppRouteModule {
