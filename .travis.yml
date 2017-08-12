@@ -1,0 +1,30 @@
+---
+#####
+dist : trusty
+sudo : required
+group : edge
+
+language : node_js
+services : [ "docker" ]
+node_js : [ "8" ]
+
+notifications :
+  email :
+    recipients :
+      - $EMAIL
+    on_success : never
+    on_failure : always
+
+before_install :
+  - echo $COVERALLS | base64 --decode >> ./etc/.coveralls.yml
+  - npm install -g yarn
+
+install :
+  - yarn install
+
+script :
+  - yarn run ci
+  - export BRANCH="${TRAVIS_BRANCH/\//-}"
+  - export TAG=`if [ "$BRANCH" != "master" ] ; then echo "${BRANCH}-${TRAVIS_COMMIT}-${TRAVIS_BUILD_NUMBER}" ; else echo "latest" ; fi`
+  - docker build -f Dockerfile -t $TRAVIS_REPO_SLUG:$TAG .
+  - docker images -a

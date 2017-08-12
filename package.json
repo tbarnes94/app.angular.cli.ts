@@ -18,7 +18,8 @@
 
     "build": "ng build -prod",
 
-    "ci": "ng help"
+    "preci": "yarn run doc && yarn run lint && yarn run test",
+    "ci": "yarn run build"
 
   },
   "private": true,
