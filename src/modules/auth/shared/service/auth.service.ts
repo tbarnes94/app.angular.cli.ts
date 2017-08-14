@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
 import { CommonService } from '../../../commons/shared/service/common.service';
+import { AuthToken } from '../types/auth.token';
 
 /**
  * https://angular.io/tutorial/toh-pt4
@@ -21,7 +22,7 @@ export class AuthService {
   public constructor(protected readonly common: CommonService) {
     this.token$ = this.common
       .select([ 'auth', 'token' ])
-      .map((o) => (o !== null))
+      .map((o: AuthToken) => (o !== null && o.access_token !== undefined))
     ;
   }
 

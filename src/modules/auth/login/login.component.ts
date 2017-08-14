@@ -34,7 +34,7 @@ import { AuthCredentials } from '../shared/types/auth.credentials';
         *ngIf='( this.error$ | async ) as error'
         class='error'
         >
-        {{ error.message }}
+        {{ error }}
       </div>
       <div *ngIf='( this.loader$ | async )'>
         Loading...

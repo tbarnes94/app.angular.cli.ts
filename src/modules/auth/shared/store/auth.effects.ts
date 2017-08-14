@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Rx';
 import { CommonLoader } from '../../../commons';
 import { CommonEffects } from '../../../commons';
 import { ObjectStrings } from '../../../commons';
+import { AuthCredentials } from '../types/auth.credentials';
 import { AuthError } from './auth.actions';
 import { AuthLoader } from './auth.actions';
 import { AUTH_LOGIN_START } from './auth.actions';
@@ -30,14 +31,28 @@ export class AuthEffects extends CommonEffects {
     .map((o: AuthActions) => o.payload)
     .do((o) => this.common.dispatch(new AuthError(null)))
     .do((o) => this.common.dispatch(new AuthLoader(true)))
-    .switchMap((o) => this.api.request<null, ObjectStrings>('https://api.github.com', `users/kuwas`, 'Get', {})) // undefined, login/webservices, Post
+    .switchMap((o: AuthCredentials) => {
+      const auth: string = 'admin:secret!';
+      return this.api.request<string, ObjectStrings>(
+        undefined,
+        `oauth/token`,
+        'Post',
+        {
+          'Authorization': `Basic ${btoa(auth)}`,
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        `username=${o.username}&` +
+        `password=${o.password}&` +
+        `grant_type=password`
+      );
+    })
     .do((o) => this.common.dispatch(new AuthLoader(false)))
     .map((o: any) => {
-      if (!o.error) {
+      if (o.content && o.content.access_token) {
         return new AuthLoginComplete(o.content);
       }
       this.common.dispatch(new AuthLogout(null));
-      return new AuthError(o.error);
+      return new AuthError(o.error.message);
     })
     ;
 
