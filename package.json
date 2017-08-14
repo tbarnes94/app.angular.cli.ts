@@ -7,16 +7,16 @@
     "ng": "ng",
     "typedoc": "typedoc",
 
-    "clean:dist": "rm -rf 'dist'",
-    "clean:docs": "rm -rf 'docs'",
-    "clean:coverage": "rm -rf 'coverage'",
+    "clean:dist": "rm -rf \"dist\"",
+    "clean:docs": "rm -rf \"docs\"",
+    "clean:coverage": "rm -rf \"coverage\"",
 
     "start": "yarn run serve:proxy",
     "serve": "ng serve",
-    "serve:proxy": "ng serve --proxy-config 'proxy.conf.json'",
+    "serve:proxy": "ng serve --proxy-config \"proxy.conf.json\"",
 
     "predocs": "yarn run clean:docs",
-    "docs": "typedoc --options 'typedoc.json' --exclude '**/*.(spec|d).ts' 'src'",
+    "docs": "typedoc --options \"typedoc.json\" --exclude \"**/*.(spec|d).ts\" \"src\"",
 
     "prelint": "",
     "lint": "ng lint",
@@ -32,7 +32,7 @@
     "e2e": "ng e2e",
 
     "prebuild": "yarn run clean:dist",
-    "build": "ng build --target 'production'",
+    "build": "ng build --target \"production\"",
 
     "preci": "yarn run docs && yarn run lint && yarn run test:single",
     "ci": "yarn run build"
