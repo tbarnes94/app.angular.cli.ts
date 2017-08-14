@@ -7,16 +7,35 @@
 > [![Pull Requests][pullrequest-src]][pullrequest-lnk]
 > [![Issues][issues-src]][issues-lnk]
 
-[@angular/cli](https://github.com/angular/angular-cli) @ 1.3.0
+[@angular/cli](https://github.com/angular/angular-cli) @1.3.0
 
 # Setup
+
+## Windows
+
+* Install [Cmder](http://www.cmder.net)
+* Install [Node 8+](https://www.nodejs.org/en/download)
+
+```
+npm install -g yarn
+```
+
+## Proxies
+
+```
+npm config set proxy (url)
+npm config set https-proxy (url)
+yarn config set proxy (url)
+yarn config set https-proxy (url)
+```
+
+## Runtime
 
 * Install [Augury](https://chrome.google.com/webstore/detail/augury/elgalmkoelokbchhkhacckoklkejnhcd)
 * Install [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
 
 ```
-npm install -g yarn
-npm install -g @angular/cli
+yarn global add @angular/cli
 yarn
 ```
 
