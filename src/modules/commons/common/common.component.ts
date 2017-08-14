@@ -37,19 +37,6 @@ export class CommonComponent implements OnChanges,
   public readonly destroy$: Subject<boolean> = new Subject<boolean>();
 
   /**
-   * Constructor
-   * @param route     https://angular.io/api/router/ActivatedRoute
-   * @param common    https://angular.io/tutorial/toh-pt4
-   * @param auth      https://angular.io/tutorial/toh-pt4
-   * @param forms     https://github.com/udos86/ng2-dynamic-forms
-   */
-  public constructor(protected readonly route: ActivatedRoute,
-                     protected readonly common: CommonService,
-                     protected readonly auth: AuthService,
-                     protected readonly forms: DynamicFormService) {
-  }
-
-  /**
    * https://angular.io/api/core/OnChanges
    */
   public ngOnChanges(): void {
@@ -97,6 +84,19 @@ export class CommonComponent implements OnChanges,
   public ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
+  }
+
+  /**
+   * Constructor
+   * @param route     https://angular.io/api/router/ActivatedRoute
+   * @param common    https://angular.io/tutorial/toh-pt4
+   * @param auth      https://angular.io/tutorial/toh-pt4
+   * @param forms     https://github.com/udos86/ng2-dynamic-forms
+   */
+  public constructor(protected readonly route: ActivatedRoute,
+                     protected readonly common: CommonService,
+                     protected readonly auth: AuthService,
+                     protected readonly forms: DynamicFormService) {
   }
 
 }

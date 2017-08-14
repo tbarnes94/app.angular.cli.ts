@@ -11,17 +11,17 @@ import { CommonService } from '../service/common.service';
 export class CommonGuard implements CanActivate {
 
   /**
-   * Constructor
-   * @param common    https://angular.io/tutorial/toh-pt4
-   */
-  public constructor(protected readonly common: CommonService) {
-  }
-
-  /**
    * https://angular.io/api/router/CanActivate
    */
   public canActivate(): Observable<boolean> {
     return Observable.of(false);
+  }
+
+  /**
+   * Constructor
+   * @param common    https://angular.io/tutorial/toh-pt4
+   */
+  public constructor(protected readonly common: CommonService) {
   }
 
 }

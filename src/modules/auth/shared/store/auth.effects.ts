@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Effect } from '@ngrx/effects';
 import { Observable } from 'rxjs/Rx';
 
-import { CommonLoader } from '../../../commons';
 import { CommonEffects } from '../../../commons';
 import { ObjectStrings } from '../../../commons';
 import { AuthCredentials } from '../types/auth.credentials';

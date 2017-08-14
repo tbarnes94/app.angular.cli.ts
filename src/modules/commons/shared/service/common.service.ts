@@ -40,11 +40,12 @@ export class CommonService {
   public select<T>(nodes: Array<string>,
                    filters: Observable<Array<Function>> | Array<Function> = new Array(),
                    context: Object = this): Observable<T> {
+
     let select$: Observable<any>;
     const filters$: Observable<Array<Function>> = ( filters instanceof Array )
-        ? Observable.of(filters)
-        : filters
-        ;
+      ? Observable.of(filters)
+      : filters
+    ;
 
     if (nodes.length === 1) {
       select$ = this.store.select(nodes[ 0 ]);
@@ -75,13 +76,16 @@ export class CommonService {
    * @returns this
    */
   public loader(input: boolean, delay: number = 0): this {
+
     if (delay > 0) {
       clearTimeout(this.delay);
       this.delay = setTimeout(this.loader.bind(this, input), delay);
     } else {
       this.dispatch(new CommonLoader(input));
     }
+
     return this;
+
   }
 
   /**
@@ -100,14 +104,17 @@ export class CommonService {
    */
   public constructor(protected readonly router: Router,
                      protected readonly store: Store<any>) {
+
     this.router.events
       .filter((o) => ( o instanceof NavigationEnd || o instanceof NavigationCancel || o instanceof NavigationError ))
       .subscribe((o) => this.loader(false, 500))
     ;
+
     this.router.events
       .filter((o) => ( o instanceof NavigationStart ))
       .subscribe((o) => this.loader(true))
     ;
+
   }
 
 }

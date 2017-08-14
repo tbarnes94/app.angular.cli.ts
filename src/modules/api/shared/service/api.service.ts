@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
 import { ObjectStrings } from '../../../commons';
+import { print } from '../../../commons';
 import { ApiError } from '../types/api.error';
 import { ApiOptions } from '../types/api.options';
 import { ApiResponse } from '../types/api.response';
@@ -15,15 +16,6 @@ import { ApiResponse } from '../types/api.response';
  */
 @Injectable()
 export class ApiService {
-
-  /**
-   * Constructor
-   * @param options   https://angular.io/guide/ngmodule#configure-core-services-with-coremoduleforroot
-   * @param http      https://angular.io/api/common/http/HttpClient
-   */
-  public constructor(protected readonly options: ApiOptions,
-                     protected readonly http: HttpClient) {
-  }
 
   /**
    * @param h         https://angular.io/api/common/http/HttpHeaders
@@ -47,7 +39,7 @@ export class ApiService {
         ,
       )
     )
-    ;
+      ;
   }
 
   /**
@@ -67,10 +59,10 @@ export class ApiService {
    * @returns         http://reactivex.io/documentation/observable.html
    */
   public request<R, S>(host: string,
-                        path: string,
-                        method: string,
-                        headers: ObjectStrings,
-                        body?: R): Observable< ApiResponse<S> | ApiError > {
+                       path: string,
+                       method: string,
+                       headers: ObjectStrings,
+                       body?: R): Observable<ApiResponse<S> | ApiError> {
     return this.http.request<S>(
       method,
       ( host ) ? `${ host }/${ path }` : `${ this.options.root }/${ path }`, {
@@ -81,7 +73,18 @@ export class ApiService {
     )
       .map((o: HttpResponse<S>) => this.response<S>(o))
       .catch((o: HttpErrorResponse) => this.error(o))
+      .do(print.bind(this, 'ApiService'))
       ;
+
+  }
+
+  /**
+   * Constructor
+   * @param options   https://angular.io/guide/ngmodule#configure-core-services-with-coremoduleforroot
+   * @param http      https://angular.io/api/common/http/HttpClient
+   */
+  public constructor(protected readonly options: ApiOptions,
+                     protected readonly http: HttpClient) {
   }
 
 }
