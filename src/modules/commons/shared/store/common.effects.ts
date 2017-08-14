@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions } from '@ngrx/effects';
 
-import { ApiService } from '../../../api';
+import { ApiService } from '../../../api/shared/service/api.service';
 import { CommonService } from '../service/common.service';
 import { CommonAction } from './common.action';
 
