@@ -1,0 +1,31 @@
+{
+  "app": {
+    "root": {
+      "title": "Angular",
+      "logout": "Logout"
+    }
+  },
+  "auth": {
+    "loader": {
+      "message": "Loading..."
+    },
+    "login": {
+      "username": {
+        "label": "Username",
+        "error": {
+          "required": "{{ label }} is required."
+        }
+      },
+      "password": {
+        "label": "Password",
+        "error": {
+          "required": "{{ label }} is required."
+        }
+      },
+      "submit": "Submit"
+    }
+  },
+  "dashboard": {
+    "welcome": "Welcome to the Dashboard"
+  }
+}

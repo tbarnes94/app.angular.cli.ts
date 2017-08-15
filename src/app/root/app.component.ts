@@ -3,7 +3,10 @@ import { ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
 import { AuthLogout } from '../../modules/auth';
-import { CommonComponent } from '../../modules/commons';
+import { AuthService } from '../../modules/auth';
+import { CommonService } from '../../modules/commons';
+import { TranslateLanguage } from '../../modules/translate';
+import { TranslateService } from '../../modules/translate';
 
 /**
  * https://angular.io/guide/styleguide#app-root-module
@@ -15,7 +18,11 @@ import { CommonComponent } from '../../modules/commons';
   template: `
     <div class='col-xs-12'>
       <div>
-        <h1>Angular</h1>
+        <h1>{{ 'app.root.title' | translate }}</h1>
+      </div>
+      <div>
+        <button (click)='onLanguage("en-US")' class='btn btn-link' >English</button>
+        <button (click)='onLanguage("fr-CA")' class='btn btn-link' >Français</button>
       </div>
       <div>
         <router-outlet></router-outlet>
@@ -26,13 +33,13 @@ import { CommonComponent } from '../../modules/commons';
           (click)='onLogout()'
           class='btn btn-primary'
           >
-          Logout
+          {{ 'app.root.logout' | translate }}
         </button>
       </div>
     </div>
   `,
 })
-export class AppComponent extends CommonComponent {
+export class AppComponent {
 
   /**
    * http://reactivex.io/documentation/observable.html
@@ -43,7 +50,14 @@ export class AppComponent extends CommonComponent {
    * https://angular.io/api/core/OnInit
    */
   public ngOnInit(): void {
-    this.token$ = this.auth.token$.takeUntil(this.destroy$);
+    this.token$ = this.auth.token$;
+  }
+
+  /**
+   * @param input
+   */
+  public onLanguage(input: string): void {
+    this.common.dispatch(new TranslateLanguage(input));
   }
 
   /**
@@ -51,6 +65,17 @@ export class AppComponent extends CommonComponent {
    */
   public onLogout(): void {
     this.common.dispatch(new AuthLogout(null));
+  }
+
+  /**
+   * Constructor
+   * @param common      https://angular.io/tutorial/toh-pt4
+   * @param auth        https://angular.io/tutorial/toh-pt4
+   * @param translate   https://angular.io/tutorial/toh-pt4
+   */
+  public constructor(protected readonly common: CommonService,
+                     protected readonly auth: AuthService,
+                     protected readonly translate: TranslateService) {
   }
 
 }

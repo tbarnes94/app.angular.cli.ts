@@ -17,36 +17,38 @@ import { AuthCredentials } from '../shared/types/auth.credentials';
   styleUrls: [ './login.component.scss' ],
   encapsulation: ViewEncapsulation.Emulated,
   template: `
-    <form
-      [formGroup]='this.formGroup'
-      (submit)='this.onSubmit(this.formGroup.value)'
-      >
-      <div class='row'>
-        <dynamic-bootstrap-form-control
-          *ngFor='let control of this.formModel'
-          [hasErrorMessaging]='control.hasErrorMessages'
-          [group]='this.formGroup'
-          [model]='control'
+    <div *ngIf='( this.forms$ | async ) as forms' >
+      <form
+        [formGroup]='forms.group'
+        (submit)='this.onSubmit(forms.group.value)'
+        >
+        <div class='row'>
+          <dynamic-bootstrap-form-control
+            *ngFor='let control of forms.model'
+            [hasErrorMessaging]='control.hasErrorMessages'
+            [group]='forms.group'
+            [model]='control'
+            >
+          </dynamic-bootstrap-form-control>
+        </div>
+        <div
+          *ngIf='( this.error$ | async ) as error'
+          class='error'
           >
-        </dynamic-bootstrap-form-control>
-      </div>
-      <div
-        *ngIf='( this.error$ | async ) as error'
-        class='error'
-        >
-        {{ error }}
-      </div>
-      <div *ngIf='( this.loader$ | async )'>
-        Loading...
-      </div>
-      <button
-        [disabled]='this.formGroup.invalid'
-        class='btn btn-primary'
-        type='submit'
-        >
-        Submit
-      </button>
-    </form>
+          {{ 'auth.error.' + error }}
+        </div>
+        <div *ngIf='( this.loader$ | async )'>
+          {{ 'auth.loader.message' }}
+        </div>
+        <button
+          [disabled]='forms.group.invalid'
+          class='btn btn-primary'
+          type='submit'
+          >
+          {{ 'auth.login.submit' | translate }}
+        </button>
+      </form>
+    </div>
   `,
 })
 export class AuthLoginComponent extends CommonComponent {
@@ -56,52 +58,55 @@ export class AuthLoginComponent extends CommonComponent {
    */
   public error$: Observable<string>;
   public loader$: Observable<string>;
-
-  /**
-   * https://github.com/udos86/ng2-dynamic-forms
-   */
-  public formGroup: FormGroup;
-  public formModel: Array<DynamicFormControlModel> = [
-
-    new DynamicInputModel({
-      id: 'username',
-      label: 'Username',
-      errorMessages: {
-        required: '{{ label }} is required.'
-      },
-      validators: {
-        required: null,
-      },
-    }, {
-      grid: {
-        container: 'col-xs-12 col-sm-6'
-      }
-    }),
-
-    new DynamicInputModel({
-      id: 'password',
-      label: 'Password',
-      errorMessages: {
-        required: '{{ label }} is required.'
-      },
-      validators: {
-        required: null,
-      },
-    }, {
-      grid: {
-        container: 'col-xs-12 col-sm-6'
-      }
-    }),
-
-  ];
+  public forms$: Observable<any>;
 
   /**
    * https://angular.io/api/core/OnInit
    */
   public ngOnInit(): void {
+
     this.error$ = this.common.select<string>(['auth', 'error']).takeUntil(this.destroy$);
     this.loader$ = this.common.select<string>(['auth', 'loader']).takeUntil(this.destroy$);
-    this.formGroup = this.forms.createFormGroup(this.formModel);
+    this.forms$ = this.common.select<any>(['translate', 'translations'])
+      .filter((o) => (o !== null))
+      .map((o) => ([
+        new DynamicInputModel({
+          id: 'username',
+          label: o.auth.login.username.label,
+          errorMessages: {
+            required: o.auth.login.username.error.required,
+          },
+          validators: {
+            required: null,
+          },
+        }, {
+          grid: {
+            container: 'col-xs-12 col-sm-6'
+          }
+        }),
+        new DynamicInputModel({
+          id: 'password',
+          label: o.auth.login.password.label,
+          errorMessages: {
+            required: o.auth.login.username.error.required,
+          },
+          validators: {
+            required: null,
+          },
+        }, {
+          grid: {
+            container: 'col-xs-12 col-sm-6'
+          }
+        }),
+      ]))
+      .map((o) => ({ model: o, group: null }))
+      .map((o: any) => {
+        o.group = this.forms.createFormGroup(o.model);
+        return o;
+      })
+      .takeUntil(this.destroy$)
+      ;
+
   }
 
   /**

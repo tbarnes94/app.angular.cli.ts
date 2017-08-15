@@ -11,6 +11,7 @@ import { ApiModule } from '../modules/api';
 import { AuthModule } from '../modules/auth';
 import { CommonModule } from '../modules/commons';
 import { DashboardModule } from '../modules/dashboard';
+import { TranslateModule } from '../modules/translate';
 
 /**
  * https://angular.io/guide/styleguide#app-root-module
@@ -32,6 +33,7 @@ import { DashboardModule } from '../modules/dashboard';
     AuthModule.forRoot(),
     CommonModule.forRoot(),
     DashboardModule.forRoot(),
+    TranslateModule.forRoot(),
     CommonModule,
 
   ],

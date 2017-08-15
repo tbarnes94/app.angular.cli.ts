@@ -1,0 +1,31 @@
+{
+  "app": {
+    "root": {
+      "title": "Angular fr",
+      "logout": "Logout fr"
+    }
+  },
+  "auth": {
+    "loader": {
+      "message": "Loading... fr"
+    },
+    "login": {
+      "username": {
+        "label": "Username fr",
+        "error": {
+          "required": "{{ label }} is required fr."
+        }
+      },
+      "password": {
+        "label": "Password fr",
+        "error": {
+          "required": "{{ label }} is required fr."
+        }
+      },
+      "submit": "Submit fr"
+    }
+  },
+  "dashboard": {
+    "welcome": "Welcome to the Dashboard fr"
+  }
+}
