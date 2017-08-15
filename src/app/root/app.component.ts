@@ -20,21 +20,26 @@ import { TranslateService } from '../../modules/translate';
       <div>
         <h1>{{ 'app.root.title' | translate }}</h1>
       </div>
-      <div>
-        <button (click)='onLanguage("en-US")' class='btn btn-link' >English</button>
-        <button (click)='onLanguage("fr-CA")' class='btn btn-link' >Français</button>
+      <div *ngIf='( languages$ | async ) as languages' >
+        <span *ngFor='let language of languages' >
+          <button
+            (click)='onLanguage(language.id)'
+            class='btn btn-link'
+            >
+            {{ language.title }}
+          </button>
+        </span>
       </div>
-      <div>
-        <router-outlet></router-outlet>
-      </div>
-      <div>
+      <div *ngIf='( this.token$ | async )' >
         <button
-          *ngIf='( this.token$ | async )'
           (click)='onLogout()'
-          class='btn btn-primary'
+          class='btn btn-link'
           >
           {{ 'app.root.logout' | translate }}
         </button>
+      </div>
+      <div>
+        <router-outlet></router-outlet>
       </div>
     </div>
   `,
@@ -45,6 +50,10 @@ export class AppComponent {
    * http://reactivex.io/documentation/observable.html
    */
   public token$: Observable<boolean>;
+  public languages$: Observable<Array<any>> = Observable.of([
+    { id: 'en-US', title: 'English' },
+    { id: 'fr-CA', title: 'Français' },
+  ]);
 
   /**
    * https://angular.io/api/core/OnInit
