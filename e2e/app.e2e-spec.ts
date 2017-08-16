@@ -1,4 +1,4 @@
-import { AppPage } from './app.po';
+import { AppPage } from './app-page';
 
 describe('app', () => {
 
