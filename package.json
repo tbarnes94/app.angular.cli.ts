@@ -12,8 +12,8 @@
     "clean:coverage": "rm -rf \"coverage\"",
 
     "start": "yarn run serve:proxy",
-    "serve": "ng serve",
-    "serve:proxy": "ng serve --proxy-config \"proxy.conf.json\"",
+    "serve": "ng serve --open",
+    "serve:proxy": "ng serve --proxy-config \"proxy.conf.json\" --open",
 
     "predocs": "yarn run clean:docs",
     "docs": "typedoc --options \"typedoc.json\" --exclude \"**/*.(spec|d).ts\" \"src\"",
@@ -28,7 +28,7 @@
     "pretest:coverage:single": "yarn run clean:coverage",
     "test:coverage:single": "ng test --code-coverage --single-run",
 
-    "pree2e": "",
+    "pree2e": "yarn run clean:coverage",
     "e2e": "ng e2e",
 
     "prebuild": "yarn run clean:dist",
