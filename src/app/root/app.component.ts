@@ -13,7 +13,7 @@ import { TranslateService } from '../../modules/translate';
  */
 @Component({
   selector: 'app-root',
-  styleUrls: [ './app.component.scss' ],
+  styleUrls: [ './app.component.styl' ],
   encapsulation: ViewEncapsulation.Emulated,
   template: `
     <div>

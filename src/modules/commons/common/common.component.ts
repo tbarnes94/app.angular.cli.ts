@@ -19,7 +19,7 @@ import { CommonService } from '../shared/service/common.service';
  */
 @Component({
   selector: 'commons-common',
-  styleUrls: [ './common.component.scss' ],
+  styleUrls: [ './common.component.styl' ],
   template: ``,
 })
 export class CommonComponent implements OnChanges,

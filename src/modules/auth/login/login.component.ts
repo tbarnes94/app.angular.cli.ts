@@ -13,7 +13,7 @@ import { AuthCredentials } from '../shared/types/auth.credentials';
  */
 @Component({
   selector: 'auth-login',
-  styleUrls: [ './login.component.scss' ],
+  styleUrls: [ './login.component.styl' ],
   encapsulation: ViewEncapsulation.Emulated,
   template: `
     <div *ngIf='( this.forms$ | async ) as forms' >
