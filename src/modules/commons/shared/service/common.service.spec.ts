@@ -113,13 +113,13 @@ describe('<Common>', () => {
       expect(outpt[ 0 ]).toEqual(value);
     }));
 
-    it('should return response for loads() with delay', fakeAsync(() => {
+    it('should return response for loader() with delay', fakeAsync(() => {
       store.select().subscribe((o) => outpt = o);
       service.loader(true, 500); tick(1000);
       expect(outpt).toBeTruthy();
     }));
 
-    it('should return response for loads()', fakeAsync(() => {
+    it('should return response for loader()', fakeAsync(() => {
       store.select().subscribe((o) => outpt = o);
       service.loader(true); tick();
       expect(outpt).toBeTruthy();
