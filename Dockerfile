@@ -1,10 +1,11 @@
-FROM kuwas/nginx:latest
+FROM nginx:1.13-alpine
 MAINTAINER kuwas/dockerfiles
 
 # setup #
 
-COPY dist/ /app/var/
-RUN ls -la /app/var/*
+COPY dist/ /usr/share/nginx/html/
+COPY docker/nginx/default.conf /etc/nginx/conf.d/
+RUN ls -la /usr/share/nginx/html/*
 
 # cmd #
 
