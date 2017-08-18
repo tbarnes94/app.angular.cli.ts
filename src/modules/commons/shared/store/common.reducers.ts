@@ -9,13 +9,13 @@ import { commonReducer } from './common.reducer';
 /**
  * https://github.com/ngrx/store
  */
-export const commonLoaderReducer: ActionReducer<boolean, CommonLoader> = commonReducer<boolean, CommonLoader>(COMMON_LOADER, true);
+export const commonLoaderReducers: ActionReducer<boolean, CommonLoader> = commonReducer<boolean, CommonLoader>(COMMON_LOADER, true);
 
 /**
  * https://github.com/ngrx/store
  */
 export function commonReducers(state: any, action: CommonActions): any {
   return combineReducers({
-    loader: commonLoaderReducer,
+    loader: commonLoaderReducers,
   })(state, action);
 }
