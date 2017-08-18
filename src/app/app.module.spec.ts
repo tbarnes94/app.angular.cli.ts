@@ -1,7 +1,11 @@
-describe('app', () => {
+describe('<App>', () => {
 
-  it('should return response', () => {
-    expect(true).toBeTruthy();
+  describe('AppModule', () => {
+
+    it('should return response', () => {
+      expect(true).toBeTruthy();
+    });
+
   });
 
 });
