@@ -21,7 +21,7 @@ import { AuthCredentials } from '../shared/types/auth.credentials';
         [formGroup]='forms.group'
         (submit)='this.onSubmit(forms.group.value)'
         >
-        <div class='row'>
+        <div class='row' >
           <dynamic-bootstrap-form-control
             *ngFor='let control of forms.model'
             [hasErrorMessaging]='control.hasErrorMessages'
@@ -36,7 +36,7 @@ import { AuthCredentials } from '../shared/types/auth.credentials';
           >
           {{ 'auth.error.' + error | translate }}
         </div>
-        <div *ngIf='( this.loader$ | async )'>
+        <div *ngIf='( this.loader$ | async )' >
           {{ 'auth.loader.message' | translate }}
         </div>
         <button
@@ -80,7 +80,7 @@ export class AuthLoginComponent extends CommonComponent {
           },
         }, {
           grid: {
-            container: 'col-xs-12 col-sm-6'
+            container: 'col-xs-12 col-sm-6 col-lg-3'
           }
         }),
         new DynamicInputModel({
@@ -88,14 +88,14 @@ export class AuthLoginComponent extends CommonComponent {
           inputType: DYNAMIC_FORM_CONTROL_INPUT_TYPE_PASSWORD,
           label: o.auth.login.password.label,
           errorMessages: {
-            required: o.auth.login.username.error.required,
+            required: o.auth.login.password.error.required,
           },
           validators: {
             required: null,
           },
         }, {
           grid: {
-            container: 'col-xs-12 col-sm-6'
+            container: 'col-xs-12 col-sm-6 col-lg-3'
           }
         }),
       ]))

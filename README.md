@@ -36,7 +36,7 @@ yarn config set https-proxy (url)
 
 ```
 yarn global add @angular/cli
-yarn
+yarn install --ignore-optional
 ```
 
 # Commands

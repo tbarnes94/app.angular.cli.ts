@@ -16,28 +16,28 @@ import { TranslateService } from '../../modules/translate';
   styleUrls: [ './app.component.styl' ],
   encapsulation: ViewEncapsulation.Emulated,
   template: `
-    <div>
+    <div class='container' >
       <h1>{{ 'app.root.title' | translate }}</h1>
-    </div>
-    <div *ngIf='( languages$ | async ) as languages' >
-      <span *ngFor='let language of languages' >
+      <div *ngIf='( languages$ | async ) as languages' >
+        <span *ngFor='let language of languages' >
+          <button
+            (click)='onLanguage(language.id)'
+            class='btn btn-link'
+            >
+            {{ language.title }}
+          </button>
+        </span>
+      </div>
+      <div *ngIf='( this.token$ | async )' >
         <button
-          (click)='onLanguage(language.id)'
+          (click)='onLogout()'
           class='btn btn-link'
           >
-          {{ language.title }}
+          {{ 'app.root.logout' | translate }}
         </button>
-      </span>
+      </div>
     </div>
-    <div *ngIf='( this.token$ | async )' >
-      <button
-        (click)='onLogout()'
-        class='btn btn-link'
-        >
-        {{ 'app.root.logout' | translate }}
-      </button>
-    </div>
-    <div>
+    <div class='container' >
       <router-outlet></router-outlet>
     </div>
   `,
