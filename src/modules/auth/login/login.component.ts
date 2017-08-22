@@ -16,20 +16,22 @@ import { AuthCredentials } from '../shared/types/auth.credentials';
   styleUrls: [ './login.component.styl' ],
   encapsulation: ViewEncapsulation.Emulated,
   template: `
-    <div *ngIf='( this.forms$ | async ) as forms' >
+    <div
+      *ngIf='( this.forms$ | async ) as forms'
+      class='row'
+      >
       <form
         [formGroup]='forms.group'
         (submit)='this.onSubmit(forms.group.value)'
+        class='col-xs-12 col-sm-6 col-lg-3'
         >
-        <div class='row' >
-          <dynamic-bootstrap-form-control
-            *ngFor='let control of forms.model'
-            [hasErrorMessaging]='control.hasErrorMessages'
-            [group]='forms.group'
-            [model]='control'
-            >
-          </dynamic-bootstrap-form-control>
-        </div>
+        <dynamic-bootstrap-form-control
+          *ngFor='let control of forms.model'
+          [hasErrorMessaging]='control.hasErrorMessages'
+          [group]='forms.group'
+          [model]='control'
+          >
+        </dynamic-bootstrap-form-control>
         <div
           *ngIf='( this.error$ | async ) as error'
           class='error'
@@ -78,10 +80,6 @@ export class AuthLoginComponent extends CommonComponent {
           validators: {
             required: null,
           },
-        }, {
-          grid: {
-            container: 'col-xs-12 col-sm-6 col-lg-3'
-          }
         }),
         new DynamicInputModel({
           id: 'password',
@@ -93,10 +91,6 @@ export class AuthLoginComponent extends CommonComponent {
           validators: {
             required: null,
           },
-        }, {
-          grid: {
-            container: 'col-xs-12 col-sm-6 col-lg-3'
-          }
         }),
       ]))
       .map((o) => ({ model: o, group: null }))
