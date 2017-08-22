@@ -18,23 +18,22 @@ import { AuthCredentials } from '../shared/types/auth.credentials';
   template: `
     <div
       *ngIf='( this.forms$ | async ) as forms'
-      class='row'
       >
       <form
         [formGroup]='forms.group'
         (submit)='this.onSubmit(forms.group.value)'
-        class='col-xs-12 col-sm-6 col-lg-3'
         >
         <dynamic-bootstrap-form-control
           *ngFor='let control of forms.model'
           [hasErrorMessaging]='control.hasErrorMessages'
           [group]='forms.group'
           [model]='control'
+          class='row'
           >
         </dynamic-bootstrap-form-control>
         <div
           *ngIf='( this.error$ | async ) as error'
-          class='error'
+          class='server-error'
           >
           {{ 'auth.error.' + error | translate }}
         </div>
@@ -80,6 +79,10 @@ export class AuthLoginComponent extends CommonComponent {
           validators: {
             required: null,
           },
+        }, {
+          grid: {
+            container: 'col-xs-12 col-sm-6 col-md-6 col-lg-4'
+          }
         }),
         new DynamicInputModel({
           id: 'password',
@@ -91,6 +94,10 @@ export class AuthLoginComponent extends CommonComponent {
           validators: {
             required: null,
           },
+        }, {
+          grid: {
+            container: 'col-xs-12 col-sm-6 col-md-6 col-lg-4'
+          }
         }),
       ]))
       .map((o) => ({ model: o, group: null }))
