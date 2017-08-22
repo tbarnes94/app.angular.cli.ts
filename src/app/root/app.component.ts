@@ -21,7 +21,7 @@ import { TranslateService } from '../../modules/translate';
       <div *ngIf='( languages$ | async ) as languages' >
         <span *ngFor='let language of languages' >
           <button
-            (click)='onLanguage(language.id)'
+            (click)='this.onLanguage(language.id)'
             class='btn btn-link'
             >
             {{ language.title }}
@@ -30,7 +30,7 @@ import { TranslateService } from '../../modules/translate';
       </div>
       <div *ngIf='( this.token$ | async )' >
         <button
-          (click)='onLogout()'
+          (click)='this.onLogout()'
           class='btn btn-link'
           >
           {{ 'app.root.logout' | translate }}
