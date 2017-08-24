@@ -3,6 +3,8 @@ import { ActionReducer } from '@ngrx/store';
 import { ActionReducerMap } from '@ngrx/store';
 import { combineReducers } from '@ngrx/store';
 
+import { AUTH_LOGOUT } from '../../../modules/auth';
+
 /**
  * https://github.com/ngrx/store
  */
@@ -57,8 +59,18 @@ export function storage(reducer: ActionReducer<any>): ActionReducer<any> {
 
 }
 
+export function clear(reducer: ActionReducer<any>): ActionReducer<any> {
+  return (state: any, action: any): any => {
+    return (action.type === AUTH_LOGOUT)
+      ? reducer({ common: state.common, translate: state.translate }, action)
+      : reducer(state, action)
+      ;
+  };
+}
+
 export const metaReducers: Array<ActionReducer<any>> = [
   storage,
+  clear,
 ];
 
 export const reducers: ActionReducerMap<any> = {
