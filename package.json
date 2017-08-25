@@ -27,7 +27,7 @@
     "test:coverage": "ng test --code-coverage",
     "pretest:coverage:single": "yarn run clean:coverage",
     "test:coverage:single": "ng test --code-coverage --single-run",
-    "coverage": "",
+    "coverage": "ng help",
 
     "pree2e": "yarn run clean:coverage",
     "e2e": "ng e2e",
