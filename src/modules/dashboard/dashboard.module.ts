@@ -3,7 +3,7 @@ import { ModuleWithProviders } from '@angular/core';
 
 import { CommonModule } from '../commons';
 import { DashboardRouteModule } from './dashboard-route.module';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardDashboardComponent } from './dashboard/dashboard.component';
 
 /**
  * https://angular.io/guide/ngmodule#configure-core-services-with-coremoduleforroot
@@ -22,7 +22,7 @@ export class DashboardRootModule {
     CommonModule,
     DashboardRouteModule,
   ],
-  declarations: [ DashboardComponent ],
+  declarations: [ DashboardDashboardComponent ],
   exports: [],
 })
 export class DashboardModule {

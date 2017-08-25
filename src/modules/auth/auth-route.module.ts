@@ -8,7 +8,7 @@ import { AuthLoginComponent } from './login/login.component';
  * https://angular.io/guide/router#configuration
  */
 const route: Routes = [
-  {path: 'login', component: AuthLoginComponent}
+  { path: 'login', component: AuthLoginComponent }
 ];
 
 /**

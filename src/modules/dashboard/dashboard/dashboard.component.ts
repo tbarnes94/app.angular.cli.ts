@@ -16,5 +16,5 @@ import { CommonComponent } from '../../commons';
     </div>
   `,
 })
-export class DashboardComponent extends CommonComponent {
+export class DashboardDashboardComponent extends CommonComponent {
 }

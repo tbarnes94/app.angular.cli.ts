@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Routes } from '@angular/router';
 
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardDashboardComponent } from './dashboard/dashboard.component';
 
 /**
  * https://angular.io/guide/router#configuration
  */
 const route: Routes = [
-  {path: '', component: DashboardComponent, pathMatch: 'full'}
+  { path: '', component: DashboardDashboardComponent, pathMatch: 'full' }
 ];
 
 /**
