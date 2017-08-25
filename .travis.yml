@@ -1,30 +1,111 @@
 ---
-#####
+# .travis.yml
+# https://docs.travis-ci.com/user/languages
+# https://docs.travis-ci.com/user/customizing-the-build
+# https://docs.travis-ci.com/user/environment-variables
+# https://docs.travis-ci.com/user/build-stages
+# http://ricostacruz.com/cheatsheets/travis.html
+
 dist : trusty
 sudo : required
 group : edge
 
+# framework #
+
 language : node_js
-services : [ "docker" ]
-node_js : [ "8" ]
+node_js :
+- 8.4.0
+# - 8.3.0
+# - 8.2.0
+# - 8.1.0
+- 8.0.0
+# - 7.10.0
+- 7.0.0
+
+# setup #
+
+env :
+  global :
+  - BRANCH_PARSE=${TRAVIS_BRANCH/\//-}
+  - DOCKER_IMAGE_HASHS=$TRAVIS_REPO_SLUG:$BRANCH_PARSE-$TRAVIS_COMMIT
+  - DOCKER_IMAGE_NUMBER=$TRAVIS_REPO_SLUG:$BRANCH_PARSE-$TRAVIS_BUILD_NUMBER
+  - DOCKER_IMAGE_LATEST=$TRAVIS_REPO_SLUG:latest
+  matrix :
+  - VERSION=0.0.0
+
+before_install :
+- npm install -g yarn
+install :
+- yarn install
+
+# Job #
+
+jobs :
+
+  include :
+
+    # stage #
+  - stage : tests
+    before_script :
+    - echo $COVERALLS | base64 --decode >> ./etc/.coveralls.yml
+    script :
+    - yarn run doc
+    - yarn run lint
+    - yarn run test
+    - yarn run coverage
+
+    # stage #
+  - stage : build.docker
+    services :
+    - docker
+    before_script :
+    - yarn run version
+    - export VERSION=$(node -e "console.log( require('./package.json' ).version) ;")
+    - echo $VERSION >> ./dist/version.txt
+    script :
+    - docker build -t $DOCKER_IMAGE_HASHS -f Dockerfile .
+    - docker tag $DOCKER_IMAGE_HASHS $DOCKER_IMAGE_NUMBER
+    after_success :
+    - docker images -a
+    branches :
+      only :
+      - develop
+      - master
+
+    # stage #
+  - stage : build.docker.latest
+    services :
+    - docker
+    before_script :
+    - yarn run version
+    - export VERSION=$(node -e "console.log( require('./package.json' ).version) ;")
+    - echo $VERSION >> ./dist/version.txt
+    script :
+    - docker build -t $DOCKER_IMAGE_HASHS -f Dockerfile .
+    - docker tag $DOCKER_IMAGE_HASHS $DOCKER_IMAGE_NUMBER
+    - docker tag $DOCKER_IMAGE_HASHS $DOCKER_IMAGE_LATEST
+    after_success :
+    - docker images -a
+    branches :
+      only :
+      - master
+
+    # stage #
+  - stage : debug
+    script :
+    - echo $BRANCH_SHORT
+    - echo $DOCKER_IMAGE_HASHS
+    - echo $DOCKER_IMAGE_NUMBER
+    - echo $DOCKER_IMAGE_LATEST
+    - echo $VERSION
+    - ls -la
+    - pwd
+
+# email #
 
 notifications :
   email :
     recipients :
-      - $EMAIL
-    on_success : never
+    - k@whiteoranges.com
     on_failure : always
-
-before_install :
-  - echo $COVERALLS | base64 --decode >> ./.coveralls.yml
-  - npm install -g yarn
-
-install :
-  - yarn install
-
-script :
-  - yarn run ci
-  - export BRANCH="${TRAVIS_BRANCH/\//-}"
-  - export TAG=`if [ "$BRANCH" != "master" ] ; then echo "${BRANCH}-${TRAVIS_COMMIT}-${TRAVIS_BUILD_NUMBER}" ; else echo "latest" ; fi`
-  - docker build -f Dockerfile -t $TRAVIS_REPO_SLUG:$TAG .
-  - docker images -a
+    on_success : never
