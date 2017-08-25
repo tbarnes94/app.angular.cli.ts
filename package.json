@@ -21,7 +21,7 @@
     "prelint": "",
     "lint": "ng lint",
 
-    "test": "ng test",
+    "test": "yarn run test:single",
     "test:single": "ng test --single-run",
     "pretest:coverage": "yarn run clean:coverage",
     "test:coverage": "ng test --code-coverage",
