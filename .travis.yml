@@ -6,9 +6,8 @@
 # https://docs.travis-ci.com/user/build-stages
 # http://ricostacruz.com/cheatsheets/travis.html
 
+sudo : false
 dist : trusty
-sudo : required
-group : edge
 
 # framework #
 
@@ -56,6 +55,8 @@ jobs :
 
     # stage #
   - stage : build.docker
+    sudo : required
+    group : edge
     services :
     - docker
     before_script :
@@ -74,6 +75,8 @@ jobs :
 
     # stage #
   - stage : build.docker.latest
+    sudo : required
+    group : edge
     services :
     - docker
     before_script :
