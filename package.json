@@ -35,7 +35,7 @@
     "prebuild": "yarn run clean:dist",
     "build": "ng build --target \"production\"",
 
-    "preversion": "yarn run docs && yarn run lint && yarn run test:single",
+    "preversion": "yarn run doc && yarn run lint && yarn run test:single",
     "version": "yarn run build"
 
   },
