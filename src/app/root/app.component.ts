@@ -20,19 +20,13 @@ import { TranslateService } from '../../modules/translate';
       <h1>{{ 'app.root.title' | translate }}</h1>
       <div *ngIf='( languages$ | async ) as languages' >
         <span *ngFor='let language of languages' >
-          <button
-            (click)='this.onLanguage(language.id)'
-            class='btn btn-link'
-            >
+          <button (click)='this.onLanguage(language.id)' class='btn btn-link' >
             {{ language.title }}
           </button>
         </span>
       </div>
       <div *ngIf='( this.token$ | async )' >
-        <button
-          (click)='this.onLogout()'
-          class='btn btn-link'
-          >
+        <button (click)='this.onLogout()' class='btn btn-link' >
           {{ 'app.root.logout' | translate }}
         </button>
       </div>

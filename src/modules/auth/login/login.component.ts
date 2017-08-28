@@ -17,13 +17,8 @@ import { AuthCredentials } from '../shared/types/auth.credentials';
   styleUrls: [ './login.component.styl' ],
   encapsulation: ViewEncapsulation.Emulated,
   template: `
-    <div
-      *ngIf='( this.forms$ | async ) as forms'
-      >
-      <form
-        [formGroup]='forms.group'
-        (submit)='this.onSubmit(forms.group.value)'
-        >
+    <div *ngIf='( this.forms$ | async ) as forms' >
+      <form [formGroup]='forms.group' (submit)='this.onSubmit(forms.group.value)' >
         <dynamic-bootstrap-form-control
           *ngFor='let control of forms.model'
           [hasErrorMessaging]='control.hasErrorMessages'
@@ -32,20 +27,13 @@ import { AuthCredentials } from '../shared/types/auth.credentials';
           class='row'
           >
         </dynamic-bootstrap-form-control>
-        <div
-          *ngIf='( this.error$ | async ) as error'
-          class='server-error'
-          >
+        <div *ngIf='( this.error$ | async ) as error' class='form-error' >
           {{ 'auth.error.' + error | translate }}
         </div>
         <div *ngIf='( this.loader$ | async )' >
           {{ 'auth.loader.message' | translate }}
         </div>
-        <button
-          [disabled]='forms.group.invalid'
-          class='btn btn-primary'
-          type='submit'
-          >
+        <button [disabled]='forms.group.invalid' type='submit' class='btn btn-primary' >
           {{ 'auth.login.submit' | translate }}
         </button>
       </form>

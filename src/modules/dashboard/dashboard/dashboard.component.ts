@@ -8,8 +8,8 @@ import { CommonComponent } from '../../commons';
  */
 @Component({
   selector: 'dashboard-dashboard',
-  styleUrls: [ './dashboard.component.styl' ],
   encapsulation: ViewEncapsulation.Emulated,
+  styles: [ `` ],
   template: `
     <div>
       {{ 'dashboard.welcome' | translate }}
