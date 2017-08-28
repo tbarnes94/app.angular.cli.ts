@@ -54,7 +54,7 @@ export class AuthLoginComponent extends CommonComponent {
    */
   public ngOnInit(): void {
     this.error$ = this.common.select<string>(['auth', 'error']).takeUntil(this.destroy$);
-    this.loader$ = this.common.select<string>(['auth', 'loader']).takeUntil(this.destroy$);
+    this.loader$ = this.common.select<boolean>(['auth', 'loader']).takeUntil(this.destroy$);
     this.forms$ = this.build().takeUntil(this.destroy$);
   }
 
