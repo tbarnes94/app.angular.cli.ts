@@ -46,7 +46,7 @@ export class AuthLoginComponent extends CommonComponent {
    * http://reactivex.io/documentation/observable.html
    */
   public error$: Observable<string>;
-  public loader$: Observable<string>;
+  public loader$: Observable<boolean>;
   public forms$: Observable<any>;
 
   /**
