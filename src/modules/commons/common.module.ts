@@ -12,6 +12,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { CommonComponent } from './common/common.component';
 import { CommonGuard } from './shared/guard/common.guard';
+import { CommonPipe } from './shared/pipes/common.pipe';
 import { CommonPreloadStrategy } from './shared/router/common.preload.strategy';
 import { CommonService } from './shared/service/common.service';
 import { commonReducers } from './shared/store/common.reducers';
@@ -37,6 +38,7 @@ export class CommonRootModule {
   ],
   declarations: [
     CommonComponent,
+    CommonPipe,
   ],
   exports: [
     CommonModuleDep,
@@ -45,6 +47,9 @@ export class CommonRootModule {
     ReactiveFormsModule,
     DynamicFormsBootstrapUIModule,
     TranslateModule,
+
+    CommonComponent,
+    CommonPipe,
   ],
 })
 export class CommonModule {
