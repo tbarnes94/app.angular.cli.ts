@@ -5,6 +5,7 @@ import { DYNAMIC_FORM_CONTROL_INPUT_TYPE_PASSWORD } from '@ng2-dynamic-forms/cor
 import { Observable } from 'rxjs/Rx';
 
 import { CommonComponent } from '../../commons';
+import { isNotEmpty } from '../../commons';
 import { AuthLoginStart } from '../shared/store/auth.actions';
 import { AuthCredentials } from '../shared/types/auth.credentials';
 
@@ -64,17 +65,27 @@ export class AuthLoginComponent extends CommonComponent {
    * https://angular.io/api/core/OnInit
    */
   public ngOnInit(): void {
-
     this.error$ = this.common.select<string>(['auth', 'error']).takeUntil(this.destroy$);
     this.loader$ = this.common.select<string>(['auth', 'loader']).takeUntil(this.destroy$);
-    this.forms$ = this.common.select<any>(['translate', 'translations'])
-      .filter((o) => (o !== null))
+    this.forms$ = this.build().takeUntil(this.destroy$);
+  }
+
+  /**
+   * @returns http://reactivex.io/documentation/observable.html
+   */
+  public build(): Observable<any> {
+
+    return Observable.combineLatest(
+        this.common.select<any>(['translate', 'translations'])
+      )
+      .map((o) => ({ translations: o[0] }))
+      .filter((o) => (isNotEmpty(o.translations)))
       .map((o) => ([
         new DynamicInputModel({
           id: 'username',
-          label: o.auth.login.username.label,
+          label: o.translations.auth.login.username.label,
           errorMessages: {
-            required: o.auth.login.username.error.required,
+            required: o.translations.auth.login.username.error.required,
           },
           validators: {
             required: null,
@@ -87,9 +98,9 @@ export class AuthLoginComponent extends CommonComponent {
         new DynamicInputModel({
           id: 'password',
           inputType: DYNAMIC_FORM_CONTROL_INPUT_TYPE_PASSWORD,
-          label: o.auth.login.password.label,
+          label: o.translations.auth.login.password.label,
           errorMessages: {
-            required: o.auth.login.password.error.required,
+            required: o.translations.auth.login.password.error.required,
           },
           validators: {
             required: null,
@@ -116,6 +127,5 @@ export class AuthLoginComponent extends CommonComponent {
   public onSubmit(input: AuthCredentials): void {
     this.common.dispatch(new AuthLoginStart(input));
   }
-
 
 }
