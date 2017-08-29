@@ -4,19 +4,14 @@ import { Http } from '@angular/http';
 import { HttpModule } from '@angular/http';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { MissingTranslationHandler } from '@ngx-translate/core';
 import { TranslateLoader } from '@ngx-translate/core';
 import { TranslateModule as TranslateModuleDep } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { TranslateService } from './shared/service/translate.service';
 import { translateReducers } from './shared/store/translate.reducers';
-
-/**
- * https://github.com/ngx-translate/http-loader
- */
-export function TranslateLoaderFactory(http: Http): TranslateHttpLoader {
-  return new TranslateHttpLoader(http, './assets/i18ns/', '.json');
-}
+import { TranslateLoaderFactory } from './shared/translate/translate.loader.factory';
+import { TranslateMissingHandler } from './shared/translate/translate.missing.handler';
 
 /**
  * https://angular.io/guide/ngmodule#configure-core-services-with-coremoduleforroot
@@ -27,11 +22,8 @@ export function TranslateLoaderFactory(http: Http): TranslateHttpLoader {
     EffectsModule.forFeature([]),
     StoreModule.forFeature('translate', translateReducers),
     TranslateModuleDep.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: TranslateLoaderFactory,
-        deps: [ Http ],
-      }
+      missingTranslationHandler: { provide: MissingTranslationHandler, useClass: TranslateMissingHandler },
+      loader: { provide: TranslateLoader, useFactory: TranslateLoaderFactory, deps: [ Http ] },
     }),
   ],
 })

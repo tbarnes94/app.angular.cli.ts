@@ -6,7 +6,7 @@ import { CommonService } from '../../../commons';
 import { AuthService } from '../service/auth.service';
 
 /**
- * https://angular.io/guide/router#milestone-5-route-guards
+ * https://angular.io/api/router/CanActivate
  */
 @Injectable()
 export class AuthGuard extends CommonGuard {
@@ -22,7 +22,7 @@ export class AuthGuard extends CommonGuard {
   }
 
   /**
-   * https://angular.io/api/router/CanActivate
+   * https://angular.io/guide/router#milestone-5-route-guards
    */
   public canActivate(): Observable<boolean> {
     return this.auth.token$

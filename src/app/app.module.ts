@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { DynamicFormsCoreModule } from '@ng2-dynamic-forms/core';
 
 import { CoreModule } from './core/core.module';
-import { AppComponent } from './root/app.component';
 import { AppRouteModule } from './root/app-route.module';
+import { AppRootComponent } from './root/root.component';
 import { StoreModule } from './shared/store.module';
 
 import { environment } from '../environments/environment';
@@ -38,10 +38,10 @@ import { TranslateModule } from '../modules/translate';
 
   ],
   declarations: [
-    AppComponent,
+    AppRootComponent,
   ],
   bootstrap: [
-    AppComponent,
+    AppRootComponent,
   ],
 })
 export class AppModule {

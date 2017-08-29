@@ -1,7 +1,7 @@
 import { HttpResponse } from '@angular/common/http';
 
 /**
- * https://angular.io/guide/ngmodule#configure-core-services-with-coremoduleforroot
+ * https://angular.io/api/common/http/HttpResponse
  */
 export class ApiResponse<T> {
   public constructor(public readonly response: HttpResponse<T>,

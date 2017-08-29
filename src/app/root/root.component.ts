@@ -13,7 +13,7 @@ import { TranslateService } from '../../modules/translate';
  */
 @Component({
   selector: 'app-root',
-  styleUrls: [ './app.component.styl' ],
+  styleUrls: [ './root.component.styl' ],
   encapsulation: ViewEncapsulation.Emulated,
   template: `
     <div class='container' >
@@ -36,7 +36,7 @@ import { TranslateService } from '../../modules/translate';
     </div>
   `,
 })
-export class AppComponent {
+export class AppRootComponent {
 
   /**
    * http://reactivex.io/documentation/observable.html
