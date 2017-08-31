@@ -1,0 +1,115 @@
+/**
+ * @imports
+ * http://mcg.mbitson.com
+ * node-sass  --output-style compressed ./src/assets/styles/material.scss ./src/assets/styles/material.css
+ */
+@import '../../../node_modules/@angular/material/theming';
+@include mat-core();
+
+/** @theme */
+
+$theme-oranges: (
+  50: #fff5e0,
+  100: #ffe6b3,
+  200: #ffd580,
+  300: #ffc44d,
+  400: #ffb726,
+  500: #ffaa00,
+  600: #ffa300,
+  700: #ff9900,
+  800: #ff9000,
+  900: #ff7f00,
+  A100: #ffffff,
+  A200: #fff8f2,
+  A400: #ffdcbf,
+  A700: #ffcda6,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  )
+);
+
+$theme-cyans: (
+  50: #e0f5ff,
+  100: #b3e6ff,
+  200: #80d5ff,
+  300: #4dc4ff,
+  400: #26b7ff,
+  500: #00aaff,
+  600: #00a3ff,
+  700: #0099ff,
+  800: #0090ff,
+  900: #007fff,
+  A100: #ffffff,
+  A200: #f2f8ff,
+  A400: #bfdbff,
+  A700: #a6cdff,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  )
+);
+
+$theme-red: (
+  50: #f5e0e0,
+  100: #e6b3b3,
+  200: #d58080,
+  300: #c44d4d,
+  400: #b72626,
+  500: #aa0000,
+  600: #a30000,
+  700: #990000,
+  800: #900000,
+  900: #7f0000,
+  A100: #ffadad,
+  A200: #ff7a7a,
+  A400: #ff4747,
+  A700: #ff2d2d,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #ffffff,
+    A700: #ffffff,
+  )
+);
+
+/** @exports */
+$theme-primary: mat-palette($theme-oranges);
+$theme-secondary: mat-palette($theme-cyans);
+$theme-error: mat-palette($theme-red);
+$theme: mat-light-theme($theme-primary, $theme-secondary, $theme-error);
+@include angular-material-theme($theme);
