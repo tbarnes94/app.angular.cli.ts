@@ -7,7 +7,10 @@ import { CommonModule as CommonModuleDep } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { DynamicFormsBootstrapUIModule } from '@ng2-dynamic-forms/ui-bootstrap';
+import { MdButtonModule } from '@angular/material';
+import { MdProgressBarModule } from '@angular/material';
+import { MdProgressSpinnerModule } from '@angular/material';
+import { DynamicFormsMaterialUIModule } from '@ng2-dynamic-forms/ui-material';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { CommonComponent } from './common/common.component';
@@ -45,7 +48,10 @@ export class CommonRootModule {
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    DynamicFormsBootstrapUIModule,
+    MdButtonModule,
+    MdProgressBarModule,
+    MdProgressSpinnerModule,
+    DynamicFormsMaterialUIModule,
     TranslateModule,
 
     CommonComponent,

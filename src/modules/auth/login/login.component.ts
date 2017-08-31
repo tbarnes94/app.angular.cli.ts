@@ -19,21 +19,21 @@ import { AuthCredentials } from '../shared/types/auth.credentials';
   template: `
     <div *ngIf='( this.forms$ | async ) as forms' >
       <form [formGroup]='forms.group' (submit)='this.onSubmit(forms.group.value)' >
-        <dynamic-bootstrap-form-control
+        <dynamic-material-form-control
           *ngFor='let control of forms.model'
           [hasErrorMessaging]='control.hasErrorMessages'
           [group]='forms.group'
           [model]='control'
           class='row'
           >
-        </dynamic-bootstrap-form-control>
+        </dynamic-material-form-control>
         <div *ngIf='( this.error$ | async ) as error' class='form-error' >
           {{ 'auth.error.' + error | translate }}
         </div>
         <div *ngIf='( this.loader$ | async )' >
           {{ 'auth.loader.message' | translate }}
         </div>
-        <button [disabled]='forms.group.invalid' type='submit' class='btn btn-primary' >
+        <button [disabled]='forms.group.invalid' md-raised-button color='primary' type='submit' >
           {{ 'auth.login.submit' | translate }}
         </button>
       </form>
@@ -79,8 +79,8 @@ export class AuthLoginComponent extends CommonComponent {
             required: null,
           },
         }, {
-          grid: {
-            container: 'col-xs-12 col-sm-6 col-md-6 col-lg-4'
+          element: {
+            container: 'col-xs-12 col-sm-6 col-md-4 col-lg-3'
           }
         }),
         new DynamicInputModel({
@@ -94,8 +94,8 @@ export class AuthLoginComponent extends CommonComponent {
             required: null,
           },
         }, {
-          grid: {
-            container: 'col-xs-12 col-sm-6 col-md-6 col-lg-4'
+          element: {
+            container: 'col-xs-12 col-sm-6 col-md-4 col-lg-3'
           }
         }),
       ]))
