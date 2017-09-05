@@ -26,9 +26,10 @@ node_js :
 env :
   global :
   - BRANCH_PARSE=${TRAVIS_BRANCH/\//-}
-  - DOCKER_IMAGE_HASHS=$TRAVIS_REPO_SLUG:$BRANCH_PARSE-$TRAVIS_COMMIT
-  - DOCKER_IMAGE_NUMBER=$TRAVIS_REPO_SLUG:$BRANCH_PARSE-$TRAVIS_BUILD_NUMBER
-  - DOCKER_IMAGE_LATEST=$TRAVIS_REPO_SLUG:latest
+  - DOCKER_BUILD_HASHS=$TRAVIS_REPO_SLUG:$BRANCH_PARSE-$TRAVIS_COMMIT
+  - DOCKER_BUILD_NUMBER=$TRAVIS_REPO_SLUG:$BRANCH_PARSE-$TRAVIS_BUILD_NUMBER
+  - DOCKER_BUILD_LATEST=$TRAVIS_REPO_SLUG:$BRANCH_PARSE-latest
+  - DOCKER_REPOS_LATEST=$TRAVIS_REPO_SLUG:latest
   matrix :
   - VERSION=0.0.0
 
@@ -64,8 +65,9 @@ jobs :
     - export VERSION=$(node -e "console.log( require('./package.json' ).version) ;")
     - echo $VERSION >> ./dist/version.txt
     script :
-    - docker build -t $DOCKER_IMAGE_HASHS -f Dockerfile .
-    - docker tag $DOCKER_IMAGE_HASHS $DOCKER_IMAGE_NUMBER
+    - docker build -t $DOCKER_BUILD_HASHS -f Dockerfile .
+    - docker tag $DOCKER_BUILD_HASHS $DOCKER_BUILD_NUMBER
+    - docker tag $DOCKER_BUILD_HASHS $DOCKER_BUILD_LATEST
     after_success :
     - docker images -a
     branches :
@@ -84,9 +86,10 @@ jobs :
     - export VERSION=$(node -e "console.log( require('./package.json' ).version) ;")
     - echo $VERSION >> ./dist/version.txt
     script :
-    - docker build -t $DOCKER_IMAGE_HASHS -f Dockerfile .
-    - docker tag $DOCKER_IMAGE_HASHS $DOCKER_IMAGE_NUMBER
-    - docker tag $DOCKER_IMAGE_HASHS $DOCKER_IMAGE_LATEST
+    - docker build -t $DOCKER_BUILD_HASHS -f Dockerfile .
+    - docker tag $DOCKER_BUILD_HASHS $DOCKER_BUILD_NUMBER
+    - docker tag $DOCKER_BUILD_HASHS $DOCKER_BUILD_LATEST
+    - docker tag $DOCKER_BUILD_HASHS $DOCKER_REPOS_LATEST
     after_success :
     - docker images -a
     branches :
@@ -96,10 +99,11 @@ jobs :
     # stage #
   - stage : debug
     script :
-    - echo $BRANCH_SHORT
-    - echo $DOCKER_IMAGE_HASHS
-    - echo $DOCKER_IMAGE_NUMBER
-    - echo $DOCKER_IMAGE_LATEST
+    - echo $BRANCH_PARSE
+    - echo $DOCKER_BUILD_HASHS
+    - echo $DOCKER_BUILD_NUMBER
+    - echo $DOCKER_BUILD_LATEST
+    - echo $DOCKER_REPOS_LATEST
     - echo $VERSION
     - ls -la
     - pwd
