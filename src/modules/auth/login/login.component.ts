@@ -14,31 +14,33 @@ import { AuthCredentials } from '../shared/types/auth.credentials';
  */
 @Component({
   selector: 'auth-login',
-  styleUrls: [ './login.component.styl' ],
   encapsulation: ViewEncapsulation.Emulated,
+  styles: [ `` ],
   template: `
-    <div *ngIf='( this.forms$ | async ) as forms' >
-      <form [formGroup]='forms.group' (submit)='this.onSubmit(forms.group.value)' >
-        <div class='row' >
-          <dynamic-material-form-control
-            *ngFor='let control of forms.model'
-            [hasErrorMessaging]='control.hasErrorMessages'
-            [group]='forms.group'
-            [model]='control'
-            >
-          </dynamic-material-form-control>
-        </div>
-        <div *ngIf='( this.error$ | async ) as error' class='form-error' >
-          {{ 'auth.error.' + error | translate }}
-        </div>
-        <div *ngIf='( this.loader$ | async )' >
-          {{ 'auth.loader.message' | translate }}
-        </div>
-        <button [disabled]='forms.group.invalid' md-raised-button color='primary' type='submit' >
-          {{ 'auth.login.submit' | translate }}
-        </button>
-      </form>
-    </div>
+    <template-basic
+      [key]='"auth"'
+      [title]='( "app.root.title" | translate )'
+      [loads$]='this.loader$'
+      [error$]='this.error$'
+      divider='true'
+      >
+      <div *ngIf='( this.forms$ | async ) as forms' class='template-content' >
+        <form [formGroup]='forms.group' (submit)='this.onSubmit(forms.group.value)' >
+          <div class='row' >
+            <dynamic-material-form-control
+              *ngFor='let control of forms.model'
+              [hasErrorMessaging]='control.hasErrorMessages'
+              [group]='forms.group'
+              [model]='control'
+              >
+            </dynamic-material-form-control>
+          </div>
+          <button [disabled]='forms.group.invalid' md-raised-button color='primary' type='submit' >
+            {{ 'auth.login.submit' | translate }}
+          </button>
+        </form>
+      </div>
+    </template-basic>
   `,
 })
 export class AuthLoginComponent extends CommonComponent {
@@ -46,18 +48,9 @@ export class AuthLoginComponent extends CommonComponent {
   /**
    * http://reactivex.io/documentation/observable.html
    */
-  public error$: Observable<string>;
-  public loader$: Observable<boolean>;
-  public forms$: Observable<any>;
-
-  /**
-   * https://angular.io/api/core/OnInit
-   */
-  public ngOnInit(): void {
-    this.error$ = this.common.select<string>(['auth', 'error']).takeUntil(this.destroy$);
-    this.loader$ = this.common.select<boolean>(['auth', 'loader']).takeUntil(this.destroy$);
-    this.forms$ = this.build().takeUntil(this.destroy$);
-  }
+  public readonly forms$: Observable<any> = this.build().takeUntil(this.destroy$);
+  public readonly error$: Observable<string> = this.common.select<string>(['auth', 'error']).takeUntil(this.destroy$);
+  public readonly loader$: Observable<boolean> = this.common.select<boolean>(['auth', 'loader']).takeUntil(this.destroy$);
 
   /**
    * @returns http://reactivex.io/documentation/observable.html
@@ -81,7 +74,7 @@ export class AuthLoginComponent extends CommonComponent {
           },
         }, {
           element: {
-            container: 'col-xs-12 col-sm-6 col-md-6 col-lg-6'
+            container: 'col-xs-12 col-sm-6'
           }
         }),
         new DynamicInputModel({
@@ -96,7 +89,7 @@ export class AuthLoginComponent extends CommonComponent {
           },
         }, {
           element: {
-            container: 'col-xs-12 col-sm-6 col-md-6 col-lg-6'
+            container: 'col-xs-12 col-sm-6'
           }
         }),
       ]))

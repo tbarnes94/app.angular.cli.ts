@@ -26,6 +26,8 @@
     }
   },
   "dashboard": {
-    "welcome": "Welcome to the Dashboard"
+    "dashboard": {
+      "title": "Dashboard"
+    }
   }
 }

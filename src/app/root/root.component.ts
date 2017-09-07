@@ -14,25 +14,17 @@ import { TranslateService } from '../../modules/translate';
 @Component({
   selector: 'app-root',
   styleUrls: [ './root.component.styl' ],
-  encapsulation: ViewEncapsulation.Emulated,
+  encapsulation: ViewEncapsulation.None,
   template: `
     <div class='container' >
-      <h1>{{ 'app.root.title' | translate }}</h1>
-      <div *ngIf='( languages$ | async ) as languages' >
-        <span *ngFor='let language of languages' >
-          <button (click)='this.onLanguage(language.id)' md-button color='accent' >
-            {{ language.title }}
-          </button>
-        </span>
-      </div>
-      <div *ngIf='( this.token$ | async )' >
-        <button (click)='this.onLogout()' md-raised-button color='primary' >
-          {{ 'app.root.logout' | translate }}
-        </button>
-      </div>
-    </div>
-    <div class='container' >
       <router-outlet></router-outlet>
+    </div>
+    <div *ngIf='( languages$ | async ) as languages' class='container languages' >
+      <span *ngFor='let language of languages' >
+        <button (click)='this.onLanguage(language.id)' md-button color='accent' >
+          {{ language.title }}
+        </button>
+      </span>
     </div>
   `,
 })
@@ -41,31 +33,17 @@ export class AppRootComponent {
   /**
    * http://reactivex.io/documentation/observable.html
    */
-  public token$: Observable<boolean>;
-  public languages$: Observable<Array<any>> = Observable.of([
+  public readonly token$: Observable<boolean> = this.auth.token$;
+  public readonly languages$: Observable<Array<any>> = Observable.of([
     { id: 'en-US', title: 'English' },
     { id: 'fr-CA', title: 'Français' },
   ]);
-
-  /**
-   * https://angular.io/api/core/OnInit
-   */
-  public ngOnInit(): void {
-    this.token$ = this.auth.token$;
-  }
 
   /**
    * @param input
    */
   public onLanguage(input: string): void {
     this.common.dispatch(new TranslateLanguage(input));
-  }
-
-  /**
-   * @param input
-   */
-  public onLogout(): void {
-    this.common.dispatch(new AuthLogout(null));
   }
 
   /**
