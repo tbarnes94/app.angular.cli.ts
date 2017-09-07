@@ -1,15 +1,12 @@
 {
   "app": {
     "root": {
-      "title": "Angular fr",
-      "logout": "Logout fr"
+      "title": "Angular fr"
     }
   },
   "auth": {
-    "loader": {
-      "message": "Loading... fr"
-    },
     "login": {
+      "title": "Angular fr",
       "username": {
         "label": "Username fr",
         "error": {
@@ -27,7 +24,8 @@
   },
   "dashboard": {
     "dashboard": {
-      "title": "Dashboard fr"
+      "title": "Dashboard fr",
+      "logout": "Logout fr"
     }
   }
 }

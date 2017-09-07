@@ -18,8 +18,9 @@ import { AuthCredentials } from '../shared/types/auth.credentials';
   styles: [ `` ],
   template: `
     <template-basic
-      [key]='"auth"'
-      [title]='( "app.root.title" | translate )'
+      *ngIf='( "auth" | translate ) as translations'
+      [key]='"login"'
+      [translations]='translations'
       [loads$]='this.loader$'
       [error$]='this.error$'
       divider='true'
@@ -36,7 +37,7 @@ import { AuthCredentials } from '../shared/types/auth.credentials';
             </dynamic-material-form-control>
           </div>
           <button [disabled]='forms.group.invalid' md-raised-button color='primary' type='submit' >
-            {{ 'auth.login.submit' | translate }}
+            {{ translations.login.submit }}
           </button>
         </form>
       </div>

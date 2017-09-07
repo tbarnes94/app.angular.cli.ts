@@ -13,11 +13,13 @@ import { CommonComponent } from '../../commons';
   styles: [ `` ],
   template: `
     <template-basic
-      [title]='( "dashboard.dashboard.title" | translate )'
+      *ngIf='( "dashboard" | translate ) as translations'
+      [key]='"dashboard"'
+      [translations]='translations'
       >
       <div class='template-content' >
         <button (click)='this.onLogout()' md-raised-button color='primary' >
-          {{ 'app.root.logout' | translate }}
+          {{ translations.dashboard.logout }}
         </button>
       </div>
     </template-basic>

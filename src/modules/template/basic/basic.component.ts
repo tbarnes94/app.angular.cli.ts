@@ -3,6 +3,8 @@ import { Input } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
+import { ObjectAny } from '../../commons';
+
 /**
  * https://angular.io/guide/ngmodule#declare-directives-and-components
  */
@@ -12,10 +14,8 @@ import { Observable } from 'rxjs/Observable';
   styles: [ `` ],
   template: `
     <md-card>
-      <md-card-title
-        *ngIf='( this.title !== null )'
-        >
-        {{ this.title }}
+      <md-card-title>
+        {{ this.translations[this.key].title }}
       </md-card-title>
       <md-card-content>
         <ng-content select='.template-menus' ></ng-content>
@@ -24,7 +24,12 @@ import { Observable } from 'rxjs/Observable';
       <ng-container *ngIf='( this.loads$ | async ) === false' >
         <div *ngIf='( this.error$ | async ) as error' class='mat-error-section' >
           <md-icon>error</md-icon>
-          <span [innerHTML]='this.key + ".error." + error | translate' ></span>
+          <span [innerHTML]='
+            ( this.translations.error && this.translations.error[ error ] )
+            ? this.translations.error[ error ]
+            : error
+            ' >
+          </span>
         </div>
         <ng-content select='.template-content' ></ng-content>
       </ng-container>
@@ -45,7 +50,7 @@ export class TemplateBasicComponent {
    * https://angular.io/api/core/Input
    */
   @Input() public readonly key: string = null;
-  @Input() public readonly title: string = null;
+  @Input() public readonly translations: ObjectAny = null;
   @Input() public readonly loads$: Observable<boolean> = Observable.of(false);
   @Input() public readonly error$: Observable<string> = Observable.of(null);
   @Input() public readonly divider: boolean = false;
