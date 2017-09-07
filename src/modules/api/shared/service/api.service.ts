@@ -65,7 +65,13 @@ export class ApiService {
                        body?: R): Observable<ApiResponse<S> | ApiError> {
     return this.http.request<S>(
       method,
-      ( host ) ? `${ host }/${ path }` : `${ this.options.root }/${ path }`, {
+      ( host )
+        ? `${ host }/${ path }`
+        : ( !path.match( /^\// ) )
+          ? `${ this.options.root }/${ path }`
+          : `${ path }`
+          ,
+      {
         headers: this.headers(headers),
         body: ( body ) ? body : undefined,
         observe: 'response',
