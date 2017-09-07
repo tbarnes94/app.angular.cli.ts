@@ -24,7 +24,7 @@ export class AuthEffects extends CommonEffects {
    * http://reactivex.io/documentation/observable.html
    */
   @Effect()
-  public loginStart$: Observable<AuthActions> = this.actions$
+  public readonly loginStart$: Observable<AuthActions> = this.actions$
     .ofType(AUTH_LOGIN_START)
     .debounceTime(100)
     .map((o: AuthActions) => o.payload)
@@ -59,7 +59,7 @@ export class AuthEffects extends CommonEffects {
    * http://reactivex.io/documentation/observable.html
    */
   @Effect({dispatch: false})
-  public loginComplete$: Observable<AuthActions> = this.actions$
+  public readonly loginComplete$: Observable<AuthActions> = this.actions$
     .ofType(AUTH_LOGIN_COMPLETE)
     .debounceTime(100)
     .do((o: AuthActions) => this.common.redirect([ 'dashboard' ]))
@@ -69,7 +69,7 @@ export class AuthEffects extends CommonEffects {
    * http://reactivex.io/documentation/observable.html
    */
   @Effect({dispatch: false})
-  public logout$: Observable<AuthActions> = this.actions$
+  public readonly logout$: Observable<AuthActions> = this.actions$
     .ofType(AUTH_LOGOUT)
     .debounceTime(100)
     .do((o: AuthActions) => this.common.redirect([ 'login' ]))
