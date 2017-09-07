@@ -4,6 +4,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { CommonModule } from '../commons';
+import { TemplateModule } from '../template';
 import { AuthRouteModule } from './auth-route.module';
 import { AuthLoginComponent } from './login/login.component';
 import { AuthGuard } from './shared/guard/auth.guard';
@@ -29,6 +30,7 @@ export class AuthRootModule {
 @NgModule({
   imports: [
     CommonModule,
+    TemplateModule,
     AuthRouteModule,
   ],
   declarations: [ AuthLoginComponent ],

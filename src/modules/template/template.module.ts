@@ -2,9 +2,7 @@ import { NgModule } from '@angular/core';
 import { ModuleWithProviders } from '@angular/core';
 
 import { CommonModule } from '../commons';
-import { TemplateModule } from '../template';
-import { DashboardRouteModule } from './dashboard-route.module';
-import { DashboardDashboardComponent } from './dashboard/dashboard.component';
+import { TemplateBasicComponent } from './basic/basic.component';
 
 /**
  * https://angular.io/guide/ngmodule#configure-core-services-with-coremoduleforroot
@@ -12,7 +10,7 @@ import { DashboardDashboardComponent } from './dashboard/dashboard.component';
 @NgModule({
   imports: [],
 })
-export class DashboardRootModule {
+export class TemplateRootModule {
 }
 
 /**
@@ -21,20 +19,22 @@ export class DashboardRootModule {
 @NgModule({
   imports: [
     CommonModule,
-    TemplateModule,
-    DashboardRouteModule,
   ],
-  declarations: [ DashboardDashboardComponent ],
-  exports: [],
+  declarations: [
+    TemplateBasicComponent,
+  ],
+  exports: [
+    TemplateBasicComponent,
+  ],
 })
-export class DashboardModule {
+export class TemplateModule {
 
   /**
    * https://angular.io/guide/ngmodule#configure-core-services-with-coremoduleforroot
    */
   public static forRoot(): ModuleWithProviders {
     return {
-      ngModule: DashboardRootModule,
+      ngModule: TemplateRootModule,
       providers: [],
     };
   }

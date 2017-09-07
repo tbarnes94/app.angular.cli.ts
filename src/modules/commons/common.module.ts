@@ -8,6 +8,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MdButtonModule } from '@angular/material';
+import { MdCardModule } from '@angular/material';
+import { MdIconModule } from '@angular/material';
 import { MdProgressBarModule } from '@angular/material';
 import { MdProgressSpinnerModule } from '@angular/material';
 import { DynamicFormsMaterialUIModule } from '@ng2-dynamic-forms/ui-material';
@@ -49,6 +51,8 @@ export class CommonRootModule {
     FormsModule,
     ReactiveFormsModule,
     MdButtonModule,
+    MdCardModule,
+    MdIconModule,
     MdProgressBarModule,
     MdProgressSpinnerModule,
     DynamicFormsMaterialUIModule,
@@ -56,7 +60,9 @@ export class CommonRootModule {
 
     CommonComponent,
     CommonPipe,
+
   ],
+
 })
 export class CommonModule {
 
