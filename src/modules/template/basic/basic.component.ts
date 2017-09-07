@@ -20,7 +20,7 @@ import { Observable } from 'rxjs/Observable';
       <md-card-content>
         <ng-content select='.template-menus' ></ng-content>
       </md-card-content>
-      <hr *ngIf='this.divider'/>
+      <hr *ngIf='this.divider' />
       <ng-container *ngIf='( this.loads$ | async ) === false' >
         <div *ngIf='( this.error$ | async ) as error' class='mat-error-section' >
           <md-icon>error</md-icon>
