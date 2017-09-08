@@ -72,7 +72,7 @@ export class AuthEffects extends CommonEffects {
   public readonly logout$: Observable<AuthActions> = this.actions$
     .ofType(AUTH_LOGOUT)
     .debounceTime(100)
-    .do((o: AuthActions) => this.common.redirect([ 'login' ]))
+    .do((o: AuthActions) => this.common.redirect([ 'auth' ]))
     ;
 
 }
