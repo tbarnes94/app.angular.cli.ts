@@ -34,10 +34,12 @@ export class AppRootComponent {
    * http://reactivex.io/documentation/observable.html
    */
   public readonly token$: Observable<boolean> = this.auth.token$;
-  public readonly languages$: Observable<Array<any>> = Observable.of([
-    { id: 'en-US', title: 'English' },
-    { id: 'fr-CA', title: 'Français' },
-  ]);
+  public readonly languages$: Observable<Array<any>> = Observable
+    .of([
+      { id: 'en-US', title: 'English' },
+      { id: 'fr-CA', title: 'Français' },
+    ])
+    ;
 
   /**
    * @param input

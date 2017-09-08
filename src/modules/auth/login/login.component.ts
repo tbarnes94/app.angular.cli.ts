@@ -58,7 +58,8 @@ export class AuthLoginComponent extends CommonComponent {
    */
   public build(): Observable<any> {
 
-    return Observable.combineLatest(
+    return Observable
+      .combineLatest(
         this.common.select<any>(['translate', 'translations'])
       )
       .map((o) => ({ translations: o[0] }))

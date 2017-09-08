@@ -30,15 +30,16 @@ export class ApiService {
    * @returns         http://reactivex.io/documentation/observable.html
    */
   public error(r: HttpErrorResponse): Observable<ApiError> {
-    return Observable.of(
-      new ApiError(
-        r,
-        ( !r.error || !r.error.message )
-          ? { message: `${ r.status } ${ r.statusText }` }
-          : r.error
-        ,
+    return Observable
+      .of(
+        new ApiError(
+          r,
+          ( !r.error || !r.error.message )
+            ? { message: `${ r.status } ${ r.statusText }` }
+            : r.error
+          ,
+        )
       )
-    )
       ;
   }
 
