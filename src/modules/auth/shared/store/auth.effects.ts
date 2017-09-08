@@ -49,9 +49,10 @@ export class AuthEffects extends CommonEffects {
     .map((o: any) => {
       if (o.content && o.content.access_token) {
         return new AuthLoginComplete(o.content);
+      } else {
+        this.common.dispatch(new AuthLogout(null));
+        return this.exception(o.error, AuthError);
       }
-      this.common.dispatch(new AuthLogout(null));
-      return new AuthError(o.error.message);
     })
     ;
 

@@ -12,6 +12,18 @@ import { CommonAction } from './common.action';
 export class CommonEffects {
 
   /**
+   * @param e
+   * @param ErrorAction
+   * @returns CommonAction
+   */
+  public exception(e: { message?: string }, ErrorAction: any): CommonAction<any> {
+    return ( e && e.message )
+      ? new ErrorAction(e.message)
+      : new ErrorAction('Error')
+      ;
+  }
+
+  /**
    * Constructor
    * @param actions$    https://github.com/ngrx/effects/blob/master/docs/intro.md
    * @param common      https://angular.io/tutorial/toh-pt4
