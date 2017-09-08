@@ -6,6 +6,7 @@ import { NavigationExtras } from '@angular/router';
 import { NavigationStart } from '@angular/router';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { BehaviorSubject } from 'rxjs/Rx';
 import { Observable } from 'rxjs/Rx';
 
 import { CommonAction } from '../store/common.action';
@@ -21,6 +22,19 @@ export class CommonService {
    * https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout
    */
   public delay: any;
+
+  /**
+   * http://reactivex.io/documentation/observable.html
+   */
+  public readonly width$: BehaviorSubject<number> =
+    new BehaviorSubject<number>(window.innerWidth)
+  ;
+  public readonly resize$: Observable<number> = Observable
+    .fromEvent(window, 'resize')
+    .map((o: any) => o.target.innerWidth)
+    .debounceTime(100)
+    .distinctUntilChanged()
+  ;
 
   /**
    * @param input
@@ -113,6 +127,10 @@ export class CommonService {
     this.router.events
       .filter((o) => ( o instanceof NavigationStart ))
       .subscribe((o) => this.loader(true))
+    ;
+
+    this.resize$
+      .subscribe((o) => this.width$.next(o))
     ;
 
   }
