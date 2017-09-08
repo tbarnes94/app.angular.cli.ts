@@ -128,6 +128,7 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
+import 'hammerjs';
 
 /**
  * Date, currency, decimal and percent pipes.
