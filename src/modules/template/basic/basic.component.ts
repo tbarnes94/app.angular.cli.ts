@@ -31,8 +31,9 @@ import { ObjectAny } from '../../commons';
             ' >
           </span>
         </div>
-        <ng-content select='.template-content' ></ng-content>
+        <ng-content select='.template-content-loads' ></ng-content>
       </ng-container>
+      <ng-content select='.template-content' ></ng-content>
       <div
         *ngIf='( this.loads$ | async ) === true'
         fxLayout='row'

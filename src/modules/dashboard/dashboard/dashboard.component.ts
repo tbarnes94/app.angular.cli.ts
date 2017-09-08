@@ -17,7 +17,7 @@ import { CommonComponent } from '../../commons';
       [key]='"dashboard"'
       [translations]='translations'
       >
-      <div class='template-content' >
+      <div class='template-content-loads' >
         <button (click)='this.onLogout()' md-raised-button color='primary' >
           {{ translations.dashboard.logout }}
         </button>
