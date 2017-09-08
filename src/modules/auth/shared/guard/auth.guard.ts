@@ -28,7 +28,7 @@ export class AuthGuard extends CommonGuard {
     return this.auth.token$
       .map((o: boolean) => {
         if (o) { return true; }
-        this.common.redirect([ 'login' ]);
+        this.common.redirect([ 'auth' ]);
         return false;
       })
       ;

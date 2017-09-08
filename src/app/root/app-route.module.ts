@@ -9,10 +9,10 @@ import { CommonPreloadStrategy } from '../../modules/commons';
  * https://angular.io/guide/router#milestone-6-asynchronous-routing
  */
 const route: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  { path: '', loadChildren: '../../modules/auth/auth.module#AuthModule' },
+  { path: '',          redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: 'auth',      loadChildren: '../../modules/auth/auth.module#AuthModule' },
   { path: 'dashboard', loadChildren: '../../modules/dashboard/dashboard.module#DashboardModule', canActivate: [AuthGuard] },
-  { path: '**', redirectTo: '' },
+  { path: '**',        redirectTo: 'dashboard' },
 ];
 
 /**
