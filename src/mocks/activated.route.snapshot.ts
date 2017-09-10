@@ -30,7 +30,7 @@ export class MocksActivatedRouteSnapshot implements ActivatedRouteSnapshot {
     return null;
   }
 
-  public constructor(public readonly routeConfig: Route | null,) {
+  public constructor(public readonly routeConfig: Route | null) {
     this.toString();
   }
 
