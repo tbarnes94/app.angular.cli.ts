@@ -1,14 +1,73 @@
-<!doctype html>
+<!DOCTYPE html >
+
 <html lang='en' >
+
 <head>
+
+  <!-- metas -->
   <meta charset='utf-8' >
+  <meta name='author' content='' >
+  <meta name='description' content='' >
   <title>app.angular.cli.ts</title>
   <base href='/' >
-  <meta name='viewport' content='width=device-width, initial-scale=1' >
+
+  <!-- mobiles -->
+  <meta name='viewport' content='width=device-width,initial-scale=1' >
+  <link rel='manifest' href='./assets/icons/manifest.json' >
+
+  <!-- android -->
+  <meta name='theme-color' content='#000000' >
+  <link rel='icon' type='image/png' href='./assets/icons/android-icon-192x192.png' sizes='192x192' >
+
+  <!-- apple -->
+  <meta name='apple-mobile-web-app-capable' content='yes' >
+  <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' >
+
+  <link rel='apple-touch-startup-image' type='image/png' href='./assets/icons/apple-startup-2048x2692.png' media='(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2) and (orientation:portrait)' ><!-- iPad Pro12.9" portrait -->
+  <link rel='apple-touch-startup-image' type='image/png' href='./assets/icons/apple-startup-2732x2008.png' media='(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2) and (orientation:landscape)' ><!-- iPad Pro12.9" landscape -->
+  <link rel='apple-touch-startup-image' type='image/png' href='./assets/icons/apple-startup-1536x2008.png' media='(device-width:768px) and (device-height:1024px) and (-webkit-device-pixel-ratio:2) and (orientation:portrait)' ><!-- iPad Regular/Pro/Air/Mini retina portrait -->
+  <link rel='apple-touch-startup-image' type='image/png' href='./assets/icons/apple-startup-2048x1496.png' media='(device-width:768px) and (device-height:1024px) and (-webkit-device-pixel-ratio:2) and (orientation:landscape)' ><!-- iPad Regular/Pro/Air/Mini retina landscape -->
+  <link rel='apple-touch-startup-image' type='image/png' href='./assets/icons/apple-startup-768x1004.png' media='(device-width:768px) and (device-height:1024px) and (-webkit-device-pixel-ratio:1) and (orientation:portrait)' ><!-- iPad non-retina portrait -->
+  <link rel='apple-touch-startup-image' type='image/png' href='./assets/icons/apple-startup-1024x748.png' media='(device-width:768px) and (device-height:1024px) and (-webkit-device-pixel-ratio:1) and (orientation:landscape)' ><!-- iPad non-retina landscape -->
+  <link rel='apple-touch-startup-image' type='image/png' href='./assets/icons/apple-startup-1242x2148.png' media='(device-width:414px) and (device-height:736px) and (-webkit-device-pixel-ratio:3) and (orientation:portrait)' ><!-- iPhone 6+/6s+/7+ retina portrait -->
+  <link rel='apple-touch-startup-image' type='image/png' href='./assets/icons/apple-startup-2208x1182.png' media='(device-width:414px) and (device-height:736px) and (-webkit-device-pixel-ratio:3) and (orientation:landscape)' ><!-- iPhone 6+/6s+/7+ retina landscape -->
+  <link rel='apple-touch-startup-image' type='image/png' href='./assets/icons/apple-startup-750x1294.png' media='(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2) and (orientation:portrait)' ><!-- iPhone 6/6s/7 retina portrait -->
+  <link rel='apple-touch-startup-image' type='image/png' href='./assets/icons/apple-startup-1334x710.png' media='(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2) and (orientation:landscape)' ><!-- iPhone 6/6s/7 retina landscape -->
+  <link rel='apple-touch-startup-image' type='image/png' href='./assets/icons/apple-startup-640x1096.png' media='(device-width:320px) and (device-height:568px) and (-webkit-device-pixel-ratio:2)' ><!-- iPhone 5/SE retina portrait -->
+  <link rel='apple-touch-startup-image' type='image/png' href='./assets/icons/apple-startup-640x920.png' media='(device-width:320px) and (device-height:480px) and (-webkit-device-pixel-ratio:2)' ><!-- iPhone <5 retina portrait -->
+  <link rel='apple-touch-startup-image' type='image/png' href='./assets/icons/apple-startup-320x460.png' media='(device-width:320px) and (device-height:480px) and (-webkit-device-pixel-ratio:1)' ><!-- iPhone <5 non-retina portrait -->
+
+  <link rel='apple-touch-icon' type='image/png' href='./assets/icons/apple-icon-180x180.png' sizes='180x180' >
+  <link rel='apple-touch-icon' type='image/png' href='./assets/icons/apple-icon-152x152.png' sizes='152x152' >
+  <link rel='apple-touch-icon' type='image/png' href='./assets/icons/apple-icon-144x144.png' sizes='144x144' >
+  <link rel='apple-touch-icon' type='image/png' href='./assets/icons/apple-icon-120x120.png' sizes='120x120' >
+  <link rel='apple-touch-icon' type='image/png' href='./assets/icons/apple-icon-114x114.png' sizes='114x114' >
+  <link rel='apple-touch-icon' type='image/png' href='./assets/icons/apple-icon-76x76.png' sizes='76x76' >
+  <link rel='apple-touch-icon' type='image/png' href='./assets/icons/apple-icon-72x72.png' sizes='72x72' >
+  <link rel='apple-touch-icon' type='image/png' href='./assets/icons/apple-icon-60x60.png' sizes='60x60' >
+  <link rel='apple-touch-icon' type='image/png' href='./assets/icons/apple-icon-57x57.png' sizes='57x57' >
+
+  <!-- microsoft -->
+  <meta name='msapplication-TileColor' content='#000000' >
+  <meta name='msapplication-TileImage' content='./assets/icons/ms-icon-144x144.png' >
+  <meta http-equiv='x-ua-compatible' content='ie=edge,chrome=1' >
+
+  <!-- fonts -->
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i' >
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i' >
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css' >
   <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons' >
-  <link rel='icon' type='image/x-icon' href='favicon.ico' >
+
+  <!-- favicon -->
+  <link rel='icon' type='image/png' href='./assets/icons/favicon-16x16.png' sizes='16x16' >
+  <link rel='icon' type='image/png' href='./assets/icons/favicon-32x32.png' sizes='32x32' >
+  <link rel='icon' type='image/png' href='./assets/icons/favicon-96x96.png' sizes='96x96' >
+  <link rel='icon' type='image/x-icon' href='./assets/icons/favicon.ico' >
+
 </head>
+
 <body>
   <app-root></app-root>
 </body>
+
 </html>
