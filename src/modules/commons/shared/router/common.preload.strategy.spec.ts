@@ -11,13 +11,13 @@ describe('<Common>', () => {
 
   describe('CommonPreloadStrategy', () => {
 
-    it('should return response for preload() true', fakeAsync(() => {
+    it('should return response for preload() with true', fakeAsync(() => {
       service = new Preload();
       outpt = service.preload({ data: { preload: true } }, () => true);
       expect(outpt).toBeTruthy();
     }));
 
-    it('should return response for preload() false', fakeAsync(() => {
+    it('should return response for preload() with false', fakeAsync(() => {
       service.preload({ data: { preload: false } }, null).subscribe((o: null) => outpt = o); tick();
       expect(outpt).toBeNull();
     }));

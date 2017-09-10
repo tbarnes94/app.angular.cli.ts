@@ -3,6 +3,7 @@ export * from './shared/guard/common.guard';
 export * from './shared/helpers/common.helpers';
 export * from './shared/pipes/common.pipe';
 export * from './shared/router/common.preload.strategy';
+export * from './shared/router/common.route.reuse.strategy';
 export * from './shared/service/common.service';
 export * from './shared/store/common.action';
 export * from './shared/store/common.actions';

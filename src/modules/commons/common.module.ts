@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ModuleWithProviders } from '@angular/core';
+import { RouteReuseStrategy } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
@@ -19,6 +20,7 @@ import { CommonComponent } from './common/common.component';
 import { CommonGuard } from './shared/guard/common.guard';
 import { CommonPipe } from './shared/pipes/common.pipe';
 import { CommonPreloadStrategy } from './shared/router/common.preload.strategy';
+import { CommonRouteReuseStrategy } from './shared/router/common.route.reuse.strategy';
 import { CommonService } from './shared/service/common.service';
 import { commonReducers } from './shared/store/common.reducers';
 
@@ -75,6 +77,7 @@ export class CommonModule {
       providers: [
         CommonGuard,
         CommonPreloadStrategy,
+        { provide: RouteReuseStrategy, useClass: CommonRouteReuseStrategy },
         CommonService,
       ],
     };

@@ -18,7 +18,7 @@ describe('<Common>', () => {
 
     it('should return response for forRoot()', fakeAsync(() => {
       outpt = Module.forRoot();
-      expect(outpt.providers.length).toEqual(3);
+      expect(outpt.providers.length).toEqual(4);
       module = new RootModule();
     }));
 
