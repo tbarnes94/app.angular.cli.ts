@@ -35,8 +35,8 @@ export class CommonService {
    */
   public readonly resize$: Observable<number> = Observable
     .fromEvent(window, 'resize')
-    .map((o: any) => o.target.innerWidth)
     .debounceTime(100)
+    .map((o: any) => o.target.innerWidth)
     .distinctUntilChanged()
   ;
 
