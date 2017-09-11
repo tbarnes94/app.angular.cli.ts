@@ -6,7 +6,7 @@ import { ApiService } from './shared/service/api.service';
 import { ApiOptions } from './shared/types/api.options';
 
 /**
- * https://angular.io/guide/ngmodule#configure-core-services-with-coremoduleforroot
+ * https://angular.io/api/core/NgModule
  */
 @NgModule({
   imports: [ HttpClientModule ],

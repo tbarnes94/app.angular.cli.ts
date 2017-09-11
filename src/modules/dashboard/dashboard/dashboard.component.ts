@@ -5,7 +5,7 @@ import { AuthLogout } from '../../auth';
 import { CommonComponent } from '../../commons';
 
 /**
- * https://angular.io/guide/ngmodule#declare-directives-and-components
+ * https://angular.io/api/core/Component
  */
 @Component({
   selector: 'dashboard-dashboard',
@@ -28,6 +28,7 @@ import { CommonComponent } from '../../commons';
 export class DashboardDashboardComponent extends CommonComponent {
 
   /**
+   * https://angular.io/guide/user-input
    * @param input
    */
   public onLogout(): void {

@@ -25,7 +25,7 @@ import { CommonService } from './shared/service/common.service';
 import { commonReducers } from './shared/store/common.reducers';
 
 /**
- * https://angular.io/guide/ngmodule#configure-core-services-with-coremoduleforroot
+ * https://angular.io/api/core/NgModule
  */
 @NgModule({
   imports: [

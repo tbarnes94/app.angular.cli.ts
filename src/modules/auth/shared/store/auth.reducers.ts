@@ -12,14 +12,22 @@ import { AuthLoginComplete } from './auth.actions';
 import { AuthActions } from './auth.actions';
 
 /**
- * https://github.com/ngrx/store
+ * https://github.com/ngrx/platform
  */
 export const authErrorReducer: ActionReducer<string, AuthError> = commonReducer<string, AuthError>(AUTH_ERROR, null);
+
+/**
+ * https://github.com/ngrx/platform
+ */
 export const authLoaderReducer: ActionReducer<boolean, AuthLoader> = commonReducer<boolean, AuthLoader>(AUTH_LOADER, false);
+
+/**
+ * https://github.com/ngrx/platform
+ */
 export const authTokenReducer: ActionReducer<AuthToken, AuthLoginComplete> = commonReducer<AuthToken, AuthLoginComplete>(AUTH_LOGIN_COMPLETE, null);
 
 /**
- * https://github.com/ngrx/store
+ * https://github.com/ngrx/platform
  */
 export function authReducers(state: any, action: AuthActions): any {
   return combineReducers({

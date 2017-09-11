@@ -6,6 +6,7 @@ import { CommonService } from '../service/common.service';
 import { CommonAction } from './common.action';
 
 /**
+ * https://angular.io/api/core/Injectable
  * https://github.com/ngrx/effects
  */
 @Injectable()

@@ -5,7 +5,7 @@ import { CommonModule } from '../commons';
 import { TemplateBasicComponent } from './basic/basic.component';
 
 /**
- * https://angular.io/guide/ngmodule#configure-core-services-with-coremoduleforroot
+ * https://angular.io/api/core/NgModule
  */
 @NgModule({
   imports: [],

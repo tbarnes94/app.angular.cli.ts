@@ -15,7 +15,7 @@ import { AuthService } from '../../auth/shared/service/auth.service';
 import { CommonService } from '../shared/service/common.service';
 
 /**
- * https://angular.io/guide/ngmodule#declare-directives-and-components
+ * https://angular.io/api/core/Component
  */
 @Component({
   selector: 'commons-common',
@@ -38,48 +38,56 @@ export class CommonComponent implements OnChanges,
 
   /**
    * https://angular.io/api/core/OnChanges
+   * https://angular.io/api/core/OnChanges#ngOnChanges
    */
   public ngOnChanges(): void {
   }
 
   /**
    * https://angular.io/api/core/OnInit
+   * https://angular.io/api/core/OnInit#ngOnInit
    */
   public ngOnInit(): void {
   }
 
   /**
    * https://angular.io/api/core/DoCheck
+   * https://angular.io/api/core/DoCheck#ngDoCheck
    */
   public ngDoCheck(): void {
   }
 
   /**
    * https://angular.io/api/core/AfterContentInit
+   * https://angular.io/api/core/AfterContentInit#ngAfterContentInit
    */
   public ngAfterContentInit(): void {
   }
 
   /**
    * https://angular.io/api/core/AfterContentChecked
+   * https://angular.io/api/core/AfterContentChecked#ngAfterContentChecked
    */
   public ngAfterContentChecked(): void {
   }
 
   /**
    * https://angular.io/api/core/AfterViewInit
+   * https://angular.io/api/core/AfterViewInit#ngAfterViewInit
    */
   public ngAfterViewInit(): void {
   }
 
   /**
    * https://angular.io/api/core/AfterViewChecked
+   * https://angular.io/api/core/AfterViewChecked#ngAfterViewChecked
    */
   public ngAfterViewChecked(): void {
   }
 
   /**
    * https://angular.io/api/core/OnDestroy
+   * https://angular.io/api/core/OnDestroy#ngOnDestroy
    */
   public ngOnDestroy(): void {
     this.destroy$.next(true);

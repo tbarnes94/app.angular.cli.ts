@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Rx';
 export class CommonPreloadStrategy implements PreloadingStrategy {
 
   /**
-   * https://angular.io/guide/router#preloading-background-loading-of-feature-areas
+   * https://angular.io/api/router/PreloadingStrategy#preload
    */
   public preload(route: Route, loads: Function): Observable<null> {
     return ( route.data && route.data.preload )

@@ -12,7 +12,7 @@ import { ApiOptions } from '../types/api.options';
 import { ApiResponse } from '../types/api.response';
 
 /**
- * https://angular.io/tutorial/toh-pt4
+ * https://angular.io/api/core/Injectable
  */
 @Injectable()
 export class ApiService {
@@ -26,7 +26,7 @@ export class ApiService {
   }
 
   /**
-   * @param r         https://angular.io/api/common/http/HttpResponse
+   * @param r         https://angular.io/api/common/http/HttpErrorResponse
    * @returns         http://reactivex.io/documentation/observable.html
    */
   public error(r: HttpErrorResponse): Observable<ApiError> {

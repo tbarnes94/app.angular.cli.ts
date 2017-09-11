@@ -15,6 +15,7 @@ import { AuthLogout } from './auth.actions';
 import { AuthActions } from './auth.actions';
 
 /**
+ * https://angular.io/api/core/Injectable
  * https://github.com/ngrx/effects
  */
 @Injectable()

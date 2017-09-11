@@ -14,7 +14,7 @@ import { TranslateLoaderFactory } from './shared/translate/translate.loader.fact
 import { TranslateMissingHandler } from './shared/translate/translate.missing.handler';
 
 /**
- * https://angular.io/guide/ngmodule#configure-core-services-with-coremoduleforroot
+ * https://angular.io/api/core/NgModule
  */
 @NgModule({
   imports: [

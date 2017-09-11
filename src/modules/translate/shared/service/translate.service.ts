@@ -7,20 +7,20 @@ import { CommonService } from '../../../commons';
 import { TranslateTranslations } from '../store/translate.actions';
 
 /**
- * https://angular.io/tutorial/toh-pt4
+ * https://angular.io/api/core/Injectable
  */
 @Injectable()
 export class TranslateService {
 
   /**
-   * @param o   https://github.com/ngx-translate/core
+   * @param o   https://github.com/ngx-translate/core#properties
    */
   public onLanguageChange(o: string): void {
     this.translate.use(o);
   }
 
   /**
-   * @param e   https://github.com/ngx-translate/core
+   * @param e   https://github.com/ngx-translate/core#properties
    */
   public onTranslationsChange(e: LangChangeEvent): void {
     this.common.dispatch(new TranslateTranslations(e.translations));

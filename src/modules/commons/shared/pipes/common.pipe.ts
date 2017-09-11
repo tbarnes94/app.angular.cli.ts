@@ -4,13 +4,14 @@ import { PipeTransform } from '@angular/core';
 import { CommonService } from '../service/common.service';
 
 /**
+ * https://angular.io/api/core/Pipe
  * https://angular.io/api/core/PipeTransform
  */
 @Pipe({ name: 'common' })
 export class CommonPipe implements PipeTransform {
 
   /**
-   * https://angular.io/guide/pipes
+   * https://angular.io/api/core/PipeTransform#transform
    */
   public transform(current: any, ...options: Array<any>): any {
     return current;

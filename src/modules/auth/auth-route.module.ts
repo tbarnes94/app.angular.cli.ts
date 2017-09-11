@@ -5,7 +5,7 @@ import { Routes } from '@angular/router';
 import { AuthLoginComponent } from './login/login.component';
 
 /**
- * https://angular.io/guide/router#milestone-6-asynchronous-routing
+ * https://angular.io/api/router/Routes
  */
 const route: Routes = [
   { path: '',      redirectTo: 'login', pathMatch: 'full' },

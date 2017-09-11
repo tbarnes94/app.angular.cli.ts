@@ -9,7 +9,7 @@ import { TranslateLanguage } from '../../modules/translate';
 import { TranslateService } from '../../modules/translate';
 
 /**
- * https://angular.io/guide/styleguide#app-root-module
+ * https://angular.io/api/core/Component
  */
 @Component({
   selector: 'app-root',
@@ -34,6 +34,10 @@ export class AppRootComponent {
    * http://reactivex.io/documentation/observable.html
    */
   public readonly token$: Observable<boolean> = this.auth.token$;
+
+  /**
+   * http://reactivex.io/documentation/observable.html
+   */
   public readonly languages$: Observable<Array<any>> = Observable
     .of([
       { id: 'en-US', title: 'English' },
@@ -42,6 +46,7 @@ export class AppRootComponent {
     ;
 
   /**
+   * https://angular.io/guide/user-input
    * @param input
    */
   public onLanguage(input: string): void {

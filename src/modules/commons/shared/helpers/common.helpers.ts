@@ -14,6 +14,10 @@ export function isEmptyArray<T>(input: T): boolean {
   return ( isArray(input) && isEmpty(input) );
 }
 
+/**
+ * @param input
+ * @returns boolean
+ */
 export function isNotEmptyArray<T>(input: T): boolean {
   return ( !isEmptyArray<T>(input) );
 }
@@ -26,6 +30,10 @@ export function isEmptyObject<T>(input: T): boolean {
   return ( isObject(input) && isEmpty(input) );
 }
 
+/**
+ * @param input
+ * @returns boolean
+ */
 export function isNotEmptyObject<T>(input: T): boolean {
   return ( !isEmptyObject<T>(input) );
 }
@@ -38,6 +46,10 @@ export function isNullOrUndefined<T>(input: T): boolean {
   return ( isUndefined(input) || isNull(input) );
 }
 
+/**
+ * @param input
+ * @returns boolean
+ */
 export function isNotNullOrUndefined<T>(input: T): boolean {
   return ( !isNullOrUndefined<T>(input) );
 }
@@ -50,6 +62,10 @@ export function isEmpty<T>(input: T): boolean {
   return ( _isEmpty(input) );
 }
 
+/**
+ * @param input
+ * @returns boolean
+ */
 export function isNotEmpty<T>(input: T): boolean {
   return ( !isEmpty(input) );
 }

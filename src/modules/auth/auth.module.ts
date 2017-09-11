@@ -13,7 +13,7 @@ import { AuthEffects } from './shared/store/auth.effects';
 import { authReducers } from './shared/store/auth.reducers';
 
 /**
- * https://angular.io/guide/ngmodule#configure-core-services-with-coremoduleforroot
+ * https://angular.io/api/core/NgModule
  */
 @NgModule({
   imports: [

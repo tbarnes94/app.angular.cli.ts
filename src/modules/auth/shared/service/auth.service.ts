@@ -5,7 +5,7 @@ import { CommonService } from '../../../commons/shared/service/common.service';
 import { AuthToken } from '../types/auth.token';
 
 /**
- * https://angular.io/tutorial/toh-pt4
+ * https://angular.io/api/core/Injectable
  */
 @Injectable()
 export class AuthService {

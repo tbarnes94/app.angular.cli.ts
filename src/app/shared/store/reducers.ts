@@ -6,7 +6,7 @@ import { combineReducers } from '@ngrx/store';
 import { AUTH_LOGOUT } from '../../../modules/auth';
 
 /**
- * https://github.com/ngrx/store
+ * https://github.com/ngrx/platform
  */
 export const local: any = {
   key: 'app.angular.cli.ts',
@@ -16,6 +16,9 @@ export const local: any = {
   },
 };
 
+/**
+ * https://github.com/ngrx/platform
+ */
 export function parse(payload: any, state: any): any {
 
   const outpt: any = {};
@@ -37,6 +40,9 @@ export function parse(payload: any, state: any): any {
 
 }
 
+/**
+ * https://github.com/ngrx/platform
+ */
 export function storage(reducer: ActionReducer<any>): ActionReducer<any> {
 
   return (state: any, action: any): any => {
@@ -59,6 +65,9 @@ export function storage(reducer: ActionReducer<any>): ActionReducer<any> {
 
 }
 
+/**
+ * https://github.com/ngrx/platform
+ */
 export function clear(reducer: ActionReducer<any>): ActionReducer<any> {
   return (state: any, action: any): any => {
     return (action.type === AUTH_LOGOUT)
@@ -68,11 +77,17 @@ export function clear(reducer: ActionReducer<any>): ActionReducer<any> {
   };
 }
 
+/**
+ * https://github.com/ngrx/platform
+ */
 export const metaReducers: Array<ActionReducer<any>> = [
   storage,
   clear,
 ];
 
+/**
+ * https://github.com/ngrx/platform
+ */
 export const reducers: ActionReducerMap<any> = {
   // router : routerReducer ,
 };

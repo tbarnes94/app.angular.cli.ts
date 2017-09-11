@@ -13,7 +13,7 @@ import { CommonAction } from '../store/common.action';
 import { CommonLoader } from '../store/common.actions';
 
 /**
- * https://angular.io/tutorial/toh-pt4
+ * https://angular.io/api/core/Injectable
  */
 @Injectable()
 export class CommonService {
@@ -24,11 +24,15 @@ export class CommonService {
   public delay: any;
 
   /**
-   * http://reactivex.io/documentation/observable.html
+   * http://reactivex.io/documentation/subject.html
    */
   public readonly width$: BehaviorSubject<number> =
     new BehaviorSubject<number>(window.innerWidth)
   ;
+
+  /**
+   * http://reactivex.io/documentation/observable.html
+   */
   public readonly resize$: Observable<number> = Observable
     .fromEvent(window, 'resize')
     .map((o: any) => o.target.innerWidth)
@@ -49,7 +53,7 @@ export class CommonService {
    * @param nodes
    * @param filters
    * @param context
-   * @returns         http://reactivex.io/documentation/observable.html
+   * @returns http://reactivex.io/documentation/observable.html
    */
   public select<T>(nodes: Array<string>,
                    filters: Observable<Array<Function>> | Array<Function> = new Array(),

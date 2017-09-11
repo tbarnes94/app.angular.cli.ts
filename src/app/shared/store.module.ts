@@ -9,7 +9,7 @@ import { metaReducers } from './store/reducers';
 import { reducers } from './store/reducers';
 
 /**
- * https://github.com/ngrx/store
+ * https://github.com/ngrx/platform
  */
 @NgModule({
   imports: [

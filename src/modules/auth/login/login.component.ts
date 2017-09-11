@@ -10,7 +10,7 @@ import { AuthLoginStart } from '../shared/store/auth.actions';
 import { AuthCredentials } from '../shared/types/auth.credentials';
 
 /**
- * https://angular.io/guide/ngmodule#declare-directives-and-components
+ * https://angular.io/api/core/Component
  */
 @Component({
   selector: 'auth-login',
@@ -50,7 +50,15 @@ export class AuthLoginComponent extends CommonComponent {
    * http://reactivex.io/documentation/observable.html
    */
   public readonly forms$: Observable<any> = this.build().takeUntil(this.destroy$);
+
+  /**
+   * http://reactivex.io/documentation/observable.html
+   */
   public readonly error$: Observable<string> = this.common.select<string>(['auth', 'error']).takeUntil(this.destroy$);
+
+  /**
+   * http://reactivex.io/documentation/observable.html
+   */
   public readonly loader$: Observable<boolean> = this.common.select<boolean>(['auth', 'loader']).takeUntil(this.destroy$);
 
   /**
@@ -106,6 +114,7 @@ export class AuthLoginComponent extends CommonComponent {
   }
 
   /**
+   * https://angular.io/guide/user-input
    * @param input
    */
   public onSubmit(input: AuthCredentials): void {

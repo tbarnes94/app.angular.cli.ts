@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { ObjectAny } from '../../commons';
 
 /**
- * https://angular.io/guide/ngmodule#declare-directives-and-components
+ * https://angular.io/api/core/Component
  */
 @Component({
   selector: 'template-basic',
@@ -51,9 +51,27 @@ export class TemplateBasicComponent {
    * https://angular.io/api/core/Input
    */
   @Input() public readonly key: string = null;
+
+  /**
+   * https://angular.io/api/core/Input
+   */
   @Input() public readonly translations: ObjectAny = null;
+
+  /**
+   * https://angular.io/api/core/Input
+   * http://reactivex.io/documentation/observable.html
+   */
   @Input() public readonly loads$: Observable<boolean> = Observable.of(false);
+
+  /**
+   * https://angular.io/api/core/Input
+   * http://reactivex.io/documentation/observable.html
+   */
   @Input() public readonly error$: Observable<string> = Observable.of(null);
+
+  /**
+   * https://angular.io/api/core/Input
+   */
   @Input() public readonly divider: boolean = false;
 
 }

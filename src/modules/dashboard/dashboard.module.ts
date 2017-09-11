@@ -7,7 +7,7 @@ import { DashboardRouteModule } from './dashboard-route.module';
 import { DashboardDashboardComponent } from './dashboard/dashboard.component';
 
 /**
- * https://angular.io/guide/ngmodule#configure-core-services-with-coremoduleforroot
+ * https://angular.io/api/core/NgModule
  */
 @NgModule({
   imports: [],
