@@ -108,6 +108,7 @@ export class CommonService {
 
   /**
    * @param input
+   * @param options
    * @returns this
    */
   public redirect(input: Array<string>, options: NavigationExtras = {}): this {
