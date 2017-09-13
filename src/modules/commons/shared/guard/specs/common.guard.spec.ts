@@ -1,7 +1,7 @@
 import { fakeAsync } from '@angular/core/testing';
 import { tick } from '@angular/core/testing';
 
-import { CommonGuard as Guard } from './common.guard';
+import { CommonGuard as Guard } from '../common.guard';
 
 describe('<Common>', () => {
 

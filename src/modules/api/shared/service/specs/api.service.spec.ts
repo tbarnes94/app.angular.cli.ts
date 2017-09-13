@@ -7,8 +7,8 @@ import { TestBed } from '@angular/core/testing';
 import { fakeAsync } from '@angular/core/testing';
 import { tick } from '@angular/core/testing';
 
-import { ApiOptions } from '../types/api.options';
-import { ApiService as Service } from './api.service';
+import { ApiOptions } from '../../types/api.options';
+import { ApiService as Service } from '../api.service';
 
 describe('<Api>', () => {
 

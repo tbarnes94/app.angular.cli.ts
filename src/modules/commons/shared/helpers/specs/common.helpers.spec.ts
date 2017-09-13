@@ -2,17 +2,17 @@ import { TestBed } from '@angular/core/testing';
 import { fakeAsync } from '@angular/core/testing';
 import { tick } from '@angular/core/testing';
 
-import { error } from './common.helpers';
-import { immutable } from './common.helpers';
-import { isEmpty } from './common.helpers';
-import { isEmptyArray } from './common.helpers';
-import { isEmptyObject } from './common.helpers';
-import { isNotEmpty } from './common.helpers';
-import { isNotEmptyArray } from './common.helpers';
-import { isNotEmptyObject } from './common.helpers';
-import { isNotNullOrUndefined } from './common.helpers';
-import { isNullOrUndefined } from './common.helpers';
-import { print } from './common.helpers';
+import { error } from '../common.helpers';
+import { immutable } from '../common.helpers';
+import { isEmpty } from '../common.helpers';
+import { isEmptyArray } from '../common.helpers';
+import { isEmptyObject } from '../common.helpers';
+import { isNotEmpty } from '../common.helpers';
+import { isNotEmptyArray } from '../common.helpers';
+import { isNotEmptyObject } from '../common.helpers';
+import { isNotNullOrUndefined } from '../common.helpers';
+import { isNullOrUndefined } from '../common.helpers';
+import { print } from '../common.helpers';
 
 describe('<Common>', () => {
 

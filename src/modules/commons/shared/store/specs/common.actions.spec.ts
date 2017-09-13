@@ -1,9 +1,9 @@
 import { fakeAsync } from '@angular/core/testing';
 import { tick } from '@angular/core/testing';
 
-import { COMMON_LOADER } from './common.actions';
-import { CommonLoader } from './common.actions';
-import { CommonActions } from './common.actions';
+import { COMMON_LOADER } from '../common.actions';
+import { CommonLoader } from '../common.actions';
+import { CommonActions } from '../common.actions';
 
 describe('<Common>', () => {
 

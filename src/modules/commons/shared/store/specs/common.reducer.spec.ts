@@ -1,7 +1,7 @@
 import { fakeAsync } from '@angular/core/testing';
 import { tick } from '@angular/core/testing';
 
-import { commonReducer as Reducer } from './common.reducer';
+import { commonReducer as Reducer } from '../common.reducer';
 
 describe('<Common>', () => {
 

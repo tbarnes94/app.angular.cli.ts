@@ -1,9 +1,9 @@
 import { fakeAsync } from '@angular/core/testing';
 import { tick } from '@angular/core/testing';
 
-import { ObjectAny } from './object.any';
-import { ObjectBooleans } from './object.booleans';
-import { ObjectStrings } from './object.strings';
+import { ObjectAny } from '../object.any';
+import { ObjectBooleans } from '../object.booleans';
+import { ObjectStrings } from '../object.strings';
 
 describe('<Common>', () => {
 

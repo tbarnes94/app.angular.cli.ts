@@ -2,8 +2,8 @@ import { fakeAsync } from '@angular/core/testing';
 import { tick } from '@angular/core/testing';
 import { DetachedRouteHandle } from '@angular/router';
 
-import { MocksActivatedRouteSnapshot } from '../../../../mocks/activated.route.snapshot';
-import { CommonRouteReuseStrategy as Reuse } from './common.route.reuse.strategy';
+import { MocksActivatedRouteSnapshot } from '../../../../../mocks/activated.route.snapshot';
+import { CommonRouteReuseStrategy as Reuse } from '../common.route.reuse.strategy';
 
 /** @tests */
 describe('<Common>', () => {

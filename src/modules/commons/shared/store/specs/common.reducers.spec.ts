@@ -1,10 +1,10 @@
 import { fakeAsync } from '@angular/core/testing';
 import { tick } from '@angular/core/testing';
 
-import { CommonLoader } from './common.actions';
-import { CommonActions } from './common.actions';
-import { commonLoaderReducers } from './common.reducers';
-import { commonReducers as Reducers } from './common.reducers';
+import { CommonLoader } from '../common.actions';
+import { CommonActions } from '../common.actions';
+import { commonLoaderReducers } from '../common.reducers';
+import { commonReducers as Reducers } from '../common.reducers';
 
 describe('<Common>', () => {
 

@@ -2,7 +2,7 @@ import { fakeAsync } from '@angular/core/testing';
 import { tick } from '@angular/core/testing';
 import { Observable } from 'rxjs/Rx';
 
-import { CommonPreloadStrategy as Preload } from './common.preload.strategy';
+import { CommonPreloadStrategy as Preload } from '../common.preload.strategy';
 
 describe('<Common>', () => {
 

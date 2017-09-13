@@ -1,9 +1,9 @@
 import { fakeAsync } from '@angular/core/testing';
 import { tick } from '@angular/core/testing';
 
-import { ApiError } from './api.error';
-import { ApiOptions } from './api.options';
-import { ApiResponse } from './api.response';
+import { ApiError } from '../api.error';
+import { ApiOptions } from '../api.options';
+import { ApiResponse } from '../api.response';
 
 describe('<Api>', () => {
 

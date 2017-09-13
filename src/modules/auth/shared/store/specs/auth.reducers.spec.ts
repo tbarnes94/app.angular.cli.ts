@@ -1,16 +1,16 @@
 import { fakeAsync } from '@angular/core/testing';
 import { tick } from '@angular/core/testing';
 
-import { AuthToken } from '../types/auth.token';
-import { AuthError } from './auth.actions';
-import { AuthLoader } from './auth.actions';
-import { AuthLoginComplete } from './auth.actions';
-import { AuthLogout } from './auth.actions';
-import { AuthActions } from './auth.actions';
-import { authErrorReducer } from './auth.reducers';
-import { authLoaderReducer } from './auth.reducers';
-import { authTokenReducer } from './auth.reducers';
-import { authReducers as Reducers } from './auth.reducers';
+import { AuthToken } from '../../types/auth.token';
+import { AuthError } from '../auth.actions';
+import { AuthLoader } from '../auth.actions';
+import { AuthLoginComplete } from '../auth.actions';
+import { AuthLogout } from '../auth.actions';
+import { AuthActions } from '../auth.actions';
+import { authErrorReducer } from '../auth.reducers';
+import { authLoaderReducer } from '../auth.reducers';
+import { authTokenReducer } from '../auth.reducers';
+import { authReducers as Reducers } from '../auth.reducers';
 
 describe('<Auth>', () => {
 

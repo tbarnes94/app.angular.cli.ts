@@ -1,19 +1,19 @@
 import { fakeAsync } from '@angular/core/testing';
 import { tick } from '@angular/core/testing';
 
-import { AuthCredentials } from '../types/auth.credentials';
-import { AuthToken } from '../types/auth.token';
-import { AUTH_ERROR } from './auth.actions';
-import { AuthError } from './auth.actions';
-import { AUTH_LOADER } from './auth.actions';
-import { AuthLoader } from './auth.actions';
-import { AUTH_LOGIN_START } from './auth.actions';
-import { AuthLoginStart } from './auth.actions';
-import { AUTH_LOGIN_COMPLETE } from './auth.actions';
-import { AuthLoginComplete } from './auth.actions';
-import { AUTH_LOGOUT } from './auth.actions';
-import { AuthLogout } from './auth.actions';
-import { AuthActions } from './auth.actions';
+import { AuthCredentials } from '../../types/auth.credentials';
+import { AuthToken } from '../../types/auth.token';
+import { AUTH_ERROR } from '../auth.actions';
+import { AuthError } from '../auth.actions';
+import { AUTH_LOADER } from '../auth.actions';
+import { AuthLoader } from '../auth.actions';
+import { AUTH_LOGIN_START } from '../auth.actions';
+import { AuthLoginStart } from '../auth.actions';
+import { AUTH_LOGIN_COMPLETE } from '../auth.actions';
+import { AuthLoginComplete } from '../auth.actions';
+import { AUTH_LOGOUT } from '../auth.actions';
+import { AuthLogout } from '../auth.actions';
+import { AuthActions } from '../auth.actions';
 
 describe('<Auth>', () => {
 

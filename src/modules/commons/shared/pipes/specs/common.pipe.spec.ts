@@ -1,7 +1,7 @@
 import { fakeAsync } from '@angular/core/testing';
 import { tick } from '@angular/core/testing';
 
-import { CommonPipe as Pipe } from './common.pipe';
+import { CommonPipe as Pipe } from '../common.pipe';
 
 /** @tests */
 describe('<Common>', () => {

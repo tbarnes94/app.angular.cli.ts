@@ -1,7 +1,7 @@
 import { fakeAsync } from '@angular/core/testing';
 import { tick } from '@angular/core/testing';
 
-import { CommonAction as Action } from './common.action';
+import { CommonAction as Action } from '../common.action';
 
 describe('<Common>', () => {
 

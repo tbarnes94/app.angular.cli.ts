@@ -1,5 +1,5 @@
-import { MocksRouter } from '../../../../mocks/router';
-import { MocksStore } from '../../../../mocks/store';
+import { MocksRouter } from '../../../../../mocks/router';
+import { MocksStore } from '../../../../../mocks/store';
 
 import { TestBed } from '@angular/core/testing';
 import { fakeAsync } from '@angular/core/testing';
@@ -12,8 +12,8 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
-import { ObjectAny } from '../types/object.any';
-import { CommonService as Service } from './common.service';
+import { ObjectAny } from '../../types/object.any';
+import { CommonService as Service } from '../common.service';
 
 describe('<Common>', () => {
 

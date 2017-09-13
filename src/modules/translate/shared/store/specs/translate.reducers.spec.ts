@@ -1,12 +1,12 @@
 import { fakeAsync } from '@angular/core/testing';
 import { tick } from '@angular/core/testing';
 
-import { TranslateLanguage } from './translate.actions';
-import { TranslateTranslations } from './translate.actions';
-import { TranslateActions } from './translate.actions';
-import { translateLanguageReducers } from './translate.reducers';
-import { translateTranslationsReducers } from './translate.reducers';
-import { translateReducers as Reducers } from './translate.reducers';
+import { TranslateLanguage } from '../translate.actions';
+import { TranslateTranslations } from '../translate.actions';
+import { TranslateActions } from '../translate.actions';
+import { translateLanguageReducers } from '../translate.reducers';
+import { translateTranslationsReducers } from '../translate.reducers';
+import { translateReducers as Reducers } from '../translate.reducers';
 
 describe('<Translate>', () => {
 
