@@ -1,27 +1,19 @@
 import { ModuleWithProviders } from '@angular/core';
-import { fakeAsync } from '@angular/core/testing';
-import { tick } from '@angular/core/testing';
 
 import { CommonModule as Module } from '../common.module';
 import { CommonRootModule as RootModule } from '../common.module';
+import { CommonSuite } from './common.tests';
 
-describe('<Common>', () => {
+/** @exports */
+const title: string = 'Common';
+const subtitle: string = 'CommonModule';
 
-  let outpt: ModuleWithProviders;
-  let module: Module | RootModule;
+CommonSuite(title, subtitle, '', () => {
+  const outpt: Module = new Module();
+  const roots: RootModule = new RootModule();
+});
 
-  describe('CommonModule', () => {
-
-    it('should return response', fakeAsync(() => {
-      module = new Module();
-    }));
-
-    it('should return response for forRoot()', fakeAsync(() => {
-      outpt = Module.forRoot();
-      expect(outpt.providers.length).toEqual(4);
-      module = new RootModule();
-    }));
-
-  });
-
+CommonSuite(title, subtitle, 'for forRoot()', () => {
+  const outpt: ModuleWithProviders = Module.forRoot();
+  expect(outpt.providers.length).toEqual(4);
 });

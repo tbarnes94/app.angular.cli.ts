@@ -13,7 +13,7 @@ export class CommonPipe implements PipeTransform {
   /**
    * https://angular.io/api/core/PipeTransform#transform
    */
-  public transform(current: any, ...options: Array<any>): any {
+  public transform(current: string, ...options: Array<any>): string {
     return current;
   }
 
