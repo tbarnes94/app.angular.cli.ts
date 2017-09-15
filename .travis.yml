@@ -34,7 +34,7 @@ env :
   - VERSION=0.0.0
 
 before_install :
-- npm install -g yarn
+- npm install -g yarn@0.27.5
 install :
 - yarn install
 
