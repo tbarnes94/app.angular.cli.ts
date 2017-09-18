@@ -1,7 +1,7 @@
+import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ModuleWithProviders } from '@angular/core';
-import { Http } from '@angular/http';
-import { HttpModule } from '@angular/http';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { MissingTranslationHandler } from '@ngx-translate/core';
@@ -18,12 +18,12 @@ import { TranslateMissingHandler } from './shared/translate/translate.missing.ha
  */
 @NgModule({
   imports: [
-    HttpModule,
+    HttpClientModule,
     EffectsModule.forFeature([]),
     StoreModule.forFeature('translate', translateReducers),
     TranslateModuleDep.forRoot({
       missingTranslationHandler: { provide: MissingTranslationHandler, useClass: TranslateMissingHandler },
-      loader: { provide: TranslateLoader, useFactory: TranslateLoaderFactory, deps: [ Http ] },
+      loader: { provide: TranslateLoader, useFactory: TranslateLoaderFactory, deps: [ HttpClient ] },
     }),
   ],
 })
