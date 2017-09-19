@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/Rx';
 import { ObjectStrings } from '../../../commons/shared/types/object.strings';
 import { print } from '../../../commons/shared/helpers/common.helpers';
 import { ApiError } from '../types/api.error';
+import { ApiErrorContent } from '../types/api.error.content';
 import { ApiOptions } from '../types/api.options';
 import { ApiResponse } from '../types/api.response';
 
@@ -30,16 +31,15 @@ export class ApiService {
    * @returns         http://reactivex.io/documentation/observable.html
    */
   public error(r: HttpErrorResponse): Observable<ApiError> {
+    let outpt: ApiErrorContent | any;
+    try {
+      outpt = JSON.parse(r.error);
+      outpt = (outpt.error) ? outpt.error : outpt;
+    } catch (e) {
+      outpt = new ApiErrorContent(`${ r.status } ${ r.statusText }`);
+    }
     return Observable
-      .of(
-        new ApiError(
-          r,
-          ( !r.error || !r.error.message )
-            ? { message: `${ r.status } ${ r.statusText }` }
-            : r.error
-          ,
-        )
-      )
+      .of(new ApiError(r, outpt))
       ;
   }
 
@@ -68,7 +68,7 @@ export class ApiService {
       method,
       ( host )
         ? `${ host }/${ path }`
-        : ( !path.match( /^\// ) )
+        : ( !path.match(/^\//) )
           ? `${ this.options.root }/${ path }`
           : `${ path }`
           ,

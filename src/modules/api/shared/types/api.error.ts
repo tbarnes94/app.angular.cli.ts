@@ -1,12 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { ObjectAny } from '../../../commons';
+import { ApiErrorContent } from './api.error.content';
 
 /**
  * https://angular.io/api/common/http/HttpErrorResponse
  */
 export class ApiError {
   public constructor(public readonly response: HttpErrorResponse,
-                     public readonly error: ObjectAny | { message?: string }) {
+                     public readonly error: ApiErrorContent | any) {
   }
 }

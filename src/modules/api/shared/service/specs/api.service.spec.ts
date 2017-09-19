@@ -52,10 +52,10 @@ CommonSuite(
   subtitle,
   'for error()',
   () => {
-    const payload: any = new HttpErrorResponse({ error: { message: samples } });
+    const payload: HttpErrorResponse = new HttpErrorResponse({ error: {} });
     service.error(payload).subscribe((o) => outpt = o);
     tick();
-    expect(outpt.error.message).toEqual(samples);
+    expect(outpt.error.message).toEqual(`0 Unknown Error`);
   },
   one,
 );
@@ -65,7 +65,7 @@ CommonSuite(
   subtitle,
   'for response()',
   () => {
-    const payload: any = new HttpResponse<string>({ body: samples });
+    const payload: HttpResponse<string> = new HttpResponse<string>({ body: samples });
     outpt = service.response(payload);
     expect(outpt.content).toEqual(samples);
   },

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions } from '@ngrx/effects';
 
+import { ApiError } from '../../../api/shared/types/api.error';
 import { ApiService } from '../../../api/shared/service/api.service';
 import { CommonService } from '../service/common.service';
 import { CommonAction } from './common.action';
@@ -13,13 +14,13 @@ import { CommonAction } from './common.action';
 export class CommonEffects {
 
   /**
-   * @param e
+   * @param r
    * @param ErrorAction
    * @returns CommonAction
    */
-  public exception(e: { message?: string }, ErrorAction: any): CommonAction<any> {
-    return ( e && e.message )
-      ? new ErrorAction(e.message)
+  public exception(r: ApiError, ErrorAction: any): CommonAction<any> {
+    return ( r && r.error && r.error.message )
+      ? new ErrorAction(r.error.message)
       : new ErrorAction('Error')
       ;
   }
