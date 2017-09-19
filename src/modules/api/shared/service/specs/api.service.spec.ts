@@ -52,10 +52,36 @@ CommonSuite(
   subtitle,
   'for error()',
   () => {
-    const payload: HttpErrorResponse = new HttpErrorResponse({ error: {} });
+    const payload: HttpErrorResponse = new HttpErrorResponse({ error: `{ "message" : "${samples}" }` });
     service.error(payload).subscribe((o) => outpt = o);
     tick();
-    expect(outpt.error.message).toEqual(`0 Unknown Error`);
+    expect(outpt.error.message).toEqual(samples);
+  },
+  one,
+);
+
+CommonSuite(
+  title,
+  subtitle,
+  'for error() with error',
+  () => {
+    const payload: HttpErrorResponse = new HttpErrorResponse({ error: `{ "error" : "${samples}" }` });
+    service.error(payload).subscribe((o) => outpt = o);
+    tick();
+    expect(outpt.error).toEqual(samples);
+  },
+  one,
+);
+
+CommonSuite(
+  title,
+  subtitle,
+  'for error() with default',
+  () => {
+    const payload: HttpErrorResponse = new HttpErrorResponse({ status: 400, statusText: samples, error: {} });
+    service.error(payload).subscribe((o) => outpt = o);
+    tick();
+    expect(outpt.error.message).toEqual(`400 ${samples}`);
   },
   one,
 );
