@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { LangChangeEvent } from '@ngx-translate/core';
-import { TranslateService as TranslateServiceDep } from '@ngx-translate/core';
+import { TranslateService as TranslateServiceExternal } from '@ngx-translate/core';
 
 import { CommonService } from '../../../commons';
 import { TranslateTranslations } from '../store/translate.actions';
@@ -34,7 +34,7 @@ export class TranslateService {
    * @param title       https://angular.io/api/platform-browser/Title
    */
   public constructor(protected readonly common: CommonService,
-                     protected readonly translate: TranslateServiceDep,
+                     protected readonly translate: TranslateServiceExternal,
                      protected readonly title: Title) {
     this.common.select<string>([ 'translate', 'language' ]).subscribe(this.onLanguageChange.bind(this));
     // this.translate.onDefaultLangChange.subscribe( this.onTranslationsChange.bind( this ) ) ;

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { ModuleWithProviders } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { StoreModule as StoreModuleDep } from '@ngrx/store';
+import { StoreModule as StoreModuleExternal } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { metaReducers } from './store/reducers';
@@ -14,7 +14,7 @@ import { reducers } from './store/reducers';
 @NgModule({
   imports: [
     EffectsModule.forRoot([]),
-    StoreModuleDep.forRoot(reducers, { metaReducers }),
+    StoreModuleExternal.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({ maxAge: 100 }),
     // x StoreRouterConnectingModule ,
   ],

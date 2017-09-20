@@ -4,18 +4,6 @@ import { RouteReuseStrategy } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
-import { CommonModule as CommonModuleDep } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MdButtonModule } from '@angular/material';
-import { MdCardModule } from '@angular/material';
-import { MdIconModule } from '@angular/material';
-import { MdProgressBarModule } from '@angular/material';
-import { MdProgressSpinnerModule } from '@angular/material';
-import { DynamicFormsMaterialUIModule } from '@ng2-dynamic-forms/ui-material';
-import { TranslateModule } from '@ngx-translate/core';
-
 import { CommonComponent } from './common/common.component';
 import { CommonGuard } from './shared/guard/common.guard';
 import { CommonPipe } from './shared/pipes/common.pipe';
@@ -40,29 +28,14 @@ export class CommonRootModule {
  * https://angular.io/guide/styleguide#feature-modules
  */
 @NgModule({
-  imports: [
-    CommonModuleDep,
-  ],
+  imports: [],
   declarations: [
     CommonComponent,
     CommonPipe,
   ],
   exports: [
-    CommonModuleDep,
-    FlexLayoutModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MdButtonModule,
-    MdCardModule,
-    MdIconModule,
-    MdProgressBarModule,
-    MdProgressSpinnerModule,
-    DynamicFormsMaterialUIModule,
-    TranslateModule,
-
     CommonComponent,
     CommonPipe,
-
   ],
 
 })

@@ -6,7 +6,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { MissingTranslationHandler } from '@ngx-translate/core';
 import { TranslateLoader } from '@ngx-translate/core';
-import { TranslateModule as TranslateModuleDep } from '@ngx-translate/core';
+import { TranslateModule as TranslateModuleExternal } from '@ngx-translate/core';
 
 import { TranslateService } from './shared/service/translate.service';
 import { translateReducers } from './shared/store/translate.reducers';
@@ -21,7 +21,7 @@ import { TranslateMissingHandler } from './shared/translate/translate.missing.ha
     HttpClientModule,
     EffectsModule.forFeature([]),
     StoreModule.forFeature('translate', translateReducers),
-    TranslateModuleDep.forRoot({
+    TranslateModuleExternal.forRoot({
       missingTranslationHandler: { provide: MissingTranslationHandler, useClass: TranslateMissingHandler },
       loader: { provide: TranslateLoader, useFactory: TranslateLoaderFactory, deps: [ HttpClient ] },
     }),
@@ -35,7 +35,7 @@ export class TranslateRootModule {
  */
 @NgModule({
   imports: [],
-  exports: [ TranslateModuleDep ],
+  exports: [ TranslateModuleExternal ],
 })
 export class TranslateModule {
 

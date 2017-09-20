@@ -20,7 +20,7 @@ const route: Routes = [
  */
 @NgModule({
   imports: [ RouterModule.forRoot(route, { preloadingStrategy: CommonPreloadStrategy }) ],
-  exports: [ RouterModule ],
+  exports: [],
 })
 export class AppRouteModule {
 }

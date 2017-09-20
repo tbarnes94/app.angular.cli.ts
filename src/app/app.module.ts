@@ -37,6 +37,7 @@ import { TranslateModule } from '../modules/translate';
     TemplateModule.forRoot(),
     TranslateModule.forRoot(),
     CommonModule,
+    TemplateModule,
 
   ],
   declarations: [
