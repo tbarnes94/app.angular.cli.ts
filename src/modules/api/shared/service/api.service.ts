@@ -5,8 +5,8 @@ import { HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
-import { ObjectStrings } from '../../../commons/shared/types/object.strings';
 import { print } from '../../../commons/shared/helpers/common.helpers';
+import { ObjectStrings } from '../../../commons/shared/types/object.strings';
 import { ApiError } from '../types/api.error';
 import { ApiErrorContent } from '../types/api.error.content';
 import { ApiOptions } from '../types/api.options';

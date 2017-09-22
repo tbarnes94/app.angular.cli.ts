@@ -27,19 +27,19 @@ let filters: Observable<Array<Function>> | Array<Function>;
 
 export function one(): void {
 
-  router = new MocksRouter<ObjectAny>();
-  store = new MocksStore<boolean | string>();
   TestBed.configureTestingModule({
     imports: [],
     declarations: [],
     providers: [
-      { provide: Store, useValue: store },
-      { provide: Router, useValue: router },
+      { provide: Router, useValue: new MocksRouter<ObjectAny>() },
+      { provide: Store, useValue: new MocksStore<boolean | string>() },
       Service,
     ],
   });
 
   service = TestBed.get(Service);
+  router = TestBed.get(Router);
+  store = TestBed.get(Store);
   spyOn(spy, 'cback');
 
 }
