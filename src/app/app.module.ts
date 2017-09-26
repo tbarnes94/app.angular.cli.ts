@@ -35,7 +35,7 @@ import { TranslateModule } from '../modules/translate';
     CommonModule.forRoot(),
     DashboardModule.forRoot(),
     TemplateModule.forRoot(),
-    TranslateModule.forRoot(),
+    TranslateModule.forRoot(environment.translate),
     CommonModule,
     TemplateModule,
 

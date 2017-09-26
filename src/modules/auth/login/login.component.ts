@@ -4,8 +4,8 @@ import { DynamicInputModel } from '@ng2-dynamic-forms/core';
 import { DYNAMIC_FORM_CONTROL_INPUT_TYPE_PASSWORD } from '@ng2-dynamic-forms/core';
 import { Observable } from 'rxjs/Rx';
 
-import { CommonComponent } from '../../commons';
 import { isNotEmpty } from '../../commons';
+import { TemplateCommonComponent } from '../../template';
 import { AuthLoginStart } from '../shared/store/auth.actions';
 import { AuthCredentials } from '../shared/types/auth.credentials';
 
@@ -44,7 +44,7 @@ import { AuthCredentials } from '../shared/types/auth.credentials';
     </template-basic>
   `,
 })
-export class AuthLoginComponent extends CommonComponent {
+export class AuthLoginComponent extends TemplateCommonComponent {
 
   /**
    * http://reactivex.io/documentation/observable.html

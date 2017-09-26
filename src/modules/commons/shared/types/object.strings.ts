@@ -1,6 +1,7 @@
 /**
  * https://www.typescriptlang.org/docs/handbook/advanced-types.html
  */
-export class ObjectStrings {
-  [ name: string ]: string
+export class ObjectStrings
+{
+  [ name : string ] : string
 }

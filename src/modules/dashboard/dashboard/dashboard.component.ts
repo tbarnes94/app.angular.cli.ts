@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
 
 import { AuthLogout } from '../../auth';
-import { CommonComponent } from '../../commons';
+import { TemplateCommonComponent } from '../../template';
 
 /**
  * https://angular.io/api/core/Component
@@ -25,7 +25,7 @@ import { CommonComponent } from '../../commons';
     </template-basic>
   `,
 })
-export class DashboardDashboardComponent extends CommonComponent {
+export class DashboardDashboardComponent extends TemplateCommonComponent {
 
   /**
    * https://angular.io/guide/user-input

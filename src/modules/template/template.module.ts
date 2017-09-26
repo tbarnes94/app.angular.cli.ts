@@ -15,6 +15,7 @@ import { DynamicFormsMaterialUIModule } from '@ng2-dynamic-forms/ui-material';
 
 import { TranslateModule } from '../translate';
 import { TemplateBasicComponent } from './basic/basic.component';
+import { TemplateCommonComponent } from './common/common.component';
 
 /**
  * https://angular.io/api/core/NgModule
@@ -48,6 +49,7 @@ export class TemplateRootModule {
   ],
   declarations: [
     TemplateBasicComponent,
+    TemplateCommonComponent,
   ],
   exports: [
 
@@ -64,6 +66,7 @@ export class TemplateRootModule {
     DynamicFormsMaterialUIModule,
 
     TemplateBasicComponent,
+    TemplateCommonComponent,
     TranslateModule,
 
   ],

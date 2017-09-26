@@ -1,21 +1,27 @@
-import { ActionReducer } from '@ngrx/store';
-import { combineReducers } from '@ngrx/store';
+/** @imports */
+import { ActionReducer } from '@ngrx/store' ;
+import { combineReducers } from '@ngrx/store' ;
 
-import { COMMON_LOADER } from './common.actions';
-import { CommonLoader } from './common.actions';
-import { CommonActions } from './common.actions';
-import { commonReducer } from './common.reducer';
-
-/**
- * https://github.com/ngrx/platform
- */
-export const commonLoaderReducer: ActionReducer<boolean, CommonLoader> = commonReducer<boolean, CommonLoader>(COMMON_LOADER, true);
+import { State } from '../types/state' ;
+import { COMMON_LOADS } from './common.actions' ;
+import { CommonLoads } from './common.actions' ;
+import { CommonActions } from './common.actions' ;
+import { CommonReducer } from './common.reducer' ;
 
 /**
  * https://github.com/ngrx/platform
  */
-export function commonReducers(state: any, action: CommonActions): any {
-  return combineReducers({
-    loader: commonLoaderReducer,
-  })(state, action);
+export const CommonLoadsReducer : ActionReducer< boolean , CommonLoads > = CommonReducer< boolean , CommonLoads >( COMMON_LOADS , true ) ;
+
+/**
+ * https://github.com/ngrx/platform
+ */
+export function CommonReducers( state : any , action : CommonActions ) : any
+{
+  return combineReducers
+  ({
+    loads : CommonLoadsReducer ,
+  })
+  ( state , action ) ;
+
 }

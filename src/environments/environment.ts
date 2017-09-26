@@ -1,4 +1,5 @@
-import { environment as envbase } from './environment.base';
+import { environment as common } from './environment.common';
 
-envbase.production = false;
-export const environment = envbase;
+/** @exports */
+common.app.production = false;
+export const environment: any = common;
