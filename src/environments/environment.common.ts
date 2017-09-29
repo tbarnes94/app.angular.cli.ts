@@ -7,6 +7,10 @@ export const environment: any = {
 
   api: {
     root: '/api',
+    login: {
+      method: 'Post',
+      path: 'oauth/token',
+    },
   },
 
   translate: {

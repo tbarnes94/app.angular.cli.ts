@@ -3,17 +3,16 @@ import { Effect } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
-import { CommonEffects } from '../../../commons';
+import { CommonReset } from '../../../commons';
 import { ObjectStrings } from '../../../commons';
+import { TemplateCommonEffects } from '../../../template';
 import { AuthCredentials } from '../types/auth.credentials';
-import { AUTH_ERROR } from './auth.actions';
 import { AuthError } from './auth.actions';
 import { AuthLoader } from './auth.actions';
 import { AUTH_LOGIN_START } from './auth.actions';
 import { AUTH_LOGIN_COMPLETE } from './auth.actions';
 import { AuthLoginComplete } from './auth.actions';
 import { AUTH_LOGOUT } from './auth.actions';
-import { AuthLogout } from './auth.actions';
 import { AuthActions } from './auth.actions';
 
 /**
@@ -21,7 +20,7 @@ import { AuthActions } from './auth.actions';
  * https://github.com/ngrx/effects
  */
 @Injectable()
-export class AuthEffects extends CommonEffects {
+export class AuthEffects extends TemplateCommonEffects {
 
   /**
    * http://reactivex.io/documentation/observable.html
@@ -36,11 +35,12 @@ export class AuthEffects extends CommonEffects {
       const auth: string = 'admin:secret!';
       return this.api.request<string, ObjectStrings>(
         undefined,
-        `oauth/token`,
-        'Post', {
+        this.api.options.login.path,
+        this.api.options.login.method,
+        this.headers({
           'Authorization': `Basic ${btoa(auth)}`,
           'Content-Type': 'application/x-www-form-urlencoded'
-        },
+        }),
         `username=${o.username}&` +
         `password=${o.password}&` +
         `grant_type=password`
@@ -62,11 +62,12 @@ export class AuthEffects extends CommonEffects {
   /**
    * http://reactivex.io/documentation/observable.html
    */
-  @Effect({ dispatch: false })
+  @Effect()
   public readonly logout$: Observable<Action> = this.actions$
     .ofType(AUTH_LOGOUT)
     .debounceTime(100)
     .do((o) => this.common.redirect([ 'auth' ]))
+    .map((o) => new CommonReset(null))
   ;
 
 }

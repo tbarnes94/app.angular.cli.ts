@@ -103,7 +103,7 @@ export class ApiService
    * @param http      https://angular.io/api/common/http/HttpClient
    */
   public constructor(
-    protected readonly options : ApiOptions ,
+    public readonly options : ApiOptions ,
     protected readonly http : HttpClient ,
   ) {}
 

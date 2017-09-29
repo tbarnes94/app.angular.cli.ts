@@ -4,7 +4,7 @@ import { ActionReducerMap } from '@ngrx/store';
 import { MetaReducer } from '@ngrx/store';
 import { combineReducers } from '@ngrx/store';
 
-import { AUTH_LOGOUT } from '../../../modules/auth';
+import { COMMON_RESET } from '../../../modules/commons';
 
 /**
  * https://github.com/ngrx/platform
@@ -71,7 +71,7 @@ export function storage(reducer: ActionReducer<any>): ActionReducer<any> {
  */
 export function clear(reducer: ActionReducer<any>): ActionReducer<any> {
   return (state: any, action: any): any => {
-    return (action.type === AUTH_LOGOUT)
+    return (action.type === COMMON_RESET)
       ? reducer({ common: state.common, translate: state.translate }, action)
       : reducer(state, action)
       ;

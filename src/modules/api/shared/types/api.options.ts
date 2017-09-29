@@ -5,6 +5,7 @@ export class ApiOptions
 {
   public constructor(
     public readonly root : string ,
+    public readonly login : any ,
   ) {}
 
 }
