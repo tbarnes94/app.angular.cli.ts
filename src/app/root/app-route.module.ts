@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Routes } from '@angular/router';
 
-import { AuthGuard } from '../../modules/auth';
 import { CommonPreloadStrategy } from '../../modules/commons';
 
 /**
@@ -11,7 +10,7 @@ import { CommonPreloadStrategy } from '../../modules/commons';
 const route: Routes = [
   { path: '',          redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'auth',      loadChildren: '../../modules/auth/auth.module#AuthModule' },
-  { path: 'dashboard', loadChildren: '../../modules/dashboard/dashboard.module#DashboardModule', canActivate: [AuthGuard] },
+  { path: 'dashboard', loadChildren: '../../modules/dashboard/dashboard.module#DashboardModule' },
   { path: '**',        redirectTo: 'dashboard' },
 ];
 

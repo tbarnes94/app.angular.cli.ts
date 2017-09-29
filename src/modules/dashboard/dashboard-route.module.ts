@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Routes } from '@angular/router';
 
+import { AuthGuard } from '../auth';
 import { DashboardDashboardComponent } from './dashboard/dashboard.component';
 
 /**
  * https://angular.io/api/router/Routes
  */
 const route: Routes = [
-  { path: '',   component: DashboardDashboardComponent, pathMatch: 'full' },
-  { path: '**', redirectTo: '' },
+  { path: '', component: DashboardDashboardComponent, canActivate: [ AuthGuard ], pathMatch: 'full' },
 ];
 
 /**
