@@ -15,7 +15,7 @@ export class TemplateCommonEffects extends CommonEffects {
    * https://angular.io/api/common/http/HttpHeaders
    */
   public headers(h: any = {}): ObjectStrings {
-    this.common.select([ 'translate', 'language' ]).take(1).subscribe(o => h['Accept-Language'] = o);
+    this.common.select<string>([ 'translate', 'language' ]).take(1).subscribe((o) => { if (o) { h['Accept-Language'] = o; } });
     return h;
   }
 
