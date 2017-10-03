@@ -8,10 +8,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MdButtonModule } from '@angular/material';
 import { MdCardModule } from '@angular/material';
 import { MdIconModule } from '@angular/material';
+import { MdInputModule } from '@angular/material';
 import { MdProgressBarModule } from '@angular/material';
 import { MdProgressSpinnerModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
-import { DynamicFormsMaterialUIModule } from '@ng2-dynamic-forms/ui-material';
 
 import { TranslateModule } from '../translate';
 import { TemplateBasicComponent } from './basic/basic.component';
@@ -39,10 +39,10 @@ export class TemplateRootModule {
     MdButtonModule,
     MdCardModule,
     MdIconModule,
+    MdInputModule,
     MdProgressBarModule,
     MdProgressSpinnerModule,
     RouterModule,
-    DynamicFormsMaterialUIModule,
 
     TranslateModule,
 
@@ -60,10 +60,10 @@ export class TemplateRootModule {
     MdButtonModule,
     MdCardModule,
     MdIconModule,
+    MdInputModule,
     MdProgressBarModule,
     MdProgressSpinnerModule,
     RouterModule,
-    DynamicFormsMaterialUIModule,
 
     TemplateBasicComponent,
     TemplateCommonComponent,

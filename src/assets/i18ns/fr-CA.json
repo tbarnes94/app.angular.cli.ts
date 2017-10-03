@@ -10,13 +10,13 @@
       "username": {
         "label": "Username fr",
         "error": {
-          "required": "{{ label }} is required fr."
+          "required": "Username is required fr."
         }
       },
       "password": {
         "label": "Password fr",
         "error": {
-          "required": "{{ label }} is required fr."
+          "required": "Password is required fr."
         }
       },
       "submit": "Submit fr"

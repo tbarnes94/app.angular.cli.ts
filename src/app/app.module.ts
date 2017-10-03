@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { DynamicFormsCoreModule } from '@ng2-dynamic-forms/core';
 
 import { CoreModule } from './core/core.module';
 import { AppRouteModule } from './root/app-route.module';
@@ -22,7 +21,6 @@ import { TranslateModule } from '../modules/translate';
   imports: [
 
     /** node_modules */
-    DynamicFormsCoreModule.forRoot(),
 
     /** application */
     AppRouteModule,
