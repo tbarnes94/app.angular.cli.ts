@@ -17,8 +17,10 @@ import { TranslateService } from '../../modules/translate';
   encapsulation: ViewEncapsulation.None,
   template: `
     <div class='container' >
+      <!-- routlet -->
       <router-outlet></router-outlet>
     </div>
+    <!-- language -->
     <div *ngIf='( this.languages$ | async ) as languages' class='container languages' >
       <span *ngFor='let language of languages' >
         <button (click)='this.onLanguage(language.id)' md-button color='accent' >

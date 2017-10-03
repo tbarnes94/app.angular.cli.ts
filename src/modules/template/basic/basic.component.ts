@@ -14,14 +14,23 @@ import { ObjectAny } from '../../commons';
   styles: [ `` ],
   template: `
     <md-card>
-      <md-card-title>
-        {{ this.translations[this.key].title }}
+      <!-- title -->
+      <md-card-title *ngIf='( this.translations[ this.key ].title )' >
+        {{ this.translations[ this.key ].title }}
       </md-card-title>
+      <!-- subtitle -->
+      <md-card-subtitle *ngIf='( this.translations[ this.key ].subtitle )' >
+        {{ this.translations[ this.key ].subtitle }}
+      </md-card-subtitle>
+      <!-- menus -->
       <md-card-content>
         <ng-content select='.template-menus' ></ng-content>
       </md-card-content>
+      <!-- divider -->
       <hr *ngIf='this.divider' />
+      <!-- contact -->
       <ng-container *ngIf='( this.loads$ | async ) === false' >
+        <!-- contact error -->
         <div *ngIf='( this.error$ | async ) as error' class='mat-error-section' >
           <md-icon>error</md-icon>
           <span [innerHTML]='
@@ -31,9 +40,20 @@ import { ObjectAny } from '../../commons';
             ' >
           </span>
         </div>
+        <!-- contact loads -->
         <ng-content select='.template-content-loads' ></ng-content>
       </ng-container>
+      <!-- contact statics -->
       <ng-content select='.template-content' ></ng-content>
+      <!-- actions -->
+      <md-card-actions *ngIf='( this.translations[ this.key ].actions )' >
+        {{ this.translations[ this.key ].actions }}
+      </md-card-actions>
+      <!-- footer -->
+      <md-card-footer *ngIf='( this.translations[ this.key ].footer )' >
+        {{ this.translations[ this.key ].footer }}
+      </md-card-footer>
+      <!-- loads -->
       <div
         *ngIf='( this.loads$ | async ) === true'
         fxLayout='row'
