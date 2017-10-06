@@ -1,4 +1,5 @@
 /** @imports */
+import { Location } from '@angular/common' ;
 import { Injectable } from '@angular/core' ;
 import { NavigationCancel } from '@angular/router' ;
 import { NavigationEnd } from '@angular/router' ;
@@ -129,10 +130,12 @@ export class CommonService
   /**
    * Constructor
    * @param router    https://angular.io/api/router/Router
+   * @param location  https://angular.io/api/common/Location
    * @param store     https://github.com/ngrx/platform
    */
   public constructor(
     protected readonly router : Router ,
+    protected readonly location : Location ,
     protected readonly store : Store<State> ,
   ) {
     this.router.events

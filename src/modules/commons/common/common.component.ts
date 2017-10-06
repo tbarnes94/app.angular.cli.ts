@@ -10,10 +10,7 @@ import { OnChanges } from '@angular/core' ;
 import { OnDestroy } from '@angular/core' ;
 import { OnInit } from '@angular/core' ;
 
-import { ActivatedRoute } from '@angular/router' ;
 import { Subject } from 'rxjs/Rx' ;
-
-import { CommonService } from '../shared/service/common.service' ;
 
 /**
  * https://angular.io/api/core/Component
@@ -89,15 +86,5 @@ export class CommonComponent implements OnChanges ,
     this.destroy$.next( true ) ;
     this.destroy$.unsubscribe() ;
   }
-
-  /**
-   * Constructor
-   * @param route     https://angular.io/api/router/ActivatedRoute
-   * @param common    https://angular.io/tutorial/toh-pt4
-   */
-  public constructor(
-    protected readonly route : ActivatedRoute ,
-    protected readonly common : CommonService ,
-  ) {}
 
 }

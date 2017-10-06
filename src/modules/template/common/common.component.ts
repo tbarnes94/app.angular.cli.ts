@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { CommonComponent } from '../../commons';
+import { CommonContainerComponent } from '../../commons';
 import { CommonService } from '../../commons';
 
 /**
@@ -13,7 +13,7 @@ import { CommonService } from '../../commons';
   styles: [ `` ],
   template: ``,
 })
-export class TemplateCommonComponent extends CommonComponent {
+export class TemplateCommonComponent extends CommonContainerComponent {
 
   /**
    * Constructor

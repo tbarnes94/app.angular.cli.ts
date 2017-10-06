@@ -6,6 +6,7 @@ import { EffectsModule } from '@ngrx/effects' ;
 import { StoreModule } from '@ngrx/store' ;
 
 import { CommonComponent } from './common/common.component' ;
+import { CommonContainerComponent } from './common/common.container.component' ;
 import { CommonGuard } from './shared/guard/common.guard' ;
 import { CommonPipe } from './shared/pipes/common.pipe' ;
 import { CommonPreloadStrategy } from './shared/router/common.preload.strategy' ;
@@ -35,11 +36,13 @@ export class CommonRootModule {}
   declarations :
   [
     CommonComponent ,
+    CommonContainerComponent ,
     CommonPipe ,
   ] ,
   exports :
   [
     CommonComponent ,
+    CommonContainerComponent ,
     CommonPipe ,
   ] ,
 
