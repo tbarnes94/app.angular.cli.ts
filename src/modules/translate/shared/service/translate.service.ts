@@ -1,5 +1,7 @@
 /** @imports */
 import { Injectable } from '@angular/core' ;
+import { DateAdapter } from '@angular/material' ;
+import { NativeDateAdapter } from '@angular/material' ;
 import { Title } from '@angular/platform-browser' ;
 import { LangChangeEvent } from '@ngx-translate/core' ;
 import { TranslateService as TranslateServiceExternal } from '@ngx-translate/core' ;
@@ -28,6 +30,7 @@ export class TranslateService
    */
   public onLanguageEvent( o : string ) : void
   {
+    this.dates.setLocale( o ) ;
     this.translate.use( o ) ;
   }
 
@@ -51,14 +54,16 @@ export class TranslateService
   /**
    * Constructor
    * @param options     https://angular.io/guide/ngmodule#configure-core-services-with-coremoduleforroot
-   * @param common      https://angular.io/tutorial/toh-pt4
    * @param translate   https://github.com/ngx-translate/core
+   * @param common      https://angular.io/tutorial/toh-pt4
+   * @param dates       https://github.com/angular/material2/blob/master/src/lib/core/datetime/date-adapter.ts
    * @param title       https://angular.io/api/platform-browser/Title
    */
   public constructor(
     protected readonly options : TranslateOptions ,
-    protected readonly common : CommonService ,
     protected readonly translate : TranslateServiceExternal ,
+    protected readonly common : CommonService ,
+    protected readonly dates : DateAdapter<NativeDateAdapter> ,
     protected readonly title : Title ,
   ) {
     this.language$.filter( ( o ) => ( !o ) ).subscribe( this.onLanguageEmpty.bind( this ) ) ;

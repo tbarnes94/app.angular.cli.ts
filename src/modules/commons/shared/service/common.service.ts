@@ -128,6 +128,15 @@ export class CommonService
   }
 
   /**
+   * @returns this
+   */
+  public backs() : this
+  {
+    this.location.back() ;
+    return this ;
+  }
+
+  /**
    * Constructor
    * @param router    https://angular.io/api/router/Router
    * @param location  https://angular.io/api/common/Location
