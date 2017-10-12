@@ -10,13 +10,13 @@
       "username": {
         "label": "Username",
         "error": {
-          "required": "Username is required."
+          "required": "This field is required."
         }
       },
       "password": {
         "label": "Password",
         "error": {
-          "required": "Password is required."
+          "required": "This field is required."
         }
       },
       "submit": "Submit"

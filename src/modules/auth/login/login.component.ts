@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { FormGroup } from '@angular/forms';
+import { Validators } from '@angular/forms';
 
-import { TemplateCommonComponent } from '../../template';
+import { TemplateContainerComponent } from '../../template';
 import { AuthLoginStart } from '../shared/store/auth.actions';
-import { AuthCredentials } from '../shared/types/auth.credentials';
 
 /**
  * https://angular.io/api/core/Component
@@ -23,28 +23,66 @@ import { AuthCredentials } from '../shared/types/auth.credentials';
       divider='true'
       >
       <div class='template-content' >
-        <form (ngSubmit)='this.onSubmit(this.datas)' #forms='ngForm' >
-          <div fxLayout='row' fxLayout.xs='column' fxLayoutWrap class='flex-wrapper' >
+        <form
+          (ngSubmit)='this.onSubmit(this.form)'
+          [formGroup]='this.form'
+          >
+          <div
+            fxLayout='row'
+            fxLayout.xs='column'
+            fxLayoutWrap
+            class='flex-wrapper'
+            >
             <!-- username -->
-            <div class='form-group flex-block' fxFlex='0 0 calc(50%-30px)' >
+            <div
+              class='form-group flex-block'
+              fxFlex='0 0 calc(50%-30px)'
+              >
               <label for='username' >
                 {{ translations.login.username.label }}
               </label>
               <md-form-field>
-                <input mdInput [(ngModel)]='this.datas.username' type='text' required #username='ngModel' id='username' name='username' />
-                <md-error [hidden]='( username.pristine || username.valid )' >
+                <input
+                  mdInput
+                  [formControlName]='"username"'
+                  id='username'
+                  name='username'
+                  type='text'
+                  required
+                  />
+                <md-error *ngIf=
+                  '(
+                    ( !this.form.controls.username.pristine || ( this.check$ | async ) ) &&
+                    ( this.form.controls.username.invalid )
+                  )'
+                  >
                   {{ translations.login.username.error.required }}
                 </md-error>
               </md-form-field>
             </div>
             <!-- password -->
-            <div class='form-group flex-block' fxFlex='0 0 calc(50%-30px)' >
+            <div
+              class='form-group flex-block'
+              fxFlex='0 0 calc(50%-30px)'
+              >
               <label for='password' >
                 {{ translations.login.password.label }}
               </label>
               <md-form-field>
-                <input mdInput [(ngModel)]='this.datas.password' type='password' required #password='ngModel' id='password' name='password' />
-                <md-error [hidden]='( password.pristine || password.valid )' >
+                <input
+                  mdInput
+                  [formControlName]='"password"'
+                  id='password'
+                  name='password'
+                  type='password'
+                  required
+                  />
+                <md-error *ngIf=
+                  '(
+                    ( !this.form.controls.password.pristine || ( this.check$ | async ) ) &&
+                    ( this.form.controls.password.invalid )
+                  )'
+                  >
                   {{ translations.login.password.error.required }}
                 </md-error>
               </md-form-field>
@@ -52,7 +90,12 @@ import { AuthCredentials } from '../shared/types/auth.credentials';
           </div>
           <!-- actions -->
           <div class='form-group' >
-            <button [disabled]='( this.loader$ | async ) || !forms.form.valid' md-raised-button color='primary' type='submit' >
+            <button
+              md-raised-button
+              [disabled]='( this.loader$ | async )'
+              color='primary'
+              type='submit'
+              >
               {{ translations.login.submit }}
             </button>
           </div>
@@ -61,29 +104,31 @@ import { AuthCredentials } from '../shared/types/auth.credentials';
     </template-basic>
   `,
 })
-export class AuthLoginComponent extends TemplateCommonComponent {
+export class AuthLoginComponent extends TemplateContainerComponent {
 
   /**
-   * https://angular.io/guide/forms
+   * https://angular.io/api/forms/FormGroup
    */
-  public datas: AuthCredentials = new AuthCredentials(null, null);
+  public form: FormGroup = this.formbuilder.group({
+    username: [ null, [ Validators.required ] ],
+    password: [ null, [ Validators.required ] ],
+  });
 
   /**
-   * http://reactivex.io/documentation/observable.html
+   * https://angular.io/api/core/OnInit
+   * https://angular.io/api/core/OnInit#ngOnInit
    */
-  public readonly error$: Observable<string> = this.common.select<string>(['auth', 'error']).takeUntil(this.destroy$);
-
-  /**
-   * http://reactivex.io/documentation/observable.html
-   */
-  public readonly loader$: Observable<boolean> = this.common.select<boolean>(['auth', 'loader']).takeUntil(this.destroy$);
+  public ngOnInit(): void {
+    this.streams('auth');
+  }
 
   /**
    * https://angular.io/guide/user-input
-   * @param input
+   * @param form
    */
-  public onSubmit(input: AuthCredentials): void {
-    this.common.dispatch(new AuthLoginStart(input));
+  public onSubmit(form: FormGroup): void {
+    if (form.valid) { this.common.dispatch(new AuthLoginStart(form.value)); }
+    this.check$.next(true);
   }
 
 }

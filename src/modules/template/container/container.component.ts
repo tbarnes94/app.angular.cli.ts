@@ -1,0 +1,71 @@
+import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { BehaviorSubject } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
+
+import { AuthService } from '../../auth/shared/service/auth.service';
+import { CommonContainerComponent } from '../../commons';
+import { CommonService } from '../../commons';
+
+/**
+ * https://angular.io/api/core/Component
+ */
+@Component({
+  selector: 'template-container',
+  styles: [ `` ],
+  template: ``,
+})
+export class TemplateContainerComponent extends CommonContainerComponent {
+
+  /**
+   * http://reactivex.io/documentation/subject.html
+   */
+  public check$: BehaviorSubject<boolean> = null;
+
+  /**
+   * http://reactivex.io/documentation/observable.html
+   */
+  public error$: Observable<string> = null;
+
+  /**
+   * http://reactivex.io/documentation/observable.html
+   */
+  public loader$: Observable<boolean> = null;
+
+  /**
+   * http://reactivex.io/documentation/observable.html
+   */
+  public translations$: Observable<any> = null;
+
+  /**
+   * http://reactivex.io/documentation/observable.html
+   */
+  public language$: Observable<string> = null;
+
+  /**
+   * @param key
+   */
+  public streams(key: string = 'common'): void {
+    this.check$ = new BehaviorSubject<boolean>(false);
+    this.error$ = this.common.select<string>([ key, 'error' ]).takeUntil(this.destroy$);
+    this.loader$ = this.common.select<boolean>([ key, 'loader' ]).takeUntil(this.destroy$);
+    this.translations$ = this.common.select<any>([ 'translate', 'translations' ]).takeUntil(this.destroy$);
+    this.language$ = this.common.select<string>([ 'translate', 'language' ]).takeUntil(this.destroy$);
+  }
+
+  /**
+   * Constructor
+   * @param route         https://angular.io/api/router/ActivatedRoute
+   * @param common        https://angular.io/tutorial/toh-pt4
+   * @param auth          https://angular.io/tutorial/toh-pt4
+   * @param formbuilder   https://angular.io/api/forms/FormBuilder
+   */
+  public constructor(protected readonly route: ActivatedRoute,
+                     protected readonly common: CommonService,
+                     protected readonly auth: AuthService,
+                     protected readonly formbuilder: FormBuilder) {
+    super(route, common);
+  }
+
+}

@@ -15,7 +15,7 @@ import { RouterModule } from '@angular/router';
 
 import { TranslateModule } from '../translate';
 import { TemplateBasicComponent } from './basic/basic.component';
-import { TemplateCommonComponent } from './common/common.component';
+import { TemplateContainerComponent } from './container/container.component';
 
 /**
  * https://angular.io/api/core/NgModule
@@ -49,7 +49,7 @@ export class TemplateRootModule {
   ],
   declarations: [
     TemplateBasicComponent,
-    TemplateCommonComponent,
+    TemplateContainerComponent,
   ],
   exports: [
 
@@ -66,7 +66,7 @@ export class TemplateRootModule {
     RouterModule,
 
     TemplateBasicComponent,
-    TemplateCommonComponent,
+    TemplateContainerComponent,
     TranslateModule,
 
   ],
