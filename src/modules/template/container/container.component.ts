@@ -19,11 +19,6 @@ import { CommonService } from '../../commons';
 export class TemplateContainerComponent extends CommonContainerComponent {
 
   /**
-   * http://reactivex.io/documentation/subject.html
-   */
-  public check$: BehaviorSubject<boolean> = null;
-
-  /**
    * http://reactivex.io/documentation/observable.html
    */
   public error$: Observable<string> = null;
@@ -34,24 +29,26 @@ export class TemplateContainerComponent extends CommonContainerComponent {
   public loader$: Observable<boolean> = null;
 
   /**
-   * http://reactivex.io/documentation/observable.html
+   * http://reactivex.io/documentation/subject.html
    */
-  public translations$: Observable<any> = null;
+  public check$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
    * http://reactivex.io/documentation/observable.html
    */
-  public language$: Observable<string> = null;
+  public language$: Observable<string> = this.common.select<string>([ 'translate', 'language' ]).takeUntil(this.destroy$);
+
+  /**
+   * http://reactivex.io/documentation/observable.html
+   */
+  public translations$: Observable<any> = this.common.select<any>([ 'translate', 'translations' ]).takeUntil(this.destroy$);
 
   /**
    * @param key
    */
   public streams(key: string = 'common'): void {
-    this.check$ = new BehaviorSubject<boolean>(false);
     this.error$ = this.common.select<string>([ key, 'error' ]).takeUntil(this.destroy$);
     this.loader$ = this.common.select<boolean>([ key, 'loader' ]).takeUntil(this.destroy$);
-    this.translations$ = this.common.select<any>([ 'translate', 'translations' ]).takeUntil(this.destroy$);
-    this.language$ = this.common.select<string>([ 'translate', 'language' ]).takeUntil(this.destroy$);
   }
 
   /**
