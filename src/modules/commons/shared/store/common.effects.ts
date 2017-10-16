@@ -44,7 +44,7 @@ export class CommonEffects
       .map( ( o : ApiError | any ) =>
       {
         return ( o.content )
-          ? new Complete( o.content )
+          ? new Complete( new ApiResponse( o.content , null , o.timestamp ) )
           : this.exception( o , Error )
           ;
       })

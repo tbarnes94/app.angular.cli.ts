@@ -2,15 +2,15 @@
 import { Component } from '@angular/core' ;
 import { ActivatedRoute } from '@angular/router' ;
 
+import { CommonComponent } from '../common/common.component' ;
 import { CommonService } from '../shared/service/common.service' ;
-import { CommonComponent } from './common.component' ;
 
 /**
  * https://angular.io/api/core/Component
  */
 @Component
 ({
-  selector : 'commons-common-container' ,
+  selector : 'commons-container' ,
   styles : [ `` ] ,
   template : `` ,
 })

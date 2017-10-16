@@ -1,5 +1,5 @@
 export * from './common/common.component' ;
-export * from './common/common.container.component' ;
+export * from './container/container.component' ;
 export * from './shared/guard/common.guard' ;
 export * from './shared/helpers/common.helpers' ;
 export * from './shared/pipes/common.pipe' ;

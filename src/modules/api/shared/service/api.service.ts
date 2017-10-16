@@ -44,7 +44,7 @@ export class ApiService
     }
 
     return Observable
-      .of( new ApiError( r , outpt ) )
+      .of( new ApiError( outpt , r , new Date() ) )
       ;
 
   }
@@ -55,7 +55,7 @@ export class ApiService
    */
   public response<T>( r : HttpResponse<T> ) : ApiResponse<T>
   {
-    return new ApiResponse<T>( r , r.body ) ;
+    return new ApiResponse<T>( r.body , r , new Date() ) ;
   }
 
   /**

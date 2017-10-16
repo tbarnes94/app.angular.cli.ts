@@ -9,8 +9,9 @@ import { ApiErrorContent } from './api.error.content' ;
 export class ApiError
 {
   public constructor(
-    public readonly response : HttpErrorResponse ,
     public readonly error : ApiErrorContent | any ,
+    public readonly response? : HttpErrorResponse ,
+    public readonly timestamp? : Date ,
   ) {}
 
 }

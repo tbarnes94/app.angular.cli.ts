@@ -1,5 +1,5 @@
+import { ApiResponse } from '../../../api';
 import { CommonAction } from '../../../commons';
-
 import { AuthCredentials } from '../types/auth.credentials';
 import { AuthToken } from '../types/auth.token';
 
@@ -37,7 +37,7 @@ export class AuthLoginStart extends CommonAction<AuthCredentials> {
 /**
  * https://github.com/ngrx/platform
  */
-export class AuthLoginComplete extends CommonAction<AuthToken> {
+export class AuthLoginComplete extends CommonAction<ApiResponse<AuthToken>> {
   public readonly type: string = AUTH_LOGIN_COMPLETE;
 }
 

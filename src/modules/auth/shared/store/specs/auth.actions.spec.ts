@@ -1,3 +1,4 @@
+import { ApiResponse } from '../../../../api';
 import { CommonActionTest } from '../../../../commons/shared/store/specs/common.actions.tests';
 import { CommonSuite } from '../../../../commons/specs/common.tests';
 import { AuthCredentials } from '../../types/auth.credentials';
@@ -30,7 +31,7 @@ CommonSuite(title, 'AuthLoginStart', '', () => {
 });
 
 CommonSuite(title, 'AuthLoginComplete', '', () => {
-  CommonActionTest<AuthLoginComplete, AuthToken>(AuthLoginComplete, AUTH_LOGIN_COMPLETE, new AuthToken(null, null, 0));
+  CommonActionTest<AuthLoginComplete, ApiResponse<AuthToken>>(AuthLoginComplete, AUTH_LOGIN_COMPLETE, new ApiResponse(new AuthToken(null, null, 0)));
 });
 
 CommonSuite(title, 'AuthLogout', '', () => {

@@ -1,3 +1,4 @@
+import { ApiResponse } from '../../../../api';
 import { CommonReducerActionTest } from '../../../../commons/shared/store/specs/common.reducers.tests';
 import { CommonReducerTest } from '../../../../commons/shared/store/specs/common.reducers.tests';
 import { CommonSuite } from '../../../../commons/specs/common.tests';
@@ -39,9 +40,9 @@ CommonSuite(title, subtitle, 'for loader', () => {
 
 subtitle = 'authTokenReducer';
 CommonSuite(title, subtitle, '', () => {
-  CommonReducerTest<AuthToken>(authTokenReducer, null);
+  CommonReducerTest<ApiResponse<AuthToken>>(authTokenReducer, null);
 });
 
 CommonSuite(title, subtitle, 'for complete', () => {
-  CommonReducerActionTest<AuthLoginComplete, AuthToken, AuthToken>(AuthLoginComplete, authTokenReducer, new AuthToken(null, null, 0), new AuthToken(null, null, 0));
+  CommonReducerActionTest<AuthLoginComplete, ApiResponse<AuthToken>, ApiResponse<AuthToken>>(AuthLoginComplete, authTokenReducer, new ApiResponse(new AuthToken(null, null, 0)), new ApiResponse(new AuthToken(null, null, 0)));
 });

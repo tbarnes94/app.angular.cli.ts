@@ -1,6 +1,7 @@
 import { ActionReducer } from '@ngrx/store';
 import { combineReducers } from '@ngrx/store';
 
+import { ApiResponse } from '../../../api';
 import { CommonReducer } from '../../../commons';
 import { AuthToken } from '../types/auth.token';
 import { AUTH_ERROR } from './auth.actions';
@@ -24,7 +25,7 @@ export const authLoaderReducer: ActionReducer<boolean, AuthLoader> = CommonReduc
 /**
  * https://github.com/ngrx/platform
  */
-export const authTokenReducer: ActionReducer<AuthToken, AuthLoginComplete> = CommonReducer<AuthToken, AuthLoginComplete>(AUTH_LOGIN_COMPLETE, null);
+export const authTokenReducer: ActionReducer<ApiResponse<AuthToken>, AuthLoginComplete> = CommonReducer<ApiResponse<AuthToken>, AuthLoginComplete>(AUTH_LOGIN_COMPLETE, null);
 
 /**
  * https://github.com/ngrx/platform
