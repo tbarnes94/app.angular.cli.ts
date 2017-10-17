@@ -1,7 +1,7 @@
 /** @imports */
 import { ActionReducer } from '@ngrx/store' ;
 
-import { immutable } from '../helpers/common.helpers' ;
+import { immutable } from '../helpers/common.transformers' ;
 import { CommonAction } from './common.action' ;
 
 /**

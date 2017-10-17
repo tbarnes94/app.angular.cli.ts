@@ -2,6 +2,7 @@ export * from './common/common.component' ;
 export * from './container/container.component' ;
 export * from './shared/guard/common.guard' ;
 export * from './shared/helpers/common.helpers' ;
+export * from './shared/helpers/common.transformers' ;
 export * from './shared/pipes/common.pipe' ;
 export * from './shared/router/common.preload.strategy' ;
 export * from './shared/router/common.route.reuse.strategy' ;

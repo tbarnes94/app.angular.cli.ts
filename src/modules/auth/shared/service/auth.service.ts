@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
-import { ApiResponse } from '../../../api';
+import { toContent } from '../../../commons/shared/helpers/common.transformers';
 import { CommonService } from '../../../commons/shared/service/common.service';
 import { AuthToken } from '../types/auth.token';
 
@@ -15,7 +15,8 @@ export class AuthService {
    * http://reactivex.io/documentation/observable.html
    */
   public readonly token$: Observable<boolean> = this.common.select([ 'auth', 'token' ])
-    .map((o: ApiResponse<AuthToken>) => (!!o && !!o.content && !!o.content.access_token))
+    .map( toContent )
+    .map((o: AuthToken) => (!!o && !!o.access_token))
     ;
 
   /**

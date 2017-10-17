@@ -1,11 +1,9 @@
 /** @imports */
-import { clone } from 'lodash' ;
 import { isArray } from 'lodash' ;
 import { isEmpty as _isEmpty } from 'lodash' ;
 import { isNull } from 'lodash' ;
 import { isObject } from 'lodash' ;
 import { isUndefined } from 'lodash' ;
-import { Observable } from 'rxjs/Rx' ;
 
 /**
  * @param input
@@ -80,31 +78,10 @@ export function isNotEmpty<T>( input : T ) : boolean
 }
 
 /**
- * @param input
- * @returns T
- */
-export function immutable<T>( input : T ) : T
-{
-  return ( isArray( input ) || isObject( input ) )
-    ? clone( input )
-    : input
-    ;
-}
-
-/**
  * @param message
  * @param input
  */
 export function print<T>( message : string , input : T ) : void
 {
   return console.log( `<${message}>` , input ) ;
-}
-
-/**
- * @param input
- * @returns http://reactivex.io/documentation/observable.html
- */
-export function error<T>( input : T ) : Observable<T>
-{
-  return Observable.of( input ) ;
 }
