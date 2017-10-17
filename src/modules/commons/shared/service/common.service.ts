@@ -24,7 +24,7 @@ export class CommonService
   /**
    * https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout
    */
-  public delay : any ;
+  public delay : number ;
 
   /**
    * http://reactivex.io/documentation/subject.html
@@ -39,7 +39,7 @@ export class CommonService
   public readonly resizes$ : Observable<number> = Observable
     .fromEvent( window , 'resize' )
     .debounceTime( 100 )
-    .map( ( o : any ) => o.target.innerWidth )
+    .map( ( o : Event ) => ( o.target as any ).innerWidth )
     .distinctUntilChanged()
     ;
 
@@ -47,7 +47,7 @@ export class CommonService
    * @param input
    * @returns this
    */
-  public dispatch( input : CommonAction<any> ) : this
+  public dispatch<T>( input : CommonAction<T> ) : this
   {
     this.store.dispatch( input ) ;
     return this ;
@@ -85,7 +85,7 @@ export class CommonService
     return Observable
       .combineLatest( select$ , filters$ )
       .map( ( o ) => ({ store : o[ 0 ] , filters : o[ 1 ] }) )
-      .switchMap( ( o : any ) =>
+      .switchMap( ( o : { store : any , filters : Array<Function> } ) =>
       {
         return o.filters.reduce
           (

@@ -7,6 +7,7 @@ import { ApiService } from '../../../api/shared/service/api.service' ;
 import { ApiError } from '../../../api/shared/types/api.error' ;
 import { ApiResponse } from '../../../api/shared/types/api.response' ;
 import { CommonService } from '../service/common.service' ;
+import { Class } from '../types/class' ;
 import { CommonAction } from './common.action' ;
 
 /**
@@ -24,14 +25,14 @@ export class CommonEffects
    * @param request
    * @returns http://reactivex.io/documentation/observable.html
    */
-  public build$< A , L , E , C , S >(
+  public build$< A , L extends CommonAction<boolean> , E extends CommonAction<string> , C extends CommonAction<S> , S >(
     action : string ,
-    Loads : any ,
-    Error : any ,
-    Complete : any ,
+    Loads : Class<L> ,
+    Error : Class<E> ,
+    Complete : Class<C> ,
     request : Function ,
   )
-  : Observable<A>
+  : Observable< E | C >
   {
     return this.actions$
       .ofType( action )
@@ -41,11 +42,11 @@ export class CommonEffects
       .do( ( o ) => this.common.dispatch( new Loads( true ) ) )
       .switchMap( request.bind( this ) )
       .do( ( o ) => this.common.dispatch( new Loads( false ) ) )
-      .map( ( o : ApiError | any ) =>
+      .map( ( o : any | ApiError ) =>
       {
         return ( o.content )
           ? new Complete( new ApiResponse( o.content , null , o.timestamp ) )
-          : this.exception( o , Error )
+          : this.exception<E>( o , Error )
           ;
       })
       ;
@@ -53,14 +54,14 @@ export class CommonEffects
 
   /**
    * @param r
-   * @param ErrorAction
+   * @param Action
    * @returns CommonAction
    */
-  public exception( r : ApiError , ErrorAction : any ) : CommonAction<any>
+  public exception<T>( r : ApiError , Action : Class<T> ) : T
   {
     return ( r && r.error && r.error.message )
-      ? new ErrorAction( r.error.message )
-      : new ErrorAction( 'Error' )
+      ? new Action( r.error.message )
+      : new Action( 'Error' )
       ;
   }
 

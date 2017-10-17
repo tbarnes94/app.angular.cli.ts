@@ -1,4 +1,5 @@
 /** @imports */
+import { ApiResponse } from '../../../api/shared/types/api.response' ;
 import { CommonAction } from './common.action' ;
 
 /**
@@ -37,7 +38,7 @@ export class CommonError extends CommonAction<string>
 /**
  * https://github.com/ngrx/platform
  */
-export class CommonComplete extends CommonAction<any>
+export class CommonComplete extends CommonAction<ApiResponse<string>>
 {
   public readonly type : string = COMMON_COMPLETE ;
 }

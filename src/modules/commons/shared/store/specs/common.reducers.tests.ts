@@ -2,6 +2,7 @@
 import { tick } from '@angular/core/testing' ;
 import { ActionReducer } from '@ngrx/store' ;
 
+import { Class } from '../../types/class' ;
 import { CommonAction } from '../common.action' ;
 
 /** @exports */
@@ -12,7 +13,7 @@ export function CommonReducerTest<S>( Reducer : any , results : S ) : void
 }
 
 /** @exports */
-export function CommonReducerActionTest< A extends CommonAction<P> , P , S >( Action : any , Reducer : ActionReducer< S , A > , payload : P , results : S ) : void
+export function CommonReducerActionTest< A extends CommonAction<P> , P , S >( Action : Class<A> , Reducer : ActionReducer< S , A > , payload : P , results : S ) : void
 {
   const action : A = new Action( payload ) ;
   const state : S = Reducer( undefined , action ) ;

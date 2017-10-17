@@ -12,6 +12,7 @@ export * from './shared/store/common.actions' ;
 export * from './shared/store/common.effects' ;
 export * from './shared/store/common.reducer' ;
 export * from './shared/store/common.reducers' ;
+export * from './shared/types/class' ;
 export * from './shared/types/object.any' ;
 export * from './shared/types/object.booleans' ;
 export * from './shared/types/object.strings' ;

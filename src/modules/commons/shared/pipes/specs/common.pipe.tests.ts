@@ -1,10 +1,13 @@
 /** @imports */
 import { tick } from '@angular/core/testing' ;
 
+import { Class } from '../../types/class' ;
+import { CommonPipe } from '../common.pipe' ;
+
 /** @exports */
-export function CommonPipeTest< C , R >( Pipe : any , current : C , results : R , ...options : Array<any> ) : void
+export function CommonPipeTest< P extends CommonPipe , C , R >( Pipe : Class<P> , current : any , results : R , ...options : Array<any> ) : void
 {
-  const pipe : any = new Pipe( null ) ;
+  const pipe : P = new Pipe( null ) ;
   const outpt : string = pipe.transform( current , ...options ) ;
   expect( outpt ).toEqual( results ) ;
 }

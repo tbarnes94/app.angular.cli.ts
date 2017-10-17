@@ -21,8 +21,8 @@ export class TranslateService
   /**
    * http://reactivex.io/documentation/observable.html
    */
-  public readonly language$ : Observable<string> =
-    this.common.select<string>([ 'translate' , 'language' ])
+  public readonly language$ : Observable<string> = this.common
+    .select<string>([ 'translate' , 'language' ])
     ;
 
   /**
