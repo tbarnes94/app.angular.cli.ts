@@ -14,7 +14,8 @@ export class AuthService {
   /**
    * http://reactivex.io/documentation/observable.html
    */
-  public readonly token$: Observable<boolean> = this.common.select([ 'auth', 'token' ])
+  public readonly token$: Observable<boolean> = this.common
+    .select([ 'auth', 'token' ])
     .map( toContent )
     .map((o: AuthToken) => (!!o && !!o.access_token))
     ;

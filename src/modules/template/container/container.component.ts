@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Rx';
 import { AuthService } from '../../auth/shared/service/auth.service';
 import { CommonContainerComponent } from '../../commons';
 import { CommonService } from '../../commons';
+import { ObjectAny } from '../../commons';
 
 /**
  * https://angular.io/api/core/Component
@@ -36,19 +37,34 @@ export class TemplateContainerComponent extends CommonContainerComponent {
   /**
    * http://reactivex.io/documentation/observable.html
    */
-  public language$: Observable<string> = this.common.select<string>([ 'translate', 'language' ]).takeUntil(this.destroy$);
+  public language$: Observable<string> = this.common
+    .select<string>([ 'translate', 'language' ])
+    .takeUntil(this.destroy$)
+    ;
 
   /**
    * http://reactivex.io/documentation/observable.html
    */
-  public translations$: Observable<any> = this.common.select<any>([ 'translate', 'translations' ]).takeUntil(this.destroy$);
+  public translations$: Observable<ObjectAny> = this.common
+    .select<ObjectAny>([ 'translate', 'translations' ])
+    .takeUntil(this.destroy$)
+    ;
 
   /**
    * @param key
    */
   public streams(key: string = 'common'): void {
-    this.error$ = this.common.select<string>([ key, 'error' ]).takeUntil(this.destroy$);
-    this.loader$ = this.common.select<boolean>([ key, 'loader' ]).takeUntil(this.destroy$);
+
+    this.error$ = this.common
+      .select<string>([ key, 'error' ])
+      .takeUntil(this.destroy$)
+      ;
+
+    this.loader$ = this.common
+      .select<boolean>([ key, 'loader' ])
+      .takeUntil(this.destroy$)
+      ;
+
   }
 
   /**
