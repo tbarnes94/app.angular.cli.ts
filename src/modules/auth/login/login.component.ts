@@ -41,24 +41,24 @@ import { AuthLoginStart } from '../shared/store/auth.actions';
               <label for='username' >
                 {{ translations.login.username.label }}
               </label>
-              <md-form-field>
+              <mat-form-field>
                 <input
-                  mdInput
+                  matInput
                   [formControlName]='"username"'
                   id='username'
                   name='username'
                   type='text'
                   required
                   />
-                <md-error *ngIf=
+                <mat-error *ngIf=
                   '(
                     ( !this.form.controls.username.pristine || ( this.check$ | async ) ) &&
                     ( this.form.controls.username.invalid )
                   )'
                   >
                   {{ translations.login.username.error.required }}
-                </md-error>
-              </md-form-field>
+                </mat-error>
+              </mat-form-field>
             </div>
             <!-- password -->
             <div
@@ -68,30 +68,30 @@ import { AuthLoginStart } from '../shared/store/auth.actions';
               <label for='password' >
                 {{ translations.login.password.label }}
               </label>
-              <md-form-field>
+              <mat-form-field>
                 <input
-                  mdInput
+                  matInput
                   [formControlName]='"password"'
                   id='password'
                   name='password'
                   type='password'
                   required
                   />
-                <md-error *ngIf=
+                <mat-error *ngIf=
                   '(
                     ( !this.form.controls.password.pristine || ( this.check$ | async ) ) &&
                     ( this.form.controls.password.invalid )
                   )'
                   >
                   {{ translations.login.password.error.required }}
-                </md-error>
-              </md-form-field>
+                </mat-error>
+              </mat-form-field>
             </div>
           </div>
           <!-- actions -->
           <div class='form-group' >
             <button
-              md-raised-button
+              mat-raised-button
               [disabled]='( this.loader$ | async )'
               color='primary'
               type='submit'

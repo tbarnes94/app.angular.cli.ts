@@ -18,7 +18,7 @@ import { TemplateContainerComponent } from '../../template';
       [translations]='translations'
       >
       <div class='template-content-loads' >
-        <button (click)='this.onLogout()' md-raised-button color='primary' >
+        <button (click)='this.onLogout()' mat-raised-button color='primary' >
           {{ translations.dashboard.logout }}
         </button>
       </div>

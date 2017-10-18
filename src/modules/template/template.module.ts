@@ -5,12 +5,12 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MdButtonModule } from '@angular/material';
-import { MdCardModule } from '@angular/material';
-import { MdIconModule } from '@angular/material';
-import { MdInputModule } from '@angular/material';
-import { MdProgressBarModule } from '@angular/material';
-import { MdProgressSpinnerModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material';
+import { MatCardModule } from '@angular/material';
+import { MatIconModule } from '@angular/material';
+import { MatInputModule } from '@angular/material';
+import { MatProgressBarModule } from '@angular/material';
+import { MatProgressSpinnerModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 
 import { TranslateModule } from '../translate';
@@ -36,12 +36,12 @@ export class TemplateRootModule {
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    MdButtonModule,
-    MdCardModule,
-    MdIconModule,
-    MdInputModule,
-    MdProgressBarModule,
-    MdProgressSpinnerModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    MatInputModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
     RouterModule,
 
     TranslateModule,
@@ -57,12 +57,12 @@ export class TemplateRootModule {
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    MdButtonModule,
-    MdCardModule,
-    MdIconModule,
-    MdInputModule,
-    MdProgressBarModule,
-    MdProgressSpinnerModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    MatInputModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
     RouterModule,
 
     TemplateBasicComponent,

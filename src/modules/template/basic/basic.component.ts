@@ -13,26 +13,26 @@ import { ObjectAny } from '../../commons';
   encapsulation: ViewEncapsulation.Emulated,
   styles: [ `` ],
   template: `
-    <md-card>
+    <mat-card>
       <!-- title -->
-      <md-card-title *ngIf='( this.translations[ this.key ].title )' >
+      <mat-card-title *ngIf='( this.translations[ this.key ].title )' >
         {{ this.translations[ this.key ].title }}
-      </md-card-title>
+      </mat-card-title>
       <!-- subtitle -->
-      <md-card-subtitle *ngIf='( this.translations[ this.key ].subtitle )' >
+      <mat-card-subtitle *ngIf='( this.translations[ this.key ].subtitle )' >
         {{ this.translations[ this.key ].subtitle }}
-      </md-card-subtitle>
+      </mat-card-subtitle>
       <!-- menus -->
-      <md-card-content>
+      <mat-card-content>
         <ng-content select='.template-menus' ></ng-content>
-      </md-card-content>
+      </mat-card-content>
       <!-- divider -->
       <hr *ngIf='this.divider' />
       <!-- contact -->
       <ng-container *ngIf='( this.loads$ | async ) === false' >
         <!-- contact error -->
         <div *ngIf='( this.error$ | async ) as error' class='mat-error-section' >
-          <md-icon>error</md-icon>
+          <mat-icon>error</mat-icon>
           <span [innerHTML]='
             ( this.translations.error && this.translations.error[ error ] )
             ? this.translations.error[ error ]
@@ -46,13 +46,13 @@ import { ObjectAny } from '../../commons';
       <!-- contact statics -->
       <ng-content select='.template-content' ></ng-content>
       <!-- actions -->
-      <md-card-actions *ngIf='( this.translations[ this.key ].actions )' >
+      <mat-card-actions *ngIf='( this.translations[ this.key ].actions )' >
         {{ this.translations[ this.key ].actions }}
-      </md-card-actions>
+      </mat-card-actions>
       <!-- footer -->
-      <md-card-footer *ngIf='( this.translations[ this.key ].footer )' >
+      <mat-card-footer *ngIf='( this.translations[ this.key ].footer )' >
         {{ this.translations[ this.key ].footer }}
-      </md-card-footer>
+      </mat-card-footer>
       <!-- loads -->
       <div
         *ngIf='( this.loads$ | async ) === true'
@@ -60,9 +60,9 @@ import { ObjectAny } from '../../commons';
         fxLayoutAlign='center center'
         class='loads'
         >
-        <md-spinner></md-spinner>
+        <mat-spinner></mat-spinner>
       </div>
-    </md-card>
+    </mat-card>
   `,
 })
 export class TemplateBasicComponent {

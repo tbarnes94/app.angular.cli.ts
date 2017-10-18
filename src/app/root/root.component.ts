@@ -23,7 +23,7 @@ import { TranslateService } from '../../modules/translate';
     <!-- language -->
     <div *ngIf='( this.languages$ | async ) as languages' class='container languages' >
       <span *ngFor='let language of languages' >
-        <button (click)='this.onLanguage(language.id)' md-button color='accent' >
+        <button (click)='this.onLanguage(language.id)' mat-button color='accent' >
           {{ language.title }}
         </button>
       </span>
