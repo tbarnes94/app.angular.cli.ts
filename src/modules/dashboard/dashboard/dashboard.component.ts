@@ -13,13 +13,16 @@ import { TemplateContainerComponent } from '../../template';
   styles: [ `` ],
   template: `
     <template-basic
-      *ngIf='( "dashboard" | translate ) as translations'
-      [key]='"dashboard"'
+      *ngIf='( "dashboard.dashboard" | translate ) as translations'
       [translations]='translations'
       >
       <div class='template-content-loads' >
-        <button (click)='this.onLogout()' mat-raised-button color='primary' >
-          {{ translations.dashboard.logout }}
+        <button
+          mat-raised-button
+          [color]='"primary"'
+          (click)='this.onLogout()'
+          >
+          {{ translations.logout }}
         </button>
       </div>
     </template-basic>

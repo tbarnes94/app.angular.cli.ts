@@ -15,12 +15,11 @@ import { AuthLoginStart } from '../shared/store/auth.actions';
   styles: [ `` ],
   template: `
     <template-basic
-      *ngIf='( "auth" | translate ) as translations'
-      [key]='"login"'
+      *ngIf='( "auth.login" | translate ) as translations'
+      [loads]='( this.loader$ | async )'
+      [error]='( this.error$ | async )'
       [translations]='translations'
-      [loads$]='this.loader$'
-      [error$]='this.error$'
-      divider='true'
+      [divider]='"true"'
       >
       <div class='template-content' >
         <form
@@ -39,7 +38,7 @@ import { AuthLoginStart } from '../shared/store/auth.actions';
               fxFlex='0 0 calc(50%-30px)'
               >
               <label for='username' >
-                {{ translations.login.username.label }}
+                {{ translations.username.label }}
               </label>
               <mat-form-field>
                 <input
@@ -56,7 +55,7 @@ import { AuthLoginStart } from '../shared/store/auth.actions';
                     ( this.form.controls.username.invalid )
                   )'
                   >
-                  {{ translations.login.username.error.required }}
+                  {{ translations.username.error.required }}
                 </mat-error>
               </mat-form-field>
             </div>
@@ -66,7 +65,7 @@ import { AuthLoginStart } from '../shared/store/auth.actions';
               fxFlex='0 0 calc(50%-30px)'
               >
               <label for='password' >
-                {{ translations.login.password.label }}
+                {{ translations.password.label }}
               </label>
               <mat-form-field>
                 <input
@@ -83,7 +82,7 @@ import { AuthLoginStart } from '../shared/store/auth.actions';
                     ( this.form.controls.password.invalid )
                   )'
                   >
-                  {{ translations.login.password.error.required }}
+                  {{ translations.password.error.required }}
                 </mat-error>
               </mat-form-field>
             </div>
@@ -93,10 +92,10 @@ import { AuthLoginStart } from '../shared/store/auth.actions';
             <button
               mat-raised-button
               [disabled]='( this.loader$ | async )'
-              color='primary'
+              [color]='"primary"'
               type='submit'
               >
-              {{ translations.login.submit }}
+              {{ translations.submit }}
             </button>
           </div>
         </form>

@@ -21,9 +21,16 @@ import { TranslateService } from '../../modules/translate';
       <router-outlet></router-outlet>
     </div>
     <!-- language -->
-    <div *ngIf='( this.languages$ | async ) as languages' class='container languages' >
+    <div
+      *ngIf='( this.languages$ | async ) as languages'
+      class='container languages'
+      >
       <span *ngFor='let language of languages' >
-        <button (click)='this.onLanguage(language.id)' mat-button color='accent' >
+        <button
+          mat-button
+          [color]='"accent"'
+          (click)='this.onLanguage(language.id)'
+          >
           {{ language.title }}
         </button>
       </span>
