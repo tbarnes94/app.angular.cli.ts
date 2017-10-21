@@ -3,16 +3,14 @@ import { ModuleWithProviders } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material';
 import { MatCardModule } from '@angular/material';
 import { MatIconModule } from '@angular/material';
-import { MatInputModule } from '@angular/material';
 import { MatProgressBarModule } from '@angular/material';
 import { MatProgressSpinnerModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 
+import { FormModule } from '../forms';
 import { TranslateModule } from '../translate';
 import { TemplateBasicComponent } from './basic/basic.component';
 import { TemplateContainerComponent } from './container/container.component';
@@ -34,16 +32,14 @@ export class TemplateRootModule {
 
     CommonModule,
     FlexLayoutModule,
-    FormsModule,
-    ReactiveFormsModule,
     MatButtonModule,
     MatCardModule,
     MatIconModule,
-    MatInputModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
     RouterModule,
 
+    FormModule,
     TranslateModule,
 
   ],
@@ -55,18 +51,16 @@ export class TemplateRootModule {
 
     CommonModule,
     FlexLayoutModule,
-    FormsModule,
-    ReactiveFormsModule,
     MatButtonModule,
     MatCardModule,
     MatIconModule,
-    MatInputModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
     RouterModule,
 
     TemplateBasicComponent,
     TemplateContainerComponent,
+    FormModule,
     TranslateModule,
 
   ],
