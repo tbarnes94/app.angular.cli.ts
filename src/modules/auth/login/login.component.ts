@@ -2,9 +2,12 @@ import { Component } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { Observable } from 'rxjs/Rx';
 
+import { FormSchemas } from '../../forms';
 import { TemplateContainerComponent } from '../../template';
 import { AuthLoginStart } from '../shared/store/auth.actions';
+import { AuthCredentials } from '../shared/types/auth.credentials';
 
 /**
  * https://angular.io/api/core/Component
@@ -22,83 +25,12 @@ import { AuthLoginStart } from '../shared/store/auth.actions';
       [divider]='"true"'
       >
       <div class='template-content' >
-        <form
-          (ngSubmit)='this.onSubmit(this.form)'
-          [formGroup]='this.form'
+        <forms-form
+          [schemas]='( this.schemas$ | async )'
+          (onCompleteEvent)='this.onComplete($event)'
+          (onClickEvent)='this.onClick($event)'
           >
-          <div
-            fxLayout='row'
-            fxLayout.xs='column'
-            fxLayoutWrap
-            class='flex-wrapper'
-            >
-            <!-- username -->
-            <div
-              class='form-group flex-block'
-              fxFlex='0 0 calc(50%-30px)'
-              >
-              <label for='username' >
-                {{ translations.username.label }}
-              </label>
-              <mat-form-field>
-                <input
-                  matInput
-                  [formControlName]='"username"'
-                  id='username'
-                  name='username'
-                  type='text'
-                  required
-                  />
-                <mat-error *ngIf=
-                  '(
-                    ( !this.form.controls.username.pristine || ( this.check$ | async ) ) &&
-                    ( this.form.controls.username.invalid )
-                  )'
-                  >
-                  {{ translations.username.error.required }}
-                </mat-error>
-              </mat-form-field>
-            </div>
-            <!-- password -->
-            <div
-              class='form-group flex-block'
-              fxFlex='0 0 calc(50%-30px)'
-              >
-              <label for='password' >
-                {{ translations.password.label }}
-              </label>
-              <mat-form-field>
-                <input
-                  matInput
-                  [formControlName]='"password"'
-                  id='password'
-                  name='password'
-                  type='password'
-                  required
-                  />
-                <mat-error *ngIf=
-                  '(
-                    ( !this.form.controls.password.pristine || ( this.check$ | async ) ) &&
-                    ( this.form.controls.password.invalid )
-                  )'
-                  >
-                  {{ translations.password.error.required }}
-                </mat-error>
-              </mat-form-field>
-            </div>
-          </div>
-          <!-- actions -->
-          <div class='form-group' >
-            <button
-              mat-raised-button
-              [disabled]='( this.loader$ | async )'
-              [color]='"primary"'
-              type='submit'
-              >
-              {{ translations.submit }}
-            </button>
-          </div>
-        </form>
+        </forms-form>
       </div>
     </template-basic>
   `,
@@ -108,26 +40,105 @@ export class AuthLoginComponent extends TemplateContainerComponent {
   /**
    * https://angular.io/api/forms/FormGroup
    */
-  public form: FormGroup = this.formbuilder.group({
-    username: [ null, [ Validators.required ] ],
-    password: [ null, [ Validators.required ] ],
-  });
+  public schemas$: Observable<FormSchemas> = Observable.of(null);
 
   /**
    * https://angular.io/api/core/OnInit
    * https://angular.io/api/core/OnInit#ngOnInit
    */
   public ngOnInit(): void {
+
     this.streams('auth');
+    this.schemas$ = Observable
+      .combineLatest(
+        this.loader$.takeUntil(this.destroy$),
+        this.translations$.takeUntil(this.destroy$),
+      )
+      .map((o) => ({ loader: o[0], translations: o[1] }))
+      .filter((o) => (!!o.translations))
+      .map((o) => {
+
+        const t: any = o.translations.auth.login;
+
+        return {
+
+          actions: [{
+            key: 'complete',
+            label: t.submit,
+            element: 'button',
+            color: 'primary',
+            click: null,
+            disabled: (o.loader),
+            href: null,
+            type: 'submit',
+          }],
+
+          sections: [{
+            key: 'form',
+            title: null,
+            description: null,
+            children: [{
+              key: 'username',
+              label: t.username.label,
+              tooltip: null,
+              error: t.username.error,
+              width: '50%',
+              children: [{
+                key: 'i',
+                element: 'input',
+                validators: [ Validators.required ],
+                disabled: false,
+                value: null,
+                placeholder: null,
+                maxlength: 100,
+                type: 'text',
+                width: '100%'
+              }]
+            }, {
+              key: 'password',
+              label: t.password.label,
+              tooltip: null,
+              error: t.password.error,
+              width: '50%',
+              children: [{
+                key: 'i',
+                element: 'input',
+                validators: [ Validators.required ],
+                disabled: false,
+                value: null,
+                placeholder: null,
+                maxlength: 100,
+                type: 'password',
+                width: '100%'
+              }]
+            }]
+          }]
+
+        };
+
+      })
+      ;
+
   }
 
   /**
    * https://angular.io/guide/user-input
-   * @param form
+   * @param forms
    */
-  public onSubmit(form: FormGroup): void {
-    if (form.valid) { this.common.dispatch(new AuthLoginStart(form.value)); }
-    this.check$.next(true);
+  public onComplete(forms: FormGroup): void {
+    const value: any = forms.value.form;
+    const payload: AuthCredentials = new AuthCredentials(value.username.i, value.password.i);
+    this.common.dispatch(new AuthLoginStart(payload));
+  }
+
+  /**
+   * https://angular.io/guide/user-input
+   * @param input
+   */
+  public onClick(input: string): void {
+    if (typeof this[ input ] === 'function') {
+      this[ input ]();
+    }
   }
 
 }

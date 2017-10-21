@@ -10,13 +10,13 @@
       "username": {
         "label": "Username",
         "error": {
-          "required": "This field is required."
+          "required": "Field is required."
         }
       },
       "password": {
         "label": "Password",
         "error": {
-          "required": "This field is required."
+          "required": "Field is required."
         }
       },
       "submit": "Submit"
@@ -25,6 +25,53 @@
   "dashboard": {
     "dashboard": {
       "title": "Dashboard",
+      "name": {
+        "label": "NAME",
+        "tooltip": "Field has tooltip",
+        "error": {
+          "required": "Field is required."
+        },
+        "placeholder": {
+          "first": "First",
+          "last": "Last"
+        }
+      },
+      "animal": {
+        "label": "ANIMAL",
+        "tooltip": "Field has tooltip",
+        "error": {
+          "required": "Field is required."
+        },
+        "placeholder": "Favorite",
+        "options": [
+          { "title": "", "value": null },
+          { "title": "Cat", "value": "cat" },
+          { "title": "Dog", "value": "dog" },
+          { "title": "Rat", "value": "rat" }
+        ]
+      },
+      "foods": {
+        "label": "FOODS",
+        "tooltip": "Field has tooltip",
+        "error": {
+          "required": "Field is required."
+        },
+        "options": [
+          { "title": "Sushi", "value": "sushi" },
+          { "title": "Milkshake", "value": "milkshake" },
+          { "title": "Pizza", "value": "pizza" }
+        ]
+      },
+      "house": {
+        "label": "HOUSE",
+        "tooltip": "Field has tooltip",
+        "placeholder": "On fire",
+        "error": {
+          "required": "Field is required."
+        }
+      },
+      "redirect": "Google",
+      "submit": "Submit",
       "logout": "Logout"
     }
   }

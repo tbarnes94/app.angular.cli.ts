@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject } from 'rxjs/Rx';
 import { Observable } from 'rxjs/Rx';
 
 import { AuthService } from '../../auth/shared/service/auth.service';
@@ -28,11 +27,6 @@ export class TemplateContainerComponent extends CommonContainerComponent {
    * http://reactivex.io/documentation/observable.html
    */
   public loader$: Observable<boolean> = null;
-
-  /**
-   * http://reactivex.io/documentation/subject.html
-   */
-  public check$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
    * http://reactivex.io/documentation/observable.html
