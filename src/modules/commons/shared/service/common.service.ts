@@ -44,6 +44,54 @@ export class CommonService
     ;
 
   /**
+   * @returns this
+   */
+  public totop() : this
+  {
+    document.body.scrollTop =
+    document.documentElement.scrollTop = 0 ;
+    return this ;
+  }
+
+  /**
+   * @returns this
+   */
+  public backs() : this
+  {
+    this.location.back() ;
+    return this ;
+  }
+
+  /**
+   * @param input
+   * @param options
+   * @returns this
+   */
+  public redirect( input : Array<string> , options : NavigationExtras = {} ) : this
+  {
+    this.router.navigate( input , options ) ;
+    return this ;
+  }
+
+  /**
+   * @param input
+   * @param delay
+   * @returns this
+   */
+  public loads( input : boolean , delay : number = 0 ) : this
+  {
+    if ( delay > 0 ) {
+      clearTimeout( this.delay ) ;
+      this.delay = setTimeout( this.loads.bind( this , input ) , delay ) ;
+    } else {
+      this.dispatch( new CommonLoads( input ) ) ;
+    }
+
+    return this ;
+
+  }
+
+  /**
    * @param input
    * @returns this
    */
@@ -96,44 +144,6 @@ export class CommonService
       })
       ;
 
-  }
-
-  /**
-   * @param input
-   * @param delay
-   * @returns this
-   */
-  public loads( input : boolean , delay : number = 0 ) : this
-  {
-    if ( delay > 0 ) {
-      clearTimeout( this.delay ) ;
-      this.delay = setTimeout( this.loads.bind( this , input ) , delay ) ;
-    } else {
-      this.dispatch( new CommonLoads( input ) ) ;
-    }
-
-    return this ;
-
-  }
-
-  /**
-   * @param input
-   * @param options
-   * @returns this
-   */
-  public redirect( input : Array<string> , options : NavigationExtras = {} ) : this
-  {
-    this.router.navigate( input , options ) ;
-    return this ;
-  }
-
-  /**
-   * @returns this
-   */
-  public backs() : this
-  {
-    this.location.back() ;
-    return this ;
   }
 
   /**

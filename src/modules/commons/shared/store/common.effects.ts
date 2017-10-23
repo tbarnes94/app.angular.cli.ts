@@ -59,6 +59,7 @@ export class CommonEffects
    */
   public exception<T>( r : ApiError , Action : Class<T> ) : T
   {
+    this.common.totop() ;
     return ( r && r.error && r.error.message )
       ? new Action( r.error.message )
       : new Action( 'Error' )
