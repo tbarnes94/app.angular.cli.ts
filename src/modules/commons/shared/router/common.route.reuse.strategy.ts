@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot } from '@angular/router' ;
 import { DetachedRouteHandle } from '@angular/router' ;
 import { RouteReuseStrategy } from '@angular/router' ;
 
-import { isNotNullOrUndefined } from '../helpers/common.helpers' ;
+import { isNotNullOrUndefined } from '../helpers/is.null.or.undefined' ;
 
 /**
  * https://angular.io/api/router/RouteReuseStrategy

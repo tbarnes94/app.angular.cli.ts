@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
-import { toContent } from '../../../commons/shared/helpers/common.transformers';
+import { toContent } from '../../../commons/shared/helpers/to.content';
 import { CommonService } from '../../../commons/shared/service/common.service';
 import { AuthToken } from '../types/auth.token';
 
