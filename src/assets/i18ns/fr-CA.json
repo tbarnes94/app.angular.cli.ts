@@ -14,7 +14,7 @@
         }
       },
       "password": {
-        "label": "Password",
+        "label": "Password fr",
         "error": {
           "required": "Field is required fr."
         }
