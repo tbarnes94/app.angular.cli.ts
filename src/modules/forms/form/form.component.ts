@@ -31,7 +31,7 @@ import { FormSchemas } from '../shared/types/form/form.schemas';
         >
         <div
           [fxLayout]='"row"'
-          [fxLayout.xs]='"column"'
+          [fxLayout.lt-md]='"column"'
           fxLayoutWrap
           >
           <!-- groups -->
@@ -97,6 +97,8 @@ import { FormSchemas } from '../shared/types/form/form.schemas';
                 <!-- radio -->
                 <mat-radio-group
                   *ngIf='( input.element === "radio" )'
+                  [fxLayout]='"row"'
+                  [fxLayout.lt-md]='"column"'
                   [formControl]='this.controls[ section.key ].controls[ group.key ].controls[ input.key ]'
                   [id]='( section.key + "-" + group.key + "-" + input.key )'
                   >

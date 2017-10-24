@@ -34,7 +34,11 @@ import { ObjectStrings } from '../../commons';
       </i>
     </label>
     <!-- control -->
-    <div class='mat-form-controls' >
+    <div
+      [fxLayout]='"row"'
+      [fxLayout.lt-md]='"column"'
+      class='mat-form-controls'
+      >
       <ng-content></ng-content>
     </div>
     <!-- error -->
