@@ -36,11 +36,11 @@ export class CommonEffects
   {
     return this.actions$
       .ofType( action )
-      .debounceTime( 100 )
+      // .debounceTime( 100 )
       .map( ( o : any ) => o.payload )
       .do( ( o ) => this.common.dispatch( new Error( null ) ) )
       .do( ( o ) => this.common.dispatch( new Loads( true ) ) )
-      .switchMap( request.bind( this ) )
+      .mergeMap( request.bind( this ) )
       .do( ( o ) => this.common.dispatch( new Loads( false ) ) )
       .map( ( o : any | ApiError ) =>
       {
