@@ -27,7 +27,7 @@ export class AuthEffects extends TemplateCommonEffects {
    * http://reactivex.io/documentation/observable.html
    */
   @Effect()
-  public readonly login$: Observable<Action> = this.build$<AuthActions, AuthLoader, AuthError, AuthLoginComplete, ApiResponse<AuthToken>>(
+  public readonly loginStart$: Observable<Action> = this.build$<AuthActions, AuthLoader, AuthError, AuthLoginComplete, ApiResponse<AuthToken>>(
     AUTH_LOGIN_START,
     AuthLoader,
     AuthError,
@@ -56,7 +56,6 @@ export class AuthEffects extends TemplateCommonEffects {
   @Effect({ dispatch: false })
   public readonly loginComplete$: Observable<Action> = this.actions$
     .ofType(AUTH_LOGIN_COMPLETE)
-    .debounceTime(100)
     .do((o) => this.common.redirect([ 'dashboard' ]))
   ;
 
@@ -66,7 +65,6 @@ export class AuthEffects extends TemplateCommonEffects {
   @Effect()
   public readonly logout$: Observable<Action> = this.actions$
     .ofType(AUTH_LOGOUT)
-    .debounceTime(100)
     .do((o) => this.common.redirect([ 'auth' ]))
     .map((o) => new CommonReset(null))
   ;
