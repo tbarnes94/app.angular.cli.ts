@@ -71,11 +71,13 @@ import { ObjectAny } from '../../commons';
         {{ this.translations.actions }}
       </mat-card-actions>
       <!-- footer -->
+      <!--
       <mat-card-footer
         *ngIf='( this.translations.footer )'
         >
         {{ this.translations.footer }}
       </mat-card-footer>
+      -->
       <!-- loads -->
       <div
         *ngIf='this.loads'

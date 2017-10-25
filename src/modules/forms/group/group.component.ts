@@ -35,6 +35,7 @@ import { ObjectStrings } from '../../commons';
     </label>
     <!-- control -->
     <div
+      fxLayoutWrap
       [fxLayout]='"row"'
       [fxLayout.lt-sm]='"column"'
       class='mat-form-controls'

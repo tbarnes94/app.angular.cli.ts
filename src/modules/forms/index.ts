@@ -5,6 +5,7 @@ export * from './shared/types/control/abstract.control';
 export * from './shared/types/control/form.check';
 export * from './shared/types/control/form.datepicker';
 export * from './shared/types/control/form.input';
+export * from './shared/types/control/form.option';
 export * from './shared/types/control/form.radio';
 export * from './shared/types/control/form.select';
 export * from './shared/types/form/form.action';

@@ -30,9 +30,9 @@ import { FormSchemas } from '../shared/types/form/form.schemas';
         [description]='section.description'
         >
         <div
+          fxLayoutWrap
           [fxLayout]='"row"'
           [fxLayout.lt-md]='"column"'
-          fxLayoutWrap
           >
           <!-- groups -->
           <ng-container
@@ -49,19 +49,20 @@ import { FormSchemas } from '../shared/types/form/form.schemas';
               [check]='( this.check$ | async )'
               >
               <!-- controls -->
-              <div
+              <ng-container
                 *ngFor='let input of group.children'
-                [fxFlex]='"0 0 calc(" + input.width + ")"'
                 >
                 <!-- input -->
                 <mat-form-field
                   *ngIf='( input.element === "input" )'
+                  [fxFlex]='"0 0 calc(" + input.width + ")"'
                   [floatPlaceholder]='"never"'
                   >
                   <input
                     matInput
                     [formControl]='this.controls[ section.key ].controls[ group.key ].controls[ input.key ]'
                     [id]='( section.key + "-" + group.key + "-" + input.key )'
+                    [readonly]='input.readonly'
                     [placeholder]='input.placeholder'
                     [maxlength]='input.maxlength'
                     [type]='input.type'
@@ -70,6 +71,7 @@ import { FormSchemas } from '../shared/types/form/form.schemas';
                 <!-- datepicker -->
                 <mat-form-field
                   *ngIf='( input.element === "datepicker" )'
+                  [fxFlex]='"0 0 calc(" + input.width + ")"'
                   [floatPlaceholder]='"never"'
                   >
                   <input
@@ -77,11 +79,12 @@ import { FormSchemas } from '../shared/types/form/form.schemas';
                     [formControl]='this.controls[ section.key ].controls[ group.key ].controls[ input.key ]'
                     [id]='( section.key + "-" + group.key + "-" + input.key )'
                     [matDatepicker]='dates'
-                    [min]='this.min'
-                    [max]='this.max'
+                    [readonly]='input.readonly'
                     [placeholder]='input.placeholder'
                     [maxlength]='input.maxlength'
                     [type]='input.type'
+                    [min]='this.min'
+                    [max]='this.max'
                     />
                   <mat-datepicker-toggle
                     matSuffix
@@ -97,6 +100,7 @@ import { FormSchemas } from '../shared/types/form/form.schemas';
                 <!-- select -->
                 <mat-form-field
                   *ngIf='( input.element === "select" )'
+                  [fxFlex]='"0 0 calc(" + input.width + ")"'
                   [floatPlaceholder]='"never"'
                   >
                   <mat-select
@@ -115,6 +119,7 @@ import { FormSchemas } from '../shared/types/form/form.schemas';
                 <!-- check -->
                 <mat-checkbox
                   *ngIf='( input.element === "check" )'
+                  [fxFlex]='"0 0 calc(" + input.width + ")"'
                   [formControl]='this.controls[ section.key ].controls[ group.key ].controls[ input.key ]'
                   [id]='( section.key + "-" + group.key + "-" + input.key )'
                   [color]='input.color'
@@ -131,21 +136,20 @@ import { FormSchemas } from '../shared/types/form/form.schemas';
                   >
                   <mat-radio-button
                     *ngFor='let option of input.options'
+                    [ngClass.lt-sm]='"small"'
                     [value]='option.value'
                     [color]='input.color'
                     >
                     {{ option.title }}
                   </mat-radio-button>
                 </mat-radio-group>
-              </div>
+              </ng-container>
             </forms-group>
           </ng-container>
         </div>
       </forms-section>
       <!-- actions -->
-      <div
-        class='mat-form-actions'
-        >
+      <div class='mat-form-actions' >
         <span
           *ngFor='let action of this.schemas.actions'
           >
@@ -170,6 +174,13 @@ import { FormSchemas } from '../shared/types/form/form.schemas';
             {{ action.label }}
           </a>
         </span>
+      </div>
+      <!-- footer -->
+      <div>
+        <ng-content
+          select='.form-footer'
+          >
+        </ng-content>
       </div>
     </form>
   `,
@@ -219,7 +230,11 @@ export class FormsFormComponent extends CommonComponent {
 
         const three: any = {};
         group.children.map((control) => {
-          three[control.key] = new FormControl(control.value, control.validators);
+          const payload: any = {
+            disabled: control.disabled,
+            value: control.value,
+          };
+          three[control.key] = new FormControl(payload, control.validators);
           return control;
         });
 

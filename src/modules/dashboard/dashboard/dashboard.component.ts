@@ -26,6 +26,9 @@ import { TemplateContainerComponent } from '../../template';
           (onCompleteEvent)='this.onComplete($event)'
           (onClickEvent)='this.onClick($event)'
           >
+          <div class='form-footer' >
+            {{ translations.footer }}
+          </div>
         </forms-form>
       </div>
     </template-basic>
@@ -101,6 +104,7 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
                 element: 'input',
                 validators: [ Validators.required ],
                 disabled: false,
+                readonly: false,
                 value: null,
                 placeholder: t.key.placeholder,
                 maxlength: 100,
@@ -118,6 +122,7 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
                 element: 'input',
                 validators: [ Validators.required ],
                 disabled: false,
+                readonly: false,
                 value: null,
                 placeholder: t.name.placeholder.first,
                 maxlength: 100,
@@ -128,6 +133,7 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
                 element: 'input',
                 validators: [ Validators.required ],
                 disabled: false,
+                readonly: false,
                 value: null,
                 placeholder: t.name.placeholder.last,
                 maxlength: 100,
@@ -145,6 +151,7 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
                 element: 'datepicker',
                 validators: [ Validators.required ],
                 disabled: false,
+                readonly: true,
                 value: null,
                 placeholder: t.birth.placeholder,
                 maxlength: 100,
@@ -162,6 +169,7 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
                 element: 'select',
                 validators: [ Validators.required ],
                 disabled: false,
+                readonly: false,
                 value: null,
                 placeholder: t.animal.placeholder,
                 options: t.animal.options,
@@ -178,6 +186,7 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
                 element: 'radio',
                 validators: [ Validators.required ],
                 disabled: false,
+                readonly: false,
                 value: null,
                 color: 'accent',
                 options: t.foods.options,
@@ -194,6 +203,7 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
                 element: 'check',
                 validators: [ Validators.requiredTrue ],
                 disabled: false,
+                readonly: false,
                 value: false,
                 color: 'warn',
                 label: t.house.placeholder,

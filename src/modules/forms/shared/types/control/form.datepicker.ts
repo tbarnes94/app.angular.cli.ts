@@ -1,12 +1,9 @@
-import { AbstractControl } from './abstract.control';
+import { FormInput } from './form.input';
 
 /**
  * https://angular.io/api/forms/ReactiveFormsModule
  */
-export class FormDatepicker extends AbstractControl {
+export class FormDatepicker extends FormInput {
   public readonly min?: Date;
   public readonly max?: Date;
-  public readonly placeholder?: string;
-  public readonly maxlength?: number;
-  public readonly type?: string;
 }

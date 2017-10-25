@@ -86,6 +86,7 @@
           "required": "Field is required fr."
         }
       },
+      "footer": "Copyright (c) 2000 fr.",
       "redirect": "Google fr",
       "submit": "Submit fr",
       "logout": "Logout fr"
