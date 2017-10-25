@@ -91,6 +91,23 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
             title: null,
             description: null,
             children: [{
+              key: 'key',
+              label: t.key.label,
+              tooltip: t.key.tooltip,
+              error: t.key.error,
+              width: '50%',
+              children: [{
+                key: 'title',
+                element: 'input',
+                validators: [ Validators.required ],
+                disabled: false,
+                value: null,
+                placeholder: t.key.placeholder,
+                maxlength: 100,
+                type: 'text',
+                width: '100%'
+              }]
+            }, {
               key: 'name',
               label: t.name.label,
               tooltip: t.name.tooltip,
@@ -116,6 +133,23 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
                 maxlength: 100,
                 type: 'text',
                 width: '50%'
+              }]
+            }, {
+              key: 'birth',
+              label: t.birth.label,
+              tooltip: t.birth.tooltip,
+              error: t.birth.error,
+              width: '50%',
+              children: [{
+                key: 'date',
+                element: 'datepicker',
+                validators: [ Validators.required ],
+                disabled: false,
+                value: null,
+                placeholder: t.birth.placeholder,
+                maxlength: 100,
+                type: 'text',
+                width: '100%'
               }]
             }, {
               key: 'animal',

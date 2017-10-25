@@ -67,6 +67,33 @@ import { FormSchemas } from '../shared/types/form/form.schemas';
                     [type]='input.type'
                     />
                 </mat-form-field>
+                <!-- datepicker -->
+                <mat-form-field
+                  *ngIf='( input.element === "datepicker" )'
+                  [floatPlaceholder]='"never"'
+                  >
+                  <input
+                    matInput
+                    [formControl]='this.controls[ section.key ].controls[ group.key ].controls[ input.key ]'
+                    [id]='( section.key + "-" + group.key + "-" + input.key )'
+                    [matDatepicker]='dates'
+                    [min]='this.min'
+                    [max]='this.max'
+                    [placeholder]='input.placeholder'
+                    [maxlength]='input.maxlength'
+                    [type]='input.type'
+                    />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]='dates'
+                    >
+                  </mat-datepicker-toggle>
+                  <mat-datepicker
+                    #dates
+                    touchUi='true'
+                    >
+                  </mat-datepicker>
+                </mat-form-field>
                 <!-- select -->
                 <mat-form-field
                   *ngIf='( input.element === "select" )'
@@ -98,7 +125,7 @@ import { FormSchemas } from '../shared/types/form/form.schemas';
                 <mat-radio-group
                   *ngIf='( input.element === "radio" )'
                   [fxLayout]='"row"'
-                  [fxLayout.lt-md]='"column"'
+                  [fxLayout.lt-sm]='"column"'
                   [formControl]='this.controls[ section.key ].controls[ group.key ].controls[ input.key ]'
                   [id]='( section.key + "-" + group.key + "-" + input.key )'
                   >

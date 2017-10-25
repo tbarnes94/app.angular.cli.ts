@@ -25,6 +25,14 @@
   "dashboard": {
     "dashboard": {
       "title": "Dashboard",
+      "key": {
+        "label": "KEY",
+        "tooltip": "Field has tooltip",
+        "error": {
+          "required": "Field is required."
+        },
+        "placeholder": "Title"
+      },
       "name": {
         "label": "NAME",
         "tooltip": "Field has tooltip",
@@ -35,6 +43,14 @@
           "first": "First",
           "last": "Last"
         }
+      },
+      "birth": {
+        "label": "BIRTH",
+        "tooltip": "Field has tooltip",
+        "error": {
+          "required": "Field is required."
+        },
+        "placeholder": "YYYY-MM-DD"
       },
       "animal": {
         "label": "ANIMAL",

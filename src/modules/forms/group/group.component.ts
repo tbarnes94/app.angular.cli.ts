@@ -36,7 +36,7 @@ import { ObjectStrings } from '../../commons';
     <!-- control -->
     <div
       [fxLayout]='"row"'
-      [fxLayout.lt-md]='"column"'
+      [fxLayout.lt-sm]='"column"'
       class='mat-form-controls'
       >
       <ng-content></ng-content>
