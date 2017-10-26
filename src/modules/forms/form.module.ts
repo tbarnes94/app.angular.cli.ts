@@ -15,7 +15,7 @@ import { MatTooltipModule } from '@angular/material';
 import { CommonModule } from '../commons';
 import { FormsFormComponent } from './form/form.component';
 import { FormsGroupComponent } from './group/group.component';
-import { FormsSectionComponent } from './group/section.component';
+import { FormsSectionComponent } from './section/section.component';
 
 /**
  * https://angular.io/api/core/NgModule

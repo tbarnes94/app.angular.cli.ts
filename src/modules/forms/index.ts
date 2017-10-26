@@ -1,6 +1,6 @@
 export * from './form/form.component';
 export * from './group/group.component';
-export * from './group/section.component';
+export * from './section/section.component';
 export * from './shared/types/control/abstract.control';
 export * from './shared/types/control/form.check';
 export * from './shared/types/control/form.datepicker';
