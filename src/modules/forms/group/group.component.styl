@@ -3,10 +3,20 @@
 
 :host /deep/
 
+  /* label */
+
   label
   .mat-radio-label
   .mat-checkbox-label
     white-space normal
+
+  /* animation */
+
+  .mat-radio-ripple
+  .mat-checkbox-ripple
+    display none
+
+  /* field */
 
   .mat-form-field
     width 100%
@@ -14,14 +24,44 @@
   .mat-form-field-infix
     border 0
 
+  .small
+    .mat-input-container
+    .mat-select-container
+    .mat-radio-button
+    .mat-checkbox
+      margin-bottom 10px
+
+  /* input */
+
   .mat-input-wrapper
     padding-bottom 0
 
   .mat-input-underline
     bottom auto
 
+  /* select */
+
   .mat-select-trigger
     height auto
+
+/* Group */
+
+.mat-radio-group
+.mat-form-controls
+  margin-left -7.5px
+  margin-right -7.5px
+  box-sizing border-box
+  width 100%
+
+.mat-radio-button
+.mat-form-controls > *
+  padding-left 7.5px
+  padding-right 7.5px
+  box-sizing border-box
+  max-width 100% !important
+  width auto
+
+/* label */
 
 label
   &
@@ -30,3 +70,8 @@ label
     cursor pointer
   i
     margin-left 5px
+
+/* error */
+
+.mat-error
+  margin-top 10px

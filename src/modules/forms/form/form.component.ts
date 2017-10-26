@@ -42,108 +42,13 @@ import { FormSchemas } from '../shared/types/form/form.schemas';
               *ngIf='( group.children[0] ) as one'
               [fxFlex]='"0 0 calc(" + group.width + ")"'
               [model]='this.controls[ section.key ].controls[ group.key ]'
+              [schemas]='group.children'
               [id]='( section.key + "-" + group.key + "-" + one.key )'
               [label]='group.label'
               [tooltip]='group.tooltip'
               [error]='group.error'
               [check]='( this.check$ | async )'
               >
-              <!-- controls -->
-              <ng-container
-                *ngFor='let input of group.children'
-                >
-                <!-- input -->
-                <mat-form-field
-                  *ngIf='( input.element === "input" )'
-                  [fxFlex]='"0 0 calc(" + input.width + ")"'
-                  [floatPlaceholder]='"never"'
-                  >
-                  <input
-                    matInput
-                    [formControl]='this.controls[ section.key ].controls[ group.key ].controls[ input.key ]'
-                    [id]='( section.key + "-" + group.key + "-" + input.key )'
-                    [readonly]='input.readonly'
-                    [placeholder]='input.placeholder'
-                    [maxlength]='input.maxlength'
-                    [type]='input.type'
-                    />
-                </mat-form-field>
-                <!-- datepicker -->
-                <mat-form-field
-                  *ngIf='( input.element === "datepicker" )'
-                  [fxFlex]='"0 0 calc(" + input.width + ")"'
-                  [floatPlaceholder]='"never"'
-                  >
-                  <input
-                    matInput
-                    [formControl]='this.controls[ section.key ].controls[ group.key ].controls[ input.key ]'
-                    [id]='( section.key + "-" + group.key + "-" + input.key )'
-                    [matDatepicker]='dates'
-                    [readonly]='input.readonly'
-                    [placeholder]='input.placeholder'
-                    [maxlength]='input.maxlength'
-                    [type]='input.type'
-                    [min]='this.min'
-                    [max]='this.max'
-                    />
-                  <mat-datepicker-toggle
-                    matSuffix
-                    [for]='dates'
-                    >
-                  </mat-datepicker-toggle>
-                  <mat-datepicker
-                    #dates
-                    touchUi='true'
-                    >
-                  </mat-datepicker>
-                </mat-form-field>
-                <!-- select -->
-                <mat-form-field
-                  *ngIf='( input.element === "select" )'
-                  [fxFlex]='"0 0 calc(" + input.width + ")"'
-                  [floatPlaceholder]='"never"'
-                  >
-                  <mat-select
-                    [formControl]='this.controls[ section.key ].controls[ group.key ].controls[ input.key ]'
-                    [id]='( section.key + "-" + group.key + "-" + input.key )'
-                    [placeholder]='input.placeholder'
-                    >
-                    <mat-option
-                      *ngFor='let option of input.options'
-                      [value]='option.value'
-                      >
-                      {{ option.title }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-                <!-- check -->
-                <mat-checkbox
-                  *ngIf='( input.element === "check" )'
-                  [fxFlex]='"0 0 calc(" + input.width + ")"'
-                  [formControl]='this.controls[ section.key ].controls[ group.key ].controls[ input.key ]'
-                  [id]='( section.key + "-" + group.key + "-" + input.key )'
-                  [color]='input.color'
-                  >
-                  {{ input.label }}
-                </mat-checkbox>
-                <!-- radio -->
-                <mat-radio-group
-                  *ngIf='( input.element === "radio" )'
-                  [fxLayout]='"row"'
-                  [fxLayout.lt-sm]='"column"'
-                  [formControl]='this.controls[ section.key ].controls[ group.key ].controls[ input.key ]'
-                  [id]='( section.key + "-" + group.key + "-" + input.key )'
-                  >
-                  <mat-radio-button
-                    *ngFor='let option of input.options'
-                    [ngClass.lt-sm]='"small"'
-                    [value]='option.value'
-                    [color]='input.color'
-                    >
-                    {{ option.title }}
-                  </mat-radio-button>
-                </mat-radio-group>
-              </ng-container>
             </forms-group>
           </ng-container>
         </div>
