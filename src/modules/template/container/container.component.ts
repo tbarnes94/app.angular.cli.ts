@@ -62,6 +62,16 @@ export class TemplateContainerComponent extends CommonContainerComponent {
   }
 
   /**
+   * https://angular.io/guide/user-input
+   * @param input
+   */
+  public onClick(input: string): void {
+    if (typeof this[ input ] === 'function') {
+      this[ input ]();
+    }
+  }
+
+  /**
    * Constructor
    * @param route         https://angular.io/api/router/ActivatedRoute
    * @param common        https://angular.io/tutorial/toh-pt4
