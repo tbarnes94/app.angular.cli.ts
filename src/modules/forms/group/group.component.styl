@@ -28,10 +28,10 @@
     border 0
 
   .small
-    .mat-input-container
-    .mat-select-container
-    .mat-radio-button
     .mat-checkbox
+    .mat-radio-button
+    .mat-select-container
+    .mat-input-container
       margin-bottom 10px
 
   /* input */
@@ -42,6 +42,7 @@
   .mat-input-element
   .mat-input-placeholder
     padding 10px 0
+    box-sizing border-box
 
   .mat-input-placeholder
     position relative
@@ -67,6 +68,7 @@
 
   .mat-select-trigger
     padding 10px 0
+    box-sizing border-box
     height auto
 
   .mat-select-arrow-wrapper
@@ -76,18 +78,17 @@
 
 .mat-radio-group
 .mat-form-controls
-  margin-left -7.5px
-  margin-right -7.5px
-  box-sizing border-box
-  width 100%
-
-.mat-radio-button
-.mat-form-controls > *
-  padding-left 7.5px
-  padding-right 7.5px
-  box-sizing border-box
-  max-width 100% !important
-  width auto
+  &
+    margin-left -7.5px
+    margin-right -7.5px
+    box-sizing border-box
+    width 100%
+  & > *
+    padding-left 7.5px
+    padding-right 7.5px
+    box-sizing border-box
+    max-width 100% !important
+    width auto
 
 /* label */
 
