@@ -65,11 +65,13 @@ import { ObjectAny } from '../../commons';
         >
       </ng-content>
       <!-- actions -->
+      <!--
       <mat-card-actions
         *ngIf='( this.translations.actions )'
         >
         {{ this.translations.actions }}
       </mat-card-actions>
+      -->
       <!-- footer -->
       <!--
       <mat-card-footer
