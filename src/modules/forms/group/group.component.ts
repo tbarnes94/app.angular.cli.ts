@@ -149,15 +149,15 @@ import { FormControl } from '../shared/types/form/form.schemas';
         ( ( this.touch$ | async ) === true || this.check ) &&
         ( this.model.invalid )
       )'
+     [ngClass.lt-sm]='"small"'
       >
-      <!-- required -->
-      <div *ngIf='( ( this.require$ | async ) && this.error.required )'  >
-        {{ this.error.required }}
-      </div>
-      <!-- isValid -->
-      <div *ngIf='( this.model.invalid && this.error.isValid )'  >
-        {{ this.error.isValid }}
-      </div>
+      <ng-container
+        *ngFor='let k of ( this.error$ | async )'
+        >
+        <div *ngIf='this.error[ k ]' >
+          {{ this.error[ k ] }}
+        </div>
+      </ng-container>
     </mat-error>
   `,
 })
@@ -206,18 +206,6 @@ export class FormsGroupComponent extends CommonComponent {
   /**
    * http://reactivex.io/documentation/observable.html
    */
-  public readonly require$: Observable<boolean> = this.model$
-    .filter((o) => (!!o && !!o.controls))
-    .filter((o) => (Object.keys(o.controls).length > 0))
-    .map((o) => o.controls)
-    .switchMap((o) => Observable.from(Object.keys(o)).findIndex((k, i, obs) => (!!o[k].errors && !!o[k].errors.required)))
-    .map((o) => (o > -1))
-    .takeUntil(this.destroy$)
-    ;
-
-  /**
-   * http://reactivex.io/documentation/observable.html
-   */
   public readonly touch$: Observable<boolean> = this.model$
     .filter((o) => (!!o && !!o.controls))
     .filter((o) => (Object.keys(o.controls).length > 0))
@@ -225,6 +213,29 @@ export class FormsGroupComponent extends CommonComponent {
     .switchMap((o) => Observable.from(Object.keys(o)).every((k) => (!!o[k].touched)))
     .takeUntil(this.destroy$)
     ;
+
+  /**
+   * http://reactivex.io/documentation/observable.html
+   */
+  public readonly error$: Observable<any> = this.model$
+    .filter((o) => (!!o && !!o.controls))
+    .filter((o) => (Object.keys(o.controls).length > 0))
+    .map((o) => o.controls)
+    .switchMap((o) => Observable.from(Object.keys(o)).reduce((t, k: string, i) => this.merge(t, o[k]), {}))
+    .map((o) => Object.keys(o))
+    .takeUntil(this.destroy$)
+    ;
+
+  /**
+   * @param a
+   * @param b
+   */
+  public merge(a, b): any {
+    return (b.errors)
+      ? Object.assign(a, b.errors)
+      : a
+      ;
+  }
 
   /**
    * https://angular.io/api/core/OnInit
