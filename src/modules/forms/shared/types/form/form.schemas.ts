@@ -1,10 +1,10 @@
 import { FormGroup } from '../group/form.group';
-import { FormCheck } from '../control/form.check';
-import { FormDatepicker } from '../control/form.datepicker';
-import { FormInput } from '../control/form.input';
-import { FormRadio } from '../control/form.radio';
-import { FormSelect } from '../control/form.select';
 import { FormSection } from '../group/form.section';
+import { FormCheck } from '../input/form.check';
+import { FormDatepicker } from '../input/form.datepicker';
+import { FormInput } from '../input/form.input';
+import { FormRadio } from '../input/form.radio';
+import { FormSelect } from '../input/form.select';
 import { FormAction } from './form.action';
 
 /**

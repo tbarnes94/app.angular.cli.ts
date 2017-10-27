@@ -4,7 +4,7 @@ import { Abstract } from '../abstract/abstract';
 /**
  * https://angular.io/api/forms/ReactiveFormsModule
  */
-export abstract class AbstractControl extends Abstract {
+export abstract class AbstractInput extends Abstract {
   public readonly element: string;
   public readonly validators: Array<ValidatorFn>;
   public readonly disabled?: boolean;

@@ -1,10 +1,10 @@
-import { AbstractControl } from './abstract.control';
+import { AbstractInput } from './abstract.input';
 import { FormOption } from './form.option';
 
 /**
  * https://angular.io/api/forms/ReactiveFormsModule
  */
-export class FormRadio extends AbstractControl {
-  public readonly color?: string;
+export class FormSelect extends AbstractInput {
+  public readonly placeholder?: string;
   public readonly options: Array<FormOption>;
 }
