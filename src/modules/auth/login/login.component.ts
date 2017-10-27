@@ -62,6 +62,7 @@ export class AuthLoginComponent extends TemplateContainerComponent {
 
         return {
 
+          divider: true,
           actions: [{
             key: 'complete',
             label: t.submit,
@@ -79,6 +80,7 @@ export class AuthLoginComponent extends TemplateContainerComponent {
             key: 'form',
             title: null,
             description: null,
+            divider: false,
             children: [{
               key: 'username',
               label: t.username.label,

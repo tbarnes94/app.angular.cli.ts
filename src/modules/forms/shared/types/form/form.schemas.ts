@@ -23,4 +23,5 @@ export type FormControl = FormCheck
 export class FormSchemas {
   public readonly actions?: Array<FormAction>;
   public readonly sections: Array<FormSection<FormGroup<FormControl>>>;
+  public readonly divider?: boolean;
 }

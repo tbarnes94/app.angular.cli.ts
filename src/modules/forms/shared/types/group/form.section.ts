@@ -6,4 +6,5 @@ import { AbstractGroup } from './abstract.group';
 export class FormSection<T> extends AbstractGroup<T> {
   public readonly title?: string;
   public readonly description?: string;
+  public readonly divider?: boolean;
 }

@@ -25,65 +25,65 @@
   "dashboard": {
     "dashboard": {
       "title": "Dashboard fr",
-      "key": {
-        "label": "KEY fr",
-        "tooltip": "Field has tooltip fr",
+      "input": {
+        "label": "INPUT fr",
+        "tooltip": "Input tooltip hover fr",
+        "placeholder": "One x 100% fr",
         "error": {
-          "required": "Field is required fr."
-        },
-        "placeholder": "Title fr"
-      },
-      "name": {
-        "label": "NAME fr",
-        "tooltip": "Field has tooltip fr",
-        "error": {
-          "required": "Field is required fr."
-        },
-        "placeholder": {
-          "first": "First fr",
-          "last": "Last fr"
+          "required": "Input required error fr."
         }
       },
-      "birth": {
-        "label": "BIRTH fr",
-        "tooltip": "Field has tooltip fr",
-        "error": {
-          "required": "Field is required fr."
+      "input-c": {
+        "label": "INPUT-c fr",
+        "tooltip": "Input-c tooltip hover fr",
+        "placeholder": {
+          "one": "One x 50% fr",
+          "two": "Two x 50% fr"
         },
-        "placeholder": "YYYY-MM-DD fr"
+        "error": {
+          "required": "Input-c required error fr."
+        }
       },
-      "animal": {
-        "label": "ANIMAL fr",
-        "tooltip": "Field has tooltip fr",
+      "datepicker": {
+        "label": "DATEPICKER fr",
+        "tooltip": "Datepicker tooltip hover fr",
+        "placeholder": "YYYY-MM-DD fr",
         "error": {
-          "required": "Field is required fr."
+          "required": "Datepicker required error fr."
+        }
+      },
+      "select": {
+        "label": "SELECT fr",
+        "tooltip": "Select tooltip hover fr",
+        "placeholder": "One x 100% fr",
+        "error": {
+          "required": "Select required error fr."
         },
-        "placeholder": "Favorite fr",
         "options": [
           { "title": "", "value": null },
-          { "title": "Cat fr", "value": "cat" },
-          { "title": "Dog fr", "value": "dog" },
-          { "title": "Rat fr", "value": "rat" }
+          { "title": "One fr", "value": "one" },
+          { "title": "Two fr", "value": "two" },
+          { "title": "Three fr", "value": "three" }
         ]
       },
-      "foods": {
-        "label": "FOODS fr",
-        "tooltip": "Field has tooltip fr",
+      "radio": {
+        "label": "RADIO fr",
+        "tooltip": "Radio tooltip hover fr",
         "error": {
-          "required": "Field is required fr."
+          "required": "Radio required error fr."
         },
         "options": [
-          { "title": "Sushi fr", "value": "sushi" },
-          { "title": "Milkshake fr", "value": "milkshake" },
-          { "title": "Pizza fr", "value": "pizza" }
+          { "title": "One fr", "value": "one" },
+          { "title": "Two fr", "value": "two" },
+          { "title": "Three fr", "value": "three" }
         ]
       },
-      "house": {
-        "label": "HOUSE fr",
-        "tooltip": "Field has tooltip fr",
-        "placeholder": "On fire fr",
+      "check": {
+        "label": "CHECK fr",
+        "tooltip": "Check tooltip hover fr",
+        "placeholder": "One x 100% fr",
         "error": {
-          "required": "Field is required fr."
+          "required": "Check required error fr."
         }
       },
       "footer": "Copyright (c) 2000 fr.",

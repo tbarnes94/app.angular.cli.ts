@@ -24,6 +24,8 @@ import { CommonComponent } from '../../commons';
       >
       {{ this.description }}
     </p>
+    <!-- divider -->
+    <hr *ngIf='( this.divider )' />
     <!-- content -->
     <div class='mat-form-groups' >
       <ng-content></ng-content>
@@ -41,5 +43,10 @@ export class FormsSectionComponent extends CommonComponent {
    * https://angular.io/api/core/Input
    */
   @Input() public readonly description: string = null;
+
+  /**
+   * https://angular.io/api/core/Input
+   */
+  @Input() public readonly divider: boolean = false;
 
 }

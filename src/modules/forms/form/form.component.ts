@@ -28,6 +28,7 @@ import { FormSchemas } from '../shared/types/form/form.schemas';
         *ngFor='let section of this.schemas.sections'
         [title]='section.title'
         [description]='section.description'
+        [divider]='section.divider'
         >
         <div
           fxLayoutWrap
@@ -53,6 +54,8 @@ import { FormSchemas } from '../shared/types/form/form.schemas';
           </ng-container>
         </div>
       </forms-section>
+      <!-- divider -->
+      <hr *ngIf='( this.schemas.divider )' />
       <!-- actions -->
       <div class='mat-form-actions' >
         <span
