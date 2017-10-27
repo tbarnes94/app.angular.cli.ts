@@ -149,7 +149,7 @@ import { FormControl } from '../shared/types/form/form.schemas';
         ( ( this.touch$ | async ) === true || this.check ) &&
         ( this.model.invalid )
       )'
-     [ngClass.lt-sm]='"small"'
+      [ngClass.lt-sm]='"small"'
       >
       <ng-container
         *ngFor='let k of ( this.error$ | async )'
