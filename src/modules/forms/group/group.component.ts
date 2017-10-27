@@ -36,7 +36,7 @@ import { FormControl } from '../shared/types/form/form.schemas';
         >
       </i>
     </label>
-    <!-- control -->
+    <!-- controls -->
     <div
       fxLayoutWrap
       [fxLayout]='"row"'
@@ -44,7 +44,6 @@ import { FormControl } from '../shared/types/form/form.schemas';
       [ngClass.lt-sm]='"small"'
       class='mat-form-controls'
       >
-      <!-- controls -->
       <ng-container
         *ngFor='let input of this.schemas'
         >
