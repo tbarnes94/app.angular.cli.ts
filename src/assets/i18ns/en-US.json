@@ -87,8 +87,12 @@
         }
       },
       "footer": "Copyright (c) 2000.",
-      "redirect": "Google",
-      "submit": "Submit",
+      "actions": {
+        "href": "a.href",
+        "click": "a.click",
+        "route": "a.route"
+      },
+      "complete": "Submit",
       "logout": "Logout"
     }
   }

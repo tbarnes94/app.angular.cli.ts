@@ -58,26 +58,74 @@ import { FormSchemas } from '../shared/types/form/form.schemas';
         <span
           *ngFor='let action of this.schemas.actions'
           >
-          <button
+          <!-- buttons -->
+          <ng-container
             *ngIf='action.element === "button"'
-            mat-raised-button
-            [color]='action.color'
-            (click)='this.onClick(action.click)'
-            [disabled]='action.disabled'
-            [attr.type]='action.type'
             >
-            {{ action.label }}
-          </button>
-          <a
+            <!-- non-click -->
+            <ng-container *ngIf='( !action.click )' >
+              <button
+                mat-raised-button
+                [color]='action.color'
+                [disabled]='action.disabled'
+                [type]='action.type'
+                >
+                {{ action.label }}
+              </button>
+            </ng-container>
+            <!-- click -->
+            <ng-container *ngIf='( !!action.click )' >
+              <button
+                mat-raised-button
+                [color]='action.color'
+                [disabled]='action.disabled'
+                (click)='this.onClick(action.click)'
+                [type]='action.type'
+                >
+                {{ action.label }}
+              </button>
+            </ng-container>
+          </ng-container>
+          <!-- links -->
+          <ng-container
             *ngIf='action.element === "a"'
-            mat-raised-button
-            [color]='action.color'
-            (click)='this.onClick(action.click)'
-            [disabled]='action.disabled'
-            [attr.href]='action.href'
             >
-            {{ action.label }}
-          </a>
+            <!-- href -->
+            <ng-container *ngIf='( !!action.href )' >
+              <a
+                mat-raised-button
+                [color]='action.color'
+                [disabled]='action.disabled'
+                [target]='action.target'
+                [href]='action.href'
+                >
+                {{ action.label }}
+              </a>
+            </ng-container>
+            <!-- click -->
+            <ng-container *ngIf='( !!action.click )' >
+              <a
+                mat-raised-button
+                [color]='action.color'
+                [disabled]='action.disabled'
+                (click)='this.onClick(action.click)'
+                [routerLink]=''
+                >
+                {{ action.label }}
+              </a>
+            </ng-container>
+            <!-- route -->
+            <ng-container *ngIf='( !!action.route )' >
+              <a
+                mat-raised-button
+                [color]='action.color'
+                [disabled]='action.disabled'
+                [routerLink]='action.route'
+                >
+                {{ action.label }}
+              </a>
+            </ng-container>
+          </ng-container>
         </span>
       </div>
       <!-- footer -->

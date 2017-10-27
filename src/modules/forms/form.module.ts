@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material';
 import { MatRadioModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material';
 import { MatTooltipModule } from '@angular/material';
+import { RouterModule } from '@angular/router';
 
 import { CommonModule } from '../commons';
 import { FormsFormComponent } from './form/form.component';
@@ -43,6 +44,7 @@ export class FormRootModule {
     MatRadioModule,
     MatSelectModule,
     MatTooltipModule,
+    RouterModule,
   ],
   declarations: [
     FormsFormComponent,
