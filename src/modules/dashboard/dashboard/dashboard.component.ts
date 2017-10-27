@@ -184,6 +184,8 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
                 placeholder: t.birth.placeholder,
                 maxlength: 100,
                 type: 'text',
+                min: new Date(),
+                max: new Date('2020-01-01'),
                 width: '100%'
               }]
             }, {
