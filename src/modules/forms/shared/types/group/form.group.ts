@@ -8,5 +8,6 @@ export class FormGroup<T> extends AbstractGroup<T> {
   public readonly label?: string;
   public readonly tooltip?: string;
   public readonly error?: ObjectStrings;
+  public readonly isSection?: boolean;
   public readonly width?: string;
 }

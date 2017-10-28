@@ -22,10 +22,7 @@ import { FormControl } from '../shared/types/form/form.schemas';
       *ngIf='( this.label )'
       [for]='( this.id )'
       >
-      <span
-        [innerHtml]='this.label'
-        >
-      </span>
+      <span [innerHtml]='this.label' ></span>
       <!-- tooltip -->
       <i
         *ngIf='( this.tooltip )'
@@ -44,9 +41,7 @@ import { FormControl } from '../shared/types/form/form.schemas';
       [ngClass.lt-sm]='"small"'
       class='mat-form-controls'
       >
-      <ng-container
-        *ngFor='let input of this.schemas'
-        >
+      <ng-container *ngFor='let input of this.schemas' >
         <!-- input -->
         <mat-form-field
           *ngIf='( input.element === "input" )'
@@ -127,8 +122,6 @@ import { FormControl } from '../shared/types/form/form.schemas';
         <!-- radio -->
         <mat-radio-group
           *ngIf='( input.element === "radio" )'
-          [fxLayout]='"row"'
-          [fxLayout.lt-sm]='"column"'
           [id]='( this.id + "-" + input.key )'
           [formControl]='this.model.controls[ input.key ]'
           >

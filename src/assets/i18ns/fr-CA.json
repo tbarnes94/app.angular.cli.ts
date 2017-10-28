@@ -66,6 +66,22 @@
           { "title": "Three fr", "value": "three" }
         ]
       },
+      "input-sa": {
+        "label": "INPUT-sa fr",
+        "tooltip": "Input-sa tooltip hover fr",
+        "placeholder": "One x 100% fr",
+        "error": {
+          "required": "Input-sa required error fr."
+        }
+      },
+      "input-sb": {
+        "label": "INPUT-sb fr",
+        "tooltip": "Input-sb tooltip hover fr",
+        "placeholder": "One x 100% fr",
+        "error": {
+          "required": "Input-sb required error fr."
+        }
+      },
       "radio": {
         "label": "RADIO fr",
         "tooltip": "Radio tooltip hover fr",

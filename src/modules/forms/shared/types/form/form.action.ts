@@ -10,7 +10,7 @@ export class FormAction extends Abstract {
   public readonly disabled?: boolean;
   public readonly route?: Array<string>;
   public readonly click?: string;
-  public readonly target?: string;
   public readonly href?: string;
+  public readonly target?: string;
   public readonly type?: string;
 }

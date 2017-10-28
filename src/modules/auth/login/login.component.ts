@@ -22,7 +22,7 @@ import { AuthCredentials } from '../shared/types/auth.credentials';
       [loads]='( this.loader$ | async )'
       [error]='( this.error$ | async )'
       [translations]='translations'
-      [divider]='"true"'
+      [divider]='false'
       >
       <div class='template-content' >
         <forms-form
@@ -62,38 +62,26 @@ export class AuthLoginComponent extends TemplateContainerComponent {
 
         return {
 
-          divider: true,
           actions: [{
             key: 'complete',
             label: t.submit,
             element: 'button',
             color: 'primary',
             disabled: (o.loader),
-            route: null,
-            click: null,
-            target: null,
-            href: null,
             type: 'submit',
           }],
 
           sections: [{
             key: 'form',
-            title: null,
-            description: null,
-            divider: false,
             children: [{
               key: 'username',
               label: t.username.label,
-              tooltip: null,
               error: t.username.error,
               width: '50%',
               children: [{
                 key: 'i',
                 element: 'input',
                 validators: [ Validators.required ],
-                disabled: false,
-                value: null,
-                placeholder: null,
                 maxlength: 100,
                 type: 'text',
                 width: '100%'
@@ -101,16 +89,12 @@ export class AuthLoginComponent extends TemplateContainerComponent {
             }, {
               key: 'password',
               label: t.password.label,
-              tooltip: null,
               error: t.password.error,
               width: '50%',
               children: [{
                 key: 'i',
                 element: 'input',
                 validators: [ Validators.required ],
-                disabled: false,
-                value: null,
-                placeholder: null,
                 maxlength: 100,
                 type: 'password',
                 width: '100%'

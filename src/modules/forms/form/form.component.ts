@@ -9,6 +9,9 @@ import { BehaviorSubject } from 'rxjs/Rx';
 
 import { CommonComponent } from '../../commons';
 import { FormSchemas } from '../shared/types/form/form.schemas';
+import { FormControl as FormControlSchema } from '../shared/types/form/form.schemas';
+import { FormSection as FormSectionSchema } from '../shared/types/group/form.section';
+import { FormGroup as FormGroupSchema } from '../shared/types/group/form.group';
 
 /**
  * https://angular.io/api/core/Component
@@ -25,32 +28,54 @@ import { FormSchemas } from '../shared/types/form/form.schemas';
       >
       <!-- sections -->
       <forms-section
-        *ngFor='let section of this.schemas.sections'
-        [title]='section.title'
-        [description]='section.description'
-        [divider]='section.divider'
+        *ngFor='let sec of this.schemas.sections'
+        [title]='sec.title'
+        [description]='sec.description'
+        [divider]='sec.divider'
         >
         <div
           fxLayoutWrap
           [fxLayout]='"row"'
-          [fxLayout.lt-md]='"column"'
+          [fxLayout.lt-sm]='"column"'
           >
           <!-- groups -->
-          <ng-container
-            *ngFor='let group of section.children'
-            >
-            <forms-group
-              *ngIf='( group.children[0] ) as one'
-              [fxFlex]='"0 0 calc(" + group.width + ")"'
-              [model]='this.controls[ section.key ].controls[ group.key ]'
-              [schemas]='group.children'
-              [id]='( section.key + "-" + group.key + "-" + one.key )'
-              [label]='group.label'
-              [tooltip]='group.tooltip'
-              [error]='group.error'
-              [check]='( this.check$ | async )'
+          <ng-container *ngFor='let sup of sec.children' >
+            <!-- section -->
+            <div
+              *ngIf='( sup.isSection )'
+              fxLayoutWrap
+              [fxLayout]='"row"'
+              [fxLayout.lt-sm]='"column"'
+              [fxFlex]='"0 0 calc(" + sup.width + ")"'
               >
-            </forms-group>
+              <ng-container *ngFor='let sub of sup.children' >
+                <forms-group
+                  [fxFlex]='"0 0 calc(" + sub.width + ")"'
+                  [model]='this.controls[ sec.key ].controls[ sup.key ].controls[ sub.key ]'
+                  [schemas]='sub.children'
+                  [id]='( sec.key + "-" + sup.key + "-" + sub.key + "-" + sub.children[0].key )'
+                  [label]='sub.label'
+                  [tooltip]='sub.tooltip'
+                  [error]='sub.error'
+                  [check]='( this.check$ | async )'
+                  >
+                </forms-group>
+              </ng-container>
+            </div>
+            <!-- non-section -->
+            <ng-container *ngIf='( !sup.isSection )' >
+              <forms-group
+                [fxFlex]='"0 0 calc(" + sup.width + ")"'
+                [model]='this.controls[ sec.key ].controls[ sup.key ]'
+                [schemas]='sup.children'
+                [id]='( sec.key + "-" + sup.key + "-" + sup.children[0].key )'
+                [label]='sup.label'
+                [tooltip]='sup.tooltip'
+                [error]='sup.error'
+                [check]='( this.check$ | async )'
+                >
+              </forms-group>
+            </ng-container>
           </ng-container>
         </div>
       </forms-section>
@@ -59,73 +84,69 @@ import { FormSchemas } from '../shared/types/form/form.schemas';
       <!-- actions -->
       <div class='mat-form-actions' >
         <span
-          *ngFor='let action of this.schemas.actions'
+          *ngFor='let act of this.schemas.actions'
           >
           <!-- buttons -->
-          <ng-container
-            *ngIf='action.element === "button"'
-            >
+          <ng-container *ngIf='act.element === "button"' >
             <!-- non-click -->
-            <ng-container *ngIf='( !action.click )' >
+            <ng-container *ngIf='( !act.click )' >
               <button
                 mat-raised-button
-                [color]='action.color'
-                [disabled]='action.disabled'
-                [type]='action.type'
+                [color]='act.color'
+                [disabled]='act.disabled'
+                [type]='act.type'
                 >
-                {{ action.label }}
+                {{ act.label }}
               </button>
             </ng-container>
             <!-- click -->
-            <ng-container *ngIf='( !!action.click )' >
+            <ng-container *ngIf='( !!act.click )' >
               <button
                 mat-raised-button
-                [color]='action.color'
-                [disabled]='action.disabled'
-                (click)='this.onClick(action.click)'
-                [type]='action.type'
+                [color]='act.color'
+                [disabled]='act.disabled'
+                (click)='this.onClick(act.click)'
+                [type]='act.type'
                 >
-                {{ action.label }}
+                {{ act.label }}
               </button>
             </ng-container>
           </ng-container>
           <!-- links -->
-          <ng-container
-            *ngIf='action.element === "a"'
-            >
+          <ng-container *ngIf='act.element === "a"' >
             <!-- href -->
-            <ng-container *ngIf='( !!action.href )' >
+            <ng-container *ngIf='( !!act.href )' >
               <a
                 mat-raised-button
-                [color]='action.color'
-                [disabled]='action.disabled'
-                [target]='action.target'
-                [href]='action.href'
+                [color]='act.color'
+                [disabled]='act.disabled'
+                [target]='act.target'
+                [href]='act.href'
                 >
-                {{ action.label }}
+                {{ act.label }}
               </a>
             </ng-container>
             <!-- click -->
-            <ng-container *ngIf='( !!action.click )' >
+            <ng-container *ngIf='( !!act.click )' >
               <a
                 mat-raised-button
-                [color]='action.color'
-                [disabled]='action.disabled'
-                (click)='this.onClick(action.click)'
+                [color]='act.color'
+                [disabled]='act.disabled'
+                (click)='this.onClick(act.click)'
                 [routerLink]=''
                 >
-                {{ action.label }}
+                {{ act.label }}
               </a>
             </ng-container>
             <!-- route -->
-            <ng-container *ngIf='( !!action.route )' >
+            <ng-container *ngIf='( !!act.route )' >
               <a
                 mat-raised-button
-                [color]='action.color'
-                [disabled]='action.disabled'
-                [routerLink]='action.route'
+                [color]='act.color'
+                [disabled]='act.disabled'
+                [routerLink]='act.route'
                 >
-                {{ action.label }}
+                {{ act.label }}
               </a>
             </ng-container>
           </ng-container>
@@ -177,36 +198,45 @@ export class FormsFormComponent extends CommonComponent {
    * https://angular.io/api/forms/ReactiveFormsModule
    */
   public build(): void {
+    const payload: any = {};
+    this.schemas.sections.map(this.section.bind(this, payload));
+    this.forms = new FormGroup(payload);
+    this.controls = payload;
+  }
 
-    const one: any = {};
-    this.schemas.sections.map((section) => {
+  /**
+   * @param total
+   * @param current
+   */
+  public section<T>(total: any, current: FormSectionSchema<T>): FormSectionSchema<T> {
+    const payload: any = {};
+    current.children.map(this.group.bind(this, payload));
+    total[current.key] = new FormGroup(payload);
+    return current;
+  }
 
-      const two: any = {};
-      section.children.map((group) => {
+  /**
+   * @param total
+   * @param current
+   */
+  public group<T>(total: any, current: FormGroupSchema<T>): FormGroupSchema<T> {
+    const payload: any = {};
+    current.children.map((!current.isSection) ? this.control.bind(this, payload) : this.group.bind(this, payload));
+    total[current.key] = new FormGroup(payload);
+    return current;
+  }
 
-        const three: any = {};
-        group.children.map((control) => {
-          const payload: any = {
-            disabled: control.disabled,
-            value: control.value,
-          };
-          three[control.key] = new FormControl(payload, control.validators);
-          return control;
-        });
-
-        two[group.key] = new FormGroup(three);
-        return group;
-
-      });
-
-      one[section.key] = new FormGroup(two);
-      return section;
-
-    });
-
-    this.forms = new FormGroup(one);
-    this.controls = one;
-
+  /**
+   * @param total
+   * @param current
+   */
+  public control(total: any, current: FormControlSchema): FormControlSchema {
+    const payload: any = {
+      disabled: current.disabled,
+      value: current.value,
+    };
+    total[current.key] = new FormControl(payload, current.validators);
+    return current;
   }
 
   /**
