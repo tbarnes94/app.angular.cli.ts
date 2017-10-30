@@ -34,13 +34,13 @@
   },
   "lint": [{
     "project": "src/tsconfig.app.json",
-    "exclude": "**/{node_modules,modules/api,modules/commons,modules/translate}/**"
+    "exclude": "**/{node_modules,modules/api,modules/commons,modules/forms,modules/translate}/**"
   }, {
     "project": "src/tsconfig.spec.json",
-    "exclude": "**/{node_modules,modules/api,modules/commons,modules/translate}/**"
+    "exclude": "**/{node_modules,modules/api,modules/commons,modules/forms,modules/translate}/**"
   }, {
     "project": "e2e/tsconfig.e2e.json",
-    "exclude": "**/{node_modules,modules/api,modules/commons,modules/translate}/**"
+    "exclude": "**/{node_modules,modules/api,modules/commons,modules/forms,modules/translate}/**"
   }],
   "test": {
     "karma": {

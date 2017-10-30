@@ -1,22 +1,25 @@
-import { Component } from '@angular/core';
-import { Input } from '@angular/core';
-import { ViewEncapsulation } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs/Rx';
-import { Observable } from 'rxjs/Rx';
+/** @imports */
+import { Component } from '@angular/core' ;
+import { Input } from '@angular/core' ;
+import { ViewEncapsulation } from '@angular/core' ;
+import { FormGroup } from '@angular/forms' ;
+import { BehaviorSubject } from 'rxjs/Rx' ;
+import { Observable } from 'rxjs/Rx' ;
 
-import { CommonComponent } from '../../commons';
-import { ObjectStrings } from '../../commons';
-import { FormControl } from '../shared/types/form/form.schemas';
+import { CommonComponent } from '../../commons' ;
+import { ObjectStrings } from '../../commons' ;
+import { FormControl } from '../shared/types/form/form.schemas' ;
 
 /**
  * https://angular.io/api/core/Component
  */
-@Component({
-  selector: 'forms-group',
-  encapsulation: ViewEncapsulation.Emulated,
-  styleUrls: [ './group.component.styl' ],
-  template: `
+@Component
+({
+  selector : 'forms-group' ,
+  encapsulation : ViewEncapsulation.Emulated ,
+  styleUrls : [ './group.component.styl' ] ,
+  template :
+  `
     <!-- label -->
     <label
       *ngIf='( this.label )'
@@ -152,80 +155,81 @@ import { FormControl } from '../shared/types/form/form.schemas';
         </div>
       </ng-container>
     </mat-error>
-  `,
+  ` ,
 })
-export class FormsGroupComponent extends CommonComponent {
+export class FormsGroupComponent extends CommonComponent
+{
+  /**
+   * https://angular.io/api/core/Input
+   */
+  @Input() public readonly model : FormGroup = null ;
 
   /**
    * https://angular.io/api/core/Input
    */
-  @Input() public readonly model: FormGroup = null;
+  @Input() public readonly schemas : Array<FormControl> = null ;
 
   /**
    * https://angular.io/api/core/Input
    */
-  @Input() public readonly schemas: Array<FormControl> = null;
+  @Input() public readonly id : string = null ;
 
   /**
    * https://angular.io/api/core/Input
    */
-  @Input() public readonly id: string = null;
+  @Input() public readonly label : string = null ;
 
   /**
    * https://angular.io/api/core/Input
    */
-  @Input() public readonly label: string = null;
+  @Input() public readonly tooltip : string = null ;
 
   /**
    * https://angular.io/api/core/Input
    */
-  @Input() public readonly tooltip: string = null;
+  @Input() public readonly error : ObjectStrings = null ;
 
   /**
    * https://angular.io/api/core/Input
    */
-  @Input() public readonly error: ObjectStrings = null;
-
-  /**
-   * https://angular.io/api/core/Input
-   */
-  @Input() public readonly check: boolean = false;
+  @Input() public readonly check : boolean = false ;
 
   /**
    * http://reactivex.io/documentation/subject.html
    */
-  public readonly model$: BehaviorSubject<FormGroup> = new BehaviorSubject<FormGroup>(null);
+  public readonly model$ : BehaviorSubject<FormGroup> = new BehaviorSubject<FormGroup>( null ) ;
 
   /**
    * http://reactivex.io/documentation/observable.html
    */
-  public readonly touch$: Observable<boolean> = this.model$
-    .filter((o) => (!!o && !!o.controls))
-    .filter((o) => (Object.keys(o.controls).length > 0))
-    .map((o) => o.controls)
-    .switchMap((o) => Observable.from(Object.keys(o)).every((k) => (!!o[k].touched)))
-    .takeUntil(this.destroy$)
+  public readonly touch$ : Observable<boolean> = this.model$
+    .filter( ( o ) => ( !!o && !!o.controls ) )
+    .filter( ( o ) => ( Object.keys( o.controls ).length > 0 ) )
+    .map( ( o ) => o.controls )
+    .switchMap( ( o ) => Observable.from( Object.keys( o ) ).every( ( k ) => ( !!o[ k ].touched ) ) )
+    .takeUntil( this.destroy$ )
     ;
 
   /**
    * http://reactivex.io/documentation/observable.html
    */
-  public readonly error$: Observable<any> = this.model$
-    .filter((o) => (!!o && !!o.controls))
-    .filter((o) => (Object.keys(o.controls).length > 0))
-    .map((o) => o.controls)
-    .switchMap((o) => Observable.from(Object.keys(o)).reduce((t, k: string, i) => this.merge(t, o[k]), {}))
-    .map((o) => Object.keys(o))
-    .takeUntil(this.destroy$)
+  public readonly error$ : Observable<any> = this.model$
+    .filter( ( o ) => ( !!o && !!o.controls ) )
+    .filter( ( o ) => ( Object.keys( o.controls ).length > 0 ) )
+    .map( ( o ) => o.controls )
+    .switchMap( ( o ) => Observable.from( Object.keys( o ) ).reduce( ( t , k : string , i ) => this.merge( t , o[ k ] ) , {} ) )
+    .map( ( o ) => Object.keys( o ) )
+    .takeUntil( this.destroy$ )
     ;
 
   /**
    * @param a
    * @param b
    */
-  public merge(a, b): any {
-    return (b.errors)
-      ? Object.assign(a, b.errors)
+  public merge( a , b ) : any
+  {
+    return ( b.errors )
+      ? Object.assign( a , b.errors )
       : a
       ;
   }
@@ -234,9 +238,10 @@ export class FormsGroupComponent extends CommonComponent {
    * https://angular.io/api/core/OnInit
    * https://angular.io/api/core/OnInit#ngOnInit
    */
-  public ngOnInit(): void {
+  public ngOnInit() : void
+  {
     this.model.valueChanges
-      .subscribe(this.ngOnChanges.bind(this))
+      .subscribe( this.ngOnChanges.bind( this ) )
       ;
   }
 
@@ -244,8 +249,9 @@ export class FormsGroupComponent extends CommonComponent {
    * https://angular.io/api/core/OnChanges
    * https://angular.io/api/core/OnChanges#ngOnChanges
    */
-  public ngOnChanges(): void {
-    this.model$.next(this.model);
+  public ngOnChanges() : void
+  {
+    this.model$.next( this.model ) ;
   }
 
 }

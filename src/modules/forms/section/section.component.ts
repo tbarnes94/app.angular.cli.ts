@@ -1,17 +1,20 @@
-import { Component } from '@angular/core';
-import { Input } from '@angular/core';
-import { ViewEncapsulation } from '@angular/core';
+/** @imports */
+import { Component } from '@angular/core' ;
+import { Input } from '@angular/core' ;
+import { ViewEncapsulation } from '@angular/core' ;
 
-import { CommonComponent } from '../../commons';
+import { CommonComponent } from '../../commons' ;
 
 /**
  * https://angular.io/api/core/Component
  */
-@Component({
-  selector: 'forms-section',
-  encapsulation: ViewEncapsulation.Emulated,
-  styleUrls: [ './section.component.styl' ],
-  template: `
+@Component
+({
+  selector : 'forms-section' ,
+  encapsulation : ViewEncapsulation.Emulated ,
+  styleUrls : [ './section.component.styl' ] ,
+  template :
+  `
     <!-- title -->
     <h1
       *ngIf='( this.title )'
@@ -30,23 +33,23 @@ import { CommonComponent } from '../../commons';
     <div class='mat-form-groups' >
       <ng-content></ng-content>
     </div>
-  `,
+  ` ,
 })
-export class FormsSectionComponent extends CommonComponent {
+export class FormsSectionComponent extends CommonComponent
+{
+  /**
+   * https://angular.io/api/core/Input
+   */
+  @Input() public readonly title : string = null ;
 
   /**
    * https://angular.io/api/core/Input
    */
-  @Input() public readonly title: string = null;
+  @Input() public readonly description : string = null ;
 
   /**
    * https://angular.io/api/core/Input
    */
-  @Input() public readonly description: string = null;
-
-  /**
-   * https://angular.io/api/core/Input
-   */
-  @Input() public readonly divider: boolean = false;
+  @Input() public readonly divider : boolean = false ;
 
 }
