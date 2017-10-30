@@ -10,8 +10,10 @@ import { BehaviorSubject } from 'rxjs/Rx';
 import { CommonComponent } from '../../commons';
 import { FormSchemas } from '../shared/types/form/form.schemas';
 import { FormControl as FormControlSchema } from '../shared/types/form/form.schemas';
-import { FormSection as FormSectionSchema } from '../shared/types/group/form.section';
 import { FormGroup as FormGroupSchema } from '../shared/types/group/form.group';
+import { FormSection as FormSectionSchema } from '../shared/types/group/form.section';
+import { FormLabel } from '../shared/types/group/form.functions';
+import { FormShown } from '../shared/types/group/form.functions';
 
 /**
  * https://angular.io/api/core/Component
@@ -42,7 +44,7 @@ import { FormGroup as FormGroupSchema } from '../shared/types/group/form.group';
           <ng-container *ngFor='let sup of sec.children' >
             <!-- section -->
             <div
-              *ngIf='( this.isShown(sup, this.model) && sup.isSection )'
+              *ngIf='( this.isShown(sup.shown, this.model) && sup.section )'
               fxLayoutWrap
               [fxLayout]='"row"'
               [fxLayout.lt-sm]='"column"'
@@ -50,31 +52,31 @@ import { FormGroup as FormGroupSchema } from '../shared/types/group/form.group';
               >
               <ng-container *ngFor='let sub of sup.children' >
                 <forms-group
-                  *ngIf='( this.isShown(sub, this.model) )'
+                  *ngIf='this.isShown(sub.shown, this.model)'
                   [fxFlex]='"0 0 calc(" + sub.width + ")"'
-                  [model]='this.schemaz[ sec.key ].controls[ sup.key ].controls[ sub.key ]'
+                  [model]='this.schemaz[sec.key].controls[sup.key].controls[sub.key]'
                   [schemas]='sub.children'
-                  [id]='( sec.key + "-" + sup.key + "-" + sub.key + "-" + sub.children[0].key )'
-                  [label]='sub.label'
+                  [id]='( sec.key + "-" + sup.key + "-" + sub.key )'
+                  [label]='this.onLabel(sub.label, this.model)'
                   [tooltip]='sub.tooltip'
-                  [error]='sub.error'
                   [check]='( this.check$ | async )'
+                  [error]='sub.error'
                   >
                 </forms-group>
               </ng-container>
             </div>
             <!-- non-section -->
-            <ng-container *ngIf='( !sup.isSection )' >
+            <ng-container *ngIf='( !sup.section )' >
               <forms-group
-                *ngIf='( this.isShown(sup, this.model) )'
+                *ngIf='this.isShown(sup.shown, this.model)'
                 [fxFlex]='"0 0 calc(" + sup.width + ")"'
-                [model]='this.schemaz[ sec.key ].controls[ sup.key ]'
+                [model]='this.schemaz[sec.key].controls[sup.key]'
                 [schemas]='sup.children'
-                [id]='( sec.key + "-" + sup.key + "-" + sup.children[0].key )'
-                [label]='sup.label'
+                [id]='( sec.key + "-" + sup.key )'
+                [label]='this.onLabel(sup.label, this.model)'
                 [tooltip]='sup.tooltip'
-                [error]='sup.error'
                 [check]='( this.check$ | async )'
+                [error]='sup.error'
                 >
               </forms-group>
             </ng-container>
@@ -201,56 +203,77 @@ export class FormsFormComponent extends CommonComponent {
    */
   public build(): void {
     const payload: any = {};
-    this.schemas.sections.map(this.section.bind(this, payload));
+    const calls: any = this.section.bind(this, payload);
+    this.schemas.sections.map(calls);
     this.model = new FormGroup(payload);
     this.schemaz = payload;
   }
 
   /**
    * @param total
-   * @param current
+   * @param items
    * @returns FormSectionSchema
    */
-  public section<T>(total: any, current: FormSectionSchema<T>): FormSectionSchema<T> {
+  public section<T>(total: any, items: FormSectionSchema<T>): FormSectionSchema<T> {
     const payload: any = {};
-    current.children.map(this.group.bind(this, payload));
-    total[current.key] = new FormGroup(payload);
-    return current;
+    const calls: any = this.group.bind(this, payload);
+    items.children.map(calls);
+    total[items.key] = new FormGroup(payload);
+    return items;
   }
 
   /**
    * @param total
-   * @param current
+   * @param items
    * @returns FormGroupSchema
    */
-  public group<T>(total: any, current: FormGroupSchema<T>): FormGroupSchema<T> {
+  public group<T>(total: any, items: FormGroupSchema<T>): FormGroupSchema<T> {
     const payload: any = {};
-    current.children.map((!current.isSection) ? this.control.bind(this, payload) : this.group.bind(this, payload));
-    total[current.key] = new FormGroup(payload);
-    return current;
+    const calls: any = (!items.section)
+      ? this.control.bind(this, payload)
+      : this.group.bind(this, payload)
+      ;
+    items.children.map(calls);
+    total[items.key] = new FormGroup(payload);
+    return items;
   }
 
   /**
    * @param total
-   * @param current
+   * @param items
    * @returns FormControlSchema
    */
-  public control(total: any, current: FormControlSchema): FormControlSchema {
+  public control(total: any, items: FormControlSchema): FormControlSchema {
     const payload: any = {
-      disabled: current.disabled,
-      value: current.value,
+      disabled: items.disabled,
+      value: items.value,
     };
-    total[current.key] = new FormControl(payload, current.validators);
-    return current;
+    total[items.key] = new FormControl(payload, items.validators);
+    return items;
   }
 
   /**
-   * @param schemas
+   * @param input
+   * @param model
+   * @returns string
+   */
+  public onLabel<T>(input: any, model: FormGroup): string {
+    return (typeof input === 'function')
+      ? input(model)
+      : input
+      ;
+  }
+
+  /**
+   * @param input
    * @param model
    * @returns boolean
    */
-  public isShown<T>(schemas: FormGroupSchema<T>, model: FormGroup): boolean {
-    return ( schemas.isShown ) ? schemas.isShown( model ) : true;
+  public isShown<T>(input: any, model: FormGroup): boolean {
+    return (typeof input === 'function')
+      ? input(model)
+      : true
+      ;
   }
 
   /**

@@ -1,15 +1,16 @@
-import { FormGroup as FormGroupExternal } from '@angular/forms';
 import { ObjectStrings } from '../../../../commons';
 import { AbstractGroup } from './abstract.group';
+import { FormLabel } from './form.functions';
+import { FormShown } from './form.functions';
 
 /**
  * https://angular.io/api/forms/ReactiveFormsModule
  */
 export class FormGroup<T> extends AbstractGroup<T> {
-  public readonly label?: string;
+  public readonly label?: FormLabel;
   public readonly tooltip?: string;
   public readonly error?: ObjectStrings;
-  public readonly isSection?: boolean;
-  public readonly isShown?: (model: FormGroupExternal) => boolean;
+  public readonly section?: boolean;
+  public readonly shown?: FormShown;
   public readonly width?: string;
 }

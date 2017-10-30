@@ -20,7 +20,7 @@ import { FormControl } from '../shared/types/form/form.schemas';
     <!-- label -->
     <label
       *ngIf='( this.label )'
-      [for]='( this.id )'
+      [for]='( this.id + "-" + this.schemas[ 0 ].key )'
       >
       <span [innerHtml]='this.label' ></span>
       <!-- tooltip -->

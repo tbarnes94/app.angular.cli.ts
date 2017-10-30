@@ -147,6 +147,7 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
                 key: 'one',
                 element: 'datepicker',
                 validators: [ Validators.required ],
+                readonly: true,
                 placeholder: t.datepicker.placeholder,
                 maxlength: 100,
                 type: 'text',
@@ -170,7 +171,7 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
               }]
             }, {
               key: 'shown',
-              isSection: true,
+              section: true,
               width: '50%',
               children: [{
                 key: 'shown',
@@ -189,10 +190,10 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
                 }]
               }, {
                 key: 'hides',
-                label: t.hides.label,
+                label: (i) => ( i.controls.form.controls.shown.controls.shown.value.one ),
                 tooltip: t.hides.tooltip,
                 error: t.hides.error,
-                isShown: (i) => ( i.controls.form.controls.shown.controls.shown.value.one ),
+                shown: (i) => ( i.controls.form.controls.shown.controls.shown.value.one ),
                 width: '100%',
                 children: [{
                   key: 'one',
