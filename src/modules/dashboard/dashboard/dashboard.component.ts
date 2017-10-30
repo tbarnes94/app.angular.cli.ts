@@ -192,7 +192,7 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
                 label: t.hides.label,
                 tooltip: t.hides.tooltip,
                 error: t.hides.error,
-                isShown: (o) => ( o.controls.form.controls.shown.controls.shown.value.one ),
+                isShown: (i) => ( i.controls.form.controls.shown.controls.shown.value.one ),
                 width: '100%',
                 children: [{
                   key: 'one',
