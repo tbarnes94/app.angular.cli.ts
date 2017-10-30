@@ -192,6 +192,7 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
                 label: t['input-sb'].label,
                 tooltip: t['input-sb'].tooltip,
                 error: t['input-sb'].error,
+                isShown: (o) => ( o.controls.form.controls[ 'input-s' ].controls[ 'input-sa' ].value.one ),
                 width: '100%',
                 children: [{
                   key: 'one',

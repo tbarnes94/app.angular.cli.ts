@@ -1,3 +1,4 @@
+import { FormGroup as FormGroupExternal } from '@angular/forms';
 import { ObjectStrings } from '../../../../commons';
 import { AbstractGroup } from './abstract.group';
 
@@ -9,5 +10,6 @@ export class FormGroup<T> extends AbstractGroup<T> {
   public readonly tooltip?: string;
   public readonly error?: ObjectStrings;
   public readonly isSection?: boolean;
+  public readonly isShown?: (model: FormGroupExternal) => boolean;
   public readonly width?: string;
 }

@@ -23,8 +23,8 @@ import { FormGroup as FormGroupSchema } from '../shared/types/group/form.group';
   template: `
     <!-- forms -->
     <form
-      [formGroup]='this.forms'
-      (ngSubmit)='this.onComplete(this.forms)'
+      [formGroup]='this.model'
+      (ngSubmit)='this.onComplete(this.model)'
       >
       <!-- sections -->
       <forms-section
@@ -42,7 +42,7 @@ import { FormGroup as FormGroupSchema } from '../shared/types/group/form.group';
           <ng-container *ngFor='let sup of sec.children' >
             <!-- section -->
             <div
-              *ngIf='( sup.isSection )'
+              *ngIf='( this.isShown(sup, this.model) && sup.isSection )'
               fxLayoutWrap
               [fxLayout]='"row"'
               [fxLayout.lt-sm]='"column"'
@@ -50,8 +50,9 @@ import { FormGroup as FormGroupSchema } from '../shared/types/group/form.group';
               >
               <ng-container *ngFor='let sub of sup.children' >
                 <forms-group
+                  *ngIf='( this.isShown(sub, this.model) )'
                   [fxFlex]='"0 0 calc(" + sub.width + ")"'
-                  [model]='this.controls[ sec.key ].controls[ sup.key ].controls[ sub.key ]'
+                  [model]='this.schemaz[ sec.key ].controls[ sup.key ].controls[ sub.key ]'
                   [schemas]='sub.children'
                   [id]='( sec.key + "-" + sup.key + "-" + sub.key + "-" + sub.children[0].key )'
                   [label]='sub.label'
@@ -65,8 +66,9 @@ import { FormGroup as FormGroupSchema } from '../shared/types/group/form.group';
             <!-- non-section -->
             <ng-container *ngIf='( !sup.isSection )' >
               <forms-group
+                *ngIf='( this.isShown(sup, this.model) )'
                 [fxFlex]='"0 0 calc(" + sup.width + ")"'
-                [model]='this.controls[ sec.key ].controls[ sup.key ]'
+                [model]='this.schemaz[ sec.key ].controls[ sup.key ]'
                 [schemas]='sup.children'
                 [id]='( sec.key + "-" + sup.key + "-" + sup.children[0].key )'
                 [label]='sup.label'
@@ -167,7 +169,7 @@ export class FormsFormComponent extends CommonComponent {
   /**
    * https://angular.io/api/core/Input
    */
-  @Input() public forms: FormGroup = null;
+  @Input() public model: FormGroup = null;
 
   /**
    * https://angular.io/api/core/Input
@@ -187,7 +189,7 @@ export class FormsFormComponent extends CommonComponent {
   /**
    * https://angular.io/api/core/Input
    */
-  public controls: any = null;
+  public schemaz: any = null;
 
   /**
    * http://reactivex.io/documentation/subject.html
@@ -200,8 +202,8 @@ export class FormsFormComponent extends CommonComponent {
   public build(): void {
     const payload: any = {};
     this.schemas.sections.map(this.section.bind(this, payload));
-    this.forms = new FormGroup(payload);
-    this.controls = payload;
+    this.model = new FormGroup(payload);
+    this.schemaz = payload;
   }
 
   /**
@@ -240,12 +242,21 @@ export class FormsFormComponent extends CommonComponent {
   }
 
   /**
-   * https://angular.io/guide/user-input
-   * @param forms
+   * @param schemas
+   * @param model
+   * @returns boolean
    */
-  public onComplete(forms: FormGroup): void {
-    if (forms.valid) {
-      this.onCompleteEvent.next(forms);
+  public isShown<T>(schemas: FormGroupSchema<T>, model: FormGroup): boolean {
+    return ( schemas.isShown ) ? schemas.isShown( model ) : true;
+  }
+
+  /**
+   * https://angular.io/guide/user-input
+   * @param model
+   */
+  public onComplete(model: FormGroup): void {
+    if (model.valid) {
+      this.onCompleteEvent.next(model);
     } else {
       this.check$.next(true);
     }
