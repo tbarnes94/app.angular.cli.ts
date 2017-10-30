@@ -115,16 +115,16 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
                 width: '100%'
               }]
             }, {
-              key: 'input-c',
-              label: t['input-c'].label,
-              tooltip: t['input-c'].tooltip,
-              error: t['input-c'].error,
+              key: 'multiple',
+              label: t.multiple.label,
+              tooltip: t.multiple.tooltip,
+              error: t.multiple.error,
               width: '50%',
               children: [{
                 key: 'one',
                 element: 'input',
                 validators: [ Validators.required ],
-                placeholder: t['input-c'].placeholder.one,
+                placeholder: t.multiple.placeholder.one,
                 maxlength: 100,
                 type: 'text',
                 width: '50%'
@@ -132,7 +132,7 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
                 key: 'two',
                 element: 'input',
                 validators: [ Validators.required ],
-                placeholder: t['input-c'].placeholder.two,
+                placeholder: t.multiple.placeholder.two,
                 maxlength: 100,
                 type: 'text',
                 width: '50%'
@@ -155,50 +155,50 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
                 width: '100%'
               }]
             }, {
-              key: 'select',
-              label: t.select.label,
-              tooltip: t.select.tooltip,
-              error: t.select.error,
+              key: 'selects',
+              label: t.selects.label,
+              tooltip: t.selects.tooltip,
+              error: t.selects.error,
               width: '50%',
               children: [{
                 key: 'one',
                 element: 'select',
                 validators: [ Validators.required ],
-                placeholder: t.select.placeholder,
-                options: t.select.options,
+                placeholder: t.selects.placeholder,
+                options: t.selects.options,
                 width: '100%'
               }]
             }, {
-              key: 'input-s',
+              key: 'shown',
               isSection: true,
               width: '50%',
               children: [{
-                key: 'input-sa',
-                label: t['input-sa'].label,
-                tooltip: t['input-sa'].tooltip,
-                error: t['input-sa'].error,
+                key: 'shown',
+                label: t.shown.label,
+                tooltip: t.shown.tooltip,
+                error: t.shown.error,
                 width: '100%',
                 children: [{
                   key: 'one',
                   element: 'input',
                   validators: [ Validators.required ],
-                  placeholder: t['input-sa'].placeholder,
+                  placeholder: t.shown.placeholder,
                   maxlength: 100,
                   type: 'text',
                   width: '100%'
                 }]
               }, {
-                key: 'input-sb',
-                label: t['input-sb'].label,
-                tooltip: t['input-sb'].tooltip,
-                error: t['input-sb'].error,
-                isShown: (o) => ( o.controls.form.controls[ 'input-s' ].controls[ 'input-sa' ].value.one ),
+                key: 'hides',
+                label: t.hides.label,
+                tooltip: t.hides.tooltip,
+                error: t.hides.error,
+                isShown: (o) => ( o.controls.form.controls.shown.controls.shown.value.one ),
                 width: '100%',
                 children: [{
                   key: 'one',
                   element: 'input',
                   validators: [ Validators.required ],
-                  placeholder: t['input-sb'].placeholder,
+                  placeholder: t.hides.placeholder,
                   maxlength: 100,
                   type: 'text',
                   width: '100%'

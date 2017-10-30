@@ -33,15 +33,15 @@
           "required": "Input required error."
         }
       },
-      "input-c": {
-        "label": "INPUT-c",
-        "tooltip": "Input-c tooltip hover",
+      "multiple": {
+        "label": "MULTIPLE",
+        "tooltip": "Multiple tooltip hover",
         "placeholder": {
           "one": "One x 50%",
           "two": "Two x 50%"
         },
         "error": {
-          "required": "Input-c required error."
+          "required": "Multiple required error."
         }
       },
       "datepicker": {
@@ -52,12 +52,12 @@
           "required": "Datepicker required error."
         }
       },
-      "select": {
-        "label": "SELECT",
-        "tooltip": "Select tooltip hover",
+      "selects": {
+        "label": "SELECTS",
+        "tooltip": "Selects tooltip hover",
         "placeholder": "One x 100%",
         "error": {
-          "required": "Select required error."
+          "required": "Selects required error."
         },
         "options": [
           { "title": "", "value": null },
@@ -66,20 +66,20 @@
           { "title": "Three", "value": "three" }
         ]
       },
-      "input-sa": {
-        "label": "INPUT-sa",
-        "tooltip": "Input-sa tooltip hover",
+      "shown": {
+        "label": "SHOWN",
+        "tooltip": "Shown tooltip hover",
         "placeholder": "One x 100%",
         "error": {
-          "required": "Input-sa required error."
+          "required": "Shown required error."
         }
       },
-      "input-sb": {
-        "label": "INPUT-sb",
-        "tooltip": "Input-sb tooltip hover",
+      "hides": {
+        "label": "HIDES",
+        "tooltip": "Hides tooltip hover",
         "placeholder": "One x 100%",
         "error": {
-          "required": "Input-sb required error."
+          "required": "Hides required error."
         }
       },
       "radio": {
