@@ -209,6 +209,7 @@ export class FormsFormComponent extends CommonComponent {
   /**
    * @param total
    * @param current
+   * @returns FormSectionSchema
    */
   public section<T>(total: any, current: FormSectionSchema<T>): FormSectionSchema<T> {
     const payload: any = {};
@@ -220,6 +221,7 @@ export class FormsFormComponent extends CommonComponent {
   /**
    * @param total
    * @param current
+   * @returns FormGroupSchema
    */
   public group<T>(total: any, current: FormGroupSchema<T>): FormGroupSchema<T> {
     const payload: any = {};
@@ -231,6 +233,7 @@ export class FormsFormComponent extends CommonComponent {
   /**
    * @param total
    * @param current
+   * @returns FormControlSchema
    */
   public control(total: any, current: FormControlSchema): FormControlSchema {
     const payload: any = {
