@@ -142,8 +142,12 @@ import { FormControl } from '../shared/types/form/form.schemas' ;
     <mat-error *ngIf=
       '(
         ( this.error ) &&
-        ( ( this.touch$ | async ) === true || this.check ) &&
-        ( this.model.invalid )
+        ( this.model.invalid ) &&
+        (
+          ( this.touch$ | async ) === true ||
+          ( this.pristine$ | async ) === false ||
+          ( this.check )
+        )
       )'
       [ngClass.lt-sm]='"small"'
       >
@@ -202,23 +206,34 @@ export class FormsGroupComponent extends CommonComponent
   /**
    * http://reactivex.io/documentation/observable.html
    */
-  public readonly touch$ : Observable<boolean> = this.model$
+  public readonly control$ : Observable<any> = this.model$
     .filter( ( o ) => ( !!o && !!o.controls ) )
     .filter( ( o ) => ( Object.keys( o.controls ).length > 0 ) )
     .map( ( o ) => o.controls )
-    .switchMap( ( o ) => Observable.from( Object.keys( o ) ).every( ( k ) => ( !!o[ k ].touched ) ) )
+    ;
+
+  /**
+   * http://reactivex.io/documentation/observable.html
+   */
+  public readonly error$ : Observable<any> = this.control$
+    .switchMap( ( o ) => Observable.from( Object.keys( o ) ).reduce( ( t , k : string , i ) => this.merge( t , o[ k ] ) , {} ) )
+    .map( ( o ) => Object.keys( o ) )
     .takeUntil( this.destroy$ )
     ;
 
   /**
    * http://reactivex.io/documentation/observable.html
    */
-  public readonly error$ : Observable<any> = this.model$
-    .filter( ( o ) => ( !!o && !!o.controls ) )
-    .filter( ( o ) => ( Object.keys( o.controls ).length > 0 ) )
-    .map( ( o ) => o.controls )
-    .switchMap( ( o ) => Observable.from( Object.keys( o ) ).reduce( ( t , k : string , i ) => this.merge( t , o[ k ] ) , {} ) )
-    .map( ( o ) => Object.keys( o ) )
+  public readonly pristine$ : Observable<boolean> = this.control$
+    .switchMap( ( o ) => Observable.from( Object.keys( o ) ).every( ( k ) => ( !!o[ k ].pristine ) ) )
+    .takeUntil( this.destroy$ )
+    ;
+
+  /**
+   * http://reactivex.io/documentation/observable.html
+   */
+  public readonly touch$ : Observable<boolean> = this.control$
+    .switchMap( ( o ) => Observable.from( Object.keys( o ) ).every( ( k ) => ( !!o[ k ].touched ) ) )
     .takeUntil( this.destroy$ )
     ;
 
