@@ -45,7 +45,11 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
           <ng-container *ngFor='let sup of sec.children' >
             <!-- section -->
             <div
-              *ngIf='( this.isShown( sup.shown , this.model ) && sup.section )'
+              *ngIf=
+              '(
+                sup.section &&
+                this.isBoolean( sup.shown , this.model , true )
+              )'
               fxLayoutWrap
               [fxLayout]='"row"'
               [fxLayout.lt-sm]='"column"'
@@ -53,12 +57,12 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
               >
               <ng-container *ngFor='let sub of sup.children' >
                 <forms-group
-                  *ngIf='this.isShown( sub.shown , this.model )'
+                  *ngIf='this.isBoolean( sub.shown , this.model , true )'
                   [fxFlex]='"0 0 calc(" + sub.width + ")"'
                   [model]='this.schemaz[ sec.key ].controls[ sup.key ].controls[ sub.key ]'
                   [schemas]='sub.children'
                   [id]='( sec.key + "-" + sup.key + "-" + sub.key )'
-                  [label]='this.onLabel( sub.label , this.model )'
+                  [label]='this.isStrings( sub.label , this.model )'
                   [tooltip]='sub.tooltip'
                   [check]='( this.check$ | async )'
                   [error]='sub.error'
@@ -69,12 +73,12 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
             <!-- non-section -->
             <ng-container *ngIf='( !sup.section )' >
               <forms-group
-                *ngIf='this.isShown( sup.shown , this.model )'
+                *ngIf='this.isBoolean( sup.shown , this.model , true )'
                 [fxFlex]='"0 0 calc(" + sup.width + ")"'
                 [model]='this.schemaz[ sec.key ].controls[ sup.key ]'
                 [schemas]='sup.children'
                 [id]='( sec.key + "-" + sup.key )'
-                [label]='this.onLabel( sup.label , this.model )'
+                [label]='this.isStrings( sup.label , this.model )'
                 [tooltip]='sup.tooltip'
                 [check]='( this.check$ | async )'
                 [error]='sup.error'
@@ -98,7 +102,7 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
               <button
                 mat-raised-button
                 [color]='act.color'
-                [disabled]='act.disabled'
+                [disabled]='this.isBoolean( act.disabled , this.model )'
                 [type]='act.type'
                 >
                 {{ act.label }}
@@ -109,7 +113,7 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
               <button
                 mat-raised-button
                 [color]='act.color'
-                [disabled]='act.disabled'
+                [disabled]='this.isBoolean( act.disabled , this.model )'
                 (click)='this.onClick( act.click )'
                 [type]='act.type'
                 >
@@ -124,7 +128,7 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
               <a
                 mat-raised-button
                 [color]='act.color'
-                [disabled]='act.disabled'
+                [disabled]='this.isBoolean( act.disabled , this.model )'
                 [target]='act.target'
                 [href]='act.href'
                 >
@@ -136,7 +140,7 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
               <a
                 mat-raised-button
                 [color]='act.color'
-                [disabled]='act.disabled'
+                [disabled]='this.isBoolean( act.disabled , this.model )'
                 (click)='this.onClick( act.click )'
                 [routerLink]=''
                 >
@@ -148,7 +152,7 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
               <a
                 mat-raised-button
                 [color]='act.color'
-                [disabled]='act.disabled'
+                [disabled]='this.isBoolean( act.disabled , this.model )'
                 [routerLink]='act.route'
                 >
                 {{ act.label }}
@@ -265,7 +269,7 @@ export class FormsFormComponent extends CommonComponent
    * @param model
    * @returns string
    */
-  public onLabel<T>( input : any , model : FormGroup ) : string
+  public isStrings<T>( input : any , model : FormGroup ) : string
   {
     return ( typeof input === 'function' )
       ? input( model )
@@ -276,13 +280,16 @@ export class FormsFormComponent extends CommonComponent
   /**
    * @param input
    * @param model
+   * @param start
    * @returns boolean
    */
-  public isShown<T>( input : any , model : FormGroup ) : boolean
+  public isBoolean<T>( input : any , model : FormGroup , start : boolean = false ) : boolean
   {
     return ( typeof input === 'function' )
       ? input( model )
-      : true
+      : ( typeof input === 'boolean' )
+        ? input
+        : start
       ;
   }
 

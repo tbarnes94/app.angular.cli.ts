@@ -66,7 +66,7 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
             label: t.complete,
             element: 'button',
             color: 'primary',
-            disabled: (o.loader),
+            disabled: (i) => (!i.controls.form.controls.check.value.one || o.loader),
             type: 'submit',
           }, {
             key: 'a.href',

@@ -67,7 +67,7 @@ export class AuthLoginComponent extends TemplateContainerComponent {
             label: t.submit,
             element: 'button',
             color: 'primary',
-            disabled: (o.loader),
+            disabled: (i) => (o.loader),
             type: 'submit',
           }],
 
