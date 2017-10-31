@@ -42,10 +42,22 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
   public schemas$: Observable<FormSchemas> = Observable.of(null);
 
   /**
+   * http://reactivex.io/documentation/observable.html
+   */
+  public table$: Observable<any> = this.table
+    .build$([ 'auth', 'token' ], (o) => o)
+    .takeUntil(this.destroy$)
+    ;
+
+  /**
    * https://angular.io/api/core/OnInit
    * https://angular.io/api/core/OnInit#ngOnInit
    */
   public ngOnInit(): void {
+
+    this.table$
+      .subscribe((o) => console.log(o))
+      ;
 
     this.schemas$ = Observable
       .combineLatest(

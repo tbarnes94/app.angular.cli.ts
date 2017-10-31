@@ -11,6 +11,7 @@ import { ApiModule } from '../modules/api';
 import { AuthModule } from '../modules/auth';
 import { CommonModule } from '../modules/commons';
 import { DashboardModule } from '../modules/dashboard';
+import { TableModule } from '../modules/table';
 import { TemplateModule } from '../modules/template';
 import { TranslateModule } from '../modules/translate';
 
@@ -34,6 +35,7 @@ import { TranslateModule } from '../modules/translate';
     AuthModule.forRoot(),
     CommonModule.forRoot(),
     DashboardModule.forRoot(),
+    TableModule.forRoot(),
     TemplateModule.forRoot(),
     TranslateModule.forRoot(environment.translate),
     CommonModule,
