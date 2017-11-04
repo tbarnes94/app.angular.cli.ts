@@ -31,8 +31,8 @@ import { FormControl } from '../shared/types/form/form.schemas' ;
         *ngIf='( this.tooltip )'
         [matTooltip]='this.tooltip'
         [matTooltipPosition]='"above"'
-        aria-hidden='true'
         class='fa fa-question-circle'
+        aria-hidden='true'
         >
       </i>
     </label>
@@ -50,6 +50,11 @@ import { FormControl } from '../shared/types/form/form.schemas' ;
           *ngIf='( input.element === "input" )'
           [fxFlex]='"0 0 calc(" + input.width + ")"'
           [floatPlaceholder]='"never"'
+          [ngClass]=
+            '{
+              "mat-has-prefix" : input.prefix ,
+              "mat-has-suffix" : input.suffix
+            }'
           >
           <input
             matInput
@@ -61,12 +66,27 @@ import { FormControl } from '../shared/types/form/form.schemas' ;
             [maxlength]='input.maxlength'
             [type]='input.type'
             />
+          <i
+            *ngIf='input.prefix'
+            matPrefix
+            class='fa fa-{{ input.prefix }}'
+            aria-hidden='true'
+            >
+          </i>
+          <i
+            *ngIf='input.suffix'
+            matSuffix
+            class='fa fa-{{ input.suffix }}'
+            aria-hidden='true'
+            >
+          </i>
         </mat-form-field>
         <!-- datepicker -->
         <mat-form-field
           *ngIf='( input.element === "datepicker" )'
           [fxFlex]='"0 0 calc(" + input.width + ")"'
           [floatPlaceholder]='"never"'
+          class='mat-datepicker-field'
           >
           <input
             matInput

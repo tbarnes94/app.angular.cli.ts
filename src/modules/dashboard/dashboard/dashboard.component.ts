@@ -78,7 +78,7 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
             label: t.complete,
             element: 'button',
             color: 'primary',
-            disabled: (i) => (!i.controls.form.controls.check.value.one || o.loader),
+            disabled: (o.loader),
             type: 'submit',
           }, {
             key: 'a.href',
@@ -104,6 +104,7 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
             label: t.logout,
             element: 'button',
             color: 'warn',
+            disabled: (i) => (!i.controls.form.controls.check.value.one),
             click: 'onLogout',
             type: 'button',
           }],
@@ -123,6 +124,8 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
                 validators: [ Validators.required ],
                 placeholder: t.input.placeholder,
                 maxlength: 100,
+                prefix: 'dollar',
+                suffix: 'times',
                 type: 'text',
                 width: '100%'
               }]
