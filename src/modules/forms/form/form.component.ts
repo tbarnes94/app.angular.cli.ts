@@ -62,10 +62,10 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
                   [model]='this.schemaz[ sec.key ].controls[ sup.key ].controls[ sub.key ]'
                   [schemas]='sub.children'
                   [id]='( sec.key + "-" + sup.key + "-" + sub.key )'
-                  [label]='this.isStrings( sub.label , this.model )'
-                  [tooltip]='sub.tooltip'
+                  [label]='this.isAny( sub.label , this.model )'
+                  [error]='this.isAny( sub.error , this.model )'
                   [check]='( this.check$ | async )'
-                  [error]='sub.error'
+                  [tooltip]='sub.tooltip'
                   >
                 </forms-group>
               </ng-container>
@@ -78,10 +78,10 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
                 [model]='this.schemaz[ sec.key ].controls[ sup.key ]'
                 [schemas]='sup.children'
                 [id]='( sec.key + "-" + sup.key )'
-                [label]='this.isStrings( sup.label , this.model )'
-                [tooltip]='sup.tooltip'
+                [label]='this.isAny( sup.label , this.model )'
+                [error]='this.isAny( sup.error , this.model )'
                 [check]='( this.check$ | async )'
-                [error]='sup.error'
+                [tooltip]='sup.tooltip'
                 >
               </forms-group>
             </ng-container>
@@ -267,9 +267,9 @@ export class FormsFormComponent extends CommonComponent
   /**
    * @param input
    * @param model
-   * @returns string
+   * @returns any
    */
-  public isStrings<T>( input : any , model : FormGroup ) : string
+  public isAny<T>( input : any , model : FormGroup ) : any
   {
     return ( typeof input === 'function' )
       ? input( model )
