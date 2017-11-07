@@ -1,6 +1,8 @@
 /** @imports */
 import { Component } from '@angular/core' ;
+import { EventEmitter } from '@angular/core' ;
 import { Input } from '@angular/core' ;
+import { Output } from '@angular/core' ;
 import { ViewEncapsulation } from '@angular/core' ;
 import { FormGroup } from '@angular/forms' ;
 import { BehaviorSubject } from 'rxjs/Rx' ;
@@ -206,17 +208,22 @@ export class FormsGroupComponent extends CommonComponent
   /**
    * https://angular.io/api/core/Input
    */
-  @Input() public readonly tooltip : string = null ;
-
-  /**
-   * https://angular.io/api/core/Input
-   */
   @Input() public readonly error : ObjectStrings = null ;
 
   /**
    * https://angular.io/api/core/Input
    */
   @Input() public readonly check : boolean = false ;
+
+  /**
+   * https://angular.io/api/core/Input
+   */
+  @Input() public readonly tooltip : string = null ;
+
+  /**
+   * https://angular.io/api/core/Output
+   */
+  @Output() public readonly onValueEvent : EventEmitter<FormGroup> = new EventEmitter() ;
 
   /**
    * http://reactivex.io/documentation/subject.html
@@ -275,9 +282,11 @@ export class FormsGroupComponent extends CommonComponent
    */
   public ngOnInit() : void
   {
-    this.model.valueChanges
-      .subscribe( this.ngOnChanges.bind( this ) )
-      ;
+    this.model.valueChanges.subscribe( ( o ) =>
+    {
+      this.onValueEvent.next( this.model ) ;
+      this.ngOnChanges() ;
+    }) ;
   }
 
   /**

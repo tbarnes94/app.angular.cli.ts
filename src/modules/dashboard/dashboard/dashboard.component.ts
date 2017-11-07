@@ -112,7 +112,7 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
             label: t.logout,
             element: 'button',
             color: 'warn',
-            disabled: (i) => (!i.controls.form.controls.check.value.one),
+            disabled: (f) => (!f.controls.form.controls.check.controls.one.value),
             click: 'onLogout',
             type: 'button',
           }],
@@ -125,6 +125,7 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
               label: t.input.label,
               tooltip: t.input.tooltip,
               error: t.input.error,
+              onValue: (f, m) => { f.controls.form.controls.shown.controls.hides.controls.one.setValue(m.controls.one.value); },
               width: '50%',
               children: [{
                 key: 'one',
@@ -213,10 +214,10 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
                 }]
               }, {
                 key: 'hides',
-                label: (i) => ( i.controls.form.controls.shown.controls.shown.value.one ),
+                label: (f) => ( f.controls.form.controls.shown.controls.shown.controls.one.value ),
                 tooltip: t.hides.tooltip,
                 error: t.hides.error,
-                shown: (i) => ( i.controls.form.controls.shown.controls.shown.value.one ),
+                shown: (f) => ( f.controls.form.controls.shown.controls.shown.controls.one.value ),
                 width: '100%',
                 children: [{
                   key: 'one',

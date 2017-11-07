@@ -64,6 +64,7 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
                   [id]='( sec.key + "-" + sup.key + "-" + sub.key )'
                   [label]='this.toAny( sub.label , this.model )'
                   [error]='this.toAny( sub.error , this.model )'
+                  (onValueEvent)='this.onEvent( sub.onValue , this.model , $event )'
                   [check]='( this.check$ | async )'
                   [tooltip]='sub.tooltip'
                   >
@@ -80,6 +81,7 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
                 [id]='( sec.key + "-" + sup.key )'
                 [label]='this.toAny( sup.label , this.model )'
                 [error]='this.toAny( sup.error , this.model )'
+                (onValueEvent)='this.onEvent( sup.onValue , this.model , $event )'
                 [check]='( this.check$ | async )'
                 [tooltip]='sup.tooltip'
                 >
@@ -266,31 +268,44 @@ export class FormsFormComponent extends CommonComponent
 
   /**
    * @param input
-   * @param model
+   * @param forms
    * @returns any
    */
-  public toAny<T>( input : any , model : FormGroup ) : any
+  public toAny( input : any , forms : FormGroup ) : any
   {
     return ( typeof input === 'function' )
-      ? input( model )
+      ? input( forms )
       : input
       ;
   }
 
   /**
    * @param input
-   * @param model
+   * @param forms
    * @param start
    * @returns boolean
    */
-  public toBoolean<T>( input : any , model : FormGroup , start : boolean = false ) : boolean
+  public toBoolean( input : any , forms : FormGroup , start : boolean = false ) : boolean
   {
     return ( typeof input === 'function' )
-      ? input( model )
+      ? input( forms )
       : ( typeof input === 'boolean' )
         ? input
         : start
       ;
+  }
+
+  /**
+   * @param input
+   * @param forms
+   * @param model
+   * @returns void
+   */
+  public onEvent( input : any , forms : FormGroup , model : FormGroup ) : void
+  {
+    if ( typeof input === 'function' ) {
+      input( forms , model ) ;
+    }
   }
 
   /**
