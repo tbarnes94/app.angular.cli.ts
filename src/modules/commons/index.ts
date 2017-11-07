@@ -12,6 +12,7 @@ export * from './shared/helpers/print' ;
 export * from './shared/helpers/to.content' ;
 export * from './shared/helpers/to.epoch' ;
 export * from './shared/helpers/to.property' ;
+export * from './shared/helpers/to.regex' ;
 export * from './shared/helpers/to.response' ;
 export * from './shared/helpers/to.timestamp' ;
 export * from './shared/pipes/common.pipe' ;
