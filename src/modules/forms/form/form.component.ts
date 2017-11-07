@@ -48,7 +48,7 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
               *ngIf=
               '(
                 sup.section &&
-                this.isBoolean( sup.shown , this.model , true )
+                this.toBoolean( sup.shown , this.model , true )
               )'
               fxLayoutWrap
               [fxLayout]='"row"'
@@ -57,13 +57,13 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
               >
               <ng-container *ngFor='let sub of sup.children' >
                 <forms-group
-                  *ngIf='this.isBoolean( sub.shown , this.model , true )'
+                  *ngIf='this.toBoolean( sub.shown , this.model , true )'
                   [fxFlex]='"0 0 calc(" + sub.width + ")"'
                   [model]='this.schemaz[ sec.key ].controls[ sup.key ].controls[ sub.key ]'
                   [schemas]='sub.children'
                   [id]='( sec.key + "-" + sup.key + "-" + sub.key )'
-                  [label]='this.isAny( sub.label , this.model )'
-                  [error]='this.isAny( sub.error , this.model )'
+                  [label]='this.toAny( sub.label , this.model )'
+                  [error]='this.toAny( sub.error , this.model )'
                   [check]='( this.check$ | async )'
                   [tooltip]='sub.tooltip'
                   >
@@ -73,13 +73,13 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
             <!-- non-section -->
             <ng-container *ngIf='( !sup.section )' >
               <forms-group
-                *ngIf='this.isBoolean( sup.shown , this.model , true )'
+                *ngIf='this.toBoolean( sup.shown , this.model , true )'
                 [fxFlex]='"0 0 calc(" + sup.width + ")"'
                 [model]='this.schemaz[ sec.key ].controls[ sup.key ]'
                 [schemas]='sup.children'
                 [id]='( sec.key + "-" + sup.key )'
-                [label]='this.isAny( sup.label , this.model )'
-                [error]='this.isAny( sup.error , this.model )'
+                [label]='this.toAny( sup.label , this.model )'
+                [error]='this.toAny( sup.error , this.model )'
                 [check]='( this.check$ | async )'
                 [tooltip]='sup.tooltip'
                 >
@@ -102,7 +102,7 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
               <button
                 mat-raised-button
                 [color]='act.color'
-                [disabled]='this.isBoolean( act.disabled , this.model )'
+                [disabled]='this.toBoolean( act.disabled , this.model )'
                 [type]='act.type'
                 >
                 {{ act.label }}
@@ -113,7 +113,7 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
               <button
                 mat-raised-button
                 [color]='act.color'
-                [disabled]='this.isBoolean( act.disabled , this.model )'
+                [disabled]='this.toBoolean( act.disabled , this.model )'
                 (click)='this.onClick( act.click )'
                 [type]='act.type'
                 >
@@ -128,7 +128,7 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
               <a
                 mat-raised-button
                 [color]='act.color'
-                [disabled]='this.isBoolean( act.disabled , this.model )'
+                [disabled]='this.toBoolean( act.disabled , this.model )'
                 [target]='act.target'
                 [href]='act.href'
                 >
@@ -140,7 +140,7 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
               <a
                 mat-raised-button
                 [color]='act.color'
-                [disabled]='this.isBoolean( act.disabled , this.model )'
+                [disabled]='this.toBoolean( act.disabled , this.model )'
                 (click)='this.onClick( act.click )'
                 [routerLink]=''
                 >
@@ -152,7 +152,7 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
               <a
                 mat-raised-button
                 [color]='act.color'
-                [disabled]='this.isBoolean( act.disabled , this.model )'
+                [disabled]='this.toBoolean( act.disabled , this.model )'
                 [routerLink]='act.route'
                 >
                 {{ act.label }}
@@ -269,7 +269,7 @@ export class FormsFormComponent extends CommonComponent
    * @param model
    * @returns any
    */
-  public isAny<T>( input : any , model : FormGroup ) : any
+  public toAny<T>( input : any , model : FormGroup ) : any
   {
     return ( typeof input === 'function' )
       ? input( model )
@@ -283,7 +283,7 @@ export class FormsFormComponent extends CommonComponent
    * @param start
    * @returns boolean
    */
-  public isBoolean<T>( input : any , model : FormGroup , start : boolean = false ) : boolean
+  public toBoolean<T>( input : any , model : FormGroup , start : boolean = false ) : boolean
   {
     return ( typeof input === 'function' )
       ? input( model )
