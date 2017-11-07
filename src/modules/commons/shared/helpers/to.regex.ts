@@ -1,26 +1,26 @@
 /**
  * https://regex101.com
  */
-export const AlphabetL : string = 'a-z' ;
-export const AlphabetU : string = 'A-Z' ;
-export const AlphabetA : Array<string> = [ AlphabetL , AlphabetU ] ;
-export const AlphabetExtendedL : string = 'âàäçéêèëîïôœûùüÿ' ;
-export const AlphabetExtendedU : string = 'ÂÀÄÇÉÊÈËÎÏÔŒÛÙÜŸ' ;
-export const AlphabetExtendedA : Array<string> = [ AlphabetExtendedL , AlphabetExtendedU ] ;
-export const Numeral : string = '0-9' ;
-export const NumeralDecimal : string = ',\\.' ;
-export const Puntuation : string = '!?-_\',\\.' ;
+export const AlphaLPattern : Array<string> = [ 'a-z' ] ;
+export const AlphaUPattern : Array<string> = [ 'A-Z' ] ;
+export const AlphaAllPattern : Array<string> = [ ...AlphaLPattern , ...AlphaUPattern ] ;
+export const ExtendsLPattern : Array<string> = [ 'âàäçéêèëîïôœûùüÿ' ] ;
+export const ExtendsUPattern : Array<string> = [ 'ÂÀÄÇÉÊÈËÎÏÔŒÛÙÜŸ' ] ;
+export const ExtendsAllPattern : Array<string> = [ ...ExtendsLPattern , ...ExtendsUPattern ] ;
+export const DecimalPattern : Array<string> = [ ',\\.' ] ;
+export const NumeralPattern : Array<string> = [ '0-9' ] ;
+export const PunctuatePattern : Array<string> = [ '!?-_\',\\.' ] ;
 
 /**
  * https://regex101.com
  */
-export const Generic : Array<string> =
+export const GenericPattern : Array<string> =
 [
-  Puntuation ,
-  ...AlphabetA ,
-  ...AlphabetExtendedA ,
-  Numeral ,
-  NumeralDecimal ,
+  ...AlphaAllPattern ,
+  ...ExtendsAllPattern ,
+  ...DecimalPattern ,
+  ...NumeralPattern ,
+  ...PunctuatePattern ,
 ] ;
 
 /**
