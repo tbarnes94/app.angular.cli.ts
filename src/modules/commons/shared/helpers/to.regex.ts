@@ -1,27 +1,28 @@
 /**
  * https://regex101.com
  */
-export const AlphaLPattern : Array<string> = [ 'a-z' ] ;
-export const AlphaUPattern : Array<string> = [ 'A-Z' ] ;
-export const AlphaAllPattern : Array<string> = [ ...AlphaLPattern , ...AlphaUPattern ] ;
-export const ExtendsLPattern : Array<string> = [ 'âàäçéêèëîïôœûùüÿ' ] ;
-export const ExtendsUPattern : Array<string> = [ 'ÂÀÄÇÉÊÈËÎÏÔŒÛÙÜŸ' ] ;
-export const ExtendsAllPattern : Array<string> = [ ...ExtendsLPattern , ...ExtendsUPattern ] ;
-export const DecimalPattern : Array<string> = [ ',\\.' ] ;
-export const NumeralPattern : Array<string> = [ '0-9' ] ;
-export const PunctuatePattern : Array<string> = [ '!?-_\',\\.' ] ;
+export const SpacePattern : Array<string> = [ '\\s' ] ;
+export const PunctuatePattern : Array<string> = [ '!?' , '-_' , '\',\\.' ] ;
 
 /**
  * https://regex101.com
  */
-export const GenericPattern : Array<string> =
-[
-  ...AlphaAllPattern ,
-  ...ExtendsAllPattern ,
-  ...DecimalPattern ,
-  ...NumeralPattern ,
-  ...PunctuatePattern ,
-] ;
+export const AlphaPattern : Array<string> = [ 'A-Z' , 'a-z' ] ;
+export const AlphaExtendsPattern : Array<string> = [ 'ÂÀÄÇÉÊÈËÎÏÔŒÛÙÜŸ' , 'âàäçéêèëîïôœûùüÿ' ] ;
+export const AlphaAllPattern : Array<string> = [ ...AlphaPattern , ...AlphaExtendsPattern ] ;
+
+/**
+ * https://regex101.com
+ */
+export const NumericPattern : Array<string> = [ '0-9' ] ;
+export const DecimalPattern : Array<string> = [ ',\\.' ] ;
+export const NumericAllPattern : Array<string> = [ ...NumericPattern , ...DecimalPattern ] ;
+
+/**
+ * https://regex101.com
+ */
+export const AlphanumericPattern : Array<string> = [ ...AlphaAllPattern , ...NumericAllPattern , ...SpacePattern ] ;
+export const CompletePattern : Array<string> = [ ...AlphanumericPattern , ...PunctuatePattern ] ;
 
 /**
  * @param input

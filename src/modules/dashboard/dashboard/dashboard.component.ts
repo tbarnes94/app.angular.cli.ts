@@ -6,8 +6,7 @@ import { Observable } from 'rxjs/Rx';
 
 import { AuthLogout } from '../../auth';
 import { AlphaAllPattern } from '../../commons';
-import { NumeralPattern } from '../../commons';
-import { PunctuatePattern } from '../../commons';
+import { NumericAllPattern } from '../../commons';
 import { toRegex } from '../../commons';
 import { toRegexGroup } from '../../commons';
 import { FormSchemas } from '../../forms';
@@ -74,9 +73,8 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
       .map((o) => {
 
         const t: any = o.translations.dashboard.dashboard;
-        const alpha: RegExp = toRegex(toRegexGroup(AlphaAllPattern));
-        const numeral: RegExp = toRegex(toRegexGroup(NumeralPattern));
-        const puntuate: RegExp = toRegex(toRegexGroup(PunctuatePattern));
+        const AlphaRegex: RegExp = toRegex(toRegexGroup(AlphaAllPattern));
+        const NumericRegex: RegExp = toRegex(toRegexGroup(NumericAllPattern));
 
         return {
 
@@ -130,7 +128,7 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
               children: [{
                 key: 'one',
                 element: 'input',
-                validators: [ Validators.required, Validators.pattern(numeral) ],
+                validators: [ Validators.required, Validators.pattern(NumericRegex) ],
                 placeholder: t.input.placeholder,
                 maxlength: 100,
                 prefix: 'dollar',
@@ -147,7 +145,7 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
               children: [{
                 key: 'one',
                 element: 'input',
-                validators: [ Validators.required, Validators.pattern(alpha) ],
+                validators: [ Validators.required, Validators.pattern(AlphaRegex) ],
                 placeholder: t.multiple.placeholder.one,
                 maxlength: 100,
                 type: 'text',
@@ -155,7 +153,7 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
               }, {
                 key: 'two',
                 element: 'input',
-                validators: [ Validators.required, Validators.pattern(alpha) ],
+                validators: [ Validators.required, Validators.pattern(AlphaRegex) ],
                 placeholder: t.multiple.placeholder.two,
                 maxlength: 100,
                 type: 'text',
