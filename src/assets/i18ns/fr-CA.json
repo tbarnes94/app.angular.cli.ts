@@ -30,6 +30,7 @@
         "tooltip": "Input tooltip hover fr",
         "placeholder": "One x 100% fr",
         "error": {
+          "pattern": "Input numeral error fr.",
           "required": "Input required error fr."
         }
       },
@@ -41,6 +42,7 @@
           "two": "Two x 50% fr"
         },
         "error": {
+          "pattern": "Multiple alphabet error fr.",
           "required": "Multiple required error fr."
         }
       },

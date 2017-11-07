@@ -5,6 +5,11 @@ import { Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Rx';
 
 import { AuthLogout } from '../../auth';
+import { AlphaAllPattern } from '../../commons';
+import { NumeralPattern } from '../../commons';
+import { PunctuatePattern } from '../../commons';
+import { toRegex } from '../../commons';
+import { toRegexGroup } from '../../commons';
 import { FormSchemas } from '../../forms';
 import { TemplateContainerComponent } from '../../template';
 
@@ -69,6 +74,9 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
       .map((o) => {
 
         const t: any = o.translations.dashboard.dashboard;
+        const alpha: RegExp = toRegex(toRegexGroup(AlphaAllPattern));
+        const numeral: RegExp = toRegex(toRegexGroup(NumeralPattern));
+        const puntuate: RegExp = toRegex(toRegexGroup(PunctuatePattern));
 
         return {
 
@@ -121,7 +129,7 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
               children: [{
                 key: 'one',
                 element: 'input',
-                validators: [ Validators.required ],
+                validators: [ Validators.required, Validators.pattern(numeral) ],
                 placeholder: t.input.placeholder,
                 maxlength: 100,
                 prefix: 'dollar',
@@ -138,7 +146,7 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
               children: [{
                 key: 'one',
                 element: 'input',
-                validators: [ Validators.required ],
+                validators: [ Validators.required, Validators.pattern(alpha) ],
                 placeholder: t.multiple.placeholder.one,
                 maxlength: 100,
                 type: 'text',
@@ -146,7 +154,7 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
               }, {
                 key: 'two',
                 element: 'input',
-                validators: [ Validators.required ],
+                validators: [ Validators.required, Validators.pattern(alpha) ],
                 placeholder: t.multiple.placeholder.two,
                 maxlength: 100,
                 type: 'text',
