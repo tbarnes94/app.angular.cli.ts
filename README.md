@@ -7,7 +7,7 @@
 > [![Pull Requests][pullrequest-src]][pullrequest-lnk]
 > [![Issues][issues-src]][issues-lnk]
 
-[@angular/cli](https://github.com/angular/angular-cli) @1.3.0
+[@angular/cli](https://github.com/angular/angular-cli) @1.5.0
 
 # Setup
 
