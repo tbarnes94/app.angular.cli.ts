@@ -62,7 +62,7 @@ export class CommonEffects
     this.common.totop() ;
     return ( r && r.error && r.error.message )
       ? new Action( r.error.message )
-      : new Action( 'Error' )
+      : new Action( '00000' )
       ;
   }
 

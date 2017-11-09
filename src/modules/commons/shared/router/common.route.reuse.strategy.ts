@@ -25,7 +25,8 @@ export class CommonRouteReuseStrategy implements RouteReuseStrategy
    */
   public shouldReuseRoute( future : ActivatedRouteSnapshot , curr : ActivatedRouteSnapshot ) : boolean
   {
-    return ( this.hasComponent( future ) && this.hasReuse( future ) ) ? future.data.reuse : this.isEqual( future , curr ) ;
+    return ( !this.hasComponent( future ) || !this.hasReuse( future ) ) ? this.isEqual( future , curr ) : future.data.reuse ;
+    // return ( !this.hasComponent( future ) ) ? this.isEqual( future , curr ) : false ;
   }
 
   /**

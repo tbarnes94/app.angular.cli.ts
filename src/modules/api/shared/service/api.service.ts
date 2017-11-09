@@ -83,7 +83,7 @@ export class ApiService
           : ( !path.match( /^\// ) )
             ? `${ this.options.root }/${ path }`
             : `${ path }`
-            ,
+          ,
         {
           headers : this.headers( headers ) ,
           body    : ( body ) ? body : undefined ,
