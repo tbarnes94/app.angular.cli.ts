@@ -15,5 +15,16 @@
       "es2017",
       "dom"
     ]
+  },
+  "typedocOptions": {
+    "mode": "modules",
+    "theme": "default",
+    "ignoreCompilerErrors": "true",
+    "out": "docs",
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   }
 }
