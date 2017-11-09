@@ -1,5 +1,4 @@
 /** @imports */
-import { tick } from '@angular/core/testing' ;
 import { ActionReducer } from '@ngrx/store' ;
 
 import { Class } from '../../types/class' ;

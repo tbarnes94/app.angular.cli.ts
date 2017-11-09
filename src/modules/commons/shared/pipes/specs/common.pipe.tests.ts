@@ -1,6 +1,4 @@
 /** @imports */
-import { tick } from '@angular/core/testing' ;
-
 import { Class } from '../../types/class' ;
 import { CommonPipe } from '../common.pipe' ;
 
