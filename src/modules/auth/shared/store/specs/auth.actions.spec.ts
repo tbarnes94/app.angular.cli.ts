@@ -17,9 +17,11 @@ import { AuthLogout } from '../auth.actions';
 /** @exports */
 const title: string = 'Auth';
 const samples: string = 'kuwas';
+const samplea: AuthCredentials = new AuthCredentials(null, null);
+const samplez: ApiResponse<AuthToken> = new ApiResponse(new AuthToken(null, null, 0));
 
 CommonSuite(title, 'AuthError', '', () => {
-  CommonActionTest<AuthError, string>(AuthError, AUTH_ERROR, samples);
+  CommonActionTest<AuthError, typeof samples>(AuthError, AUTH_ERROR, samples);
 });
 
 CommonSuite(title, 'AuthLoader', '', () => {
@@ -27,11 +29,11 @@ CommonSuite(title, 'AuthLoader', '', () => {
 });
 
 CommonSuite(title, 'AuthLoginStart', '', () => {
-  CommonActionTest<AuthLoginStart, AuthCredentials>(AuthLoginStart, AUTH_LOGIN_START, new AuthCredentials(null, null));
+  CommonActionTest<AuthLoginStart, typeof samplea>(AuthLoginStart, AUTH_LOGIN_START, samplea);
 });
 
 CommonSuite(title, 'AuthLoginComplete', '', () => {
-  CommonActionTest<AuthLoginComplete, ApiResponse<AuthToken>>(AuthLoginComplete, AUTH_LOGIN_COMPLETE, new ApiResponse(new AuthToken(null, null, 0)));
+  CommonActionTest<AuthLoginComplete, typeof samplez>(AuthLoginComplete, AUTH_LOGIN_COMPLETE, samplez);
 });
 
 CommonSuite(title, 'AuthLogout', '', () => {

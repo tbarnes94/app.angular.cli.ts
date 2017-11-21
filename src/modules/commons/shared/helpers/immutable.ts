@@ -1,7 +1,7 @@
 /** @imports */
-import { clone } from 'lodash' ;
-import { isArray } from 'lodash' ;
-import { isObject } from 'lodash' ;
+import * as clone from 'clone' ;
+import { isArray } from './is.array' ;
+import { isObject } from './is.object' ;
 
 /**
  * @param input
@@ -9,7 +9,7 @@ import { isObject } from 'lodash' ;
  */
 export function immutable<T>( input : T ) : T
 {
-  return ( isArray( input ) || isObject( input ) )
+  return ( isArray<T>( input ) || isObject<T>( input ) )
     ? clone( input )
     : input
     ;

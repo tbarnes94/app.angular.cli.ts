@@ -15,18 +15,25 @@ import { authReducers as reducers } from '../auth.reducers';
 const title: string = 'Auth';
 let subtitle: string = 'authReducers';
 const samples: string = 'kuwas';
+const samplez: ApiResponse<AuthToken> = new ApiResponse(new AuthToken(null, null, 0));
 
 CommonSuite(title, subtitle, '', () => {
-  CommonReducerTest<any>(reducers, { error: null, loader: false, token: null });
+  CommonReducerTest<any>(
+    reducers, {
+      error: null,
+      loader: false,
+      token: null,
+    },
+  );
 });
 
 subtitle = 'authErrorReducer';
 CommonSuite(title, subtitle, '', () => {
-  CommonReducerTest<string>(authErrorReducer, null);
+  CommonReducerTest<typeof samples>(authErrorReducer, null);
 });
 
 CommonSuite(title, subtitle, 'for error', () => {
-  CommonReducerActionTest<AuthError, string, string>(AuthError, authErrorReducer, samples, samples);
+  CommonReducerActionTest<AuthError, typeof samples, typeof samples>(AuthError, authErrorReducer, samples, samples);
 });
 
 subtitle = 'authLoaderReducer';
@@ -40,9 +47,9 @@ CommonSuite(title, subtitle, 'for loader', () => {
 
 subtitle = 'authTokenReducer';
 CommonSuite(title, subtitle, '', () => {
-  CommonReducerTest<ApiResponse<AuthToken>>(authTokenReducer, null);
+  CommonReducerTest<typeof samplez>(authTokenReducer, null);
 });
 
 CommonSuite(title, subtitle, 'for complete', () => {
-  CommonReducerActionTest<AuthLoginComplete, ApiResponse<AuthToken>, ApiResponse<AuthToken>>(AuthLoginComplete, authTokenReducer, new ApiResponse(new AuthToken(null, null, 0)), new ApiResponse(new AuthToken(null, null, 0)));
+  CommonReducerActionTest<AuthLoginComplete, typeof samplez, typeof samplez>(AuthLoginComplete, authTokenReducer, samplez, samplez);
 });

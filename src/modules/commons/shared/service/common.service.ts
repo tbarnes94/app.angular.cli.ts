@@ -126,6 +126,10 @@ export class CommonService
       select$ = this.store.select( nodes[0] , nodes[1] ) ;
     } else if ( nodes.length === 3 ) {
       select$ = this.store.select( nodes[0] , nodes[1] , nodes[2] ) ;
+    } else if ( nodes.length === 4 ) {
+      select$ = this.store.select( nodes[0] , nodes[1] , nodes[2] , nodes[3] ) ;
+    } else if ( nodes.length === 5 ) {
+      select$ = this.store.select( nodes[0] , nodes[1] , nodes[2] , nodes[3] , nodes[4] ) ;
     } else {
       select$ = Observable.of( null ) ;
     }

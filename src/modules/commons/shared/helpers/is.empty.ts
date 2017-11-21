@@ -1,5 +1,7 @@
 /** @imports */
-import { isEmpty as _isEmpty } from 'lodash' ;
+import { isEmptyArray } from './is.array' ;
+import { isNullOrUndefined } from './is.null.or.undefined' ;
+import { isEmptyObject } from './is.object' ;
 
 /**
  * @param input
@@ -7,7 +9,14 @@ import { isEmpty as _isEmpty } from 'lodash' ;
  */
 export function isEmpty<T>( input : T ) : boolean
 {
-  return ( _isEmpty( input ) ) ;
+  return (
+    isEmptyArray<T>( input ) ||
+    isEmptyObject<T>( input ) ||
+    isNullOrUndefined<T>( input ) ||
+    ( input as any ) === false ||
+    ( input as any ) === '' ||
+    ( input as any ) === 0
+  ) ;
 }
 
 /**
@@ -16,5 +25,5 @@ export function isEmpty<T>( input : T ) : boolean
  */
 export function isNotEmpty<T>( input : T ) : boolean
 {
-  return ( !isEmpty( input ) ) ;
+  return ( !isEmpty<T>( input ) ) ;
 }
