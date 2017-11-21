@@ -50,7 +50,7 @@ import { FormControl } from '../shared/types/form/form.schemas' ;
         <!-- input -->
         <mat-form-field
           *ngIf='( input.element === "input" )'
-          [fxFlex]='"0 0 calc(" + input.width + ")"'
+          [fxFlex]='"0 0 " + input.width'
           [floatPlaceholder]='"never"'
           [ngClass]=
             '{
@@ -86,7 +86,7 @@ import { FormControl } from '../shared/types/form/form.schemas' ;
         <!-- datepicker -->
         <mat-form-field
           *ngIf='( input.element === "datepicker" )'
-          [fxFlex]='"0 0 calc(" + input.width + ")"'
+          [fxFlex]='"0 0 " + input.width'
           [floatPlaceholder]='"never"'
           class='mat-datepicker-field'
           >
@@ -117,7 +117,7 @@ import { FormControl } from '../shared/types/form/form.schemas' ;
         <!-- select -->
         <mat-form-field
           *ngIf='( input.element === "select" )'
-          [fxFlex]='"0 0 calc(" + input.width + ")"'
+          [fxFlex]='"0 0 " + input.width'
           [floatPlaceholder]='"never"'
           >
           <mat-select
@@ -137,7 +137,7 @@ import { FormControl } from '../shared/types/form/form.schemas' ;
         <!-- check -->
         <mat-checkbox
           *ngIf='( input.element === "check" )'
-          [fxFlex]='"0 0 calc(" + input.width + ")"'
+          [fxFlex]='"0 0 " + input.width'
           [id]='( this.id + "-" + input.key )'
           [formControl]='this.model.controls[ input.key ]'
           [color]='input.color'

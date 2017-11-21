@@ -53,12 +53,12 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
               fxLayoutWrap
               [fxLayout]='"row"'
               [fxLayout.lt-sm]='"column"'
-              [fxFlex]='"0 0 calc(" + sup.width + ")"'
+              [fxFlex]='"0 0 " + sup.width'
               >
               <ng-container *ngFor='let sub of sup.children' >
                 <forms-group
                   *ngIf='this.toBoolean( sub.shown , this.model , true )'
-                  [fxFlex]='"0 0 calc(" + sub.width + ")"'
+                  [fxFlex]='"0 0 " + sub.width'
                   [model]='this.schemaz[ sec.key ].controls[ sup.key ].controls[ sub.key ]'
                   [schemas]='sub.children'
                   [id]='( sec.key + "-" + sup.key + "-" + sub.key )'
@@ -75,7 +75,7 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
             <ng-container *ngIf='( !sup.section )' >
               <forms-group
                 *ngIf='this.toBoolean( sup.shown , this.model , true )'
-                [fxFlex]='"0 0 calc(" + sup.width + ")"'
+                [fxFlex]='"0 0 " + sup.width'
                 [model]='this.schemaz[ sec.key ].controls[ sup.key ]'
                 [schemas]='sup.children'
                 [id]='( sec.key + "-" + sup.key )'
