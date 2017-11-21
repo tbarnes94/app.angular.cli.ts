@@ -3,10 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
 import { AuthService } from '../../auth/shared/service/auth.service';
-import { CommonContainerComponent } from '../../commons';
-import { CommonService } from '../../commons';
-import { ObjectAny } from '../../commons';
-import { TableService } from '../../table';
+import { CommonContainerComponent } from '../../commons/container/container.component';
+import { CommonService } from '../../commons/shared/service/common.service';
+import { ObjectAny } from '../../commons/shared/types/object.any';
+import { FormService } from '../../forms/shared/service/form.service';
+import { TableService } from '../../table/shared/service/table.service';
 
 /**
  * https://angular.io/api/core/Component
@@ -76,11 +77,13 @@ export class TemplateContainerComponent extends CommonContainerComponent {
    * @param route     https://angular.io/api/router/ActivatedRoute
    * @param common    https://angular.io/tutorial/toh-pt4
    * @param auth      https://angular.io/tutorial/toh-pt4
+   * @param forms     https://angular.io/tutorial/toh-pt4
    * @param table     https://angular.io/tutorial/toh-pt4
    */
   public constructor(protected readonly route: ActivatedRoute,
                      protected readonly common: CommonService,
                      protected readonly auth: AuthService,
+                     protected readonly forms: FormService,
                      protected readonly table: TableService) {
     super(route, common);
   }

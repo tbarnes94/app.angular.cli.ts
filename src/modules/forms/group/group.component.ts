@@ -127,7 +127,7 @@ import { FormControl } from '../shared/types/form/form.schemas' ;
             [placeholder]='input.placeholder'
             >
             <mat-option
-              *ngFor='let option of input.options'
+              *ngFor='let option of ( this.toAny( input.options , this.forms ) )'
               [value]='option.value'
               >
               {{ option.title }}
@@ -151,7 +151,7 @@ import { FormControl } from '../shared/types/form/form.schemas' ;
           [formControl]='this.model.controls[ input.key ]'
           >
           <mat-radio-button
-            *ngFor='let option of input.options'
+            *ngFor='let option of ( this.toAny( input.options , this.forms ) )'
             [value]='option.value'
             [color]='input.color'
             >
@@ -185,6 +185,11 @@ import { FormControl } from '../shared/types/form/form.schemas' ;
 })
 export class FormsGroupComponent extends CommonComponent
 {
+  /**
+   * https://angular.io/api/core/Input
+   */
+  @Input() public readonly forms : FormGroup = null ;
+
   /**
    * https://angular.io/api/core/Input
    */
@@ -273,6 +278,19 @@ export class FormsGroupComponent extends CommonComponent
     return ( b.errors )
       ? Object.assign( a , b.errors )
       : a
+      ;
+  }
+
+  /**
+   * @param input
+   * @param forms
+   * @returns any
+   */
+  public toAny( input : any , forms : FormGroup ) : any
+  {
+    return ( typeof input === 'function' )
+      ? input( forms )
+      : input
       ;
   }
 

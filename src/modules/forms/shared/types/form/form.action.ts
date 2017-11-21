@@ -1,6 +1,6 @@
 /** @imports */
 import { Abstract } from '../abstract/abstract' ;
-import { FormBoolean } from '../group/form.functions' ;
+import { FormBoolean } from '../abstract/form.functions' ;
 
 /**
  * https://angular.io/api/forms/ReactiveFormsModule

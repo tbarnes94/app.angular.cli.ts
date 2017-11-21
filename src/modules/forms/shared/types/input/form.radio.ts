@@ -1,4 +1,5 @@
 /** @imports */
+import { FormAny } from '../abstract/form.functions' ;
 import { AbstractInput } from './abstract.input' ;
 import { FormOption } from './form.option' ;
 
@@ -8,5 +9,5 @@ import { FormOption } from './form.option' ;
 export class FormRadio extends AbstractInput
 {
   public readonly color? : string ;
-  public readonly options : Array<FormOption> ;
+  public readonly options : FormAny | Array<FormOption> ;
 }

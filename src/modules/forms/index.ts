@@ -1,10 +1,11 @@
 export * from './form/form.component' ;
 export * from './group/group.component' ;
 export * from './section/section.component' ;
+export * from './shared/service/form.service' ;
 export * from './shared/types/form/form.action' ;
 export * from './shared/types/form/form.schemas' ;
 export * from './shared/types/group/abstract.group' ;
-export * from './shared/types/group/form.functions' ;
+export * from './shared/types/abstract/form.functions' ;
 export * from './shared/types/group/form.group' ;
 export * from './shared/types/group/form.section' ;
 export * from './shared/types/input/abstract.input' ;

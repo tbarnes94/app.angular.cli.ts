@@ -1,5 +1,5 @@
 /** @imports */
-import { CommonModule as CommonModuleExternal } from '@angular/common' ;
+import { CommonModule } from '@angular/common' ;
 import { NgModule } from '@angular/core' ;
 import { ModuleWithProviders } from '@angular/core' ;
 import { FlexLayoutModule } from '@angular/flex-layout' ;
@@ -14,10 +14,11 @@ import { MatSelectModule } from '@angular/material' ;
 import { MatTooltipModule } from '@angular/material' ;
 import { RouterModule } from '@angular/router' ;
 
-import { CommonModule } from '../commons' ;
+import { CommonModule as CommonModuleExternal } from '../commons' ;
 import { FormsFormComponent } from './form/form.component' ;
 import { FormsGroupComponent } from './group/group.component' ;
 import { FormsSectionComponent } from './section/section.component' ;
+import { FormService } from './shared/service/form.service' ;
 
 /**
  * https://angular.io/api/core/NgModule
@@ -69,7 +70,10 @@ export class FormModule
   {
     return {
       ngModule : FormRootModule ,
-      providers : [] ,
+      providers :
+      [
+        FormService ,
+      ] ,
     } ;
   }
 

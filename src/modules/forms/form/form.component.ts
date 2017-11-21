@@ -59,6 +59,7 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
                 <forms-group
                   *ngIf='this.toBoolean( sub.shown , this.model , true )'
                   [fxFlex]='"0 0 " + sub.width'
+                  [forms]='this.model'
                   [model]='this.schemaz[ sec.key ].controls[ sup.key ].controls[ sub.key ]'
                   [schemas]='sub.children'
                   [id]='( sec.key + "-" + sup.key + "-" + sub.key )'
@@ -76,6 +77,7 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
               <forms-group
                 *ngIf='this.toBoolean( sup.shown , this.model , true )'
                 [fxFlex]='"0 0 " + sup.width'
+                [forms]='this.model'
                 [model]='this.schemaz[ sec.key ].controls[ sup.key ]'
                 [schemas]='sup.children'
                 [id]='( sec.key + "-" + sup.key )'
@@ -268,6 +270,39 @@ export class FormsFormComponent extends CommonComponent
 
   /**
    * @param input
+   * @returns any
+   */
+  public payload( input : any ) : any
+  {
+    let outpt : any = {} ;
+    const keys : Array<string> = Object.keys( input ) ;
+    const isObject : boolean = ( typeof input === 'object' ) ;
+
+    if ( isObject && keys.length > 0 ) {
+
+      const first : any = input[ keys[ 0 ] ] ;
+      const keysFirst : Array<string> = Object.keys( first ) ;
+      const isObjectFirst : boolean = ( typeof first === 'object' ) ;
+
+      if (
+        ( keys.length > 1 ) ||
+        ( isObjectFirst && keysFirst.length > 0 )
+      ) {
+        keys.forEach( ( k ) => outpt[ k ] = this.payload( input[ k ] ) ) ;
+      } else {
+        outpt = first ;
+      }
+
+    } else {
+      outpt = input ;
+    }
+
+    return outpt ;
+
+  }
+
+  /**
+   * @param input
    * @param forms
    * @returns any
    */
@@ -315,7 +350,8 @@ export class FormsFormComponent extends CommonComponent
   public onComplete( model : FormGroup ) : void
   {
     if ( model.valid ) {
-      this.onCompleteEvent.next( model ) ;
+      const payload : any = this.payload( model.value ) ;
+      this.onCompleteEvent.next( payload ) ;
     } else {
       this.check$.next( true ) ;
     }

@@ -90,11 +90,23 @@
         "error": {
           "required": "Radio required error fr."
         },
-        "options": [
-          { "title": "One fr", "value": "one" },
-          { "title": "Two fr", "value": "two" },
-          { "title": "Three fr", "value": "three" }
-        ]
+        "options": {
+          "one": [
+            { "title": "One A fr", "value": "one.a" },
+            { "title": "One B fr", "value": "one.b" },
+            { "title": "One C fr", "value": "one.c" }
+          ],
+          "two": [
+            { "title": "Two A fr", "value": "two.a" },
+            { "title": "Two B fr", "value": "two.b" },
+            { "title": "Two C fr", "value": "two.c" }
+          ],
+          "three": [
+            { "title": "Three A fr", "value": "three.a" },
+            { "title": "Three B fr", "value": "three.b" },
+            { "title": "Three C fr", "value": "three.c" }
+          ]
+        }
       },
       "check": {
         "label": "CHECK fr",
