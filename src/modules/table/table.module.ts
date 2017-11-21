@@ -1,8 +1,9 @@
 /** @imports */
+import { CommonModule } from '@angular/common' ;
 import { ModuleWithProviders } from '@angular/core' ;
 import { NgModule } from '@angular/core' ;
 
-import { CommonModule } from '../commons' ;
+import { CommonModule as CommonModuleExternal } from '../commons' ;
 import { TableService } from './shared/service/table.service' ;
 
 /**
@@ -22,6 +23,7 @@ export class TableRootModule {}
   imports :
   [
     CommonModule ,
+    CommonModuleExternal ,
   ] ,
   declarations : [] ,
   exports : [] ,

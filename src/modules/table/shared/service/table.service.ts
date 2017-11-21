@@ -4,8 +4,6 @@ import { DatePipe } from '@angular/common' ;
 import { Injectable } from '@angular/core' ;
 import { Observable } from 'rxjs/Rx' ;
 
-import { ApiResponse } from '../../../api' ;
-import { CommonService } from '../../../commons' ;
 import { isNotEmpty } from '../../../commons' ;
 import { toContent } from '../../../commons' ;
 
@@ -19,23 +17,19 @@ export class TableService
    * http://reactivex.io/documentation/observable.html
    */
   public build$(
-    nodes : Array<string> ,
+    language$ : Observable<string> ,
+    translations$ : Observable<any> ,
+    width$ : Observable<number> ,
+    datas$ : Observable<any> ,
     parse : ( o : any ) => any ,
     filters : ( o : any ) => boolean = ( o : any ) => true ,
   )
   : Observable<any>
   {
-    return Observable.combineLatest
-      (
-        this.common.select<ApiResponse<any>>( nodes )
-          .map( toContent )
-          ,
-        this.common.select<string>([ 'translate' , 'language' ]) ,
-        this.common.select<any>([ 'translate' , 'translations' ]) ,
-        this.common.width$ ,
-      )
-      .map( ( o ) => ({ items : o[0] , language : o[1] , translations : o[2] , width : o[3] }) )
-      .filter( ( o ) => ( isNotEmpty( o.items ) && isNotEmpty( o.language ) && isNotEmpty( o.translations ) ) )
+    return Observable
+      .combineLatest( language$ , translations$ , width$ , datas$.map( toContent ) )
+      .map( ( o ) => ({ language : o[0] , translations : o[1] , width : o[2] , datas : o[3] }) )
+      .filter( ( o ) => ( isNotEmpty( o.language ) && isNotEmpty( o.translations ) && isNotEmpty( o.datas ) ) )
       .filter( filters )
       .map( ( o : any ) =>
       {
@@ -48,13 +42,5 @@ export class TableService
       .map( parse )
       ;
   }
-
-  /**
-   * Constructor
-   * @param common    https://angular.io/tutorial/toh-pt4
-   */
-  public constructor(
-    protected readonly common : CommonService ,
-  ) {}
 
 }

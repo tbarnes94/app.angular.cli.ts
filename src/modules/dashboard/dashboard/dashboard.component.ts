@@ -49,7 +49,13 @@ export class DashboardDashboardComponent extends TemplateContainerComponent {
    * http://reactivex.io/documentation/observable.html
    */
   public table$: Observable<any> = this.table
-    .build$([ 'auth', 'token' ], (o) => o)
+    .build$(
+      this.language$,
+      this.translations$,
+      this.common.width$,
+      this.common.select([ 'auth', 'token' ]),
+      (o) => o,
+    )
     .takeUntil(this.destroy$)
     ;
 
