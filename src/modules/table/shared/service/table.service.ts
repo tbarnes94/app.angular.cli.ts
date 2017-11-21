@@ -16,7 +16,8 @@ export class TableService
   /**
    * http://reactivex.io/documentation/observable.html
    */
-  public build$(
+  public build$
+  (
     language$ : Observable<string> ,
     translations$ : Observable<any> ,
     width$ : Observable<number> ,
