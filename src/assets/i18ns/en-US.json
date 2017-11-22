@@ -1,8 +1,10 @@
 {
+  "title": {
+    "start": "Angular",
+    "separator": " - "
+  },
   "app": {
-    "roots": {
-      "title": "Angular"
-    }
+    "roots": {}
   },
   "auth": {
     "login": {

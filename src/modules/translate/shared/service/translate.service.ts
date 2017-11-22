@@ -1,16 +1,20 @@
 /** @imports */
+import { DOCUMENT } from '@angular/common' ;
+import { Inject } from '@angular/core' ;
 import { Injectable } from '@angular/core' ;
 import { DateAdapter } from '@angular/material' ;
 import { NativeDateAdapter } from '@angular/material' ;
 import { Title } from '@angular/platform-browser' ;
 import { LangChangeEvent } from '@ngx-translate/core' ;
 import { TranslateService as TranslateServiceExternal } from '@ngx-translate/core' ;
+import { BehaviorSubject } from 'rxjs/Rx' ;
 import { Observable } from 'rxjs/Rx' ;
 
 import { CommonService } from '../../../commons' ;
 import { TranslateLanguage } from '../store/translate.actions' ;
 import { TranslateTranslations } from '../store/translate.actions' ;
 import { TranslateOptions } from '../types/translate.options' ;
+import { TranslateTitle } from '../types/translate.title' ;
 
 /**
  * https://angular.io/api/core/Injectable
@@ -26,20 +30,54 @@ export class TranslateService
     ;
 
   /**
-   * @param o   https://github.com/ngx-translate/core#properties
+   * http://reactivex.io/documentation/observable.html
    */
-  public onLanguageEvent( o : string ) : void
+  public readonly translations$ : Observable<any> = this.common
+    .select<any>([ 'translate' , 'translations' ])
+    ;
+
+  /**
+   * http://reactivex.io/documentation/subject.html
+   */
+  public readonly titles$ : BehaviorSubject<Array<string>> = new BehaviorSubject<Array<string>>([]) ;
+
+  /**
+   * http://reactivex.io/documentation/observable.html
+   */
+  public readonly title$ : Observable<TranslateTitle> = Observable
+    .combineLatest( this.titles$ , this.translations$ )
+    .map( ( o ) => new TranslateTitle( o[ 0 ] , o[ 1 ] ) )
+    .filter( ( o ) => ( !!o.translations ) )
+    ;
+
+  /**
+   * @param input
+   */
+  public setTitle( input : Array<string> ) : void
   {
-    this.dates.setLocale( o ) ;
-    this.translate.use( o ) ;
+    this.titles$.next( input ) ;
   }
 
   /**
    * @param o   https://github.com/ngx-translate/core#properties
    */
-  public onLanguageEmpty() : void
+  public onEmptyEvent() : void
   {
     this.common.dispatch( new TranslateLanguage( this.options.start ) ) ;
+  }
+
+  /**
+   * @param o   https://github.com/ngx-translate/core#properties
+   */
+  public onLanguageEvent( o : string ) : void
+  {
+    const all : string = o ;
+    const short : string = all.split( '-' )[ 0 ] ;
+
+    this.dates.setLocale( all ) ;
+    this.document.documentElement.lang = short ;
+    this.translate.use( all ) ;
+
   }
 
   /**
@@ -48,7 +86,48 @@ export class TranslateService
   public onTranslationsEvent( e : LangChangeEvent ) : void
   {
     this.common.dispatch( new TranslateTranslations( e.translations ) ) ;
-    this.title.setTitle( e.translations.app.roots.title ) ;
+  }
+
+  /**
+   * @param input
+   */
+  public onTitleEvent( input : TranslateTitle ) : void
+  {
+    const titles : Array<string> =
+      [ 'title.start' , ...input.titles ]
+      .map( this.onTitleMap.bind( this , input.translations ) )
+      ;
+
+    const title : string = titles.join( input.translations.title.separator ) ;
+    this.title.setTitle( title ) ;
+
+  }
+
+  /**
+   * @param translations
+   * @param input
+   */
+  public onTitleMap( translations : any , input : string ) : string
+  {
+    return input
+      .split( '.' )
+      .reduce( this.onTitleReduce.bind( this ) , translations )
+      ;
+  }
+
+  /**
+   * @param total
+   * @param key
+   * @param index
+   */
+  public onTitleReduce( total : any , key : string , index : number ) : string | any
+  {
+    return total[ key ]
+      ? total[ key ]
+      : ( typeof total === 'string' )
+        ? total
+        : ''
+      ;
   }
 
   /**
@@ -57,6 +136,7 @@ export class TranslateService
    * @param translate   https://github.com/ngx-translate/core
    * @param common      https://angular.io/tutorial/toh-pt4
    * @param dates       https://github.com/angular/material2/blob/master/src/lib/core/datetime/date-adapter.ts
+   * @param document    https://angular.io/api/common/DOCUMENT
    * @param title       https://angular.io/api/platform-browser/Title
    */
   public constructor(
@@ -64,12 +144,14 @@ export class TranslateService
     protected readonly translate : TranslateServiceExternal ,
     protected readonly common : CommonService ,
     protected readonly dates : DateAdapter<NativeDateAdapter> ,
+    @Inject( DOCUMENT ) protected readonly document : any ,
     protected readonly title : Title ,
   ) {
-    this.language$.filter( ( o ) => ( !o ) ).subscribe( this.onLanguageEmpty.bind( this ) ) ;
+    this.language$.filter( ( o ) => ( !o ) ).subscribe( this.onEmptyEvent.bind( this ) ) ;
     this.language$.filter( ( o ) => ( !!o ) ).subscribe( this.onLanguageEvent.bind( this ) ) ;
-    // this.translate.onDefaultLangChange.subscribe( this.onTranslationsEvent.bind( this ) ) ;
     this.translate.onLangChange.subscribe( this.onTranslationsEvent.bind( this ) ) ;
+    // this.translate.onDefaultLangChange.subscribe( this.onTranslationsEvent.bind( this ) ) ;
+    this.title$.subscribe( this.onTitleEvent.bind( this ) ) ;
   }
 
 }
