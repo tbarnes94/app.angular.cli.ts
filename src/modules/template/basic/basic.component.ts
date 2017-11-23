@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Input } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
 
+import { CommonComponent } from '../../commons';
+
 /**
  * https://angular.io/api/core/Component
  */
@@ -32,11 +34,9 @@ import { ViewEncapsulation } from '@angular/core';
       </mat-card-content>
       <!-- divider -->
       <hr *ngIf='this.divider' />
-      <!-- contact -->
-      <ng-container
-        *ngIf='!this.loads'
-        >
-        <!-- contact error -->
+      <!-- content -->
+      <ng-container *ngIf='!this.loads' >
+        <!-- content error -->
         <div
           *ngIf='this.error'
           class='mat-error-section'
@@ -51,13 +51,13 @@ import { ViewEncapsulation } from '@angular/core';
             >
           </span>
         </div>
-        <!-- contact loads -->
+        <!-- content loads -->
         <ng-content
           select='.template-content-loads'
           >
         </ng-content>
       </ng-container>
-      <!-- contact statics -->
+      <!-- content statics -->
       <ng-content
         select='.template-content'
         >
@@ -86,7 +86,7 @@ import { ViewEncapsulation } from '@angular/core';
     </mat-card>
   `,
 })
-export class TemplateBasicComponent {
+export class TemplateBasicComponent extends CommonComponent {
 
   /**
    * https://angular.io/api/core/Input
@@ -127,6 +127,5 @@ export class TemplateBasicComponent {
    * https://angular.io/api/core/Input
    */
   @Input() public readonly footer: string = null;
-
 
 }

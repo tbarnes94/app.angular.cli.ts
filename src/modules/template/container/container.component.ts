@@ -88,6 +88,7 @@ export class TemplateContainerComponent extends CommonContainerComponent {
    * @param total
    * @param key
    * @param index
+   * @returns ObjectAny
    */
   public onTranslationsReduce(total: any, key: string, index: number): ObjectAny {
     return total[ key ] ? total[ key ] : {};

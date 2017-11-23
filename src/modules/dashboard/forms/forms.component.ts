@@ -18,8 +18,8 @@ import { FormSubmit } from './form.helpers';
   template: `
     <template-basic
       *ngIf='( this.translations$ | async ) as translations'
-      [loads]='( this.loader$ | async )'
       [error]='( this.error$ | async )'
+      [loads]='( this.loader$ | async )'
       [title]='translations.title'
       [divider]='false'
       >
