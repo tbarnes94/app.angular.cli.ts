@@ -37,7 +37,7 @@ export class TableService
         const date : DatePipe = new DatePipe( o.language ) ;
         const currency : CurrencyPipe = new CurrencyPipe( o.language ) ;
         o.date = { transform : ( i ) => date.transform( i ) } ;
-        o.currency = { transform : ( i ) => currency.transform( i , 'CAD' , true ) } ;
+        o.currency = { transform : ( i ) => currency.transform( i , 'CAD' , 'symbol-narrow' ) } ;
         return o ;
       })
       .map( parse )
