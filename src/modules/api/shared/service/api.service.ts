@@ -34,14 +34,12 @@ export class ApiService
    */
   public error( r : HttpErrorResponse ) : Observable<ApiError>
   {
-    let outpt : ApiErrorContent | any ;
-
-    try {
-      outpt = JSON.parse( r.error ) ;
-      outpt = ( outpt.error ) ? outpt.error : outpt ;
-    } catch ( e ) {
-      outpt = new ApiErrorContent( `${ r.status } ${ r.statusText }` ) ;
-    }
+    const outpt : any = ( r.error.type )
+      ? new ApiErrorContent( `${ r.status } ${ r.statusText }` )
+      : ( r.error.error )
+        ? r.error.error
+        : r.error
+      ;
 
     return Observable
       .of( new ApiError( outpt , r , new Date() ) )
