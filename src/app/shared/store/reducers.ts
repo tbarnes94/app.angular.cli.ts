@@ -9,7 +9,7 @@ import { COMMON_RESET } from '../../../modules/commons';
 /**
  * https://github.com/ngrx/platform
  */
-export const local: any = {
+export const options: any = {
   key: 'app.angular.cli.ts',
   payload: {
     auth: { token: 'string' },
@@ -20,18 +20,31 @@ export const local: any = {
 /**
  * https://github.com/ngrx/platform
  */
-export function parse(payload: any, state: any): any {
+export function reads(schemas: any, state: string = null): any {
+
+  try {
+    const input: string = localStorage.getItem(schemas.key);
+    const outpt: any = JSON.parse(input);
+    return outpt;
+  } catch (e) {
+    return state;
+  }
+
+}
+
+/**
+ * https://github.com/ngrx/platform
+ */
+export function build(nodes: any, state: any = null): any {
 
   const outpt: any = {};
-  const keys: Array<string> = Object.keys(payload);
   if (!state) {
     return outpt;
   }
-
-  keys.forEach((k) => {
+  Object.keys(nodes).forEach((k) => {
     if (state[ k ]) {
-      outpt[ k ] = ( typeof payload[ k ] === 'object' )
-        ? parse(payload[ k ], state[ k ])
+      outpt[ k ] = ( typeof nodes[ k ] === 'object' )
+        ? build(nodes[ k ], state[ k ])
         : state[ k ]
       ;
     }
@@ -44,26 +57,22 @@ export function parse(payload: any, state: any): any {
 /**
  * https://github.com/ngrx/platform
  */
+export function write(schemas: any, state: any = null): any {
+  const outpt: any = build(schemas.payload, state);
+  const payload: string = JSON.stringify(outpt);
+  localStorage.setItem(schemas.key, payload);
+  return outpt;
+}
+
+/**
+ * https://github.com/ngrx/platform
+ */
 export function storage(reducer: ActionReducer<any>): ActionReducer<any> {
-
   return (state: any, action: any): any => {
-
-    let payload: any;
     state = reducer(state, action);
-
-    if (action.type === '@ngrx/store/init') {
-      payload = localStorage.getItem(local.key);
-      payload = ( payload ) ? JSON.parse(payload) : state;
-      payload = ( payload ) ? Object.assign(state, payload) : state;
-      return reducer(payload, action);
-    }
-
-    payload = parse(local.payload, state);
-    localStorage.setItem(local.key, JSON.stringify(payload));
+    write(options, state);
     return state;
-
   };
-
 }
 
 /**
@@ -71,7 +80,7 @@ export function storage(reducer: ActionReducer<any>): ActionReducer<any> {
  */
 export function clear(reducer: ActionReducer<any>): ActionReducer<any> {
   return (state: any, action: any): any => {
-    return (action.type === COMMON_RESET)
+    return ( action.type === COMMON_RESET )
       ? reducer({ common: state.common, translate: state.translate }, action)
       : reducer(state, action)
       ;

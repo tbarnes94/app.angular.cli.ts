@@ -6,7 +6,16 @@ import { StoreModule as StoreModuleExternal } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { metaReducers } from './store/reducers';
+import { options } from './store/reducers';
 import { reducers } from './store/reducers';
+import { reads } from './store/reducers';
+
+/**
+ * https://github.com/ngrx/platform
+ */
+export function initialState(): any {
+  return reads(options);
+}
 
 /**
  * https://github.com/ngrx/platform
@@ -14,7 +23,7 @@ import { reducers } from './store/reducers';
 @NgModule({
   imports: [
     EffectsModule.forRoot([]),
-    StoreModuleExternal.forRoot(reducers, { metaReducers }),
+    StoreModuleExternal.forRoot(reducers, { initialState, metaReducers }),
     StoreDevtoolsModule.instrument({ maxAge: 100 }),
     // x StoreRouterConnectingModule ,
   ],
