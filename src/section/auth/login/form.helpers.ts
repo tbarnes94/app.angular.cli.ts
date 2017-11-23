@@ -1,6 +1,6 @@
 import { Validators } from '@angular/forms';
 
-import { CommonService } from '../../commons';
+import { CommonService } from '../../../modules/commons';
 import { AuthLoginStart } from '../shared/store/auth.actions';
 import { AuthCredentials } from '../shared/types/auth.credentials';
 

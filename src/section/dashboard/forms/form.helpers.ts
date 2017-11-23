@@ -1,10 +1,10 @@
 import { Validators } from '@angular/forms';
 
-import { AlphaAllPattern } from '../../commons';
-import { CommonService } from '../../commons';
-import { NumericAllPattern } from '../../commons';
-import { toRegex } from '../../commons';
-import { toRegexGroup } from '../../commons';
+import { AlphaAllPattern } from '../../../modules/commons';
+import { CommonService } from '../../../modules/commons';
+import { NumericAllPattern } from '../../../modules/commons';
+import { toRegex } from '../../../modules/commons';
+import { toRegexGroup } from '../../../modules/commons';
 
 /**
  * https://angular.io/api/forms/FormGroup

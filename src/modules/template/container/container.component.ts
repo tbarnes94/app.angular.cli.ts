@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/Rx';
 import { Observable } from 'rxjs/Rx';
 
-import { AuthService } from '../../auth/shared/service/auth.service';
+import { AuthService } from '../../../section/auth/shared/service/auth.service';
 import { CommonContainerComponent } from '../../commons/container/container.component';
 import { CommonService } from '../../commons/shared/service/common.service';
 import { ObjectAny } from '../../commons/shared/types/object.any';

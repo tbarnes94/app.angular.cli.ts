@@ -1,5 +1,5 @@
-import { ApiResponse } from '../../../api';
-import { CommonAction } from '../../../commons';
+import { ApiResponse } from '../../../../modules/api';
+import { CommonAction } from '../../../../modules/commons';
 import { AuthCredentials } from '../types/auth.credentials';
 import { AuthToken } from '../types/auth.token';
 

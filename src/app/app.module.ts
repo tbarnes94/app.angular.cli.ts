@@ -7,14 +7,16 @@ import { AppRootComponent } from './root/root.component';
 import { StoreModule } from './shared/store.module';
 
 import { environment } from '../environments/environment';
+
 import { ApiModule } from '../modules/api';
-import { AuthModule } from '../modules/auth';
 import { CommonModule } from '../modules/commons';
-import { DashboardModule } from '../modules/dashboard';
 import { FormModule } from '../modules/forms';
 import { TableModule } from '../modules/table';
 import { TemplateModule } from '../modules/template';
 import { TranslateModule } from '../modules/translate';
+
+import { AuthModule } from '../section/auth';
+import { DashboardModule } from '../section/dashboard';
 
 /**
  * https://angular.io/guide/styleguide#app-root-module
@@ -33,15 +35,17 @@ import { TranslateModule } from '../modules/translate';
 
     /** modules */
     ApiModule.forRoot(environment.api),
-    AuthModule.forRoot(),
     CommonModule.forRoot(),
-    DashboardModule.forRoot(),
     FormModule.forRoot(),
     TableModule.forRoot(),
     TemplateModule.forRoot(),
     TranslateModule.forRoot(environment.translate),
     CommonModule,
     TemplateModule,
+
+    /** section */
+    AuthModule.forRoot(),
+    DashboardModule.forRoot(),
 
   ],
   declarations: [

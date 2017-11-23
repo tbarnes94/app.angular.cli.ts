@@ -3,9 +3,9 @@ import { Effect } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
-import { ApiResponse } from '../../../api';
-import { CommonReset } from '../../../commons';
-import { TemplateCommonEffects } from '../../../template';
+import { ApiResponse } from '../../../../modules/api';
+import { CommonReset } from '../../../../modules/commons';
+import { TemplateCommonEffects } from '../../../../modules/template';
 import { AuthCredentials } from '../types/auth.credentials';
 import { AuthToken } from '../types/auth.token';
 import { AuthError } from './auth.actions';

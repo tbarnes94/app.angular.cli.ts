@@ -9,8 +9,8 @@ import { CommonPreloadStrategy } from '../../modules/commons';
  */
 const route: Routes = [
   { path: '',          redirectTo: 'dashboard', pathMatch: 'full' },
-  { path: 'auth',      loadChildren: '../../modules/auth/auth.module#AuthModule' },
-  { path: 'dashboard', loadChildren: '../../modules/dashboard/dashboard.module#DashboardModule' },
+  { path: 'auth',      loadChildren: '../../section/auth/auth.module#AuthModule' },
+  { path: 'dashboard', loadChildren: '../../section/dashboard/dashboard.module#DashboardModule' },
   { path: '**',        redirectTo: 'dashboard' },
 ];
 

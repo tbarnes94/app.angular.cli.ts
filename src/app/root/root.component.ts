@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
-import { AuthLogout } from '../../modules/auth';
-import { AuthService } from '../../modules/auth';
+import { AuthService } from '../../section/auth';
 import { CommonService } from '../../modules/commons';
 import { TranslateLanguage } from '../../modules/translate';
 import { TranslateService } from '../../modules/translate';

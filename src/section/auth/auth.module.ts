@@ -3,8 +3,8 @@ import { ModuleWithProviders } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
-import { CommonModule } from '../commons';
-import { TemplateModule } from '../template';
+import { CommonModule } from '../../modules/commons';
+import { TemplateModule } from '../../modules/template';
 import { AuthRouteModule } from './auth-route.module';
 import { AuthLoginComponent } from './login/login.component';
 import { AuthGuard } from './shared/guard/auth.guard';

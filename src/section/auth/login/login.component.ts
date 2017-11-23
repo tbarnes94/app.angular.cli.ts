@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
-import { FormSchemas } from '../../forms';
-import { TemplateContainerComponent } from '../../template';
+import { FormSchemas } from '../../../modules/forms';
+import { TemplateContainerComponent } from '../../../modules/template';
 import { FormBuild } from './form.helpers';
 import { FormSubmit } from './form.helpers';
 

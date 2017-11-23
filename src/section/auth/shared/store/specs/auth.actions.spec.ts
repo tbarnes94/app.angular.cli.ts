@@ -1,6 +1,6 @@
-import { ApiResponse } from '../../../../api';
-import { CommonActionTest } from '../../../../commons/shared/store/specs/common.actions.tests';
-import { CommonSuite } from '../../../../commons/specs/common.tests';
+import { ApiResponse } from '../../../../../modules/api';
+import { CommonActionTest } from '../../../../../modules/commons/shared/store/specs/common.actions.tests';
+import { CommonSuite } from '../../../../../modules/commons/specs/common.tests';
 import { AuthCredentials } from '../../types/auth.credentials';
 import { AuthToken } from '../../types/auth.token';
 import { AUTH_ERROR } from '../auth.actions';

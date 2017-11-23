@@ -1,8 +1,8 @@
 import { ActionReducer } from '@ngrx/store';
 import { combineReducers } from '@ngrx/store';
 
-import { ApiResponse } from '../../../api';
-import { CommonReducer } from '../../../commons';
+import { ApiResponse } from '../../../../modules/api';
+import { CommonReducer } from '../../../../modules/commons';
 import { AuthToken } from '../types/auth.token';
 import { AUTH_ERROR } from './auth.actions';
 import { AuthError } from './auth.actions';

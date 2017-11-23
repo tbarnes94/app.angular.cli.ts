@@ -1,7 +1,7 @@
-import { ApiResponse } from '../../../../api';
-import { CommonReducerActionTest } from '../../../../commons/shared/store/specs/common.reducers.tests';
-import { CommonReducerTest } from '../../../../commons/shared/store/specs/common.reducers.tests';
-import { CommonSuite } from '../../../../commons/specs/common.tests';
+import { ApiResponse } from '../../../../../modules/api';
+import { CommonReducerActionTest } from '../../../../../modules/commons/shared/store/specs/common.reducers.tests';
+import { CommonReducerTest } from '../../../../../modules/commons/shared/store/specs/common.reducers.tests';
+import { CommonSuite } from '../../../../../modules/commons/specs/common.tests';
 import { AuthToken } from '../../types/auth.token';
 import { AuthError } from '../auth.actions';
 import { AuthLoader } from '../auth.actions';

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { ModuleWithProviders } from '@angular/core';
 
-import { CommonModule } from '../commons';
-import { TemplateModule } from '../template';
+import { CommonModule } from '../../modules/commons';
+import { TemplateModule } from '../../modules/template';
 import { DashboardRouteModule } from './dashboard-route.module';
 import { DashboardFormsComponent } from './forms/forms.component';
 
