@@ -9,6 +9,7 @@ import { FormGroup } from '@angular/forms' ;
 import { BehaviorSubject } from 'rxjs/Rx' ;
 
 import { CommonComponent } from '../../commons' ;
+import { isObject } from '../../commons' ;
 import { FormSchemas } from '../shared/types/form/form.schemas' ;
 import { FormControl as FormControlSchema } from '../shared/types/form/form.schemas' ;
 import { FormGroup as FormGroupSchema } from '../shared/types/group/form.group' ;
@@ -275,19 +276,20 @@ export class FormsFormComponent extends CommonComponent
   public payload( input : any ) : any
   {
     let outpt : any = {} ;
-    const keys : Array<string> = Object.keys( input ) ;
-    const isObject : boolean = ( typeof input === 'object' ) ;
+    const keys : Array<string> = ( isObject( input ) )
+      ? Object.keys( input )
+      : []
+      ;
 
-    if ( isObject && keys.length > 0 ) {
+    if ( keys.length > 0 ) {
 
       const first : any = input[ keys[ 0 ] ] ;
-      const keysFirst : Array<string> = Object.keys( first ) ;
-      const isObjectFirst : boolean = ( typeof first === 'object' ) ;
+      const keyz : Array<string> = ( isObject( first ) )
+        ? Object.keys( first )
+        : []
+        ;
 
-      if (
-        ( keys.length > 1 ) ||
-        ( isObjectFirst && keysFirst.length > 0 )
-      ) {
+      if ( keys.length > 1 || keyz.length > 0 ) {
         keys.forEach( ( k ) => outpt[ k ] = this.payload( input[ k ] ) ) ;
       } else {
         outpt = first ;
