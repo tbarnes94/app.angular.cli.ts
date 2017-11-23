@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BehaviorSubject } from 'rxjs/Rx';
 import { Observable } from 'rxjs/Rx';
 
 import { AuthService } from '../../auth/shared/service/auth.service';
@@ -22,44 +23,74 @@ export class TemplateContainerComponent extends CommonContainerComponent {
   /**
    * http://reactivex.io/documentation/observable.html
    */
-  public error$: Observable<string> = null;
-
-  /**
-   * http://reactivex.io/documentation/observable.html
-   */
-  public loader$: Observable<boolean> = null;
-
-  /**
-   * http://reactivex.io/documentation/observable.html
-   */
   public language$: Observable<string> = this.common
     .select<string>([ 'translate', 'language' ])
     .takeUntil(this.destroy$)
-    ;
+  ;
 
   /**
    * http://reactivex.io/documentation/observable.html
    */
-  public translations$: Observable<ObjectAny> = this.common
+  public translationz$: Observable<ObjectAny> = this.common
     .select<ObjectAny>([ 'translate', 'translations' ])
     .takeUntil(this.destroy$)
-    ;
+  ;
 
   /**
-   * @param key
+   * http://reactivex.io/documentation/subject.html
    */
-  public streams(key: string = 'common'): void {
+  public key$: BehaviorSubject<string> = new BehaviorSubject<string>('common');
 
-    this.error$ = this.common
-      .select<string>([ key, 'error' ])
-      .takeUntil(this.destroy$)
-      ;
+  /**
+   * http://reactivex.io/documentation/subject.html
+   */
+  public keys$: Observable<Array<string>> = this.key$
+    .map((o) => o.split('.'))
+    .takeUntil(this.destroy$)
+  ;
 
-    this.loader$ = this.common
-      .select<boolean>([ key, 'loader' ])
-      .takeUntil(this.destroy$)
-      ;
+  /**
+   * http://reactivex.io/documentation/observable.html
+   */
+  public error$: Observable<string> = this.keys$
+    .switchMap((o) => this.common.select<string>([ o[ 0 ], 'error' ]))
+    .takeUntil(this.destroy$)
+  ;
 
+  /**
+   * http://reactivex.io/documentation/observable.html
+   */
+  public loader$: Observable<boolean> = this.keys$
+    .switchMap((o) => this.common.select<boolean>([ o[ 0 ], 'loader' ]))
+    .takeUntil(this.destroy$)
+  ;
+
+  /**
+   * http://reactivex.io/documentation/observable.html
+   */
+  public translations$: Observable<ObjectAny> = Observable
+    .combineLatest(this.keys$, this.translationz$)
+    .map((o) => ({ keys: o[ 0 ], translations: o[ 1 ] }))
+    .filter((o) => (!!o.translations))
+    .map(this.onTranslationsMap.bind(this))
+    .takeUntil(this.destroy$)
+  ;
+
+  /**
+   * @param input
+   * @returns ObjectAny
+   */
+  public onTranslationsMap(input: ObjectAny): ObjectAny {
+    return input.keys.reduce(this.onTranslationsReduce.bind(this), input.translations);
+  }
+
+  /**
+   * @param total
+   * @param key
+   * @param index
+   */
+  public onTranslationsReduce(total: any, key: string, index: number): ObjectAny {
+    return total[ key ] ? total[ key ] : {};
   }
 
   /**

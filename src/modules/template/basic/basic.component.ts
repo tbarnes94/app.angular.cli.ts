@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { Input } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
 
-import { ObjectAny } from '../../commons';
-
 /**
  * https://angular.io/api/core/Component
  */
@@ -15,15 +13,15 @@ import { ObjectAny } from '../../commons';
     <mat-card>
       <!-- title -->
       <mat-card-title
-        *ngIf='( this.translations.title )'
+        *ngIf='( this.title )'
         >
-        {{ this.translations.title }}
+        {{ this.title }}
       </mat-card-title>
       <!-- subtitle -->
       <mat-card-subtitle
-        *ngIf='( this.translations.subtitle )'
+        *ngIf='( this.subtitle )'
         >
-        {{ this.translations.subtitle }}
+        {{ this.subtitle }}
       </mat-card-subtitle>
       <!-- menus -->
       <mat-card-content>
@@ -46,9 +44,9 @@ import { ObjectAny } from '../../commons';
           <mat-icon>error</mat-icon>
           <span [innerHTML]=
             '
-              ( this.translations.error && this.translations.error[ this.error ] )
-                ? this.translations.error[ this.error ]
-                : this.error
+              ( this.errors[ this.error ] )
+              ? this.errors[ this.error ]
+              : this.error
             '
             >
           </span>
@@ -65,21 +63,17 @@ import { ObjectAny } from '../../commons';
         >
       </ng-content>
       <!-- actions -->
-      <!--
       <mat-card-actions
-        *ngIf='( this.translations.actions )'
+        *ngIf='( this.actions )'
         >
-        {{ this.translations.actions }}
+        {{ this.actions }}
       </mat-card-actions>
-      -->
       <!-- footer -->
-      <!--
       <mat-card-footer
-        *ngIf='( this.translations.footer )'
+        *ngIf='( this.footer )'
         >
-        {{ this.translations.footer }}
+        {{ this.footer }}
       </mat-card-footer>
-      -->
       <!-- loads -->
       <div
         *ngIf='this.loads'
@@ -107,11 +101,32 @@ export class TemplateBasicComponent {
   /**
    * https://angular.io/api/core/Input
    */
-  @Input() public readonly translations: ObjectAny = null;
+  @Input() public readonly errors: any = {};
 
   /**
    * https://angular.io/api/core/Input
    */
   @Input() public readonly divider: boolean = false;
+
+  /**
+   * https://angular.io/api/core/Input
+   */
+  @Input() public readonly title: string = null;
+
+  /**
+   * https://angular.io/api/core/Input
+   */
+  @Input() public readonly subtitle: string = null;
+
+  /**
+   * https://angular.io/api/core/Input
+   */
+  @Input() public readonly actions: string = null;
+
+  /**
+   * https://angular.io/api/core/Input
+   */
+  @Input() public readonly footer: string = null;
+
 
 }

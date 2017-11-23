@@ -25,7 +25,7 @@
     }
   },
   "dashboard": {
-    "dashboard": {
+    "forms": {
       "title": "Dashboard fr",
       "input": {
         "label": "INPUT fr",

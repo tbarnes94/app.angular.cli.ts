@@ -3,13 +3,14 @@ import { RouterModule } from '@angular/router';
 import { Routes } from '@angular/router';
 
 import { AuthGuard } from '../auth';
-import { DashboardDashboardComponent } from './dashboard/dashboard.component';
+import { DashboardFormsComponent } from './forms/forms.component';
 
 /**
  * https://angular.io/api/router/Routes
  */
 const route: Routes = [
-  { path: '', component: DashboardDashboardComponent, canActivate: [ AuthGuard ], pathMatch: 'full' },
+  { path: '',       redirectTo: 'forms',                pathMatch: 'full'          },
+  { path: 'forms',  component: DashboardFormsComponent, canActivate: [ AuthGuard ] },
 ];
 
 /**
