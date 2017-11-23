@@ -15,7 +15,7 @@
     "serve": "ng serve --open",
     "serve:proxy": "ng serve --proxy-config \"proxy.conf.json\" --open",
 
-    "predoc": "yarn run clean:docs",
+    "predoc": "yarn run clean:doc",
     "doc": "typedoc --options \"tsconfig.json\" --exclude \"**/*.(spec|d).ts\" \"src\"",
 
     "prelint": "",
