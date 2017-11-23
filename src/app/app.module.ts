@@ -14,6 +14,7 @@ import { FormModule } from '../modules/forms';
 import { TableModule } from '../modules/table';
 import { TemplateModule } from '../modules/template';
 import { TranslateModule } from '../modules/translate';
+import '../modules/translate/translate.locales';
 
 import { AuthModule } from '../section/auth';
 import { DashboardModule } from '../section/dashboard';
