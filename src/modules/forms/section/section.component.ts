@@ -16,11 +16,11 @@ import { CommonComponent } from '../../commons' ;
   template :
   `
     <!-- title -->
-    <h2
+    <p
       *ngIf='( this.title )'
       >
       {{ this.title }}
-    </h2>
+    </p>
     <!-- description -->
     <p
       *ngIf='( this.description )'
