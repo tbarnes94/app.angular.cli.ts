@@ -4,6 +4,9 @@ import { ModuleWithProviders } from '@angular/core' ;
 import { NgModule } from '@angular/core' ;
 
 import { CommonModule as CommonModuleExternal } from '../commons' ;
+import { TableBasicComponent } from './basic/basic.component' ;
+import { TableCellComponent } from './cell/cell.component' ;
+import { TableRowComponent } from './row/row.component' ;
 import { TableService } from './shared/service/table.service' ;
 
 /**
@@ -25,8 +28,16 @@ export class TableRootModule {}
     CommonModule ,
     CommonModuleExternal ,
   ] ,
-  declarations : [] ,
-  exports : [] ,
+  declarations :
+  [
+    TableBasicComponent ,
+    TableCellComponent ,
+    TableRowComponent ,
+  ] ,
+  exports :
+  [
+    TableBasicComponent ,
+  ] ,
 })
 export class TableModule
 {

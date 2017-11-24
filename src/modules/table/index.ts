@@ -1,3 +1,6 @@
+export * from './basic/basic.component' ;
+export * from './cell/cell.component' ;
+export * from './row/row.component' ;
 export * from './shared/service/table.service' ;
 export * from './shared/types/basic/table.abstract' ;
 export * from './shared/types/basic/table.functions' ;

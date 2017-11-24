@@ -11,6 +11,7 @@ import { MatProgressSpinnerModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 
 import { FormModule } from '../forms';
+import { TableModule } from '../table';
 import { TranslateModule } from '../translate';
 import { TemplateBasicComponent } from './basic/basic.component';
 import { TemplateContainerComponent } from './container/container.component';
@@ -40,6 +41,7 @@ export class TemplateRootModule {
     RouterModule,
 
     FormModule,
+    TableModule,
     TranslateModule,
 
   ],
@@ -60,7 +62,9 @@ export class TemplateRootModule {
 
     TemplateBasicComponent,
     TemplateContainerComponent,
+
     FormModule,
+    TableModule,
     TranslateModule,
 
   ],
