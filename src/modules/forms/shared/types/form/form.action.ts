@@ -1,11 +1,11 @@
 /** @imports */
-import { Abstract } from '../abstract/abstract' ;
-import { FormBoolean } from '../abstract/form.functions' ;
+import { FormAbstract } from './form.abstract' ;
+import { FormBoolean } from './form.functions' ;
 
 /**
  * https://angular.io/api/forms/ReactiveFormsModule
  */
-export class FormAction extends Abstract
+export class FormAction extends FormAbstract
 {
   public readonly label : string ;
   public readonly element : string ;

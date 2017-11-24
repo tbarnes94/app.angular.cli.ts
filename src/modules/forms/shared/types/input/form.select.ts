@@ -1,12 +1,12 @@
 /** @imports */
-import { FormAny } from '../abstract/form.functions' ;
-import { AbstractInput } from './abstract.input' ;
+import { FormAny } from '../form/form.functions' ;
+import { FormAbstractInput } from './form.abstract.input' ;
 import { FormOption } from './form.option' ;
 
 /**
  * https://angular.io/api/forms/ReactiveFormsModule
  */
-export class FormSelect extends AbstractInput
+export class FormSelect extends FormAbstractInput
 {
   public readonly placeholder? : string ;
   public readonly options : FormAny | Array<FormOption> ;

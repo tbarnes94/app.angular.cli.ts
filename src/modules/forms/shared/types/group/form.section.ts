@@ -1,10 +1,10 @@
 /** @imports */
-import { AbstractGroup } from './abstract.group' ;
+import { FormAbstractGroup } from './form.abstract.group' ;
 
 /**
  * https://angular.io/api/forms/ReactiveFormsModule
  */
-export class FormSection<T> extends AbstractGroup<T>
+export class FormSection<T> extends FormAbstractGroup<T>
 {
   public readonly title? : string ;
   public readonly description? : string ;

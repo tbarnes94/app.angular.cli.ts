@@ -1,14 +1,14 @@
 /** @imports */
 import { ObjectStrings } from '../../../../commons' ;
-import { FormAny } from '../abstract/form.functions' ;
-import { FormBoolean } from '../abstract/form.functions' ;
-import { FormVoid } from '../abstract/form.functions' ;
-import { AbstractGroup } from './abstract.group' ;
+import { FormAny } from '../form/form.functions' ;
+import { FormBoolean } from '../form/form.functions' ;
+import { FormVoid } from '../form/form.functions' ;
+import { FormAbstractGroup } from './form.abstract.group' ;
 
 /**
  * https://angular.io/api/forms/ReactiveFormsModule
  */
-export class FormGroup<T> extends AbstractGroup<T>
+export class FormGroup<T> extends FormAbstractGroup<T>
 {
   public readonly section? : boolean ;
   public readonly label? : FormAny | string ;

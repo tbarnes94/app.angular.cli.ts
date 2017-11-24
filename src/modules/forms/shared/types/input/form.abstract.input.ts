@@ -1,11 +1,11 @@
 /** @imports */
 import { ValidatorFn } from '@angular/forms' ;
-import { Abstract } from '../abstract/abstract' ;
+import { FormAbstract } from '../form/form.abstract' ;
 
 /**
  * https://angular.io/api/forms/ReactiveFormsModule
  */
-export abstract class AbstractInput extends Abstract
+export abstract class FormAbstractInput extends FormAbstract
 {
   public readonly element : string ;
   public readonly validators : Array<ValidatorFn> ;

@@ -1,10 +1,10 @@
 /** @imports */
-import { AbstractInput } from './abstract.input' ;
+import { FormAbstractInput } from './form.abstract.input' ;
 
 /**
  * https://angular.io/api/forms/ReactiveFormsModule
  */
-export class FormInput extends AbstractInput
+export class FormInput extends FormAbstractInput
 {
   public readonly placeholder? : string ;
   public readonly maxlength? : number ;

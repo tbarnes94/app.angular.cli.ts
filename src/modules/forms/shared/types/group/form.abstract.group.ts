@@ -1,10 +1,10 @@
 /** @imports */
-import { Abstract } from '../abstract/abstract' ;
+import { FormAbstract } from '../form/form.abstract' ;
 
 /**
  * https://angular.io/api/forms/ReactiveFormsModule
  */
-export abstract class AbstractGroup<T> extends Abstract
+export abstract class FormAbstractGroup<T> extends FormAbstract
 {
   public readonly children : Array<T> ;
 }
