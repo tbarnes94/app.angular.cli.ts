@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core' ;
 import { Observable } from 'rxjs/Rx' ;
 
 import { isNotEmpty } from '../../../commons' ;
-import { FormSchemas } from '../types/form/form.schemas' ;
+import { FormSchemas } from '../types/basic/form.schemas' ;
 
 /**
  * https://angular.io/api/core/Injectable

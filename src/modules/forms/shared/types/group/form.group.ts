@@ -1,8 +1,8 @@
 /** @imports */
 import { ObjectStrings } from '../../../../commons' ;
-import { FormAny } from '../form/form.functions' ;
-import { FormBoolean } from '../form/form.functions' ;
-import { FormVoid } from '../form/form.functions' ;
+import { FormAny } from '../basic/form.functions' ;
+import { FormBoolean } from '../basic/form.functions' ;
+import { FormVoid } from '../basic/form.functions' ;
 import { FormAbstractGroup } from './form.abstract.group' ;
 
 /**

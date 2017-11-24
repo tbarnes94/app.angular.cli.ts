@@ -1,5 +1,5 @@
 /** @imports */
-import { FormAny } from '../form/form.functions' ;
+import { FormAny } from '../basic/form.functions' ;
 import { FormAbstractInput } from './form.abstract.input' ;
 import { FormOption } from './form.option' ;
 

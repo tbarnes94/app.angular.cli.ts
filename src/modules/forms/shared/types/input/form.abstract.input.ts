@@ -1,6 +1,6 @@
 /** @imports */
 import { ValidatorFn } from '@angular/forms' ;
-import { FormAbstract } from '../form/form.abstract' ;
+import { FormAbstract } from '../basic/form.abstract' ;
 
 /**
  * https://angular.io/api/forms/ReactiveFormsModule

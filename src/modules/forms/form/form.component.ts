@@ -10,8 +10,8 @@ import { BehaviorSubject } from 'rxjs/Rx' ;
 
 import { CommonComponent } from '../../commons' ;
 import { isObject } from '../../commons' ;
-import { FormSchemas } from '../shared/types/form/form.schemas' ;
-import { FormControl as FormControlSchema } from '../shared/types/form/form.schemas' ;
+import { FormSchemas } from '../shared/types/basic/form.schemas' ;
+import { FormControl as FormControlSchema } from '../shared/types/basic/form.schemas' ;
 import { FormGroup as FormGroupSchema } from '../shared/types/group/form.group' ;
 import { FormSection as FormSectionSchema } from '../shared/types/group/form.section' ;
 

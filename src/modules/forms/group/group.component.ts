@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/Rx' ;
 
 import { CommonComponent } from '../../commons' ;
 import { ObjectStrings } from '../../commons' ;
-import { FormControl } from '../shared/types/form/form.schemas' ;
+import { FormControl } from '../shared/types/basic/form.schemas' ;
 
 /**
  * https://angular.io/api/core/Component
