@@ -26,7 +26,7 @@
   },
   "dashboard": {
     "forms": {
-      "title": "Dashboard",
+      "title": "Forms",
       "input": {
         "label": "INPUT",
         "tooltip": "Input tooltip hover",
