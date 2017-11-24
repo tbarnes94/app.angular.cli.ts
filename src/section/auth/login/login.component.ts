@@ -23,13 +23,13 @@ import { FormSubmit } from './form.helpers';
       [divider]='false'
       >
       <div class='template-content' >
-        <forms-form
+        <forms-basic
           *ngIf='( this.schemas$ | async ) as schemas'
           [schemas]='schemas'
           (onCompleteEvent)='this.onComplete($event)'
           (onClickEvent)='this.onClick($event)'
           >
-        </forms-form>
+        </forms-basic>
       </div>
     </template-basic>
   `,

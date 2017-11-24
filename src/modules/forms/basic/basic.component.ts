@@ -20,9 +20,9 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
  */
 @Component
 ({
-  selector : 'forms-form' ,
+  selector : 'forms-basic' ,
   encapsulation : ViewEncapsulation.Emulated ,
-  styleUrls : [ './form.component.styl' ] ,
+  styleUrls : [ './basic.component.styl' ] ,
   template :
   `
     <!-- forms -->
@@ -176,7 +176,7 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
     </form>
   ` ,
 })
-export class FormsFormComponent extends CommonComponent
+export class FormsBasicComponent extends CommonComponent
 {
   /**
    * https://angular.io/api/core/Input

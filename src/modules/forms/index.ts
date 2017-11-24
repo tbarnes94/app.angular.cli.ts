@@ -1,4 +1,4 @@
-export * from './form/form.component' ;
+export * from './basic/basic.component' ;
 export * from './group/group.component' ;
 export * from './section/section.component' ;
 export * from './shared/service/form.service' ;
