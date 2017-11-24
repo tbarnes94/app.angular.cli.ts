@@ -24,7 +24,7 @@ import { FormSubmit } from './form.helpers';
       [divider]='false'
       >
       <div class='template-content' >
-        <forms-form
+        <forms-basic
           *ngIf='( this.schemas$ | async ) as schemas'
           [schemas]='schemas'
           (onCompleteEvent)='this.onComplete($event)'
@@ -33,7 +33,7 @@ import { FormSubmit } from './form.helpers';
           <div class='form-footer' >
             {{ translations.footer }}
           </div>
-        </forms-form>
+        </forms-basic>
       </div>
     </template-basic>
   `,

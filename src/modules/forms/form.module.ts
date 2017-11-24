@@ -15,7 +15,7 @@ import { MatTooltipModule } from '@angular/material' ;
 import { RouterModule } from '@angular/router' ;
 
 import { CommonModule as CommonModuleExternal } from '../commons' ;
-import { FormsFormComponent } from './form/form.component' ;
+import { FormsBasicComponent } from './basic/basic.component' ;
 import { FormsGroupComponent } from './group/group.component' ;
 import { FormsSectionComponent } from './section/section.component' ;
 import { FormService } from './shared/service/form.service' ;
@@ -52,13 +52,13 @@ export class FormRootModule {}
   ] ,
   declarations :
   [
-    FormsFormComponent ,
+    FormsBasicComponent ,
     FormsGroupComponent ,
     FormsSectionComponent ,
   ] ,
   exports :
   [
-    FormsFormComponent ,
+    FormsBasicComponent ,
   ] ,
 })
 export class FormModule
