@@ -126,6 +126,9 @@
       },
       "complete": "Submit fr",
       "logout": "Logout fr"
+    },
+    "table": {
+      "title": "Table fr"
     }
   }
 }

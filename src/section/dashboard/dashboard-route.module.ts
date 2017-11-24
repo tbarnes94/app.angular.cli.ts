@@ -4,6 +4,7 @@ import { Routes } from '@angular/router';
 
 import { AuthGuard } from '../auth';
 import { DashboardFormsComponent } from './forms/forms.component';
+import { DashboardTableComponent } from './table/table.component';
 
 /**
  * https://angular.io/api/router/Routes
@@ -11,6 +12,7 @@ import { DashboardFormsComponent } from './forms/forms.component';
 const route: Routes = [
   { path: '',       redirectTo: 'forms',                pathMatch: 'full'          },
   { path: 'forms',  component: DashboardFormsComponent                             },
+  { path: 'table',  component: DashboardTableComponent                             },
 ];
 
 /**
