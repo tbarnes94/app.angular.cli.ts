@@ -10,7 +10,7 @@ import { DashboardFormsComponent } from './forms/forms.component';
  */
 const route: Routes = [
   { path: '',       redirectTo: 'forms',                pathMatch: 'full'          },
-  { path: 'forms',  component: DashboardFormsComponent, canActivate: [ AuthGuard ] },
+  { path: 'forms',  component: DashboardFormsComponent                             },
 ];
 
 /**
