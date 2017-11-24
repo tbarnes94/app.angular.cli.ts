@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
+import { CommonComponent } from '../../modules/commons';
 import { AuthService } from '../../section/auth';
 import { CommonService } from '../../modules/commons';
 import { TranslateLanguage } from '../../modules/translate';
@@ -36,7 +37,7 @@ import { TranslateService } from '../../modules/translate';
     </div>
   `,
 })
-export class AppRootComponent {
+export class AppRootComponent extends CommonComponent {
 
   /**
    * http://reactivex.io/documentation/observable.html
@@ -70,6 +71,7 @@ export class AppRootComponent {
   public constructor(protected readonly common: CommonService,
                      protected readonly auth: AuthService,
                      protected readonly translate: TranslateService) {
+    super();
   }
 
 }
