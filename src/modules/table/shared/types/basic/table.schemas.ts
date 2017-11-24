@@ -16,8 +16,9 @@ export type TableControl = TableHead
  */
 export class TableSchemas
 {
-  public readonly index : number ;
+  public readonly width : number ;
   public readonly columns : Array<TableHead> ;
   public readonly rows : Array<TableRow<TableControl>> ;
   public readonly sorts : Array<TableSort> ;
+  public readonly page : number ;
 }

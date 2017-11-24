@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core' ;
 import { Observable } from 'rxjs/Rx' ;
 
 import { isNotEmpty } from '../../../commons' ;
-import { toContent } from '../../../commons' ;
+import { TableSchemas } from '../types/basic/table.schemas' ;
 
 /**
  * https://angular.io/api/core/Injectable
@@ -23,15 +23,13 @@ export class TableService
     width$ : Observable<number> ,
     datas$ : Observable<any> ,
     parse : ( o : any ) => any ,
-    filters : ( o : any ) => boolean = ( o : any ) => true ,
   )
-  : Observable<any>
+  : Observable<TableSchemas>
   {
     return Observable
-      .combineLatest( language$ , translations$ , width$ , datas$.map( toContent ) )
+      .combineLatest( language$ , translations$ , width$ , datas$ )
       .map( ( o ) => ({ language : o[0] , translations : o[1] , width : o[2] , datas : o[3] }) )
-      .filter( ( o ) => ( isNotEmpty( o.language ) && isNotEmpty( o.translations ) && isNotEmpty( o.datas ) ) )
-      .filter( filters )
+      .filter( ( o ) => ( isNotEmpty( o.language ) && isNotEmpty( o.translations ) && !!o.datas ) )
       .map( ( o : any ) =>
       {
         const date : DatePipe = new DatePipe( o.language ) ;

@@ -4,6 +4,7 @@ import { Input } from '@angular/core' ;
 import { ViewEncapsulation } from '@angular/core' ;
 
 import { CommonComponent } from '../../commons' ;
+import { TableSchemas } from '../shared/types/basic/table.schemas' ;
 
 /**
  * https://angular.io/api/core/Component
@@ -15,7 +16,14 @@ import { CommonComponent } from '../../commons' ;
   styleUrls : [ './basic.component.styl' ] ,
   template :
   `
-    TableBasicComponent
+    {{ this.schemas | json }}
   ` ,
 })
-export class TableBasicComponent extends CommonComponent {}
+export class TableBasicComponent extends CommonComponent
+{
+  /**
+   * https://angular.io/api/core/Input
+   */
+  @Input() public readonly schemas : TableSchemas = null ;
+
+}

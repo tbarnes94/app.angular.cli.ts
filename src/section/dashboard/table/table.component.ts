@@ -23,6 +23,8 @@ import { TableBuild } from './table.helpers';;
       >
       <div class='template-content' >
         <table-basic
+          *ngIf='( this.schemas$ | async ) as schemas'
+          [schemas]='schemas'
           >
         </table-basic>
       </div>
@@ -32,11 +34,25 @@ import { TableBuild } from './table.helpers';;
 export class DashboardTableComponent extends TemplateContainerComponent {
 
   /**
+   * https://angular.io/api/forms/FormGroup
+   */
+  public schemas$: Observable<TableSchemas>;
+
+  /**
    * https://angular.io/api/core/OnInit
    * https://angular.io/api/core/OnInit#ngOnInit
    */
   public ngOnInit(): void {
     this.key$.next('dashboard.table');
+    this.schemas$ = this.table.build$(
+        this.language$,
+        this.translations$,
+        this.common.width$,
+        Observable.of(true),
+        TableBuild,
+      )
+      .takeUntil(this.destroy$)
+      ;
   }
 
 }
