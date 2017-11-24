@@ -46,19 +46,6 @@ export class DashboardFormsComponent extends TemplateContainerComponent {
   public schemas$: Observable<FormSchemas>;
 
   /**
-   * http://reactivex.io/documentation/observable.html
-   */
-  public table$: Observable<any> = this.table.build$(
-      this.language$,
-      this.translations$,
-      this.common.width$,
-      this.common.select([ 'auth', 'token' ]),
-      (o) => o,
-    )
-    .takeUntil(this.destroy$)
-    ;
-
-  /**
    * https://angular.io/guide/user-input
    * @param input
    */
@@ -80,9 +67,6 @@ export class DashboardFormsComponent extends TemplateContainerComponent {
         FormBuild,
       )
       .takeUntil(this.destroy$)
-      ;
-    this.table$
-      .subscribe((o) => console.log(o))
       ;
   }
 
