@@ -48,7 +48,8 @@ export class DashboardTableComponent extends TemplateContainerComponent {
         this.language$,
         this.translations$,
         this.common.width$,
-        Observable.of(true),
+        undefined,
+        undefined,
         TableBuild,
       )
       .takeUntil(this.destroy$)

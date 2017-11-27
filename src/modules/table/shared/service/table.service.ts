@@ -21,15 +21,16 @@ export class TableService
     language$ : Observable<string> ,
     translations$ : Observable<any> ,
     width$ : Observable<number> ,
-    datas$ : Observable<any> ,
+    datas$ : Observable<Array<any>> = Observable.of([]) ,
+    options$ : Observable<any> = Observable.of({}) ,
     parse : ( o : any ) => any ,
   )
   : Observable<TableSchemas>
   {
     return Observable
-      .combineLatest( language$ , translations$ , width$ , datas$ )
-      .map( ( o ) => ({ language : o[0] , translations : o[1] , width : o[2] , datas : o[3] }) )
-      .filter( ( o ) => ( isNotEmpty( o.language ) && isNotEmpty( o.translations ) && !!o.datas ) )
+      .combineLatest( language$ , translations$ , width$ , datas$ , options$ )
+      .map( ( o ) => ({ language : o[0] , translations : o[1] , width : o[2] , datas : o[3] , options : o[4] }) )
+      .filter( ( o ) => ( isNotEmpty( o.language ) && isNotEmpty( o.translations ) && !!o.datas && !!o.options ) )
       .map( ( o : any ) =>
       {
         const date : DatePipe = new DatePipe( o.language ) ;
