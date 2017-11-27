@@ -8,7 +8,7 @@
     "typedoc": "typedoc",
 
     "clean:dist": "rm -rf \"dist\"",
-    "clean:docs": "rm -rf \"docs\"",
+    "clean:doc": "rm -rf \"docs\"",
     "clean:coverage": "rm -rf \"coverage\"",
 
     "start": "yarn run serve:proxy",
