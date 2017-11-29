@@ -1,7 +1,20 @@
 /** @imports */
-import { TableControl } from './table.schemas' ;
+import { TableAbstract } from './table.abstract' ;
 
 /**
  * https://material.angular.io/components/table/overview
  */
-export type TableSort = ( content : Array<TableControl> ) => Array<TableControl> ;
+export class TablePage
+{
+  public readonly current : number ;
+  public readonly size : number ;
+}
+
+/**
+ * https://material.angular.io/components/table/overview
+ */
+export class TableSort extends TableAbstract
+{
+  public readonly order : string ;
+  public readonly type : string ;
+}

@@ -6,5 +6,6 @@ import { TableAbstract } from '../basic/table.abstract' ;
  */
 export abstract class TableAbstractRow<T> extends TableAbstract
 {
+  public readonly route? : Array<string> ;
   public readonly children : Array<T> ;
 }

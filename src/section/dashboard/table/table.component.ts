@@ -26,6 +26,9 @@ import { TableBuild } from './table.helpers';;
           *ngIf='( this.schemas$ | async ) as schemas'
           [schemas]='schemas'
           >
+          <div class='table-empty' >
+            {{ translations.empty }}
+          </div>
         </table-basic>
       </div>
     </template-basic>
@@ -48,7 +51,7 @@ export class DashboardTableComponent extends TemplateContainerComponent {
         this.language$,
         this.translations$,
         this.common.width$,
-        undefined,
+        this.http.get<Array<any>>('/assets/mocks/table.json'),
         undefined,
         TableBuild,
       )

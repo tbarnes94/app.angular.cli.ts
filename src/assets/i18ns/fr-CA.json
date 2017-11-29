@@ -128,7 +128,15 @@
       "logout": "Logout fr"
     },
     "table": {
-      "title": "Table fr"
+      "title": "Table fr",
+      "empty": "Table is currently empty fr.",
+      "columns": {
+        "id": "ID fr",
+        "name": "Name fr",
+        "city": "City fr",
+        "amount": "Amount fr",
+        "date": "Date fr"
+      }
     }
   }
 }

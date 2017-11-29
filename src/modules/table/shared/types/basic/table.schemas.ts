@@ -2,6 +2,7 @@
 import { TableCell } from '../cell/table.cell' ;
 import { TableHead } from '../cell/table.head' ;
 import { TableRow } from '../row/table.row' ;
+import { TablePage } from './table.functions' ;
 import { TableSort } from './table.functions' ;
 
 /**
@@ -16,9 +17,9 @@ export type TableControl = TableHead
  */
 export class TableSchemas
 {
-  public readonly width : number ;
-  public readonly columns : Array<TableHead> ;
+  public readonly columns : TableRow<TableHead> ;
   public readonly rows : Array<TableRow<TableControl>> ;
   public readonly sorts : Array<TableSort> ;
-  public readonly page : number ;
+  public readonly page : TablePage ;
+  public readonly width : number ;
 }

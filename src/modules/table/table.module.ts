@@ -2,6 +2,7 @@
 import { CommonModule } from '@angular/common' ;
 import { ModuleWithProviders } from '@angular/core' ;
 import { NgModule } from '@angular/core' ;
+import { RouterModule } from '@angular/router' ;
 
 import { CommonModule as CommonModuleExternal } from '../commons' ;
 import { TableBasicComponent } from './basic/basic.component' ;
@@ -27,6 +28,7 @@ export class TableRootModule {}
   [
     CommonModule ,
     CommonModuleExternal ,
+    RouterModule ,
   ] ,
   declarations :
   [

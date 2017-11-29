@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/Rx';
@@ -111,12 +112,14 @@ export class TemplateContainerComponent extends CommonContainerComponent {
    * @param auth      https://angular.io/tutorial/toh-pt4
    * @param forms     https://angular.io/tutorial/toh-pt4
    * @param table     https://angular.io/tutorial/toh-pt4
+   * @param http      https://angular.io/api/common/http/HttpClient
    */
   public constructor(protected readonly route: ActivatedRoute,
                      protected readonly common: CommonService,
                      protected readonly auth: AuthService,
                      protected readonly forms: FormService,
-                     protected readonly table: TableService) {
+                     protected readonly table: TableService,
+                     protected readonly http: HttpClient) {
     super(route, common);
   }
 

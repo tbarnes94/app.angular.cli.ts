@@ -128,7 +128,15 @@
       "logout": "Logout"
     },
     "table": {
-      "title": "Table"
+      "title": "Table",
+      "empty": "Table is currently empty.",
+      "columns": {
+        "id": "ID",
+        "name": "Name",
+        "city": "City",
+        "amount": "Amount",
+        "date": "Date"
+      }
     }
   }
 }
