@@ -8,4 +8,5 @@ export abstract class TableAbstractRow<T> extends TableAbstract
 {
   public readonly route? : Array<string> ;
   public readonly children : Array<T> ;
+  public readonly raw : any ;
 }

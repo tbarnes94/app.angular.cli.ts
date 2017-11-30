@@ -16,5 +16,4 @@ export class TablePage
 export class TableSort extends TableAbstract
 {
   public readonly order : string ;
-  public readonly type : string ;
 }

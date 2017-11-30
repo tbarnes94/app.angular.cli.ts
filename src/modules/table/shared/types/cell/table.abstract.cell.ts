@@ -7,4 +7,6 @@ import { TableAbstract } from '../basic/table.abstract' ;
 export abstract class TableAbstractCell extends TableAbstract
 {
   public readonly value : boolean | string ;
+  public readonly align : string ;
+  public readonly width : number ;
 }

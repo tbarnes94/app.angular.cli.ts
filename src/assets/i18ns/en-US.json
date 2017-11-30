@@ -132,9 +132,9 @@
       "empty": "Table is currently empty.",
       "columns": {
         "id": "ID",
-        "name": "Name",
-        "city": "City",
         "amount": "Amount",
+        "gender": "Gender",
+        "name": "Name",
         "date": "Date"
       }
     }

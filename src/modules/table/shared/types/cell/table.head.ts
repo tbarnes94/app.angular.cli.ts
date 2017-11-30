@@ -6,5 +6,5 @@ import { TableAbstractCell } from './table.abstract.cell' ;
  */
 export class TableHead extends TableAbstractCell
 {
-  public readonly width : number ;
+  public order : string ;
 }

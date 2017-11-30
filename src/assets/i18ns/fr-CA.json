@@ -132,9 +132,9 @@
       "empty": "Table is currently empty fr.",
       "columns": {
         "id": "ID fr",
-        "name": "Name fr",
-        "city": "City fr",
         "amount": "Amount fr",
+        "gender": "Gender fr",
+        "name": "Name fr",
         "date": "Date fr"
       }
     }
