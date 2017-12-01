@@ -53,10 +53,10 @@ import { FormControl } from '../shared/types/basic/form.schemas' ;
           [fxFlex]='"0 0 " + input.width'
           [floatPlaceholder]='"never"'
           [ngClass]=
-            '{
-              "mat-has-prefix" : input.prefix ,
-              "mat-has-suffix" : input.suffix
-            }'
+          '{
+            "mat-has-prefix" : input.prefix ,
+            "mat-has-suffix" : input.suffix
+          }'
           >
           <input
             matInput
