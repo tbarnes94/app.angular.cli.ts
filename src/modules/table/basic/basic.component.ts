@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/Rx' ;
 
 import { CommonComponent } from '../../commons' ;
 import { TablePage } from '../shared/types/functions/table.pages' ;
+import { TablePages } from '../shared/types/functions/table.pages' ;
 import { TablePageSchemas } from '../shared/types/functions/table.pages' ;
 import { TableSort } from '../shared/types/functions/table.sorts' ;
 import { TableControl } from '../shared/types/basic/table.schemas' ;
@@ -48,24 +49,24 @@ import { TableRow } from '../shared/types/row/table.row' ;
         <!-- tbody -->
         <tbody>
           <ng-container
-            *ngFor='let row of bodys ; index as i ;'
+            *ngFor='let one of bodys ; index as i ;'
             >
             <!-- route -->
             <tr
-              *ngIf='( row.route )'
-              [key]='row.key'
-              [children]='row.children'
+              *ngIf='( one.route )'
+              [key]='one.key'
+              [children]='one.children'
               [sequence]='( i % 2 === 0 ) ? "even" : "odd"'
-              [routerLink]='row.route'
+              [routerLink]='one.route'
               [type]='"body-click"'
               table-row
               >
             </tr>
             <!-- non-route -->
             <tr
-              *ngIf='( !row.route )'
-              [key]='row.key'
-              [children]='row.children'
+              *ngIf='( !one.route )'
+              [key]='one.key'
+              [children]='one.children'
               [sequence]='( i % 2 === 0 ) ? "even" : "odd"'
               [type]='"body"'
               table-row
@@ -73,11 +74,21 @@ import { TableRow } from '../shared/types/row/table.row' ;
             </tr>
           </ng-container>
         </tbody>
-        <!-- tfoot -->
-        <tfoot>
-          <!-- pagination -->
-        </tfoot>
       </table>
+      <!-- pages -->
+      <ng-container
+        *ngIf='( bodys.length > 0 )'
+        >
+        <div
+          *ngIf='( this.pages$ | async ) as pages'
+          [key]='"pages"'
+          [schemas]='pages.schemas'
+          [children]='pages.pages'
+          (onPagesEvent)='this.onPages( $event )'
+          table-pages
+          >
+        </div>
+      </ng-container>
       <!-- empty -->
       <div
         *ngIf='( bodys.length <= 0 )'
@@ -100,16 +111,6 @@ export class TableBasicComponent extends CommonComponent
   /**
    * http://reactivex.io/documentation/subject.html
    */
-  public readonly sortz$ : BehaviorSubject<Array<TableSort>> = new BehaviorSubject<Array<TableSort>>([]) ;
-
-  /**
-   * http://reactivex.io/documentation/subject.html
-   */
-  public readonly pagez$ : BehaviorSubject<TablePageSchemas> = new BehaviorSubject<TablePageSchemas>( null ) ;
-
-  /**
-   * http://reactivex.io/documentation/subject.html
-   */
   public readonly headz$ : BehaviorSubject<TableRow<TableHead>> = new BehaviorSubject<TableRow<TableHead>>( null ) ;
 
   /**
@@ -118,26 +119,22 @@ export class TableBasicComponent extends CommonComponent
   public readonly bodyz$ : BehaviorSubject<Array<TableRow<TableControl>>> = new BehaviorSubject<Array<TableRow<TableControl>>>([]) ;
 
   /**
-   * http://reactivex.io/documentation/observable.html
+   * http://reactivex.io/documentation/subject.html
    */
-  public readonly pages$ : Observable<Array<TablePage>> = Observable.combineLatest
-    (
-      this.bodyz$ ,
-      this.pagez$ ,
-    )
-    .map( ( o ) => ({ datas : o[ 0 ] , pages : o[ 1 ] }))
-    .filter( ( o ) => ( !!o.datas ) )
-    .map( ( o ) => [ new TablePage( '1' , undefined , undefined , undefined ) ] )
-    .takeUntil( this.destroy$ )
-    ;
+  public readonly sortz$ : BehaviorSubject<Array<TableSort>> = new BehaviorSubject<Array<TableSort>>([]) ;
+
+  /**
+   * http://reactivex.io/documentation/subject.html
+   */
+  public readonly pagez$ : BehaviorSubject<TablePageSchemas> = new BehaviorSubject<TablePageSchemas>( null ) ;
 
   /**
    * http://reactivex.io/documentation/observable.html
    */
   public readonly heads$ : Observable<TableRow<TableControl>> = Observable.combineLatest
     (
-      this.headz$ ,
-      this.sortz$ ,
+      this.headz$ , // raw
+      this.sortz$ , // raw
     )
     .map( ( o ) => ({ datas : o[ 0 ] , sorts : o[ 1 ] }))
     .filter( ( o ) => ( !!o.datas ) )
@@ -148,10 +145,10 @@ export class TableBasicComponent extends CommonComponent
   /**
    * http://reactivex.io/documentation/observable.html
    */
-  public readonly bodys$ : Observable<Array<TableRow<TableControl>>> = Observable.combineLatest
+  public readonly sorts$ : Observable<Array<TableRow<TableControl>>> = Observable.combineLatest
     (
-      this.bodyz$ ,
-      this.sortz$ ,
+      this.bodyz$ , // raw
+      this.sortz$ , // raw
     )
     .map( ( o ) => ({ datas : o[ 0 ] , sorts : o[ 1 ] }))
     .map( ( o ) => this.toSorts( o.datas , o.sorts ) )
@@ -159,13 +156,43 @@ export class TableBasicComponent extends CommonComponent
     ;
 
   /**
-   *
+   * http://reactivex.io/documentation/observable.html
    */
-  public toHeads( datas : TableRow<TableHead> , sorts : Array<TableSort> ) : TableRow<TableHead>
+  public readonly bodys$ : Observable<Array<TableRow<TableControl>>> = Observable.combineLatest
+    (
+      this.sorts$ , // sorts
+      this.pagez$ , // raw
+    )
+    .map( ( o ) => ({ datas : o[ 0 ] , pages : o[ 1 ] }))
+    .filter( ( o ) => ( !!o.datas ) )
+    .map( ( o ) => this.toBodys( o.datas , o.pages ) )
+    .takeUntil( this.destroy$ )
+    ;
+
+  /**
+   * http://reactivex.io/documentation/observable.html
+   */
+  public readonly pages$ : Observable<TablePages> = Observable.combineLatest
+    (
+      this.sorts$ , // sorts
+      this.pagez$ , // raw
+    )
+    .map( ( o ) => ({ datas : o[ 0 ] , pages : o[ 1 ] }))
+    .filter( ( o ) => ( !!o.datas ) )
+    .map( ( o ) => this.toPages( o.datas , o.pages ) )
+    .takeUntil( this.destroy$ )
+    ;
+
+  /**
+   * @param datas
+   * @param schemas
+   * @returns datas
+   */
+  public toHeads( datas : TableRow<TableHead> , schemas : Array<TableSort> ) : TableRow<TableHead>
   {
     datas.children.map( ( o ) =>
     {
-      const found : TableSort = sorts.filter( ( i ) => i.key === o.key )[ 0 ] ;
+      const found : TableSort = schemas.filter( ( i ) => i.key === o.key )[ 0 ] ;
       o.order = ( found ) ? found.order : null ;
       return o ;
     }) ;
@@ -176,12 +203,12 @@ export class TableBasicComponent extends CommonComponent
 
   /**
    * @param datas
-   * @param sorts
+   * @param schemas
    * @returns datas
    */
-  public toSorts( datas : Array<TableRow<TableControl>> , sorts : Array<TableSort> ) : Array<TableRow<TableControl>>
+  public toSorts( datas : Array<TableRow<TableControl>> , schemas : Array<TableSort> ) : Array<TableRow<TableControl>>
   {
-    const sorters : any = sorts.reduce
+    const sorters : any = schemas.reduce
     (
       ( t : any , c , i ) =>
       {
@@ -201,6 +228,47 @@ export class TableBasicComponent extends CommonComponent
   }
 
   /**
+   * @param datas
+   * @param schemas
+   * @returns datas
+   */
+  public toBodys( datas : Array<TableRow<TableControl>> , schemas : TablePageSchemas ) : Array<TableRow<TableControl>>
+  {
+    const limit : number = schemas.size ;
+    const current : number = schemas.current - 1 ; // to array index
+    const last : number = datas.length - 1 ; // to array index
+
+    let start : number = ( current * limit ) ;
+    start = ( start > 0 && start <= last ) ? start : 0 ;
+    const end : number = ( start + limit ) ;
+
+    return datas.slice( start , end ) ;
+
+  }
+
+  /**
+   * @param datas
+   * @param schemas
+   * @returns datas
+   */
+  public toPages( datas : Array<TableRow<TableControl>> , schemas : TablePageSchemas ) : TablePages
+  {
+    const limit : number = schemas.size ;
+    const total : number = Math.ceil( datas.length / limit ) ;
+    const pages : Array<TablePage> = new Array() ;
+
+    let current : number = schemas.current ;
+    current = ( current > 0 && current <= total ) ? current : 1 ;
+
+    for ( let i = 1 ; i <= total ; i++ ) {
+      pages.push( new TablePage( i , ( i === current ) , ( i === 1 ) , ( i === total ) ) ) ;
+    }
+
+    return new TablePages( schemas , pages ) ;
+
+  }
+
+  /**
    * https://angular.io/guide/user-input
    * @param input
    */
@@ -213,6 +281,16 @@ export class TableBasicComponent extends CommonComponent
 
     this.sortz$.next( payload ) ;
 
+  }
+
+  /**
+   * https://angular.io/guide/user-input
+   * @param input
+   */
+  public onPages( input : number ) : void
+  {
+    const limit : number = this.schemas.pages.size ;
+    this.pagez$.next( new TablePageSchemas( limit , input ) ) ;
   }
 
   /**

@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router' ;
 import { CommonModule as CommonModuleExternal } from '../commons' ;
 import { TableBasicComponent } from './basic/basic.component' ;
 import { TableCellComponent } from './cell/cell.component' ;
+import { TablePagesComponent } from './pages/pages.component' ;
 import { TableRowComponent } from './row/row.component' ;
 import { TableService } from './shared/service/table.service' ;
 
@@ -34,6 +35,7 @@ export class TableRootModule {}
   [
     TableBasicComponent ,
     TableCellComponent ,
+    TablePagesComponent ,
     TableRowComponent ,
   ] ,
   exports :

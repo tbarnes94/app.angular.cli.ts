@@ -3,8 +3,10 @@
     background #000
     color #fff
   &.table-row-click
-    cursor pointer
+    &
+      cursor pointer
+    &:hover
+      background #eee
   &.table-row-even
-    background transparent
   &.table-row-odd
-    background #eee
+    border-bottom #eee 1px solid

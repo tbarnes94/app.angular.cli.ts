@@ -17,8 +17,8 @@ export function TableBuild(o: any): TableSchemas {
       undefined,
       undefined, [
         new TableHead('id',     t.columns.id,     undefined,  10, undefined),
-        new TableHead('name',   t.columns.name,   undefined,  40, undefined),
-        new TableHead('gender', t.columns.gender, undefined,  10, undefined),
+        new TableHead('name',   t.columns.name,   undefined,  30, undefined),
+        new TableHead('gender', t.columns.gender, undefined,  20, undefined),
         new TableHead('amount', t.columns.amount, 'r',        20, undefined),
         new TableHead('date',   t.columns.date,   undefined,  20, undefined),
       ],

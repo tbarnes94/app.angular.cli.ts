@@ -27,16 +27,16 @@ import { TableSort } from '../shared/types/functions/table.sorts' ;
   template :
   `
     <ng-container
-      *ngFor='let cell of this.children'
+      *ngFor='let one of this.children'
       >
       <!-- th -->
       <th
         *ngIf='( this.type === "head" )'
-        [key]='cell.key'
-        [value]='cell.value'
-        [align]='cell.align'
-        [width]='cell.width'
-        [order]='cell.order'
+        [key]='one.key'
+        [value]='one.value'
+        [align]='one.align'
+        [width]='one.width'
+        [order]='one.order'
         (onSortsEvent)='this.onSorts( $event )'
         [type]='"head"'
         table-cell
@@ -49,9 +49,9 @@ import { TableSort } from '../shared/types/functions/table.sorts' ;
           this.type === "body" ||
           this.type === "body-click"
         )'
-        [key]='cell.key'
-        [value]='cell.value'
-        [align]='cell.align'
+        [key]='one.key'
+        [value]='one.value'
+        [align]='one.align'
         [type]='"body"'
         table-cell
         >
