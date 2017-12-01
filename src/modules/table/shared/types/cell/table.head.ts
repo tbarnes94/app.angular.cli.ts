@@ -6,5 +6,21 @@ import { TableAbstractCell } from './table.abstract.cell' ;
  */
 export class TableHead extends TableAbstractCell
 {
-  public order : string ;
+  public constructor
+  (
+    public readonly key : string = null ,
+    public readonly value : boolean | string = null ,
+    public readonly align : string = 'l' ,
+    public readonly width : number = 0 ,
+    public order : string = null ,
+  ) {
+    super
+    (
+      key ,
+      value ,
+      align ,
+      width ,
+    ) ;
+  }
+
 }

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Rx';
 
 import { TableSchemas } from '../../../modules/table';
 import { TemplateContainerComponent } from '../../../modules/template';
-import { TableBuild } from './table.helpers';;
+import { TableBuild } from './table.helpers';
 
 /**
  * https://angular.io/api/core/Component

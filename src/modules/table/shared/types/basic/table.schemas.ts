@@ -1,9 +1,9 @@
 /** @imports */
 import { TableCell } from '../cell/table.cell' ;
 import { TableHead } from '../cell/table.head' ;
+import { TablePageSchemas } from '../functions/table.pages' ;
+import { TableSort } from '../functions/table.sorts' ;
 import { TableRow } from '../row/table.row' ;
-import { TablePage } from './table.functions' ;
-import { TableSort } from './table.functions' ;
 
 /**
  * https://material.angular.io/components/table/overview
@@ -17,9 +17,13 @@ export type TableControl = TableHead
  */
 export class TableSchemas
 {
-  public readonly columns : TableRow<TableHead> ;
-  public readonly rows : Array<TableRow<TableControl>> ;
-  public readonly sorts : Array<TableSort> ;
-  public readonly page : TablePage ;
-  public readonly width : number ;
+  public constructor
+  (
+    public readonly heads : TableRow<TableHead> = null ,
+    public readonly bodys : Array<TableRow<TableControl>> = new Array() ,
+    public readonly sorts : Array<TableSort> = new Array() ,
+    public readonly pages : TablePageSchemas = null ,
+    public readonly width : number = 0 ,
+  ) {}
+
 }

@@ -7,7 +7,9 @@ import { BehaviorSubject } from 'rxjs/Rx' ;
 import { Observable } from 'rxjs/Rx' ;
 
 import { CommonComponent } from '../../commons' ;
-import { TableSort } from '../shared/types/basic/table.functions' ;
+import { TablePage } from '../shared/types/functions/table.pages' ;
+import { TablePageSchemas } from '../shared/types/functions/table.pages' ;
+import { TableSort } from '../shared/types/functions/table.sorts' ;
 import { TableControl } from '../shared/types/basic/table.schemas' ;
 import { TableSchemas } from '../shared/types/basic/table.schemas' ;
 import { TableHead } from '../shared/types/cell/table.head' ;
@@ -98,7 +100,12 @@ export class TableBasicComponent extends CommonComponent
   /**
    * http://reactivex.io/documentation/subject.html
    */
-  public readonly sorts$ : BehaviorSubject<Array<TableSort>> = new BehaviorSubject<Array<TableSort>>([]) ;
+  public readonly sortz$ : BehaviorSubject<Array<TableSort>> = new BehaviorSubject<Array<TableSort>>([]) ;
+
+  /**
+   * http://reactivex.io/documentation/subject.html
+   */
+  public readonly pagez$ : BehaviorSubject<TablePageSchemas> = new BehaviorSubject<TablePageSchemas>( null ) ;
 
   /**
    * http://reactivex.io/documentation/subject.html
@@ -113,10 +120,24 @@ export class TableBasicComponent extends CommonComponent
   /**
    * http://reactivex.io/documentation/observable.html
    */
+  public readonly pages$ : Observable<Array<TablePage>> = Observable.combineLatest
+    (
+      this.bodyz$ ,
+      this.pagez$ ,
+    )
+    .map( ( o ) => ({ datas : o[ 0 ] , pages : o[ 1 ] }))
+    .filter( ( o ) => ( !!o.datas ) )
+    .map( ( o ) => [ new TablePage( '1' , undefined , undefined , undefined ) ] )
+    .takeUntil( this.destroy$ )
+    ;
+
+  /**
+   * http://reactivex.io/documentation/observable.html
+   */
   public readonly heads$ : Observable<TableRow<TableControl>> = Observable.combineLatest
     (
       this.headz$ ,
-      this.sorts$ ,
+      this.sortz$ ,
     )
     .map( ( o ) => ({ datas : o[ 0 ] , sorts : o[ 1 ] }))
     .filter( ( o ) => ( !!o.datas ) )
@@ -130,7 +151,7 @@ export class TableBasicComponent extends CommonComponent
   public readonly bodys$ : Observable<Array<TableRow<TableControl>>> = Observable.combineLatest
     (
       this.bodyz$ ,
-      this.sorts$ ,
+      this.sortz$ ,
     )
     .map( ( o ) => ({ datas : o[ 0 ] , sorts : o[ 1 ] }))
     .map( ( o ) => this.toSorts( o.datas , o.sorts ) )
@@ -190,7 +211,7 @@ export class TableBasicComponent extends CommonComponent
       : []
       ;
 
-    this.sorts$.next( payload ) ;
+    this.sortz$.next( payload ) ;
 
   }
 
@@ -200,8 +221,8 @@ export class TableBasicComponent extends CommonComponent
    */
   public ngOnChanges() : void
   {
-    this.headz$.next( this.schemas.columns ) ;
-    this.bodyz$.next( this.schemas.rows ) ;
+    this.headz$.next( this.schemas.heads ) ;
+    this.bodyz$.next( this.schemas.bodys ) ;
   }
 
   /**
@@ -210,7 +231,8 @@ export class TableBasicComponent extends CommonComponent
    */
   public ngOnInit() : void
   {
-    this.sorts$.next( this.schemas.sorts ) ;
+    this.sortz$.next( this.schemas.sorts ) ;
+    this.pagez$.next( this.schemas.pages ) ;
   }
 
 }

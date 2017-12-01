@@ -6,8 +6,8 @@ import { Output } from '@angular/core' ;
 import { ViewEncapsulation } from '@angular/core' ;
 
 import { CommonComponent } from '../../commons' ;
-import { TableSort } from '../shared/types/basic/table.functions' ;
 import { TableControl } from '../shared/types/basic/table.schemas' ;
+import { TableSort } from '../shared/types/functions/table.sorts' ;
 
 /**
  * https://angular.io/api/core/Component

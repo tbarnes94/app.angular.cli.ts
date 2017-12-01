@@ -3,5 +3,9 @@
  */
 export abstract class TableAbstract
 {
-  public readonly key : string ;
+  public constructor
+  (
+    public readonly key : string = null ,
+  ) {}
+
 }

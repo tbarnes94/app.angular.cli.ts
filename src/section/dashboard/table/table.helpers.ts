@@ -1,43 +1,44 @@
+import { TableCell } from '../../../modules/table';
+import { TableHead } from '../../../modules/table';
+import { TablePageSchemas } from '../../../modules/table';
+import { TableRow } from '../../../modules/table';
+import { TableSchemas } from '../../../modules/table';
+import { TableSort } from '../../../modules/table';
+
 /**
  * https://material.angular.io/components/table/overview
  */
-export function TableBuild(o: any): any {
-
+export function TableBuild(o: any): TableSchemas {
   const d: any = o.datas;
   const t: any = o.translations;
-  return {
-    columns: {
-      key: 'thead',
-      children: [
-        { key: 'id',      value: t.columns.id,      align: 'l', width: 10 },
-        { key: 'name',    value: t.columns.name,    align: 'l', width: 40 },
-        { key: 'gender',  value: t.columns.gender,  align: 'l', width: 10 },
-        { key: 'amount',  value: t.columns.amount,  align: 'r', width: 20 },
-        { key: 'date',    value: t.columns.date,    align: 'l', width: 20 },
+  return new TableSchemas(
+    new TableRow(
+      'thead',
+      undefined,
+      undefined, [
+        new TableHead('id',     t.columns.id,     undefined,  10, undefined),
+        new TableHead('name',   t.columns.name,   undefined,  40, undefined),
+        new TableHead('gender', t.columns.gender, undefined,  10, undefined),
+        new TableHead('amount', t.columns.amount, 'r',        20, undefined),
+        new TableHead('date',   t.columns.date,   undefined,  20, undefined),
       ],
-    },
-    rows: d.map((i) => ({
-      raw: i,
-      key: i.id,
-      route: [ `./${i.id}` ],
-      children: [
-        { key: 'id',      value: i.id,                            align: 'l' },
-        { key: 'name',    value: i.name,                          align: 'l' },
-        { key: 'gender',  value: i.gender,                        align: 'l' },
-        { key: 'amount',  value: o.currency.transform(i.amount),  align: 'r' },
-        { key: 'date',    value: o.date.transform(i.date),        align: 'l' },
+    ),
+    d.map((i) => new TableRow(
+      i.id,
+      i,
+      [ `./${i.id}` ], [
+        new TableCell('id',     i.id,                           undefined,  undefined),
+        new TableCell('name',   i.name,                         undefined,  undefined),
+        new TableCell('gender', i.gender,                       undefined,  undefined),
+        new TableCell('amount', o.currency.transform(i.amount), 'r',        undefined),
+        new TableCell('date',   o.date.transform(i.date),       undefined,  undefined),
       ],
-    })),
-    // rows: [],
-    sorts: [
-      { key: 'gender', order: 'd' },
-      { key: 'amount', order: 'a' },
+    )),
+    [
+      new TableSort('gender', 'd'),
+      new TableSort('amount', 'a'),
     ],
-    page: {
-      current: 1,
-      size: 10,
-    },
-    width: o.width,
-  };
-
+    new TablePageSchemas(10, 1),
+    o.width,
+  );
 }
