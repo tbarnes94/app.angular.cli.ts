@@ -6,5 +6,12 @@ import { FormAbstract } from '../basic/form.abstract' ;
  */
 export abstract class FormAbstractGroup<T> extends FormAbstract
 {
-  public readonly children : Array<T> ;
+  public constructor
+  (
+    public readonly key : string = null ,
+    public readonly children : Array<T> = new Array() ,
+  ) {
+    super( key ) ;
+  }
+
 }

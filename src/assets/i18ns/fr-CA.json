@@ -126,6 +126,17 @@
       },
       "complete": "Submit fr",
       "logout": "Logout fr"
+    },
+    "table": {
+      "title": "Table fr",
+      "empty": "Table is currently empty fr.",
+      "columns": {
+        "id": "ID fr",
+        "amount": "Amount fr",
+        "gender": "Gender fr",
+        "name": "Name fr",
+        "date": "Date fr"
+      }
     }
   }
 }

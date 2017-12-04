@@ -126,6 +126,17 @@
       },
       "complete": "Submit",
       "logout": "Logout"
+    },
+    "table": {
+      "title": "Table",
+      "empty": "Table is currently empty.",
+      "columns": {
+        "id": "ID",
+        "amount": "Amount",
+        "gender": "Gender",
+        "name": "Name",
+        "date": "Date"
+      }
     }
   }
 }

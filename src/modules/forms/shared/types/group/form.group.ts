@@ -1,8 +1,8 @@
 /** @imports */
 import { ObjectStrings } from '../../../../commons' ;
-import { FormAny } from '../basic/form.functions' ;
-import { FormBoolean } from '../basic/form.functions' ;
-import { FormVoid } from '../basic/form.functions' ;
+import { FormAny } from '../functions/form.any' ;
+import { FormBoolean } from '../functions/form.boolean' ;
+import { FormVoid } from '../functions/form.void' ;
 import { FormAbstractGroup } from './form.abstract.group' ;
 
 /**
@@ -10,11 +10,23 @@ import { FormAbstractGroup } from './form.abstract.group' ;
  */
 export class FormGroup<T> extends FormAbstractGroup<T>
 {
-  public readonly section? : boolean ;
-  public readonly label? : FormAny | string ;
-  public readonly error? : FormAny | ObjectStrings ;
-  public readonly shown? : FormBoolean | boolean ;
-  public readonly onValue? : FormVoid ;
-  public readonly tooltip? : string ;
-  public readonly width? : string ;
+  public constructor
+  (
+    public readonly key : string = null ,
+    public readonly section : boolean = false ,
+    public readonly label : FormAny | string = null ,
+    public readonly error : FormAny | ObjectStrings = {} ,
+    public readonly shown : FormBoolean | boolean = true ,
+    public readonly onValue : FormVoid = null ,
+    public readonly tooltip : string = null ,
+    public readonly width : string = null ,
+    public readonly children : Array<T> = new Array() ,
+  ) {
+    super
+    (
+      key ,
+      children
+    ) ;
+  }
+
 }

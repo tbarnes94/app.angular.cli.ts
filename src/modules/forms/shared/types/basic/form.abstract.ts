@@ -3,5 +3,9 @@
  */
 export abstract class FormAbstract
 {
-  public readonly key : string ;
+  public constructor
+  (
+    public readonly key : string = null ,
+  ) {}
+
 }

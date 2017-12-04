@@ -5,199 +5,296 @@ import { CommonService } from '../../../modules/commons';
 import { NumericAllPattern } from '../../../modules/commons';
 import { toRegex } from '../../../modules/commons';
 import { toRegexGroup } from '../../../modules/commons';
+import { FormAction } from '../../../modules/forms';
+import { FormCheck } from '../../../modules/forms';
+import { FormDatepicker } from '../../../modules/forms';
+import { FormGroup } from '../../../modules/forms';
+import { FormInput } from '../../../modules/forms';
+import { FormRadio } from '../../../modules/forms';
+import { FormSchemas } from '../../../modules/forms';
+import { FormSection } from '../../../modules/forms';
+import { FormSelect } from '../../../modules/forms';
 
 /**
  * https://angular.io/api/forms/FormGroup
  */
-export function FormBuild(o: any): any {
+export function FormBuild(o: any): FormSchemas {
   const t: any = o.translations;
   const AlphaRegex: RegExp = toRegex(toRegexGroup(AlphaAllPattern));
   const NumericRegex: RegExp = toRegex(toRegexGroup(NumericAllPattern));
-  return {
-    divider: true,
-    actions: [ {
-      key: 'complete',
-      label: t.complete,
-      element: 'button',
-      color: 'primary',
-      disabled: (o.loader),
-      type: 'submit',
-    }, {
-      key: 'a.href',
-      label: t.actions.href,
-      element: 'a',
-      color: 'accent',
-      href: 'https://www.google.com',
-      target: '_blank',
-    }, {
-      key: 'a.click',
-      label: t.actions.click,
-      element: 'a',
-      color: 'accent',
-      click: 'onLogout',
-    }, {
-      key: 'a.route',
-      label: t.actions.route,
-      element: 'a',
-      color: 'accent',
-      route: [ '/auth' ],
-    }, {
-      key: 'logout',
-      label: t.logout,
-      element: 'button',
-      color: 'warn',
-      disabled: (f) => (!f.controls.form.controls.check.controls.one.value),
-      click: 'onLogout',
-      type: 'button',
-    } ],
-    sections: [ {
-      key: 'form',
-      divider: true,
-      children: [ {
-        key: 'input',
-        label: t.input.label,
-        tooltip: t.input.tooltip,
-        error: t.input.error,
-        onValue: (f, m) => {
-          f.controls.form.controls.shown.controls.hides.controls.one.setValue(m.controls.one.value);
-        },
-        width: '50%',
-        children: [ {
-          key: 'one',
-          element: 'input',
-          validators: [ Validators.required, Validators.pattern(NumericRegex) ],
-          placeholder: t.input.placeholder,
-          maxlength: 100,
-          prefix: 'dollar',
-          suffix: 'times',
-          type: 'text',
-          width: '100%'
-        } ]
-      }, {
-        key: 'multiple',
-        label: t.multiple.label,
-        tooltip: t.multiple.tooltip,
-        error: t.multiple.error,
-        width: '50%',
-        children: [ {
-          key: 'one',
-          element: 'input',
-          validators: [ Validators.required, Validators.pattern(AlphaRegex) ],
-          placeholder: t.multiple.placeholder.one,
-          maxlength: 100,
-          type: 'text',
-          width: '50%'
-        }, {
-          key: 'two',
-          element: 'input',
-          validators: [ Validators.required, Validators.pattern(AlphaRegex) ],
-          placeholder: t.multiple.placeholder.two,
-          maxlength: 100,
-          type: 'text',
-          width: '50%'
-        } ]
-      }, {
-        key: 'datepicker',
-        label: t.datepicker.label,
-        tooltip: t.datepicker.tooltip,
-        error: t.datepicker.error,
-        width: '50%',
-        children: [ {
-          key: 'one',
-          element: 'datepicker',
-          validators: [ Validators.required ],
-          readonly: true,
-          placeholder: t.datepicker.placeholder,
-          maxlength: 100,
-          type: 'text',
-          min: new Date(),
-          max: new Date('2020-01-01'),
-          width: '100%'
-        } ]
-      }, {
-        key: 'selects',
-        label: t.selects.label,
-        tooltip: t.selects.tooltip,
-        error: t.selects.error,
-        onValue: (f, m) => {
-          f.controls.form.controls.radio.controls.one.setValue(null);
-        },
-        width: '50%',
-        children: [ {
-          key: 'one',
-          element: 'select',
-          validators: [ Validators.required ],
-          placeholder: t.selects.placeholder,
-          options: t.selects.options,
-          width: '100%'
-        } ]
-      }, {
-        key: 'shown',
-        section: true,
-        width: '50%',
-        children: [ {
-          key: 'shown',
-          label: t.shown.label,
-          tooltip: t.shown.tooltip,
-          error: t.shown.error,
-          width: '100%',
-          children: [ {
-            key: 'one',
-            element: 'input',
-            validators: [ Validators.required ],
-            placeholder: t.shown.placeholder,
-            maxlength: 100,
-            type: 'text',
-            width: '100%'
-          } ]
-        }, {
-          key: 'hides',
-          label: (f) => ( f.controls.form.controls.shown.controls.shown.controls.one.value ),
-          tooltip: t.hides.tooltip,
-          error: t.hides.error,
-          shown: (f) => ( f.controls.form.controls.shown.controls.shown.controls.one.value ),
-          width: '100%',
-          children: [ {
-            key: 'one',
-            element: 'input',
-            validators: [ Validators.required ],
-            placeholder: t.hides.placeholder,
-            maxlength: 100,
-            type: 'text',
-            width: '100%'
-          } ]
-        } ]
-      }, {
-        key: 'radio',
-        label: t.radio.label,
-        tooltip: t.radio.tooltip,
-        error: t.radio.error,
-        width: '50%',
-        children: [ {
-          key: 'one',
-          element: 'radio',
-          validators: [ Validators.required ],
-          color: 'accent',
-          options: (f) => ( t.radio.options[ f.controls.form.controls.selects.controls.one.value ] ),
-          width: '100%'
-        } ]
-      }, {
-        key: 'check',
-        label: t.check.label,
-        tooltip: t.check.tooltip,
-        error: t.check.error,
-        width: '50%',
-        children: [ {
-          key: 'one',
-          element: 'check',
-          validators: [ Validators.requiredTrue ],
-          color: 'warn',
-          label: t.check.placeholder,
-          width: '100%'
-        } ]
-      } ],
-    } ]
-  };
+  return new FormSchemas([
+    new FormAction(
+      'complete',
+      'button',
+      t.complete,
+      'primary',
+      ( o.loader ),
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      'submit'
+    ),
+    new FormAction(
+      'a.href',
+      'a',
+      t.actions.href,
+      'accent',
+      undefined,
+      undefined,
+      undefined,
+      'https://www.google.com',
+      '_blank',
+      undefined
+    ),
+    new FormAction(
+      'a.click',
+      'a',
+      t.actions.click,
+      'accent',
+      undefined,
+      undefined,
+      'onLogout',
+      undefined,
+      undefined,
+      undefined
+    ),
+    new FormAction(
+      'a.route',
+      'a',
+      t.actions.route,
+      'accent',
+      undefined,
+      [ '/auth' ],
+      undefined,
+      undefined,
+      undefined,
+      undefined
+    ),
+    new FormAction(
+      'logout',
+      'button',
+      t.logout,
+      'warn',
+      (f: any) => (!f.controls.form.controls.check.controls.one.value),
+      undefined,
+      'onLogout',
+      undefined,
+      undefined,
+      'button'
+    ),
+  ], [
+    new FormSection(
+      'form',
+      undefined,
+      undefined,
+      true, [
+      new FormGroup(
+        'input',
+        undefined,
+        t.input.label,
+        t.input.error,
+        undefined,
+        (f: any, m: any) => { f.controls.form.controls.shown.controls.hides.controls.one.setValue(m.controls.one.value); },
+        t.input.tooltip,
+        '50%', [
+        new FormInput(
+          'one',
+          undefined,
+          [ Validators.required, Validators.pattern(NumericRegex) ],
+          undefined,
+          undefined,
+          undefined,
+          '100%',
+          t.input.placeholder,
+          100,
+          'dollar',
+          'times',
+          undefined
+        ),
+      ]),
+      new FormGroup(
+        'multiple',
+        undefined,
+        t.multiple.label,
+        t.multiple.error,
+        undefined,
+        undefined,
+        t.multiple.tooltip,
+        '50%', [
+        new FormInput(
+          'one',
+          undefined,
+          [ Validators.required, Validators.pattern(AlphaRegex) ],
+          undefined,
+          undefined,
+          undefined,
+          '50%',
+          t.multiple.placeholder.one,
+          100,
+          undefined,
+          undefined,
+          undefined
+        ),
+        new FormInput(
+          'two',
+          undefined,
+          [ Validators.required, Validators.pattern(AlphaRegex) ],
+          undefined,
+          undefined,
+          undefined,
+          '50%',
+          t.multiple.placeholder.two,
+          100,
+          undefined,
+          undefined,
+          undefined
+        ),
+      ]),
+      new FormGroup(
+        'shown',
+        true,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        '50%', [
+        new FormGroup(
+          'shown',
+          undefined,
+          t.shown.label,
+          t.shown.error,
+          undefined,
+          undefined,
+          t.shown.tooltip,
+          '100%', [
+          new FormInput(
+            'one',
+            undefined,
+            [ Validators.required ],
+            undefined,
+            undefined,
+            undefined,
+            '100%',
+            t.shown.placeholder,
+            100,
+            undefined,
+            undefined,
+            undefined
+          ),
+        ]),
+        new FormGroup(
+          'hides',
+          undefined,
+          (f: any) => ( f.controls.form.controls.shown.controls.shown.controls.one.value ),
+          t.hides.error,
+          (f: any) => ( f.controls.form.controls.shown.controls.shown.controls.one.value ),
+          undefined,
+          t.hides.tooltip,
+          '100%', [
+          new FormInput(
+            'one',
+            undefined,
+            [ Validators.required ],
+            undefined,
+            undefined,
+            undefined,
+            '100%',
+            t.hides.placeholder,
+            100,
+            undefined,
+            undefined,
+            undefined
+          ),
+        ]),
+      ]),
+      new FormGroup(
+        'datepicker',
+        undefined,
+        t.datepicker.label,
+        t.datepicker.error,
+        undefined,
+        undefined,
+        t.datepicker.tooltip,
+        '50%', [
+        new FormDatepicker(
+          'one',
+          undefined,
+          [ Validators.required ],
+          undefined,
+          true,
+          undefined,
+          '100%',
+          new Date(),
+          new Date('2020-01-01')
+        ),
+      ]),
+      new FormGroup(
+        'selects',
+        undefined,
+        t.selects.label,
+        t.selects.error,
+        undefined,
+        (f: any, m: any) => { f.controls.form.controls.radio.controls.one.setValue(null); },
+        t.selects.tooltip,
+        '50%', [
+        new FormSelect(
+          'one',
+          undefined,
+          [ Validators.required ],
+          undefined,
+          undefined,
+          undefined,
+          '100%',
+          t.selects.placeholder,
+          t.selects.options
+        ),
+      ]),
+      new FormGroup(
+        'radio',
+        undefined,
+        t.radio.label,
+        t.radio.error,
+        undefined,
+        undefined,
+        t.radio.tooltip,
+        '50%', [
+        new FormRadio(
+          'one',
+          undefined,
+          [ Validators.required ],
+          undefined,
+          undefined,
+          undefined,
+          '100%',
+          'accent',
+          (f: any) => ( t.radio.options[ f.controls.form.controls.selects.controls.one.value ] )
+        ),
+      ]),
+      new FormGroup(
+        'check',
+        undefined,
+        t.check.label,
+        t.check.error,
+        undefined,
+        undefined,
+        t.check.tooltip,
+        '50%', [
+        new FormCheck(
+          'one',
+          undefined,
+          [ Validators.requiredTrue ],
+          undefined,
+          undefined,
+          undefined,
+          '100%',
+          'warn',
+          t.check.placeholder
+        ),
+      ]),
+    ]),
+  ], true);
 }
 
 /**

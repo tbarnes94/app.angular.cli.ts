@@ -1,2 +1,15 @@
+export * from './basic/basic.component' ;
+export * from './cell/cell.component' ;
+export * from './pages/pages.component' ;
+export * from './row/row.component' ;
 export * from './shared/service/table.service' ;
+export * from './shared/types/basic/table.abstract' ;
+export * from './shared/types/basic/table.schemas' ;
+export * from './shared/types/cell/table.abstract.cell' ;
+export * from './shared/types/cell/table.cell' ;
+export * from './shared/types/cell/table.head' ;
+export * from './shared/types/functions/table.pages' ;
+export * from './shared/types/functions/table.sorts' ;
+export * from './shared/types/row/table.abstract.row' ;
+export * from './shared/types/row/table.row' ;
 export * from './table.module' ;

@@ -34,7 +34,7 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
       <forms-section
         *ngFor='let sec of this.schemas.sections'
         [title]='sec.title'
-        [description]='sec.description'
+        [subtitle]='sec.subtitle'
         [divider]='sec.divider'
         >
         <div
@@ -278,7 +278,7 @@ export class FormsBasicComponent extends CommonComponent
     let outpt : any = {} ;
     const keys : Array<string> = ( isObject( input ) )
       ? Object.keys( input )
-      : []
+      : new Array()
       ;
 
     if ( keys.length > 0 ) {
@@ -286,7 +286,7 @@ export class FormsBasicComponent extends CommonComponent
       const first : any = input[ keys[ 0 ] ] ;
       const keyz : Array<string> = ( isObject( first ) )
         ? Object.keys( first )
-        : []
+        : new Array()
         ;
 
       if ( keys.length > 1 || keyz.length > 0 ) {

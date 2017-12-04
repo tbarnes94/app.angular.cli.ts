@@ -21,14 +21,15 @@ export class FormService
     language$ : Observable<string> ,
     translations$ : Observable<any> ,
     loads$ : Observable<boolean> ,
+    datas$ : Observable<any> = Observable.of({}) ,
     options$ : Observable<any> = Observable.of({}) ,
     parse : ( o : any ) => any ,
   )
   : Observable<FormSchemas>
   {
     return Observable
-      .combineLatest( language$ , translations$ , loads$ , options$ )
-      .map( ( o ) => ({ language : o[0] , translations : o[1] , loads : o[2] , options : o[3] }) )
+      .combineLatest( language$ , translations$ , loads$ , datas$ , options$ )
+      .map( ( o ) => ({ language : o[0] , translations : o[1] , loads : o[2] , datas : o[3] , options : o[4] }) )
       .filter( ( o ) => ( isNotEmpty( o.language ) && isNotEmpty( o.translations ) && !!o.options ) )
       .map( ( o : any ) =>
       {

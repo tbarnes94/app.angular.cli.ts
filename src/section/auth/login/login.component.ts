@@ -60,6 +60,7 @@ export class AuthLoginComponent extends TemplateContainerComponent {
         this.translations$,
         Observable.of(false),
         undefined,
+        undefined,
         FormBuild,
       )
       .takeUntil(this.destroy$)

@@ -3,6 +3,10 @@
  */
 export class FormOption
 {
-  public readonly title : string ;
-  public readonly value : string ;
+  public constructor
+  (
+    public readonly title : string = null ,
+    public readonly value : string = null ,
+  ) {}
+
 }

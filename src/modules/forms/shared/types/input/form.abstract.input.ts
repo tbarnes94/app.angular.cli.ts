@@ -7,10 +7,17 @@ import { FormAbstract } from '../basic/form.abstract' ;
  */
 export abstract class FormAbstractInput extends FormAbstract
 {
-  public readonly element : string ;
-  public readonly validators : Array<ValidatorFn> ;
-  public readonly disabled? : boolean ;
-  public readonly readonly? : boolean ;
-  public readonly value : boolean | string ;
-  public readonly width? : string ;
+  public constructor
+  (
+    public readonly key : string = null ,
+    public readonly element : string = null ,
+    public readonly validators : Array<ValidatorFn> = new Array() ,
+    public readonly disabled : boolean = false ,
+    public readonly readonly : boolean = false ,
+    public readonly value : boolean | string = null ,
+    public readonly width : string = null ,
+  ) {
+    super( key ) ;
+  }
+
 }

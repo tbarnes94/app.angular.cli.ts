@@ -21,11 +21,11 @@ import { CommonComponent } from '../../commons' ;
       >
       {{ this.title }}
     </p>
-    <!-- description -->
+    <!-- subtitle -->
     <p
-      *ngIf='( this.description )'
+      *ngIf='( this.subtitle )'
       >
-      {{ this.description }}
+      {{ this.subtitle }}
     </p>
     <!-- divider -->
     <hr *ngIf='( this.divider )' />
@@ -45,7 +45,7 @@ export class FormsSectionComponent extends CommonComponent
   /**
    * https://angular.io/api/core/Input
    */
-  @Input() public readonly description : string = null ;
+  @Input() public readonly subtitle : string = null ;
 
   /**
    * https://angular.io/api/core/Input

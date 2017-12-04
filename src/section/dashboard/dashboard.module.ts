@@ -5,6 +5,7 @@ import { CommonModule } from '../../modules/commons';
 import { TemplateModule } from '../../modules/template';
 import { DashboardRouteModule } from './dashboard-route.module';
 import { DashboardFormsComponent } from './forms/forms.component';
+import { DashboardTableComponent } from './table/table.component';
 
 /**
  * https://angular.io/api/core/NgModule
@@ -26,6 +27,7 @@ export class DashboardRootModule {
   ],
   declarations: [
     DashboardFormsComponent,
+    DashboardTableComponent,
   ],
   exports: [],
 })
