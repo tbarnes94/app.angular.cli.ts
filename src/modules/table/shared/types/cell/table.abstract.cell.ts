@@ -10,6 +10,7 @@ export abstract class TableAbstractCell extends TableAbstract
   (
     public readonly key : string = null ,
     public readonly value : boolean | string = null ,
+    public readonly shown : boolean = true ,
     public readonly align : string = null ,
     public readonly width : number = null ,
   ) {

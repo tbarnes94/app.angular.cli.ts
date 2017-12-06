@@ -10,6 +10,7 @@ export class TableHead extends TableAbstractCell
   (
     public readonly key : string = null ,
     public readonly value : boolean | string = null ,
+    public readonly shown : boolean = true ,
     public readonly align : string = 'l' ,
     public readonly width : number = 0 ,
     public order : string = null ,
@@ -18,6 +19,7 @@ export class TableHead extends TableAbstractCell
     (
       key ,
       value ,
+      shown ,
       align ,
       width ,
     ) ;

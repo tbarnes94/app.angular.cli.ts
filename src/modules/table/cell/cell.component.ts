@@ -18,9 +18,12 @@ import { TableSort } from '../shared/types/functions/table.sorts' ;
   styleUrls : [ './cell.component.styl' ] ,
   host :
   {
+    '[class.table-cell]' : 'true' ,
     '[class.table-cell-head]' : '( this.type === "head" )' ,
-    '[class.table-cell-left]' : '( this.align === "l" )' ,
+    '[class.table-cell-body]' : '( this.type === "body" )' ,
+    '[class.table-cell-click]' : '( this.type === "body-click" )' ,
     '[class.table-cell-right]' : '( this.align === "r" )' ,
+    '[class.table-cell-left]' : '( this.align === "l" )' ,
     '[style.width]' : 'this.width + "%"' ,
   } ,
   template :
@@ -30,13 +33,15 @@ import { TableSort } from '../shared/types/functions/table.sorts' ;
       *ngIf='( this.type === "head" )'
       (click)='this.onSorts( this.key , this.order )'
       >
-      {{ this.value }}
+      <span>
+        {{ this.value }}
+      </span>
       <i
         [ngClass]=
         '{
-          "fa-sort-up" : ( this.order === "a" ) ,
+          "fa-sort" : ( !this.order ) ,
           "fa-sort-down" : ( this.order === "d" ) ,
-          "fa-sort" : ( !this.order )
+          "fa-sort-up" : ( this.order === "a" )
         }'
         aria-hidden='true'
         class='fa'
@@ -44,10 +49,24 @@ import { TableSort } from '../shared/types/functions/table.sorts' ;
       </i>
     </div>
     <!-- td -->
-    <div
-      *ngIf='( this.type === "body" )'
+    <div *ngIf=
+      '(
+        this.type === "body" ||
+        this.type === "body-click"
+      )'
       >
-      {{ this.value }}
+      <span>
+        {{ this.value }}
+      </span>
+      <i *ngIf=
+        '(
+          this.last &&
+          this.type === "body-click"
+        )'
+        class='fa fa-chevron-right'
+        aria-hidden='true'
+        >
+      </i>
     </div>
   ` ,
 })
@@ -87,6 +106,21 @@ export class TableCellComponent extends CommonComponent
    * https://angular.io/api/core/Output
    */
   @Output() public readonly onSortsEvent : EventEmitter<TableSort> = new EventEmitter() ;
+
+  /**
+   * https://angular.io/api/core/Input
+   */
+  @Input() public readonly index : number = 0 ;
+
+  /**
+   * https://angular.io/api/core/Input
+   */
+  @Input() public readonly first : boolean = false ;
+
+  /**
+   * https://angular.io/api/core/Input
+   */
+  @Input() public readonly last : boolean = false ;
 
   /**
    * https://angular.io/guide/user-input

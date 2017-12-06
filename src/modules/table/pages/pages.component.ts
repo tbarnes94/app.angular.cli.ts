@@ -17,6 +17,10 @@ import { TablePageSchemas } from '../shared/types/functions/table.pages' ;
   selector : '[table-pages]' ,
   encapsulation : ViewEncapsulation.Emulated ,
   styleUrls : [ './pages.component.styl' ] ,
+  host :
+  {
+    '[class.table-pages]' : 'true' ,
+  } ,
   template :
   `
     <!-- pages -->
@@ -45,6 +49,7 @@ import { TablePageSchemas } from '../shared/types/functions/table.pages' ;
           [routerLink]=''
           [ngClass]='{ "table-pages-current" : one.current }'
           (click)='this.onPages( one.current , one.key )'
+          class='table-pages-one'
           >
           <span>{{ one.key }}</span>
         </a>

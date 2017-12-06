@@ -26,10 +26,10 @@ import { TableRow } from '../shared/types/row/table.row' ;
   styleUrls : [ './basic.component.styl' ] ,
   template :
   `
+    <!-- table -->
     <ng-container
       *ngIf='( this.bodys$ | async ) as bodys'
       >
-      <!-- table -->
       <table
         *ngIf='( bodys.length > 0 )'
         class='table-basic'
@@ -49,16 +49,19 @@ import { TableRow } from '../shared/types/row/table.row' ;
         <!-- tbody -->
         <tbody>
           <ng-container
-            *ngFor='let one of bodys ; index as i ;'
+            *ngFor='let one of bodys ; even as even ; index as index ; first as first ; last as last ;'
             >
             <!-- route -->
             <tr
               *ngIf='( one.route )'
               [key]='one.key'
               [children]='one.children'
-              [sequence]='( i % 2 === 0 ) ? "even" : "odd"'
               [routerLink]='one.route'
               [type]='"body-click"'
+              [sequence]='( even ) ? "e" : "o"'
+              [index]='index'
+              [first]='first'
+              [last]='last'
               table-row
               >
             </tr>
@@ -67,8 +70,11 @@ import { TableRow } from '../shared/types/row/table.row' ;
               *ngIf='( !one.route )'
               [key]='one.key'
               [children]='one.children'
-              [sequence]='( i % 2 === 0 ) ? "even" : "odd"'
               [type]='"body"'
+              [sequence]='( even ) ? "e" : "o"'
+              [index]='index'
+              [first]='first'
+              [last]='last'
               table-row
               >
             </tr>
@@ -92,6 +98,7 @@ import { TableRow } from '../shared/types/row/table.row' ;
       <!-- empty -->
       <div
         *ngIf='( bodys.length <= 0 )'
+        class='table-empty'
         >
         <ng-content
           select='.table-empty'

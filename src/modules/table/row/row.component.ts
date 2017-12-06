@@ -19,43 +19,54 @@ import { TableSort } from '../shared/types/functions/table.sorts' ;
   styleUrls : [ './row.component.styl' ] ,
   host :
   {
+    '[class.table-row]' : 'true' ,
     '[class.table-row-head]' : '( this.type === "head" )' ,
+    '[class.table-row-body]' : '( this.type === "body" )' ,
     '[class.table-row-click]' : '( this.type === "body-click" )' ,
-    '[class.table-row-even]' : '( this.sequence === "even" )' ,
-    '[class.table-row-odd]' : '( this.sequence === "odd" )' ,
+    '[class.table-row-even]' : '( this.sequence === "e" )' ,
+    '[class.table-row-odd]' : '( this.sequence === "o" )' ,
   } ,
   template :
   `
+    <!-- row -->
     <ng-container
-      *ngFor='let one of this.children'
+      *ngFor='let one of this.children ; index as index ; first as first ; last as last ;'
       >
-      <!-- th -->
-      <th
-        *ngIf='( this.type === "head" )'
-        [key]='one.key'
-        [value]='one.value'
-        [align]='one.align'
-        [width]='one.width'
-        [order]='one.order'
-        (onSortsEvent)='this.onSorts( $event )'
-        [type]='"head"'
-        table-cell
-        >
-      </th>
-      <!-- td -->
-      <td
-        *ngIf=
-        '(
-          this.type === "body" ||
-          this.type === "body-click"
-        )'
-        [key]='one.key'
-        [value]='one.value'
-        [align]='one.align'
-        [type]='"body"'
-        table-cell
-        >
-      </td>
+      <ng-container *ngIf='one.shown' >
+        <!-- th -->
+        <th
+          *ngIf='( this.type === "head" )'
+          [key]='one.key'
+          [value]='one.value'
+          [align]='one.align'
+          [width]='one.width'
+          [order]='one.order'
+          [type]='this.type'
+          (onSortsEvent)='this.onSorts( $event )'
+          [index]='index'
+          [first]='first'
+          [last]='last'
+          table-cell
+          >
+        </th>
+        <!-- td -->
+        <td
+          *ngIf=
+          '(
+            this.type === "body" ||
+            this.type === "body-click"
+          )'
+          [key]='one.key'
+          [value]='one.value'
+          [align]='one.align'
+          [type]='this.type'
+          [index]='index'
+          [first]='first'
+          [last]='last'
+          table-cell
+          >
+        </td>
+      </ng-container>
     </ng-container>
   ` ,
 })
@@ -74,12 +85,27 @@ export class TableRowComponent extends CommonComponent
   /**
    * https://angular.io/api/core/Input
    */
+  @Input() public readonly type : string = 'body' ;
+
+  /**
+   * https://angular.io/api/core/Input
+   */
   @Input() public readonly sequence : string = null ;
 
   /**
    * https://angular.io/api/core/Input
    */
-  @Input() public readonly type : string = 'body' ;
+  @Input() public readonly index : number = 0 ;
+
+  /**
+   * https://angular.io/api/core/Input
+   */
+  @Input() public readonly first : boolean = false ;
+
+  /**
+   * https://angular.io/api/core/Input
+   */
+  @Input() public readonly last : boolean = false ;
 
   /**
    * https://angular.io/api/core/Output
