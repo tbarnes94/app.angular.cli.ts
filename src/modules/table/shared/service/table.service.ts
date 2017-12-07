@@ -23,7 +23,7 @@ export class TableService
     width$ : Observable<number> ,
     datas$ : Observable<Array<any>> = Observable.of([]) ,
     options$ : Observable<any> = Observable.of({}) ,
-    parse : ( o : any ) => any ,
+    parse : any ,
   )
   : Observable<TableSchemas>
   {

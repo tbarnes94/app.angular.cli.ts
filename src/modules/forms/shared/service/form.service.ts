@@ -23,7 +23,7 @@ export class FormService
     loads$ : Observable<boolean> ,
     datas$ : Observable<any> = Observable.of({}) ,
     options$ : Observable<any> = Observable.of({}) ,
-    parse : ( o : any ) => any ,
+    parse : any ,
   )
   : Observable<FormSchemas>
   {
