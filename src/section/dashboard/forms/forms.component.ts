@@ -41,9 +41,18 @@ import { FormSubmit } from './form.helpers';
 export class DashboardFormsComponent extends TemplateContainerComponent {
 
   /**
-   * https://angular.io/api/forms/FormGroup
+   * http://reactivex.io/documentation/observable.html
    */
-  public schemas$: Observable<FormSchemas>;
+  public schemas$: Observable<FormSchemas> = this.forms.build$(
+      this.language$,
+      this.translations$,
+      Observable.of(false),
+      undefined,
+      undefined,
+      FormBuild,
+    )
+    .takeUntil(this.destroy$)
+    ;
 
   /**
    * https://angular.io/guide/user-input
@@ -54,28 +63,18 @@ export class DashboardFormsComponent extends TemplateContainerComponent {
   }
 
   /**
+   * https://angular.io/guide/user-input
+   */
+  public onLogout(): void {
+    this.common.dispatch(new AuthLogout(null));
+  }
+
+  /**
    * https://angular.io/api/core/OnInit
    * https://angular.io/api/core/OnInit#ngOnInit
    */
   public ngOnInit(): void {
     this.key$.next('dashboard.forms');
-    this.schemas$ = this.forms.build$(
-        this.language$,
-        this.translations$,
-        Observable.of(false),
-        undefined,
-        undefined,
-        FormBuild,
-      )
-      .takeUntil(this.destroy$)
-      ;
-  }
-
-  /**
-   * https://angular.io/guide/user-input
-   */
-  public onLogout(): void {
-    this.common.dispatch(new AuthLogout(null));
   }
 
 }

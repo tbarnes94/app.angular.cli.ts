@@ -37,9 +37,18 @@ import { TableBuild } from './table.helpers';
 export class DashboardTableComponent extends TemplateContainerComponent {
 
   /**
-   * https://angular.io/api/forms/FormGroup
+   * http://reactivex.io/documentation/observable.html
    */
-  public schemas$: Observable<TableSchemas>;
+  public schemas$: Observable<TableSchemas> = this.table.build$(
+      this.language$,
+      this.translations$,
+      this.common.width$,
+      this.http.get<Array<any>>('/assets/mocks/table.json'),
+      undefined,
+      TableBuild,
+    )
+    .takeUntil(this.destroy$)
+    ;
 
   /**
    * https://angular.io/api/core/OnInit
@@ -47,16 +56,6 @@ export class DashboardTableComponent extends TemplateContainerComponent {
    */
   public ngOnInit(): void {
     this.key$.next('dashboard.table');
-    this.schemas$ = this.table.build$(
-        this.language$,
-        this.translations$,
-        this.common.width$,
-        this.http.get<Array<any>>('/assets/mocks/table.json'),
-        undefined,
-        TableBuild,
-      )
-      .takeUntil(this.destroy$)
-      ;
   }
 
 }

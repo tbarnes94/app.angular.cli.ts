@@ -37,9 +37,18 @@ import { FormSubmit } from './form.helpers';
 export class AuthLoginComponent extends TemplateContainerComponent {
 
   /**
-   * https://angular.io/api/forms/FormGroup
+   * http://reactivex.io/documentation/observable.html
    */
-  public schemas$: Observable<FormSchemas>;
+  public schemas$: Observable<FormSchemas> = this.forms.build$(
+      this.language$,
+      this.translations$,
+      Observable.of(false),
+      undefined,
+      undefined,
+      FormBuild,
+    )
+    .takeUntil(this.destroy$)
+    ;
 
   /**
    * https://angular.io/guide/user-input
@@ -55,16 +64,6 @@ export class AuthLoginComponent extends TemplateContainerComponent {
    */
   public ngOnInit(): void {
     this.key$.next('auth.login');
-    this.schemas$ = this.forms.build$(
-        this.language$,
-        this.translations$,
-        Observable.of(false),
-        undefined,
-        undefined,
-        FormBuild,
-      )
-      .takeUntil(this.destroy$)
-      ;
   }
 
 }
