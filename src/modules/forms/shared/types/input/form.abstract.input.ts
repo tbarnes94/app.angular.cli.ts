@@ -14,7 +14,7 @@ export abstract class FormAbstractInput extends FormAbstract
     public readonly validators : Array<ValidatorFn> = new Array() ,
     public readonly disabled : boolean = false ,
     public readonly readonly : boolean = false ,
-    public readonly value : boolean | string = null ,
+    public readonly value : Date | boolean | string = null ,
     public readonly width : string = null ,
   ) {
     super( key ) ;
