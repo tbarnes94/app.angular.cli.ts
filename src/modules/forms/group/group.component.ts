@@ -101,7 +101,7 @@ import { FormControl } from '../shared/types/basic/form.schemas' ;
             [type]='input.type'
             [min]='input.min'
             [max]='input.max'
-            tabIndex='-1'
+            tabindex='-1'
             />
           <mat-datepicker-toggle
             matSuffix
