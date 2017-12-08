@@ -11,6 +11,7 @@ import { BehaviorSubject } from 'rxjs/Rx' ;
 import { Observable } from 'rxjs/Rx' ;
 
 import { CommonService } from '../../../commons' ;
+import { ObjectAny } from '../../../commons' ;
 import { TranslateLanguage } from '../store/translate.actions' ;
 import { TranslateTranslations } from '../store/translate.actions' ;
 import { TranslateOptions } from '../types/translate.options' ;
@@ -32,8 +33,8 @@ export class TranslateService
   /**
    * http://reactivex.io/documentation/observable.html
    */
-  public readonly translations$ : Observable<any> = this.common
-    .select<any>([ 'translate' , 'translations' ])
+  public readonly translations$ : Observable<ObjectAny> = this.common
+    .select<ObjectAny>([ 'translate' , 'translations' ])
     ;
 
   /**
@@ -107,26 +108,23 @@ export class TranslateService
    * @param translations
    * @param input
    */
-  public onTitleMap( translations : any , input : string ) : string
+  public onTitleMap( translations : ObjectAny , input : string ) : string
   {
     return input
       .split( '.' )
-      .reduce( this.onTitleReduce.bind( this ) , translations )
-      ;
-  }
-
-  /**
-   * @param total
-   * @param key
-   * @param index
-   */
-  public onTitleReduce( total : any , key : string , index : number ) : string | any
-  {
-    return total[ key ]
-      ? total[ key ]
-      : ( typeof total === 'string' )
-        ? total
-        : ''
+      .reduce
+      (
+        ( total , current ) =>
+        {
+          return total[ current ]
+            ? total[ current ]
+            : ( typeof total === 'string' )
+              ? total
+              : ''
+            ;
+        } ,
+        translations ,
+      )
       ;
   }
 

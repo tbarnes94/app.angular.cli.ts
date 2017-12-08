@@ -13,6 +13,8 @@ import { Observable } from 'rxjs/Rx' ;
 
 import { CommonAction } from '../store/common.action' ;
 import { CommonLoads } from '../store/common.actions' ;
+import { ObjectAny } from '../types/object.any' ;
+import { Operator } from '../types/operator' ;
 import { State } from '../types/state' ;
 
 /**
@@ -104,45 +106,40 @@ export class CommonService
 
   /**
    * @param nodes
-   * @param filters
+   * @param operators
    * @param context
    * @returns http://reactivex.io/documentation/observable.html
    */
   public select<T>(
     nodes : Array<string> ,
-    filters : Observable<Array<Function>> | Array<Function> = new Array() ,
+    operators : Array<Operator> = new Array() ,
     context : Object = this ,
   )
   : Observable<T>
   {
-    let select$ : Observable<any> ;
-    const filters$ : Observable<Array<Function>> = ( filters instanceof Array )
-      ? Observable.of( filters )
-      : filters
-      ;
+    let store$ : Observable<ObjectAny> = Observable.of( null ) ;
+    const operators$ : Observable<Array<Operator>> = Observable.of( operators ) ;
 
     if ( nodes.length === 1 ) {
-      select$ = this.store.select( nodes[0] ) ;
+      store$ = this.store.select( nodes[0] ) ;
     } else if ( nodes.length === 2 ) {
-      select$ = this.store.select( nodes[0] , nodes[1] ) ;
+      store$ = this.store.select( nodes[0] , nodes[1] ) ;
     } else if ( nodes.length === 3 ) {
-      select$ = this.store.select( nodes[0] , nodes[1] , nodes[2] ) ;
+      store$ = this.store.select( nodes[0] , nodes[1] , nodes[2] ) ;
     } else if ( nodes.length === 4 ) {
-      select$ = this.store.select( nodes[0] , nodes[1] , nodes[2] , nodes[3] ) ;
+      store$ = this.store.select( nodes[0] , nodes[1] , nodes[2] , nodes[3] ) ;
     } else if ( nodes.length === 5 ) {
-      select$ = this.store.select( nodes[0] , nodes[1] , nodes[2] , nodes[3] , nodes[4] ) ;
-    } else {
-      select$ = Observable.of( null ) ;
+      store$ = this.store.select( nodes[0] , nodes[1] , nodes[2] , nodes[3] , nodes[4] ) ;
     }
 
     return Observable
-      .combineLatest( select$ , filters$ )
-      .map( ( o ) => ({ store : o[ 0 ] , filters : o[ 1 ] }) )
-      .switchMap( ( o : { store : any , filters : Array<Function> } ) =>
+      .combineLatest( store$ , operators$ )
+      .map( ( o ) => ({ store : o[ 0 ] , operators : o[ 1 ] }) )
+      .switchMap( ( o : { store : ObjectAny , operators : Array<Operator> } ) =>
       {
-        return o.filters.reduce
+        return o.operators.reduce
           (
-            ( t , c ) => t.filter( c.bind( context ) ) ,
+            ( total , current ) => total[ current.key ]( current.run.bind( context ) ) ,
             Observable.of( o.store ) ,
           )
           ;
