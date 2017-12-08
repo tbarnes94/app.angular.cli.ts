@@ -10,8 +10,10 @@ import { TableSort } from '../../../modules/table';
  */
 export function TableBuild(o: any): TableSchemas {
   const d: any = o.datas;
-  const t: any = o.translations;
+  const t: any = o.translations.dashboard.table;
   return new TableSchemas(
+    'table',
+    Object.assign(o.translations.table, t.table),
     new TableRow(
       'thead',
       undefined,

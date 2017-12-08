@@ -6,6 +6,7 @@ import { Output } from '@angular/core' ;
 import { ViewEncapsulation } from '@angular/core' ;
 
 import { CommonComponent } from '../../commons' ;
+import { replace } from '../../commons' ;
 import { TablePage } from '../shared/types/functions/table.pages' ;
 import { TablePageSchemas } from '../shared/types/functions/table.pages' ;
 
@@ -20,55 +21,68 @@ import { TablePageSchemas } from '../shared/types/functions/table.pages' ;
   host :
   {
     '[class.table-pages]' : 'true' ,
+
+    '[attr.aria-label]' : 'this.translations.title' ,
+    '[attr.role]' : '"navigation"' ,
+
   } ,
   template :
   `
     <!-- pages -->
-    <ng-container
+    <ul
       *ngIf='( this.children.length > 1 )'
       >
       <ng-container
         *ngFor='let one of this.children'
         >
         <!-- prev -->
-        <a
-          *ngIf='( one.first )'
-          [routerLink]=''
-          [ngClass]='{ "table-pages-disable" : one.current }'
-          (click)='this.onPages( one.current , this.schemas.current - 1 )'
-          class='table-pages-prev'
-          >
-          <i
-            class='fa fa-angle-left'
-            aria-hidden='true'
+        <li *ngIf='( one.first )' >
+          <button
+            [attr.aria-hidden]='( one.current )'
+            [attr.aria-label]='this.translations.p'
+            [attr.tabindex]='( one.current ) ? -1 : 0'
+            (click)='this.onPages( one.current , this.schemas.current - 1 )'
+            [ngClass]='{ "table-pages-disable" : one.current }'
+            class='table-pages-prev'
             >
-          </i>
-        </a>
+            <i
+              class='fa fa-angle-left'
+              aria-hidden='true'
+              >
+            </i>
+          </button>
+        </li>
         <!-- numbers -->
-        <a
-          [routerLink]=''
-          [ngClass]='{ "table-pages-current" : one.current }'
-          (click)='this.onPages( one.current , one.key )'
-          class='table-pages-one'
-          >
-          <span>{{ one.key }}</span>
-        </a>
-        <!-- next -->
-        <a
-          *ngIf='( one.last )'
-          [routerLink]=''
-          [ngClass]='{ "table-pages-disable" : one.current }'
-          (click)='this.onPages( one.current , this.schemas.current + 1 )'
-          class='table-pages-next'
-          >
-          <i
-            class='fa fa-angle-right'
-            aria-hidden='true'
+        <li>
+          <button
+            [attr.aria-current]='( one.current )'
+            [attr.aria-label]='this.replace( this.translations.o , [ one.key ] )'
+            (click)='this.onPages( one.current , one.key )'
+            [ngClass]='{ "table-pages-current" : one.current }'
+            class='table-pages-one'
             >
-          </i>
-        </a>
+            <span>{{ one.key }}</span>
+          </button>
+        </li>
+        <!-- next -->
+        <li *ngIf='( one.last )' >
+          <button
+            [attr.aria-hidden]='( one.current )'
+            [attr.aria-label]='this.translations.n'
+            [attr.tabindex]='( one.current ) ? -1 : 0'
+            (click)='this.onPages( one.current , this.schemas.current + 1 )'
+            [ngClass]='{ "table-pages-disable" : one.current }'
+            class='table-pages-next'
+            >
+            <i
+              class='fa fa-angle-right'
+              aria-hidden='true'
+              >
+            </i>
+          </button>
+        </li>
       </ng-container>
-    </ng-container>
+    </ul>
   ` ,
 })
 export class TablePagesComponent extends CommonComponent
@@ -77,6 +91,11 @@ export class TablePagesComponent extends CommonComponent
    * https://angular.io/api/core/Input
    */
   @Input() public readonly key : string = null ;
+
+  /**
+   * https://angular.io/api/core/Input
+   */
+  @Input() public readonly translations : any = {} ;
 
   /**
    * https://angular.io/api/core/Input
@@ -100,7 +119,17 @@ export class TablePagesComponent extends CommonComponent
    */
   public onPages( current : boolean , key : number ) : void
   {
-    if ( !current ) { this.onPagesEvent.next( key ) ; }
+    this.onPagesEvent.next( key ) ;
+  }
+
+  /**
+   * @param input
+   * @param options
+   * @returns string
+   */
+  public replace( input : string , options : Array<string> ) : string
+  {
+    return replace( input , options ) ;
   }
 
 }

@@ -25,6 +25,11 @@ import { TableSort } from '../shared/types/functions/table.sorts' ;
     '[class.table-row-click]' : '( this.type === "body-click" )' ,
     '[class.table-row-even]' : '( this.sequence === "e" )' ,
     '[class.table-row-odd]' : '( this.sequence === "o" )' ,
+
+    '[attr.tabindex]' : '( this.type === "body-click" ) ? "0" : null' ,
+    '[attr.aria-label]' : '( this.type === "body-click" ) ? this.label : null' ,
+    '[attr.role]' : '"row"' ,
+
   } ,
   template :
   `
@@ -76,6 +81,11 @@ export class TableRowComponent extends CommonComponent
    * https://angular.io/api/core/Input
    */
   @Input() public readonly key : string = null ;
+
+  /**
+   * https://angular.io/api/core/Input
+   */
+  @Input() public readonly label : string = null ;
 
   /**
    * https://angular.io/api/core/Input

@@ -19,6 +19,8 @@ export class TableSchemas
 {
   public constructor
   (
+    public readonly key : string = 'table' ,
+    public readonly translations : any = {} ,
     public readonly heads : TableRow<TableHead> = null ,
     public readonly bodys : Array<TableRow<TableControl>> = new Array() ,
     public readonly sorts : Array<TableSort> = new Array() ,

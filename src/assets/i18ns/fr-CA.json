@@ -129,7 +129,11 @@
     },
     "table": {
       "title": "Table fr",
-      "empty": "Table is currently empty fr.",
+      "table": {
+        "title": "Dashboard Table fr",
+        "click": "Go to Dashboard for this row fr",
+        "empty": "Table is currently empty fr."
+      },
       "columns": {
         "id": "ID fr",
         "amount": "Amount fr",
@@ -137,6 +141,28 @@
         "name": "Name fr",
         "date": "Date fr"
       }
+    }
+  },
+  "table": {
+    "title": "Table fr",
+    "click": "Go to this row fr",
+    "empty": "Table is currently empty fr.",
+    "caption": {
+      "title": "%1. %2. %3. fr",
+      "pages": "Currently on page: %1 fr",
+      "sorts": "Sorted by: %1 fr",
+      "separator": ", "
+    },
+    "pages": {
+      "title": "Table pagination fr",
+      "p": "Go to previous page fr",
+      "n": "Go to next page fr",
+      "o": "Go to page %1 fr"
+    },
+    "sorts": {
+      "null": "Unsorted fr",
+      "a": "%1 ascendingly fr",
+      "d": "%1 descendingly fr"
     }
   }
 }

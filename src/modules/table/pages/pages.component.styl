@@ -1,17 +1,19 @@
 :host
   margin-top 10px
 
-a
+button
   &
     color #000
+    font-size inherit
     text-align center
     text-decoration none
-    box-sizing border-box
     border-radius 2px
+    box-sizing border-box
     margin-right 10px
     padding 5px 7px
     display inline-block
     min-width 30px
+    cursor pointer
   &:hover
     background #eee
   &.table-pages-current
@@ -28,3 +30,9 @@ a
   &.table-pages-prev
   &.table-pages-next
     padding 5px 10px
+
+ul
+  &
+    list-style-type none
+  li
+    display inline-block

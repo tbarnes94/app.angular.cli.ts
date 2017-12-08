@@ -129,7 +129,11 @@
     },
     "table": {
       "title": "Table",
-      "empty": "Table is currently empty.",
+      "table": {
+        "title": "Dashboard Table",
+        "click": "Go to Dashboard for this row",
+        "empty": "Table is currently empty."
+      },
       "columns": {
         "id": "ID",
         "amount": "Amount",
@@ -137,6 +141,28 @@
         "name": "Name",
         "date": "Date"
       }
+    }
+  },
+  "table": {
+    "title": "Table",
+    "click": "Go to this row",
+    "empty": "Table is currently empty.",
+    "caption": {
+      "title": "%1. %2. %3.",
+      "pages": "Currently on page: %1",
+      "sorts": "Sorted by: %1",
+      "separator": ", "
+    },
+    "pages": {
+      "title": "Table pagination",
+      "p": "Go to previous page",
+      "n": "Go to next page",
+      "o": "Go to page %1"
+    },
+    "sorts": {
+      "null": "Unsorted",
+      "a": "%1 ascendingly",
+      "d": "%1 descendingly"
     }
   }
 }

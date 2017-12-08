@@ -10,15 +10,29 @@
     padding-top 4px
     right 0
   &.table-cell-right
-    text-align right
+    div
+    button
+      text-align right
   &.table-cell-left
-    text-align left
+    div
+    button
+      text-align left
 
 div
-  padding 10px 15px
+button
+  overflow hidden
   text-overflow ellipsis
   position relative
-  overflow hidden
+  box-sizing border-box
+  padding 10px 15px
+  display block
+  width 100%
+
+button
+  font-size inherit
+  background transparent
+  color #fff
+  cursor pointer
 
 i
   font-size 1.2rem

@@ -6,7 +6,8 @@ import * as firstBy from 'thenby' ;
 import { BehaviorSubject } from 'rxjs/Rx' ;
 import { Observable } from 'rxjs/Rx' ;
 
-import { CommonComponent } from '../../commons' ;
+import { CommonContainerComponent } from '../../commons' ;
+import { replace } from '../../commons' ;
 import { TablePage } from '../shared/types/functions/table.pages' ;
 import { TablePages } from '../shared/types/functions/table.pages' ;
 import { TablePageSchemas } from '../shared/types/functions/table.pages' ;
@@ -32,8 +33,19 @@ import { TableRow } from '../shared/types/row/table.row' ;
       >
       <table
         *ngIf='( bodys.length > 0 )'
+        [attr.aria-readonly]='true'
+        [attr.aria-labelledby]='this.schemas.key + "-caption"'
+        [attr.role]='"grid"'
         class='table-basic'
         >
+        <!-- caption -->
+        <caption
+          *ngIf='( this.caption$ | async ) as caption'
+          [attr.aria-live]='"polite"'
+          [id]='this.schemas.key + "-caption"'
+          >
+          {{ caption }}
+        </caption>
         <!-- thead -->
         <thead>
           <tr
@@ -55,13 +67,15 @@ import { TableRow } from '../shared/types/row/table.row' ;
             <tr
               *ngIf='( one.route )'
               [key]='one.key'
+              [label]='this.schemas.translations.click'
               [children]='one.children'
-              [routerLink]='one.route'
               [type]='"body-click"'
               [sequence]='( even ) ? "e" : "o"'
               [index]='index'
               [first]='first'
               [last]='last'
+              (keypress)='this.onClick( $event , one.route )'
+              (click)='this.onClick( $event , one.route )'
               table-row
               >
             </tr>
@@ -85,15 +99,16 @@ import { TableRow } from '../shared/types/row/table.row' ;
       <ng-container
         *ngIf='( bodys.length > 0 )'
         >
-        <div
+        <nav
           *ngIf='( this.pages$ | async ) as pages'
           [key]='"pages"'
+          [translations]='this.schemas.translations.pages'
           [schemas]='pages.schemas'
           [children]='pages.pages'
           (onPagesEvent)='this.onPages( $event )'
           table-pages
           >
-        </div>
+        </nav>
       </ng-container>
       <!-- empty -->
       <div
@@ -108,7 +123,7 @@ import { TableRow } from '../shared/types/row/table.row' ;
     </ng-container>
   ` ,
 })
-export class TableBasicComponent extends CommonComponent
+export class TableBasicComponent extends CommonContainerComponent
 {
   /**
    * https://angular.io/api/core/Input
@@ -187,6 +202,19 @@ export class TableBasicComponent extends CommonComponent
     .map( ( o ) => ({ datas : o[ 0 ] , pages : o[ 1 ] }))
     .filter( ( o ) => ( !!o.datas ) )
     .map( ( o ) => this.toPages( o.datas , o.pages ) )
+    .takeUntil( this.destroy$ )
+    ;
+
+  /**
+   * http://reactivex.io/documentation/observable.html
+   */
+  public readonly caption$ : Observable<string> = Observable.combineLatest
+    (
+      this.heads$ ,
+      this.pagez$ ,
+    )
+    .map( ( o ) => ({ heads : o[ 0 ] , pages : o[ 1 ] }))
+    .map( ( o ) => this.toCaption.call( this , this.schemas.translations , o.heads , o.pages ) )
     .takeUntil( this.destroy$ )
     ;
 
@@ -276,18 +304,46 @@ export class TableBasicComponent extends CommonComponent
   }
 
   /**
+   * @param translations
+   * @param heads
+   * @param pages
+   * @returns string
+   */
+  public toCaption( translations : any , heads : TableRow<TableControl> , pages : TablePageSchemas ) : string
+  {
+    const t : any = translations ;
+    const sorts : Array<string> = heads.children.reduce
+      (
+        ( total , c : any ) =>
+        {
+          if ( c.order === 'a' ) { total.push( replace( t.sorts.a , [ c.value ] ) ) ; }
+          if ( c.order === 'd' ) { total.push( replace( t.sorts.d , [ c.value ] ) ) ; }
+          return total ;
+        } ,
+        new Array() ,
+      )
+      ;
+
+    return replace
+      (
+        t.caption.title ,
+        [
+          replace( t.title ) ,
+          replace( ( sorts.length > 0 ) ? t.caption.sorts : t.sorts.null , [ sorts.join( t.caption.separator ) ] ) ,
+          replace( t.caption.pages , [ `${pages.current}` ] ) ,
+        ] ,
+      ) ;
+
+  }
+
+  /**
    * https://angular.io/guide/user-input
    * @param input
    */
   public onSorts( input : TableSort ) : void
   {
-    const payload : Array<TableSort> = ( input.order )
-      ? [ input ]
-      : []
-      ;
-
+    const payload : Array<TableSort> = ( input.order ) ? [ input ] : [] ;
     this.sortz$.next( payload ) ;
-
   }
 
   /**
@@ -298,6 +354,23 @@ export class TableBasicComponent extends CommonComponent
   {
     const limit : number = this.schemas.pages.size ;
     this.pagez$.next( new TablePageSchemas( limit , input ) ) ;
+    this.common.totop() ;
+  }
+
+  /**
+   * https://angular.io/guide/user-input
+   * @param event
+   * @param input
+   */
+  public onClick( event : any , input : Array<string> ) : void
+  {
+    if (
+      ( !event.charCode ) ||
+      ( event.charCode === 13 ) ||
+      ( event.charCode === 32 )
+    ) {
+      this.common.redirect( input ) ;
+    }
   }
 
   /**

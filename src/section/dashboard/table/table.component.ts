@@ -27,7 +27,7 @@ import { TableBuild } from './table.helpers';
           [schemas]='schemas'
           >
           <div class='table-empty' >
-            {{ translations.empty }}
+            {{ translations.table.empty }}
           </div>
         </table-basic>
       </div>
@@ -41,7 +41,7 @@ export class DashboardTableComponent extends TemplateContainerComponent {
    */
   public schemas$: Observable<TableSchemas> = this.table.build$(
       this.language$,
-      this.translations$,
+      this.translationz$,
       this.common.width$,
       this.http.get<Array<any>>('/assets/mocks/table.json'),
       undefined,

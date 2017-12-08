@@ -25,11 +25,16 @@ import { TableSort } from '../shared/types/functions/table.sorts' ;
     '[class.table-cell-right]' : '( this.align === "r" )' ,
     '[class.table-cell-left]' : '( this.align === "l" )' ,
     '[style.width]' : 'this.width + "%"' ,
+
+    '[attr.aria-sort]' : '( !!this.order ) ? ( this.order === "d" ) ? "descending" : "ascending" : null' ,
+    '[attr.role]' : '( this.type !== "head" ) ? ( this.first ) ? "rowheader" : "gridcell" : "columnheader"' ,
+    '[attr.scope]' : '( this.type === "head" ) ? "col" : null' ,
+
   } ,
   template :
   `
     <!-- th -->
-    <div
+    <button
       *ngIf='( this.type === "head" )'
       (click)='this.onSorts( this.key , this.order )'
       >
@@ -47,7 +52,7 @@ import { TableSort } from '../shared/types/functions/table.sorts' ;
         class='fa'
         >
       </i>
-    </div>
+    </button>
     <!-- td -->
     <div *ngIf=
       '(
