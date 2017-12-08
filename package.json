@@ -13,7 +13,7 @@
 
     "start": "yarn run serve:proxy",
     "serve": "ng serve --open",
-    "serve:proxy": "ng serve --proxy-config \"proxy.conf.json\" --open",
+    "serve:proxy": "ng serve --proxy-config \"proxy.conf.json\" --host 0.0.0.0 --open",
 
     "predoc": "yarn run clean:doc",
     "doc": "typedoc --options \"tsconfig.json\" --exclude \"**/*.(spec|d).ts\" \"src\"",
