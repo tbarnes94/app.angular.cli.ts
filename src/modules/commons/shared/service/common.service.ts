@@ -48,6 +48,7 @@ export class CommonService
    */
   public totop() : this
   {
+    document.body.focus() ;
     document.body.scrollTop =
     document.documentElement.scrollTop = 0 ;
     return this ;
