@@ -211,7 +211,7 @@ export class TableBasicComponent extends CommonContainerComponent
   public readonly caption$ : Observable<string> = Observable.combineLatest
     (
       this.heads$ ,
-      this.pagez$ ,
+      this.pages$ ,
     )
     .map( ( o ) => ({ heads : o[ 0 ] , pages : o[ 1 ] }))
     .map( ( o ) => this.toCaption.call( this , this.schemas.translations , o.heads , o.pages ) )
@@ -309,7 +309,7 @@ export class TableBasicComponent extends CommonContainerComponent
    * @param pages
    * @returns string
    */
-  public toCaption( translations : any , heads : TableRow<TableControl> , pages : TablePageSchemas ) : string
+  public toCaption( translations : any , heads : TableRow<TableControl> , pages : TablePages ) : string
   {
     const t : any = translations ;
     const sorts : Array<string> = heads.children.reduce
@@ -325,14 +325,20 @@ export class TableBasicComponent extends CommonContainerComponent
       ;
 
     return replace
-      (
-        t.caption.title ,
-        [
-          replace( t.title ) ,
-          replace( ( sorts.length > 0 ) ? t.caption.sorts : t.sorts.null , [ sorts.join( t.caption.separator ) ] ) ,
-          replace( t.caption.pages , [ `${pages.current}` ] ) ,
-        ] ,
-      ) ;
+    (
+      t.caption.title ,
+      [
+        t.title ,
+        ( sorts.length > 0 )
+          ? replace( t.caption.sorts , [ sorts.join( t.caption.separator ) ] )
+          : t.sorts.null
+          ,
+        ( pages.pages.length > 1 )
+          ? replace( t.caption.pages , [ `${pages.schemas.current}` , `${pages.pages.length}` ] )
+          : ''
+          ,
+      ] ,
+    ) ;
 
   }
 

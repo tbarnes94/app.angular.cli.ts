@@ -148,8 +148,8 @@
     "click": "Go to this row",
     "empty": "Table is currently empty.",
     "caption": {
-      "title": "%1. %2. %3.",
-      "pages": "Currently on page: %1",
+      "title": "%1. %2. %3",
+      "pages": "Currently on page: %1 of %2",
       "sorts": "Sorted by: %1",
       "separator": ", "
     },

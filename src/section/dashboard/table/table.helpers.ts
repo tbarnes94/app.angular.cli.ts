@@ -11,9 +11,11 @@ import { TableSort } from '../../../modules/table';
 export function TableBuild(o: any): TableSchemas {
   const d: any = o.datas;
   const t: any = o.translations.dashboard.table;
+  let translations: any = Object.assign({}, o.translations.table);
+  translations = Object.assign(translations, t.table);
   return new TableSchemas(
     'table',
-    Object.assign(o.translations.table, t.table),
+    translations,
     new TableRow(
       'thead',
       undefined,
