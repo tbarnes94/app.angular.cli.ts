@@ -1,5 +1,5 @@
 /** @imports */
-import { ApiResponse } from '../../../api/shared/types/api.response' ;
+import { ApiResponse } from '../../../api' ;
 import { CommonAction } from './common.action' ;
 
 /**

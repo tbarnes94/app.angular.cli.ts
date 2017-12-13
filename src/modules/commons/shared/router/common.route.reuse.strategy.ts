@@ -2,8 +2,8 @@
 import { ActivatedRouteSnapshot } from '@angular/router' ;
 import { DetachedRouteHandle } from '@angular/router' ;
 import { RouteReuseStrategy } from '@angular/router' ;
-
-import { isNotNullOrUndefined } from '../helpers/is.null.or.undefined' ;
+import { isNull } from 'lodash-es' ;
+import { isUndefined } from 'lodash-es' ;
 
 /**
  * https://angular.io/api/router/RouteReuseStrategy
@@ -57,7 +57,7 @@ export class CommonRouteReuseStrategy implements RouteReuseStrategy
   /**
    * https://angular.io/api/router/RouteReuseStrategy#hasReuse
    */
-  public hasReuse( route : ActivatedRouteSnapshot ) : boolean { return ( !!route.data && isNotNullOrUndefined( route.data.reuse ) ) ; }
+  public hasReuse( route : ActivatedRouteSnapshot ) : boolean { return ( !!route.data && !isUndefined( route.data.reuse ) && !isNull( route.data.reuse ) ) ; }
 
   /**
    * https://angular.io/api/router/RouteReuseStrategy#hasDetach

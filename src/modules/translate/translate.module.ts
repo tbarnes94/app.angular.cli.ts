@@ -1,18 +1,11 @@
 /** @imports */
-import { HttpClient } from '@angular/common/http' ;
-import { HttpClientModule } from '@angular/common/http' ;
 import { NgModule } from '@angular/core' ;
 import { ModuleWithProviders } from '@angular/core' ;
 import { EffectsModule } from '@ngrx/effects' ;
 import { StoreModule } from '@ngrx/store' ;
-import { MissingTranslationHandler } from '@ngx-translate/core' ;
-import { TranslateLoader } from '@ngx-translate/core' ;
-import { TranslateModule as TranslateModuleExternal } from '@ngx-translate/core' ;
 
 import { TranslateService } from './shared/service/translate.service' ;
 import { TranslateReducers } from './shared/store/translate.reducers' ;
-import { TranslateLoaderFactory } from './shared/translate/translate.loader.factory' ;
-import { TranslateMissingHandler } from './shared/translate/translate.missing.handler' ;
 import { TranslateOptions } from './shared/types/translate.options' ;
 
 /**
@@ -22,10 +15,8 @@ import { TranslateOptions } from './shared/types/translate.options' ;
 ({
   imports :
   [
-    HttpClientModule ,
     EffectsModule.forFeature([]) ,
     StoreModule.forFeature( 'translate' , TranslateReducers ) ,
-    TranslateModuleExternal.forRoot({}) ,
   ] ,
 })
 export class TranslateRootModule {}
@@ -36,7 +27,7 @@ export class TranslateRootModule {}
 @NgModule
 ({
   imports : [] ,
-  exports : [ TranslateModuleExternal ] ,
+  exports : [] ,
 })
 export class TranslateModule
 {
@@ -50,8 +41,6 @@ export class TranslateModule
       providers :
       [
         { provide : TranslateOptions , useValue : options } ,
-        { provide : MissingTranslationHandler , useClass : TranslateMissingHandler } ,
-        { provide : TranslateLoader , useFactory : TranslateLoaderFactory , deps : [ TranslateOptions , HttpClient ] } ,
         TranslateService ,
       ] ,
     } ;

@@ -11,11 +11,11 @@ import { Store } from '@ngrx/store' ;
 import { BehaviorSubject } from 'rxjs/Rx' ;
 import { Observable } from 'rxjs/Rx' ;
 
+import { ObjectAny } from '../../../helpers' ;
+import { Operator } from '../../../helpers' ;
+import { State } from '../../../helpers' ;
 import { CommonAction } from '../store/common.action' ;
 import { CommonLoads } from '../store/common.actions' ;
-import { ObjectAny } from '../types/object.any' ;
-import { Operator } from '../types/operator' ;
-import { State } from '../types/state' ;
 
 /**
  * https://angular.io/api/core/Injectable
@@ -26,7 +26,7 @@ export class CommonService
   /**
    * https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout
    */
-  public delay : number ;
+  public delay : any ;
 
   /**
    * http://reactivex.io/documentation/subject.html
@@ -139,7 +139,13 @@ export class CommonService
       {
         return o.operators.reduce
           (
-            ( total , current ) => total[ current.key ]( current.run.bind( context ) ) ,
+            ( total , current ) =>
+            {
+              return ( !!current.run )
+                ? total[ current.key ]( current.run.bind( context ) )
+                : total[ current.key ]( ...current.input )
+                ;
+            } ,
             Observable.of( o.store ) ,
           )
           ;

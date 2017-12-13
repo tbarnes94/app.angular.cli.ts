@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
-import { toContent } from '../../../../modules/commons/shared/helpers/to.content';
+import { Operator } from '../../../../modules/helpers';
+import { toProperty } from '../../../../modules/helpers';
 import { CommonService } from '../../../../modules/commons/shared/service/common.service';
 import { AuthToken } from '../types/auth.token';
 
@@ -15,8 +16,10 @@ export class AuthService {
    * http://reactivex.io/documentation/observable.html
    */
   public readonly token$: Observable<boolean> = this.common
-    .select([ 'auth', 'token' ])
-    .map( toContent )
+    .select(
+      [ 'auth', 'token' ],
+      [ new Operator( 'map', [], toProperty.bind(this, 'content') ) ]
+    )
     .map((o: AuthToken) => (!!o && !!o.access_token))
     ;
 

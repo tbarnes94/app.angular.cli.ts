@@ -7,9 +7,12 @@ import { Observable } from 'rxjs/Rx';
 import { AuthService } from '../../../section/auth/shared/service/auth.service';
 import { CommonContainerComponent } from '../../commons/container/container.component';
 import { CommonService } from '../../commons/shared/service/common.service';
-import { ObjectAny } from '../../commons/shared/types/object.any';
 import { FormService } from '../../forms/shared/service/form.service';
+import { ObjectAny } from '../../helpers/shared/types/object.any';
+import { ServerEventService } from '../../streams/shared/service/server.event.service';
+import { WebWorkerService } from '../../streams/shared/service/web.worker.service';
 import { TableService } from '../../table/shared/service/table.service';
+import { TranslateService } from '../../translate/shared/service/translate.service';
 
 /**
  * https://angular.io/api/core/Component
@@ -24,28 +27,33 @@ export class TemplateContainerComponent extends CommonContainerComponent {
   /**
    * http://reactivex.io/documentation/observable.html
    */
-  public language$: Observable<string> = this.common
-    .select<string>([ 'translate', 'language' ])
+  public readonly modules$: Observable<any> = this.translate.modules$
     .takeUntil(this.destroy$)
   ;
 
   /**
    * http://reactivex.io/documentation/observable.html
    */
-  public translationz$: Observable<ObjectAny> = this.common
-    .select<ObjectAny>([ 'translate', 'translations' ])
+  public readonly section$: Observable<any> = this.translate.section$
+    .takeUntil(this.destroy$)
+  ;
+
+  /**
+   * http://reactivex.io/documentation/observable.html
+   */
+  public readonly language$: Observable<string> = this.translate.language$
     .takeUntil(this.destroy$)
   ;
 
   /**
    * http://reactivex.io/documentation/subject.html
    */
-  public key$: BehaviorSubject<string> = new BehaviorSubject<string>('common');
+  public readonly key$: BehaviorSubject<string> = new BehaviorSubject<string>('common');
 
   /**
    * http://reactivex.io/documentation/subject.html
    */
-  public keys$: Observable<Array<string>> = this.key$
+  public readonly keys$: Observable<Array<string>> = this.key$
     .map((o) => o.split('.'))
     .takeUntil(this.destroy$)
   ;
@@ -53,7 +61,7 @@ export class TemplateContainerComponent extends CommonContainerComponent {
   /**
    * http://reactivex.io/documentation/observable.html
    */
-  public error$: Observable<string> = this.keys$
+  public readonly error$: Observable<string> = this.keys$
     .switchMap((o) => this.common.select<string>([ o[ 0 ], 'error' ]))
     .takeUntil(this.destroy$)
   ;
@@ -61,7 +69,7 @@ export class TemplateContainerComponent extends CommonContainerComponent {
   /**
    * http://reactivex.io/documentation/observable.html
    */
-  public loader$: Observable<boolean> = this.keys$
+  public readonly loader$: Observable<boolean> = this.keys$
     .switchMap((o) => this.common.select<boolean>([ o[ 0 ], 'loader' ]))
     .takeUntil(this.destroy$)
   ;
@@ -69,31 +77,13 @@ export class TemplateContainerComponent extends CommonContainerComponent {
   /**
    * http://reactivex.io/documentation/observable.html
    */
-  public translations$: Observable<ObjectAny> = Observable
-    .combineLatest(this.keys$, this.translationz$)
-    .map((o) => ({ keys: o[ 0 ], translations: o[ 1 ] }))
-    .filter((o) => (!!o.translations))
-    .map(this.onTranslationsMap.bind(this))
+  public readonly translations$: Observable<ObjectAny> = Observable
+    .combineLatest(this.key$, this.section$)
+    .map((o) => ({ key: o[ 0 ], translations: o[ 1 ] }))
+    .filter((o) => ( !!o.translations ))
+    .map((o) => this.translate.traverse(o.translations, o.key))
     .takeUntil(this.destroy$)
   ;
-
-  /**
-   * @param input
-   * @returns ObjectAny
-   */
-  public onTranslationsMap(input: ObjectAny): ObjectAny {
-    return input.keys.reduce(this.onTranslationsReduce.bind(this), input.translations);
-  }
-
-  /**
-   * @param total
-   * @param key
-   * @param index
-   * @returns ObjectAny
-   */
-  public onTranslationsReduce(total: any, key: string, index: number): ObjectAny {
-    return total[ key ] ? total[ key ] : {};
-  }
 
   /**
    * https://angular.io/guide/user-input
@@ -107,15 +97,21 @@ export class TemplateContainerComponent extends CommonContainerComponent {
 
   /**
    * Constructor
-   * @param route     https://angular.io/api/router/ActivatedRoute
-   * @param common    https://angular.io/tutorial/toh-pt4
-   * @param auth      https://angular.io/tutorial/toh-pt4
-   * @param forms     https://angular.io/tutorial/toh-pt4
-   * @param table     https://angular.io/tutorial/toh-pt4
-   * @param http      https://angular.io/api/common/http/HttpClient
+   * @param route         https://angular.io/api/router/ActivatedRoute
+   * @param common        https://angular.io/tutorial/toh-pt4
+   * @param serverevent   https://angular.io/tutorial/toh-pt4
+   * @param webworker     https://angular.io/tutorial/toh-pt4
+   * @param translate     https://angular.io/tutorial/toh-pt4
+   * @param auth          https://angular.io/tutorial/toh-pt4
+   * @param forms         https://angular.io/tutorial/toh-pt4
+   * @param table         https://angular.io/tutorial/toh-pt4
+   * @param http          https://angular.io/api/common/http/HttpClient
    */
   public constructor(protected readonly route: ActivatedRoute,
                      protected readonly common: CommonService,
+                     protected readonly serverevent: ServerEventService,
+                     protected readonly webworker: WebWorkerService,
+                     protected readonly translate: TranslateService,
                      protected readonly auth: AuthService,
                      protected readonly forms: FormService,
                      protected readonly table: TableService,

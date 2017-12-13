@@ -1,10 +1,6 @@
 import { Validators } from '@angular/forms';
 
-import { AlphaAllPattern } from '../../../modules/commons';
 import { CommonService } from '../../../modules/commons';
-import { NumericAllPattern } from '../../../modules/commons';
-import { toRegex } from '../../../modules/commons';
-import { toRegexGroup } from '../../../modules/commons';
 import { FormAction } from '../../../modules/forms';
 import { FormCheck } from '../../../modules/forms';
 import { FormDatepicker } from '../../../modules/forms';
@@ -14,12 +10,18 @@ import { FormRadio } from '../../../modules/forms';
 import { FormSchemas } from '../../../modules/forms';
 import { FormSection } from '../../../modules/forms';
 import { FormSelect } from '../../../modules/forms';
+import { AlphaAllPattern } from '../../../modules/helpers';
+import { NumericAllPattern } from '../../../modules/helpers';
+import { toRegex } from '../../../modules/helpers';
+import { toRegexGroup } from '../../../modules/helpers';
 
 /**
  * https://angular.io/api/forms/FormGroup
  */
 export function FormBuild(o: any): FormSchemas {
+  const d: any = o.datas;
   const t: any = o.translations;
+  const m: any = o.modules;
   const AlphaRegex: RegExp = toRegex(toRegexGroup(AlphaAllPattern));
   const NumericRegex: RegExp = toRegex(toRegexGroup(NumericAllPattern));
   return new FormSchemas([
@@ -95,7 +97,7 @@ export function FormBuild(o: any): FormSchemas {
         t.input.label,
         t.input.error,
         undefined,
-        (f: any, m: any) => { f.controls.form.controls.shown.controls.hides.controls.one.setValue(m.controls.one.value); },
+        (f: any, i: any) => { f.controls.form.controls.shown.controls.hides.controls.one.setValue(i.controls.one.value); },
         t.input.tooltip,
         '50%', [
         new FormInput(
@@ -236,7 +238,7 @@ export function FormBuild(o: any): FormSchemas {
         t.selects.label,
         t.selects.error,
         undefined,
-        (f: any, m: any) => { f.controls.form.controls.radio.controls.one.setValue(null); },
+        (f: any, i: any) => { f.controls.form.controls.radio.controls.one.setValue(null); },
         t.selects.tooltip,
         '50%', [
         new FormSelect(

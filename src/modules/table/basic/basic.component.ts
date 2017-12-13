@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs/Rx' ;
 import { Observable } from 'rxjs/Rx' ;
 
 import { CommonContainerComponent } from '../../commons' ;
-import { replace } from '../../commons' ;
+import { replace } from '../../helpers' ;
 import { TablePage } from '../shared/types/functions/table.pages' ;
 import { TablePages } from '../shared/types/functions/table.pages' ;
 import { TablePageSchemas } from '../shared/types/functions/table.pages' ;

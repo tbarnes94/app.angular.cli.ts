@@ -11,8 +11,8 @@ import { DashboardTableComponent } from './table/table.component';
  */
 const route: Routes = [
   { path: '',       redirectTo: 'forms',                pathMatch: 'full'          },
-  { path: 'forms',  component: DashboardFormsComponent                             },
-  { path: 'table',  component: DashboardTableComponent                             },
+  { path: 'forms',  component: DashboardFormsComponent, /*canActivate: [ AuthGuard ]*/ },
+  { path: 'table',  component: DashboardTableComponent, /*canActivate: [ AuthGuard ]*/ },
 ];
 
 /**

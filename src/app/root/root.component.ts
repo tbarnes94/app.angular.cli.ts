@@ -3,10 +3,10 @@ import { ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
 import { CommonComponent } from '../../modules/commons';
-import { AuthService } from '../../section/auth';
 import { CommonService } from '../../modules/commons';
 import { TranslateLanguage } from '../../modules/translate';
 import { TranslateService } from '../../modules/translate';
+import { AuthService } from '../../section/auth';
 
 /**
  * https://angular.io/api/core/Component

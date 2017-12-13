@@ -6,7 +6,7 @@ import { Output } from '@angular/core' ;
 import { ViewEncapsulation } from '@angular/core' ;
 
 import { CommonComponent } from '../../commons' ;
-import { replace } from '../../commons' ;
+import { replace } from '../../helpers' ;
 import { TablePage } from '../shared/types/functions/table.pages' ;
 import { TablePageSchemas } from '../shared/types/functions/table.pages' ;
 

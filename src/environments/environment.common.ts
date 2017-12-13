@@ -14,8 +14,6 @@ export const environment: any = {
   },
 
   translate: {
-    asset: './assets/i18ns/',
-    extension: '.json',
     start: 'en-US',
   },
 

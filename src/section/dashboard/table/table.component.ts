@@ -41,7 +41,8 @@ export class DashboardTableComponent extends TemplateContainerComponent {
    */
   public schemas$: Observable<TableSchemas> = this.table.build$(
       this.language$,
-      this.translationz$,
+      this.translations$,
+      this.modules$,
       this.common.width$,
       this.http.get<Array<any>>('/assets/mocks/table.json'),
       undefined,

@@ -18,8 +18,8 @@ export class CommonContainerComponent extends CommonComponent
 {
   /**
    * Constructor
-   * @param route     https://angular.io/api/router/ActivatedRoute
-   * @param common    https://angular.io/tutorial/toh-pt4
+   * @param route       https://angular.io/api/router/ActivatedRoute
+   * @param common      https://angular.io/tutorial/toh-pt4
    */
   public constructor(
     protected readonly route : ActivatedRoute ,

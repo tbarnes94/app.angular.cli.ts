@@ -1,3 +1,5 @@
+import { merge } from 'lodash-es';
+
 import { TableCell } from '../../../modules/table';
 import { TableHead } from '../../../modules/table';
 import { TablePageSchemas } from '../../../modules/table';
@@ -10,12 +12,11 @@ import { TableSort } from '../../../modules/table';
  */
 export function TableBuild(o: any): TableSchemas {
   const d: any = o.datas;
-  const t: any = o.translations.dashboard.table;
-  let translations: any = Object.assign({}, o.translations.table);
-  translations = Object.assign(translations, t.table);
+  const t: any = o.translations;
+  const m: any = o.modules;
   return new TableSchemas(
     'table',
-    translations,
+    merge({}, m.table, t.table),
     new TableRow(
       'thead',
       undefined,

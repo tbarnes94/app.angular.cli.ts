@@ -6,10 +6,10 @@ import { Output } from '@angular/core' ;
 import { ViewEncapsulation } from '@angular/core' ;
 import { FormControl } from '@angular/forms' ;
 import { FormGroup } from '@angular/forms' ;
+import { isObject } from 'lodash-es' ;
 import { BehaviorSubject } from 'rxjs/Rx' ;
 
 import { CommonComponent } from '../../commons' ;
-import { isObject } from '../../commons' ;
 import { FormSchemas } from '../shared/types/basic/form.schemas' ;
 import { FormControl as FormControlSchema } from '../shared/types/basic/form.schemas' ;
 import { FormGroup as FormGroupSchema } from '../shared/types/group/form.group' ;

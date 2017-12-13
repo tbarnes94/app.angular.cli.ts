@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core' ;
 
 import { CommonEffects } from '../../../commons' ;
-import { ObjectStrings } from '../../../commons' ;
+import { ObjectStrings } from '../../../helpers' ;
 
 /**
  * https://angular.io/api/core/Injectable

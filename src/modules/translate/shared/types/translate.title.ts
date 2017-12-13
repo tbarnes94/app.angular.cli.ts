@@ -1,5 +1,5 @@
 /** @imports */
-import { ObjectAny } from '../../../commons' ;
+import { ObjectAny } from '../../../helpers' ;
 
 /**
  * https://angular.io/guide/ngmodule#configure-core-services-with-coremoduleforroot

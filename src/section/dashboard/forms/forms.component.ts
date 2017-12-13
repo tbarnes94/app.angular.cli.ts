@@ -46,6 +46,7 @@ export class DashboardFormsComponent extends TemplateContainerComponent {
   public schemas$: Observable<FormSchemas> = this.forms.build$(
       this.language$,
       this.translations$,
+      this.modules$,
       Observable.of(false),
       undefined,
       undefined,

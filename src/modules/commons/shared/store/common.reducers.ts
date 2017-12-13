@@ -2,7 +2,7 @@
 import { ActionReducer } from '@ngrx/store' ;
 import { combineReducers } from '@ngrx/store' ;
 
-import { State } from '../types/state' ;
+import { State } from '../../../helpers' ;
 import { COMMON_LOADS } from './common.actions' ;
 import { CommonLoads } from './common.actions' ;
 import { CommonActions } from './common.actions' ;

@@ -3,11 +3,11 @@ import { Injectable } from '@angular/core' ;
 import { Actions } from '@ngrx/effects' ;
 import { Observable } from 'rxjs/Rx' ;
 
-import { ApiService } from '../../../api/shared/service/api.service' ;
-import { ApiError } from '../../../api/shared/types/api.error' ;
-import { ApiResponse } from '../../../api/shared/types/api.response' ;
+import { ApiService } from '../../../api' ;
+import { ApiError } from '../../../api' ;
+import { ApiResponse } from '../../../api' ;
+import { Class } from '../../../helpers' ;
 import { CommonService } from '../service/common.service' ;
-import { Class } from '../types/class' ;
 import { CommonAction } from './common.action' ;
 
 /**
