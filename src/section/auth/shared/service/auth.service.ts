@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
-import { Operator } from '../../../../modules/helpers';
+import { StoreOperator } from '../../../../modules/commons';
 import { toProperty } from '../../../../modules/helpers';
 import { CommonService } from '../../../../modules/commons/shared/service/common.service';
 import { AuthToken } from '../types/auth.token';
@@ -18,7 +18,7 @@ export class AuthService {
   public readonly token$: Observable<boolean> = this.common
     .select(
       [ 'auth', 'token' ],
-      [ new Operator( 'map', [], toProperty.bind(this, 'content') ) ]
+      [ new StoreOperator( 'map', [], toProperty.bind(this, 'content') ) ]
     )
     .map((o: AuthToken) => (!!o && !!o.access_token))
     ;
