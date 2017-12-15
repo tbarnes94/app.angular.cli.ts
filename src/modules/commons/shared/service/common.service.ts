@@ -7,15 +7,20 @@ import { NavigationError } from '@angular/router' ;
 import { NavigationExtras } from '@angular/router' ;
 import { NavigationStart } from '@angular/router' ;
 import { Router } from '@angular/router' ;
+import { Action } from '@ngrx/store' ;
 import { Store } from '@ngrx/store' ;
+import { isNull } from 'lodash-es' ;
+import { isUndefined } from 'lodash-es' ;
 import { BehaviorSubject } from 'rxjs/Rx' ;
 import { Observable } from 'rxjs/Rx' ;
 
 import { ObjectAny } from '../../../helpers' ;
-import { Operator } from '../../../helpers' ;
-import { State } from '../../../helpers' ;
+import { isExpired } from '../../../helpers' ;
 import { CommonAction } from '../store/common.action' ;
 import { CommonLoads } from '../store/common.actions' ;
+import { StoreCache } from '../types/store.cache' ;
+import { StoreOperator } from '../types/store.operator' ;
+import { StoreState } from '../types/store.state' ;
 
 /**
  * https://angular.io/api/core/Injectable
@@ -98,58 +103,85 @@ export class CommonService
    * @param input
    * @returns this
    */
-  public dispatch<T>( input : CommonAction<T> ) : this
+  public dispatch< T extends Action = Action >( input : T ) : this
   {
-    this.store.dispatch( input ) ;
+    this.store.dispatch<T>( input ) ;
     return this ;
+  }
+
+  /**
+   * @param cache
+   * @param input
+   * @returns this
+   */
+  public cache< R , A extends Action = Action >( cache : StoreCache<A> , input : any /* R */ ) : this
+  {
+    return (
+        ( !!cache ) &&
+        (
+          ( isNull( input ) || isUndefined( input ) ) ||
+          ( !!input.timestamp && isExpired( new Date( input.timestamp ) , cache.expires ) )
+        )
+      )
+      ? this.dispatch<A>( cache.refresh )
+      : this
+      ;
+  }
+
+  /**
+   * @param operators
+   * @param input
+   * @returns http://reactivex.io/documentation/observable.html
+   */
+  public operator<R>( operators : Array<StoreOperator> , input : R ) : any // x Observable<R>
+  {
+    return operators.reduce
+      (
+        ( total , current ) =>
+        {
+          return ( !!current.process )
+            ? total[ current.key ]( current.process.bind( current.context ) )
+            : total[ current.key ]( ...current.param )
+            ;
+        } ,
+        Observable.of( input ) ,
+      ) ;
   }
 
   /**
    * @param nodes
    * @param operators
-   * @param context
+   * @param cache
    * @returns http://reactivex.io/documentation/observable.html
    */
-  public select<T>(
+  public select< R , A extends Action = Action >(
     nodes : Array<string> ,
-    operators : Array<Operator> = new Array() ,
-    context : Object = this ,
+    operators : Array<StoreOperator> = new Array() ,
+    cache : StoreCache<A> = null ,
   )
-  : Observable<T>
+  : Observable<R>
   {
-    let store$ : Observable<ObjectAny> = Observable.of( null ) ;
-    const operators$ : Observable<Array<Operator>> = Observable.of( operators ) ;
-
+    let store$ : any ;
     if ( nodes.length === 1 ) {
-      store$ = this.store.select( nodes[0] ) ;
+      store$ = this.store.select( nodes[ 0 ] ) ;
     } else if ( nodes.length === 2 ) {
-      store$ = this.store.select( nodes[0] , nodes[1] ) ;
+      store$ = this.store.select( nodes[ 0 ] , nodes[ 1 ] ) ;
     } else if ( nodes.length === 3 ) {
-      store$ = this.store.select( nodes[0] , nodes[1] , nodes[2] ) ;
+      store$ = this.store.select( nodes[ 0 ] , nodes[ 1 ] , nodes[ 2 ] ) ;
     } else if ( nodes.length === 4 ) {
-      store$ = this.store.select( nodes[0] , nodes[1] , nodes[2] , nodes[3] ) ;
+      store$ = this.store.select( nodes[ 0 ] , nodes[ 1 ] , nodes[ 2 ] , nodes[ 3 ] ) ;
     } else if ( nodes.length === 5 ) {
-      store$ = this.store.select( nodes[0] , nodes[1] , nodes[2] , nodes[3] , nodes[4] ) ;
+      store$ = this.store.select( nodes[ 0 ] , nodes[ 1 ] , nodes[ 2 ] , nodes[ 3 ] , nodes[ 4 ] ) ;
+    } else {
+      store$ = Observable.of( null ) ;
     }
 
-    return Observable
-      .combineLatest( store$ , operators$ )
-      .map( ( o ) => ({ store : o[ 0 ] , operators : o[ 1 ] }) )
-      .switchMap( ( o : { store : ObjectAny , operators : Array<Operator> } ) =>
-      {
-        return o.operators.reduce
-          (
-            ( total , current ) =>
-            {
-              return ( !!current.run )
-                ? total[ current.key ]( current.run.bind( context ) )
-                : total[ current.key ]( ...current.input )
-                ;
-            } ,
-            Observable.of( o.store ) ,
-          )
-          ;
-      })
+    store$.take( 1 )
+      .subscribe( this.cache.bind( this , cache ) )
+      ;
+
+    return store$
+      .switchMap( this.operator.bind( this , operators ) )
       ;
 
   }
@@ -163,7 +195,7 @@ export class CommonService
   public constructor(
     protected readonly router : Router ,
     protected readonly location : Location ,
-    protected readonly store : Store<State> ,
+    protected readonly store : Store<StoreState> ,
   ) {
     this.router.events
       .filter( ( o ) => ( o instanceof NavigationEnd || o instanceof NavigationCancel ||  o instanceof NavigationError ) )

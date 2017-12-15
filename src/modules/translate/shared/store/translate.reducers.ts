@@ -3,8 +3,8 @@ import { ActionReducer } from '@ngrx/store' ;
 import { combineReducers } from '@ngrx/store' ;
 
 import { CommonReducer } from '../../../commons' ;
+import { StoreState } from '../../../commons' ;
 import { ObjectAny } from '../../../helpers' ;
-import { State } from '../../../helpers' ;
 import { TRANSLATE_LANGUAGE } from './translate.actions' ;
 import { TranslateLanguage } from './translate.actions' ;
 import { TRANSLATE_MODULES } from './translate.actions' ;

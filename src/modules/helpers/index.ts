@@ -7,5 +7,3 @@ export * from './shared/types/class' ;
 export * from './shared/types/object.any' ;
 export * from './shared/types/object.booleans' ;
 export * from './shared/types/object.strings' ;
-export * from './shared/types/operator' ;
-export * from './shared/types/state' ;
