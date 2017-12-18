@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core' ;
 import { ModuleWithProviders } from '@angular/core' ;
 
 import { ServerEventService } from './shared/service/server.event.service' ;
+import { WebSocketService } from './shared/service/web.socket.service' ;
 import { WebWorkerService } from './shared/service/web.worker.service' ;
 
 /**
@@ -35,6 +36,7 @@ export class StreamModule
       providers :
       [
         ServerEventService ,
+        WebSocketService ,
         WebWorkerService ,
       ] ,
     } ;

@@ -10,6 +10,7 @@ import { CommonService } from '../../commons/shared/service/common.service';
 import { FormService } from '../../forms/shared/service/form.service';
 import { ObjectAny } from '../../helpers/shared/types/object.any';
 import { ServerEventService } from '../../streams/shared/service/server.event.service';
+import { WebSocketService } from '../../streams/shared/service/web.socket.service';
 import { WebWorkerService } from '../../streams/shared/service/web.worker.service';
 import { TableService } from '../../table/shared/service/table.service';
 import { TranslateService } from '../../translate/shared/service/translate.service';
@@ -100,6 +101,7 @@ export class TemplateContainerComponent extends CommonContainerComponent {
    * @param route         https://angular.io/api/router/ActivatedRoute
    * @param common        https://angular.io/tutorial/toh-pt4
    * @param serverevent   https://angular.io/tutorial/toh-pt4
+   * @param websocket     https://angular.io/tutorial/toh-pt4
    * @param webworker     https://angular.io/tutorial/toh-pt4
    * @param translate     https://angular.io/tutorial/toh-pt4
    * @param auth          https://angular.io/tutorial/toh-pt4
@@ -110,6 +112,7 @@ export class TemplateContainerComponent extends CommonContainerComponent {
   public constructor(protected readonly route: ActivatedRoute,
                      protected readonly common: CommonService,
                      protected readonly serverevent: ServerEventService,
+                     protected readonly websocket: WebSocketService,
                      protected readonly webworker: WebWorkerService,
                      protected readonly translate: TranslateService,
                      protected readonly auth: AuthService,

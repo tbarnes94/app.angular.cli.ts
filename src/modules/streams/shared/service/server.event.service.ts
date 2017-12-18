@@ -4,10 +4,8 @@ import { Observable } from 'rxjs/Rx' ;
 import { Subject } from 'rxjs/Rx' ;
 
 import { ServerEventStore } from '../types/server.event.store' ;
-import { onError } from './stream.event.helpers' ;
-import { onMessage } from './stream.event.helpers' ;
+import { onEvent } from './stream.event.helpers' ;
 import { onNext } from './stream.event.helpers' ;
-import { onOpen } from './stream.event.helpers' ;
 
 declare var EventSource : any ;
 
@@ -29,14 +27,14 @@ export class ServerEventService
    */
   protected toStreams( input : string ) : ServerEventStore
   {
-    const url : string = input ;
-    const event : any /* EventSource */ = new EventSource( url ) ;
+    const uri : string = input ;
+    const event : any = new EventSource( uri ) ; // EventSource
     const close : Subject<boolean> = new Subject<boolean>() ;
     const event$ : Subject<Event> = new Subject<Event>() ;
 
-    event.onopen = onOpen.bind( this , event$ ) ;
-    event.onmessage = onMessage.bind( this , event$ ) ;
-    event.onerror = onError.bind( this , event$ ) ;
+    event.onopen = onEvent.bind( this , event$ ) ;
+    event.onerror = onEvent.bind( this , event$ ) ;
+    event.onmessage = onEvent.bind( this , event$ ) ;
     event$.takeUntil( close ).subscribe
     (
       onNext.bind( this ) ,
