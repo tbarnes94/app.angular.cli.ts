@@ -134,28 +134,54 @@ import { FormControl } from '../shared/types/basic/form.schemas' ;
             *ngIf='( input.element === "select" )'
             [fxFlex]='"0 0 " + input.width'
             class='mat-form-field'
+            [ngClass]=
+            '{
+              "mat-form-field-invalid" :
+              (
+                this.model.controls[ input.key ].invalid &&
+                (
+                  this.model.controls[ input.key ].touched ||
+                  this.check
+                )
+              )
+            }'
             >
             <div class='mat-form-field-wrapper' >
-              <select
-                [id]='( this.id + "-" + input.key )'
-                [formControl]='this.model.controls[ input.key ]'
-                [attr.aria-labelledby]='( this.id + "-" + input.key + "-label" )'
-                (blur)='this.ngOnChanges()'
-                >
-                <option
-                  *ngIf='( input.label )'
-                  [disabled]='true'
-                  [value]='null'
-                  >
-                  {{ input.label }}
-                </option>
-                <option
-                  *ngFor='let option of ( this.toAny( input.options , this.forms ) )'
-                  [value]='option.value'
-                  >
-                  {{ option.title }}
-                </option>
-              </select>
+              <div class='mat-form-field-flex' >
+                <div class='mat-form-field-infix' >
+                  <select
+                    [id]='( this.id + "-" + input.key )'
+                    [formControl]='this.model.controls[ input.key ]'
+                    [attr.aria-labelledby]='( this.id + "-" + input.key + "-label" )'
+                    (blur)='this.ngOnChanges()'
+                    class='mat-select-element'
+                    >
+                    <option
+                      *ngIf='( input.label )'
+                      [disabled]='true'
+                      [value]='null'
+                      >
+                      {{ input.label }}
+                    </option>
+                    <option
+                      *ngFor='let option of ( this.toAny( input.options , this.forms ) )'
+                      [value]='option.value'
+                      >
+                      {{ option.title }}
+                    </option>
+                  </select>
+                  <div class='mat-form-field-suffix' >
+                    <i
+                      class='fa fa-caret-down'
+                      aria-hidden='true'
+                      >
+                    </i>
+                  </div>
+                </div>
+              </div>
+              <div class='mat-form-field-underline' >
+                <span class='mat-form-field-ripple' ></span>
+              </div>
             </div>
           </div>
           <!-- radio -->
