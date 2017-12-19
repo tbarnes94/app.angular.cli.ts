@@ -103,14 +103,14 @@ export class TablePagesComponent extends CommonComponent
   @Input() public readonly schemas : TablePageSchemas = null ;
 
   /**
-   * https://angular.io/api/core/Input
-   */
-  @Input() public readonly children : Array<TablePage> = new Array() ;
-
-  /**
    * https://angular.io/api/core/Output
    */
   @Output() public readonly onPagesEvent : EventEmitter<number> = new EventEmitter() ;
+
+  /**
+   * https://angular.io/api/core/Input
+   */
+  @Input() public readonly children : Array<TablePage> = new Array() ;
 
   /**
    * https://angular.io/guide/user-input

@@ -16,7 +16,8 @@ export function FormBuild(o: any): FormSchemas {
   const d: any = o.datas;
   const t: any = o.translations;
   const m: any = o.modules;
-  return new FormSchemas([
+  return new FormSchemas(
+    m.forms, [
     new FormAction(
       'complete',
       'button',
@@ -47,12 +48,12 @@ export function FormBuild(o: any): FormSchemas {
         new FormInput(
           'one',
           undefined,
+          t.username.label,
           [ Validators.required ],
           undefined,
           undefined,
           undefined,
           '100%',
-          undefined,
           100,
           undefined,
           undefined,
@@ -71,12 +72,12 @@ export function FormBuild(o: any): FormSchemas {
         new FormInput(
           'one',
           undefined,
+          t.password.label,
           [ Validators.required ],
           undefined,
           undefined,
           undefined,
           '100%',
-          undefined,
           100,
           undefined,
           undefined,

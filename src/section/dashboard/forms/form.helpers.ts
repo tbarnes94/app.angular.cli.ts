@@ -24,7 +24,8 @@ export function FormBuild(o: any): FormSchemas {
   const m: any = o.modules;
   const AlphaRegex: RegExp = toRegex(toRegexGroup(AlphaAllPattern));
   const NumericRegex: RegExp = toRegex(toRegexGroup(NumericAllPattern));
-  return new FormSchemas([
+  return new FormSchemas(
+    m.forms, [
     new FormAction(
       'complete',
       'button',
@@ -103,12 +104,12 @@ export function FormBuild(o: any): FormSchemas {
         new FormInput(
           'one',
           undefined,
+          t.input.placeholder,
           [ Validators.required, Validators.pattern(NumericRegex) ],
           undefined,
           undefined,
           undefined,
           '100%',
-          t.input.placeholder,
           100,
           'dollar',
           'times',
@@ -127,12 +128,12 @@ export function FormBuild(o: any): FormSchemas {
         new FormInput(
           'one',
           undefined,
+          t.multiple.placeholder.one,
           [ Validators.required, Validators.pattern(AlphaRegex) ],
           undefined,
           undefined,
           undefined,
           '50%',
-          t.multiple.placeholder.one,
           100,
           undefined,
           undefined,
@@ -141,12 +142,12 @@ export function FormBuild(o: any): FormSchemas {
         new FormInput(
           'two',
           undefined,
+          t.multiple.placeholder.two,
           [ Validators.required, Validators.pattern(AlphaRegex) ],
           undefined,
           undefined,
           undefined,
           '50%',
-          t.multiple.placeholder.two,
           100,
           undefined,
           undefined,
@@ -174,12 +175,12 @@ export function FormBuild(o: any): FormSchemas {
           new FormInput(
             'one',
             undefined,
+            t.shown.placeholder,
             [ Validators.required ],
             undefined,
             undefined,
             undefined,
             '100%',
-            t.shown.placeholder,
             100,
             undefined,
             undefined,
@@ -198,12 +199,12 @@ export function FormBuild(o: any): FormSchemas {
           new FormInput(
             'one',
             undefined,
+            t.hides.placeholder,
             [ Validators.required ],
             undefined,
             undefined,
             undefined,
             '100%',
-            t.hides.placeholder,
             100,
             undefined,
             undefined,
@@ -223,9 +224,10 @@ export function FormBuild(o: any): FormSchemas {
         new FormDatepicker(
           'one',
           undefined,
+          t.datepicker.placeholder,
           [ Validators.required ],
           undefined,
-          true,
+          undefined,
           undefined,
           '100%',
           new Date(),
@@ -244,12 +246,12 @@ export function FormBuild(o: any): FormSchemas {
         new FormSelect(
           'one',
           undefined,
+          t.selects.placeholder,
           [ Validators.required ],
           undefined,
           undefined,
           undefined,
           '100%',
-          t.selects.placeholder,
           t.selects.options
         ),
       ]),
@@ -264,6 +266,7 @@ export function FormBuild(o: any): FormSchemas {
         '50%', [
         new FormRadio(
           'one',
+          undefined,
           undefined,
           [ Validators.required ],
           undefined,
@@ -286,13 +289,13 @@ export function FormBuild(o: any): FormSchemas {
         new FormCheck(
           'one',
           undefined,
+          t.check.placeholder,
           [ Validators.requiredTrue ],
           undefined,
           undefined,
           undefined,
           '100%',
           'warn',
-          t.check.placeholder
         ),
       ]),
     ]),

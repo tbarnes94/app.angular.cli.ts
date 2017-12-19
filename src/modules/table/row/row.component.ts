@@ -88,6 +88,11 @@ export class TableRowComponent extends CommonComponent
   @Input() public readonly label : string = null ;
 
   /**
+   * https://angular.io/api/core/Output
+   */
+  @Output() public readonly onSortsEvent : EventEmitter<TableSort> = new EventEmitter() ;
+
+  /**
    * https://angular.io/api/core/Input
    */
   @Input() public readonly children : Array<TableControl> = new Array() ;
@@ -117,10 +122,6 @@ export class TableRowComponent extends CommonComponent
    */
   @Input() public readonly last : boolean = false ;
 
-  /**
-   * https://angular.io/api/core/Output
-   */
-  @Output() public readonly onSortsEvent : EventEmitter<TableSort> = new EventEmitter() ;
 
   /**
    * https://angular.io/guide/user-input

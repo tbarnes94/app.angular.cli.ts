@@ -11,12 +11,12 @@ export class FormInput extends FormAbstractInput
   (
     public readonly key : string = null ,
     public readonly element : string = 'input' ,
+    public readonly label : string = null ,
     public readonly validators : Array<ValidatorFn> = new Array() ,
     public readonly disabled : boolean = false ,
     public readonly readonly : boolean = false ,
     public readonly value : Date | boolean | string = null ,
     public readonly width : string = null ,
-    public readonly placeholder : string = null ,
     public readonly maxlength : number = null ,
     public readonly prefix : string = null ,
     public readonly suffix : string = null ,
@@ -26,6 +26,7 @@ export class FormInput extends FormAbstractInput
     (
       key ,
       element ,
+      label ,
       validators ,
       disabled ,
       readonly ,

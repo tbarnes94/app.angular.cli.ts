@@ -41,8 +41,9 @@ import { TableRow } from '../shared/types/row/table.row' ;
         <!-- caption -->
         <caption
           *ngIf='( this.caption$ | async ) as caption'
-          [attr.aria-live]='"polite"'
           [id]='this.schemas.key + "-caption"'
+          [attr.aria-live]='"polite"'
+          [attr.aria-atomic]='true'
           >
           {{ caption }}
         </caption>
@@ -51,8 +52,8 @@ import { TableRow } from '../shared/types/row/table.row' ;
           <tr
             *ngIf='( this.heads$ | async ) as heads'
             [key]='heads.key'
-            [children]='heads.children'
             (onSortsEvent)='this.onSorts( $event )'
+            [children]='heads.children'
             [type]='"head"'
             table-row
             >
@@ -68,14 +69,14 @@ import { TableRow } from '../shared/types/row/table.row' ;
               *ngIf='( one.route )'
               [key]='one.key'
               [label]='this.schemas.translations.click'
+              (click)='this.onClick( $event , one.route )'
+              (keypress)='this.onClick( $event , one.route )'
               [children]='one.children'
               [type]='"body-click"'
               [sequence]='( even ) ? "e" : "o"'
               [index]='index'
               [first]='first'
               [last]='last'
-              (keypress)='this.onClick( $event , one.route )'
-              (click)='this.onClick( $event , one.route )'
               table-row
               >
             </tr>
@@ -104,8 +105,8 @@ import { TableRow } from '../shared/types/row/table.row' ;
           [key]='"pages"'
           [translations]='this.schemas.translations.pages'
           [schemas]='pages.schemas'
-          [children]='pages.pages'
           (onPagesEvent)='this.onPages( $event )'
+          [children]='pages.pages'
           table-pages
           >
         </nav>

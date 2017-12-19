@@ -25,6 +25,7 @@ export class FormSchemas
 {
   public constructor
   (
+    public readonly translations : any = {} ,
     public readonly actions : Array<FormAction> = new Array() ,
     public readonly sections : Array<FormSection<FormGroup< FormGroup<FormControl> | FormControl >>> = new Array() ,
     public readonly divider : boolean = false ,

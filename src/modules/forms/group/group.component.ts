@@ -22,149 +22,176 @@ import { FormControl } from '../shared/types/basic/form.schemas' ;
   styleUrls : [ './group.component.styl' ] ,
   template :
   `
-    <!-- label -->
-    <label
-      *ngIf='( this.label )'
-      [for]='( this.id + "-" + this.schemas[ 0 ].key )'
-      >
-      <span [innerHtml]='this.label' ></span>
-      <!-- tooltip -->
-      <i
-        *ngIf='( this.tooltip )'
-        [matTooltip]='this.tooltip'
-        [matTooltipPosition]='"above"'
-        class='fa fa-question-circle'
-        aria-hidden='true'
-        >
-      </i>
-    </label>
     <!-- controls -->
-    <div
-      fxLayoutWrap
-      [fxLayout]='"row"'
-      [fxLayout.lt-sm]='"column"'
-      [ngClass.lt-sm]='"small"'
+    <fieldset
       class='mat-form-controls'
       >
-      <ng-container *ngFor='let input of this.schemas' >
-        <!-- input -->
-        <mat-form-field
-          *ngIf='( input.element === "input" )'
-          [fxFlex]='"0 0 " + input.width'
-          [floatPlaceholder]='"never"'
-          [ngClass]=
-          '{
-            "mat-has-prefix" : input.prefix ,
-            "mat-has-suffix" : input.suffix
-          }'
+      <!-- label -->
+      <legend
+        *ngIf='( this.label )'
+        class='mat-form-label'
+        >
+        <span [innerHtml]='this.label' ></span>
+        <!-- tooltip -->
+        <i
+          *ngIf='( this.tooltip )'
+          [attr.tabindex]='0'
+          [attr.role]='"tooltip"'
+          [matTooltip]='this.tooltip'
+          [matTooltipPosition]='"above"'
+          class='fa fa-question-circle'
           >
-          <input
-            matInput
+        </i>
+      </legend>
+      <!-- input -->
+      <div
+        fxLayoutWrap
+        [fxLayout]='"row"'
+        [fxLayout.lt-sm]='"column"'
+        [ngClass.lt-sm]='"small"'
+        >
+        <ng-container *ngFor='let input of this.schemas' >
+          <!-- "label" -->
+          <label
+            *ngIf='input.label'
+            [id]='( this.id + "-" + input.key + "-label" )'
+            [for]='( this.id + "-" + input.key )'
+            class='mat-aria-label'
+            >
+            {{ input.label }}
+          </label>
+          <!-- input -->
+          <mat-form-field
+            *ngIf='( input.element === "input" )'
+            [fxFlex]='"0 0 " + input.width'
+            [floatPlaceholder]='"never"'
+            [ngClass]=
+            '{
+              "mat-has-prefix" : input.prefix ,
+              "mat-has-suffix" : input.suffix
+            }'
+            >
+            <input
+              matInput
+              [id]='( this.id + "-" + input.key )'
+              [formControl]='this.model.controls[ input.key ]'
+              [attr.aria-labelledby]='( this.id + "-" + input.key + "-label" )'
+              (blur)='this.ngOnChanges()'
+              (keypress)='this.ngOnChanges()'
+              [readonly]='input.readonly'
+              [maxlength]='input.maxlength'
+              [type]='input.type'
+              />
+            <i
+              *ngIf='input.prefix'
+              class='fa fa-{{ input.prefix }}'
+              aria-hidden='true'
+              matPrefix
+              >
+            </i>
+            <i
+              *ngIf='input.suffix'
+              class='fa fa-{{ input.suffix }}'
+              aria-hidden='true'
+              matSuffix
+              >
+            </i>
+          </mat-form-field>
+          <!-- datepicker -->
+          <mat-form-field
+            *ngIf='( input.element === "datepicker" )'
+            [fxFlex]='"0 0 " + input.width'
+            [floatPlaceholder]='"never"'
+            class='mat-datepicker-field'
+            >
+            <input
+              matInput
+              [id]='( this.id + "-" + input.key )'
+              [formControl]='this.model.controls[ input.key ]'
+              [attr.aria-labelledby]='( this.id + "-" + input.key + "-label" )'
+              (blur)='this.ngOnChanges()'
+              (keypress)='this.ngOnChanges()'
+              [matDatepicker]='dates'
+              [readonly]='input.readonly'
+              [maxlength]='input.maxlength'
+              [type]='input.type'
+              [min]='input.min'
+              [max]='input.max'
+              />
+            <mat-datepicker-toggle
+              [for]='dates'
+              matSuffix
+              >
+            </mat-datepicker-toggle>
+            <mat-datepicker
+              touchUi='true'
+              #dates
+              >
+            </mat-datepicker>
+          </mat-form-field>
+          <!-- select -->
+          <div
+            *ngIf='( input.element === "select" )'
+            [fxFlex]='"0 0 " + input.width'
+            class='mat-form-field'
+            >
+            <div class='mat-form-field-wrapper' >
+              <select
+                [id]='( this.id + "-" + input.key )'
+                [formControl]='this.model.controls[ input.key ]'
+                [attr.aria-labelledby]='( this.id + "-" + input.key + "-label" )'
+                (blur)='this.ngOnChanges()'
+                >
+                <option
+                  *ngIf='( input.label )'
+                  [disabled]='true'
+                  [value]='null'
+                  >
+                  {{ input.label }}
+                </option>
+                <option
+                  *ngFor='let option of ( this.toAny( input.options , this.forms ) )'
+                  [value]='option.value'
+                  >
+                  {{ option.title }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <!-- radio -->
+          <mat-radio-group
+            *ngIf='( input.element === "radio" )'
             [id]='( this.id + "-" + input.key )'
             [formControl]='this.model.controls[ input.key ]'
-            (blur)='this.ngOnChanges()'
-            [readonly]='input.readonly'
-            [placeholder]='input.placeholder'
-            [maxlength]='input.maxlength'
-            [type]='input.type'
-            />
-          <i
-            *ngIf='input.prefix'
-            matPrefix
-            class='fa fa-{{ input.prefix }}'
-            aria-hidden='true'
             >
-          </i>
-          <i
-            *ngIf='input.suffix'
-            matSuffix
-            class='fa fa-{{ input.suffix }}'
-            aria-hidden='true'
-            >
-          </i>
-        </mat-form-field>
-        <!-- datepicker -->
-        <mat-form-field
-          *ngIf='( input.element === "datepicker" )'
-          [fxFlex]='"0 0 " + input.width'
-          [floatPlaceholder]='"never"'
-          class='mat-datepicker-field'
-          >
-          <input
-            matInput
-            [id]='( this.id + "-" + input.key )'
-            [formControl]='this.model.controls[ input.key ]'
-            [matDatepicker]='dates'
-            [readonly]='input.readonly'
-            [placeholder]='input.placeholder'
-            [maxlength]='input.maxlength'
-            [type]='input.type'
-            [min]='input.min'
-            [max]='input.max'
-            tabindex='-1'
-            />
-          <mat-datepicker-toggle
-            matSuffix
-            [for]='dates'
-            >
-          </mat-datepicker-toggle>
-          <mat-datepicker
-            #dates
-            touchUi='true'
-            >
-          </mat-datepicker>
-        </mat-form-field>
-        <!-- select -->
-        <mat-form-field
-          *ngIf='( input.element === "select" )'
-          [fxFlex]='"0 0 " + input.width'
-          [floatPlaceholder]='"never"'
-          >
-          <mat-select
-            [id]='( this.id + "-" + input.key )'
-            [formControl]='this.model.controls[ input.key ]'
-            (blur)='this.ngOnChanges()'
-            [placeholder]='input.placeholder'
-            >
-            <mat-option
+            <mat-radio-button
               *ngFor='let option of ( this.toAny( input.options , this.forms ) )'
+              [aria-label]='input.label'
               [value]='option.value'
+              [color]='input.color'
               >
               {{ option.title }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <!-- check -->
-        <mat-checkbox
-          *ngIf='( input.element === "check" )'
-          [fxFlex]='"0 0 " + input.width'
-          [id]='( this.id + "-" + input.key )'
-          [formControl]='this.model.controls[ input.key ]'
-          [color]='input.color'
-          >
-          {{ input.label }}
-        </mat-checkbox>
-        <!-- radio -->
-        <mat-radio-group
-          *ngIf='( input.element === "radio" )'
-          [id]='( this.id + "-" + input.key )'
-          [formControl]='this.model.controls[ input.key ]'
-          >
-          <mat-radio-button
-            *ngFor='let option of ( this.toAny( input.options , this.forms ) )'
-            [value]='option.value'
+            </mat-radio-button>
+          </mat-radio-group>
+          <!-- check -->
+          <mat-checkbox
+            *ngIf='( input.element === "check" )'
+            [fxFlex]='"0 0 " + input.width'
+            [id]='( this.id + "-" + input.key )'
+            [formControl]='this.model.controls[ input.key ]'
+            [aria-label]='input.label'
             [color]='input.color'
             >
-            {{ option.title }}
-          </mat-radio-button>
-        </mat-radio-group>
-      </ng-container>
-    </div>
+            {{ input.label }}
+          </mat-checkbox>
+        </ng-container>
+      </div>
+    </fieldset>
     <!-- error -->
     <mat-error *ngIf=
       '(
         ( this.error ) &&
-        ( this.model.invalid ) &&
+        ( ( this.error$ | async ).length > 0 ) &&
         (
           ( this.touch$ | async ) === true ||
           ( this.pristine$ | async ) === false ||
@@ -176,7 +203,10 @@ import { FormControl } from '../shared/types/basic/form.schemas' ;
       <ng-container
         *ngFor='let k of ( this.error$ | async )'
         >
-        <div *ngIf='this.error[ k ]' >
+        <div
+          *ngIf='this.error[ k ]'
+          [attr.role]='"alert"'
+          >
           {{ this.error[ k ] }}
         </div>
       </ng-container>
@@ -199,6 +229,11 @@ export class FormsGroupComponent extends CommonComponent
    * https://angular.io/api/core/Input
    */
   @Input() public readonly schemas : Array<FormControl> = null ;
+
+  /**
+   * https://angular.io/api/core/Output
+   */
+  @Output() public readonly onValueEvent : EventEmitter<FormGroup> = new EventEmitter() ;
 
   /**
    * https://angular.io/api/core/Input
@@ -224,11 +259,6 @@ export class FormsGroupComponent extends CommonComponent
    * https://angular.io/api/core/Input
    */
   @Input() public readonly tooltip : string = null ;
-
-  /**
-   * https://angular.io/api/core/Output
-   */
-  @Output() public readonly onValueEvent : EventEmitter<FormGroup> = new EventEmitter() ;
 
   /**
    * http://reactivex.io/documentation/subject.html

@@ -12,6 +12,23 @@ export const Translations: any = {
 
   'error': {},
 
+  'forms': {
+    'datepicker': {
+      'label': 'Calendar label',
+      'open': 'Press to open calendar. Press escape to close calendar.',
+      'month': {
+        'click': 'Switch to month view',
+        'prev': 'Go to previous month',
+        'next': 'Go to next month',
+      },
+      'year': {
+        'click': 'Switch to year view',
+        'prev': 'Go to previous year',
+        'next': 'Go to next year',
+      },
+    }
+  },
+
   'table': {
     'title': 'Table',
     'click': 'Go to this row',

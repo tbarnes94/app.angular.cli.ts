@@ -11,6 +11,7 @@ export class FormDatepicker extends FormInput
   (
     public readonly key : string = null ,
     public readonly element : string = 'datepicker' ,
+    public readonly label : string = null ,
     public readonly validators : Array<ValidatorFn> = new Array() ,
     public readonly disabled : boolean = false ,
     public readonly readonly : boolean = false ,
@@ -23,6 +24,7 @@ export class FormDatepicker extends FormInput
     (
       key ,
       element ,
+      label ,
       validators ,
       disabled ,
       readonly ,

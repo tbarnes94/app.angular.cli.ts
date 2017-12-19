@@ -13,6 +13,7 @@ export class FormRadio extends FormAbstractInput
   (
     public readonly key : string = null ,
     public readonly element : string = 'radio' ,
+    public readonly label : string = null ,
     public readonly validators : Array<ValidatorFn> = new Array() ,
     public readonly disabled : boolean = false ,
     public readonly readonly : boolean = false ,
@@ -25,6 +26,7 @@ export class FormRadio extends FormAbstractInput
     (
       key ,
       element ,
+      label ,
       validators ,
       disabled ,
       readonly ,
