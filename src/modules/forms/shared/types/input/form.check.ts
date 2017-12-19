@@ -1,5 +1,6 @@
 /** @imports */
 import { ValidatorFn } from '@angular/forms' ;
+import { FormAny } from '../functions/form.any' ;
 import { FormAbstractInput } from './form.abstract.input' ;
 
 /**
@@ -11,9 +12,10 @@ export class FormCheck extends FormAbstractInput
   (
     public readonly key : string = null ,
     public readonly element : string = 'check' ,
-    public readonly label : string = null ,
+    public readonly label : FormAny | string = null ,
     public readonly validators : Array<ValidatorFn> = new Array() ,
     public readonly disabled : boolean = false ,
+    public readonly required : boolean = false ,
     public readonly readonly : boolean = false ,
     public readonly value : boolean | string = null ,
     public readonly width : string = null ,
@@ -26,6 +28,7 @@ export class FormCheck extends FormAbstractInput
       label ,
       validators ,
       disabled ,
+      required ,
       readonly ,
       value ,
       width ,

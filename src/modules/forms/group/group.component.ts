@@ -37,9 +37,9 @@ import { FormControl } from '../shared/types/basic/form.schemas' ;
           *ngIf='( this.tooltip )'
           [attr.tabindex]='0'
           [attr.role]='"tooltip"'
-          [matTooltip]='this.tooltip'
+          class='mat-form-tooltip fa fa-question-circle'
           [matTooltipPosition]='"above"'
-          class='fa fa-question-circle'
+          [matTooltip]='this.tooltip'
           >
         </i>
       </legend>
@@ -58,7 +58,7 @@ import { FormControl } from '../shared/types/basic/form.schemas' ;
             [for]='( this.id + "-" + input.key )'
             class='mat-aria-label'
             >
-            {{ input.label }}
+            {{ this.toAny( input.label , this.forms ) }}
           </label>
           <!-- input -->
           <mat-form-field
@@ -156,13 +156,15 @@ import { FormControl } from '../shared/types/basic/form.schemas' ;
                     (blur)='this.ngOnChanges()'
                     class='mat-select-element'
                     >
+                    <!--
                     <option
                       *ngIf='( input.label )'
                       [disabled]='true'
                       [value]='null'
                       >
-                      {{ input.label }}
+                      {{ this.toAny( input.label , this.forms ) }}
                     </option>
+                    -->
                     <option
                       *ngFor='let option of ( this.toAny( input.options , this.forms ) )'
                       [value]='option.value'

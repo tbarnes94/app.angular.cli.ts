@@ -77,7 +77,6 @@ export const Translations: any = {
       'hides': {
         'label': 'HIDES fr',
         'tooltip': 'Hides tooltip hover fr',
-        'placeholder': 'One x 100% fr',
         'error': {
           'required': 'Hides required error fr.',
         },
