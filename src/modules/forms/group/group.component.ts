@@ -303,6 +303,7 @@ export class FormsGroupComponent extends CommonComponent
     .filter( ( o ) => ( !!o && !!o.controls ) )
     .filter( ( o ) => ( Object.keys( o.controls ).length > 0 ) )
     .map( ( o ) => o.controls )
+    .takeUntil( this.destroy$ )
     ;
 
   /**
@@ -361,11 +362,14 @@ export class FormsGroupComponent extends CommonComponent
    */
   public ngOnInit() : void
   {
-    this.model.valueChanges.subscribe( ( o ) =>
-    {
-      this.onValueEvent.next( this.model ) ;
-      this.ngOnChanges() ;
-    }) ;
+    this.model.valueChanges
+      .takeUntil( this.destroy$ )
+      .subscribe( ( o ) =>
+      {
+        this.onValueEvent.next( this.model ) ;
+        this.ngOnChanges() ;
+      })
+      ;
   }
 
   /**
