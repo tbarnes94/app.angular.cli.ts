@@ -1,15 +1,12 @@
 /** @exports */
 export const Translations: any = {
-
   'title': {
     'start': 'Angular',
     'separator': ' - ',
   },
-
   'app': {
     'roots': {},
   },
-
   'error': {},
   'loads': {
     'section': {
@@ -21,7 +18,6 @@ export const Translations: any = {
       'start': 'Page is loading',
     },
   },
-
   'forms': {
     'datepicker': {
       'label': 'Calendar label',
@@ -38,7 +34,6 @@ export const Translations: any = {
       },
     }
   },
-
   'table': {
     'title': 'Table',
     'click': 'Go to this row',
@@ -61,5 +56,4 @@ export const Translations: any = {
       'd': '%1 descendingly',
     },
   },
-
 };

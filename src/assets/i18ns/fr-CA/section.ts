@@ -1,6 +1,5 @@
 /** @exports */
 export const Translations: any = {
-
   'auth': {
     'login': {
       'title': 'Angular fr',
@@ -19,7 +18,6 @@ export const Translations: any = {
       'submit': 'Submit fr',
     },
   },
-
   'dashboard': {
     'forms': {
       'title': 'Forms fr',
@@ -138,5 +136,4 @@ export const Translations: any = {
       },
     },
   },
-
 };
