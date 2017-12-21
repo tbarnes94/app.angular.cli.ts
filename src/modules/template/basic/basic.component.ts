@@ -12,78 +12,74 @@ import { CommonComponent } from '../../commons';
   encapsulation: ViewEncapsulation.Emulated,
   styles: [ `` ],
   template: `
-    <mat-card>
-      <!-- title -->
-      <mat-card-title
-        *ngIf='( this.title )'
-        >
-        {{ this.title }}
-      </mat-card-title>
-      <!-- subtitle -->
-      <mat-card-subtitle
-        *ngIf='( this.subtitle )'
-        >
-        {{ this.subtitle }}
-      </mat-card-subtitle>
-      <!-- menus -->
-      <mat-card-content>
-        <ng-content
-          select='.template-menus'
+    <!-- section -->
+    <section
+      role='region'
+      >
+      <mat-card>
+        <!-- title -->
+        <mat-card-title
+          *ngIf='( this.title )'
           >
-        </ng-content>
-      </mat-card-content>
-      <!-- divider -->
-      <hr *ngIf='this.divider' />
-      <!-- content -->
-      <ng-container *ngIf='!this.loads' >
-        <!-- content error -->
-        <div
-          *ngIf='this.error'
-          class='mat-error-section'
+          <header>{{ this.title }}</header>
+        </mat-card-title>
+        <!-- subtitle -->
+        <mat-card-subtitle
+          *ngIf='( this.subtitle )'
           >
-          <mat-icon>error</mat-icon>
-          <span [innerHTML]=
-            '
-              ( this.errors[ this.error ] )
-              ? this.errors[ this.error ]
-              : this.error
-            '
+          <span>{{ this.subtitle }}</span>
+        </mat-card-subtitle>
+        <!-- menus -->
+        <mat-card-content>
+          <ng-content select='.template-menus' ></ng-content>
+        </mat-card-content>
+        <!-- divider -->
+        <hr
+          *ngIf='( this.divider )'
+          aria-hidden='true'
+          role='separator'
+          />
+        <!-- content -->
+        <ng-container
+          *ngIf='( !this.loads )'
+          >
+          <!-- content error -->
+          <template-error
+            [error]='( this.error )'
+            [modules]='( this.modules )'
             >
-          </span>
-        </div>
-        <!-- content loads -->
-        <ng-content
-          select='.template-content-loads'
+          </template-error>
+          <!-- content loads -->
+          <ng-container>
+            <ng-content select='.template-content-loads' ></ng-content>
+          </ng-container>
+        </ng-container>
+        <!-- content statics -->
+        <ng-container>
+          <ng-content select='.template-content' ></ng-content>
+        </ng-container>
+        <!-- actions -->
+        <mat-card-actions
+          *ngIf='( this.actions )'
           >
-        </ng-content>
-      </ng-container>
-      <!-- content statics -->
-      <ng-content
-        select='.template-content'
-        >
-      </ng-content>
-      <!-- actions -->
-      <mat-card-actions
-        *ngIf='( this.actions )'
-        >
-        {{ this.actions }}
-      </mat-card-actions>
-      <!-- footer -->
-      <mat-card-footer
-        *ngIf='( this.footer )'
-        >
-        {{ this.footer }}
-      </mat-card-footer>
-      <!-- loads -->
-      <div
-        *ngIf='this.loads'
-        fxLayout='row'
-        fxLayoutAlign='center center'
-        class='loads'
-        >
-        <mat-spinner></mat-spinner>
-      </div>
-    </mat-card>
+          <nav role='navigation' >{{ this.actions }}</nav>
+        </mat-card-actions>
+        <!-- footer -->
+        <mat-card-footer
+          *ngIf='( this.footer )'
+          >
+          <footer>{{ this.footer }}</footer>
+        </mat-card-footer>
+        <!-- loads -->
+        <template-loads
+          [key]='"section"'
+          [loads]='( this.loads )'
+          [modules]='( this.modules )'
+          [style]='"spinner"'
+          >
+        </template-loads>
+      </mat-card>
+    </section>
   `,
 })
 export class TemplateBasicComponent extends CommonComponent {
@@ -101,7 +97,7 @@ export class TemplateBasicComponent extends CommonComponent {
   /**
    * https://angular.io/api/core/Input
    */
-  @Input() public readonly errors: any = {};
+  @Input() public readonly modules: any = {};
 
   /**
    * https://angular.io/api/core/Input

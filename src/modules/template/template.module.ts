@@ -15,6 +15,8 @@ import { TableModule } from '../table';
 import { TranslateModule } from '../translate';
 import { TemplateBasicComponent } from './basic/basic.component';
 import { TemplateContainerComponent } from './container/container.component';
+import { TemplateErrorComponent } from './error/error.component';
+import { TemplateLoadsComponent } from './loads/loads.component';
 
 /**
  * https://angular.io/api/core/NgModule
@@ -48,6 +50,8 @@ export class TemplateRootModule {
   declarations: [
     TemplateBasicComponent,
     TemplateContainerComponent,
+    TemplateErrorComponent,
+    TemplateLoadsComponent,
   ],
   exports: [
 
@@ -62,6 +66,8 @@ export class TemplateRootModule {
 
     TemplateBasicComponent,
     TemplateContainerComponent,
+    TemplateErrorComponent,
+    TemplateLoadsComponent,
 
     FormModule,
     TableModule,

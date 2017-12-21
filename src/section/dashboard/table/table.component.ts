@@ -18,6 +18,7 @@ import { TableBuild } from './table.helpers';
       *ngIf='( this.translations$ | async ) as translations'
       [error]='( this.error$ | async )'
       [loads]='( this.loader$ | async )'
+      [modules]='( this.modules$ | async )'
       [title]='translations.title'
       [divider]='false'
       >

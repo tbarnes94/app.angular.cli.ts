@@ -28,7 +28,7 @@ export class ServerEventService
   protected toStreams( input : string ) : ServerEventStore
   {
     const uri : string = input ;
-    const event : any = new EventSource( uri ) ; // EventSource
+    const event : any = new EventSource( uri ) ; // x EventSource
     const close : Subject<boolean> = new Subject<boolean>() ;
     const event$ : Subject<Event> = new Subject<Event>() ;
 

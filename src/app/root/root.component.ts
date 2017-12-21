@@ -16,25 +16,40 @@ import { AuthService } from '../../section/auth';
   styleUrls: [ './root.component.styl' ],
   encapsulation: ViewEncapsulation.None,
   template: `
-    <div class='container' >
+    <!-- header -->
+    <header
+      role='banner'
+      >
+      <nav role='navigation' >
+        {{ 'app.header.nav' }}
+      </nav>
+    </header>
+    <!-- main -->
+    <main
+      class='container'
+      role='main'
+      >
       <!-- routlet -->
       <router-outlet></router-outlet>
-    </div>
-    <!-- language -->
-    <div
+    </main>
+    <!-- footer -->
+    <footer
       *ngIf='( this.languages$ | async ) as languages'
       class='container languages'
+      role='contentinfo'
       >
-      <span *ngFor='let language of languages' >
-        <button
-          mat-button
-          [color]='"accent"'
-          (click)='this.onLanguage(language.id)'
-          >
-          {{ language.title }}
-        </button>
-      </span>
-    </div>
+      <nav role='navigation' >
+        <ng-container *ngFor='let language of languages' >
+          <button
+            mat-button
+            [color]='"accent"'
+            (click)='this.onLanguage( language.id )'
+            >
+            {{ language.title }}
+          </button>
+        </ng-container>
+      </nav>
+    </footer>
   `,
 })
 export class AppRootComponent extends CommonComponent {

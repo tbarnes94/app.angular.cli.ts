@@ -15,20 +15,23 @@ import { CommonComponent } from '../../commons' ;
   styleUrls : [ './section.component.styl' ] ,
   template :
   `
-    <!-- title -->
-    <p
-      *ngIf='( this.title )'
-      >
-      {{ this.title }}
-    </p>
-    <!-- subtitle -->
-    <p
-      *ngIf='( this.subtitle )'
-      >
-      {{ this.subtitle }}
-    </p>
+    <!-- header -->
+    <header>
+      <!-- title -->
+      <p *ngIf='( this.title )' >
+        {{ this.title }}
+      </p>
+      <!-- subtitle -->
+      <p *ngIf='( this.subtitle )' >
+        {{ this.subtitle }}
+      </p>
+    </header>
     <!-- divider -->
-    <hr *ngIf='( this.divider )' />
+    <hr
+      *ngIf='( this.divider )'
+      aria-hidden='true'
+      role='separator'
+      />
     <!-- content -->
     <div class='mat-form-groups' >
       <ng-content></ng-content>

@@ -33,17 +33,17 @@ import { TableRow } from '../shared/types/row/table.row' ;
       >
       <table
         *ngIf='( bodys.length > 0 )'
-        [attr.aria-readonly]='true'
-        [attr.aria-labelledby]='this.schemas.key + "-caption"'
-        [attr.role]='"grid"'
         class='table-basic'
+        [attr.aria-labelledby]='this.schemas.key + "-caption"'
+        aria-readonly='true'
+        role='grid'
         >
         <!-- caption -->
         <caption
           *ngIf='( this.caption$ | async ) as caption'
           [id]='this.schemas.key + "-caption"'
-          [attr.aria-live]='"polite"'
-          [attr.aria-atomic]='true'
+          aria-live='polite'
+          aria-atomic='true'
           >
           {{ caption }}
         </caption>

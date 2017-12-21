@@ -204,6 +204,7 @@ export class CommonService
 
     this.router.events
       .filter( ( o ) => ( o instanceof NavigationStart ) )
+      .do( ( o ) => this.totop() )
       .subscribe( ( o ) => this.loads( true ) )
       ;
 

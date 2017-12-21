@@ -31,15 +31,18 @@ import { FormControl } from '../shared/types/basic/form.schemas' ;
         *ngIf='( this.label )'
         class='mat-form-label'
         >
-        <span [innerHtml]='this.label' ></span>
+        <span
+          [innerHtml]='this.label'
+          >
+        </span>
         <!-- tooltip -->
         <i
           *ngIf='( this.tooltip )'
-          [attr.tabindex]='0'
-          [attr.role]='"tooltip"'
-          class='mat-form-tooltip fa fa-question-circle'
-          [matTooltipPosition]='"above"'
           [matTooltip]='this.tooltip'
+          [matTooltipPosition]='"above"'
+          class='mat-form-tooltip fa fa-question-circle'
+          role='tooltip'
+          tabindex='0'
           >
         </i>
       </legend>
@@ -233,7 +236,7 @@ import { FormControl } from '../shared/types/basic/form.schemas' ;
         >
         <div
           *ngIf='this.error[ k ]'
-          [attr.role]='"alert"'
+          role='alert'
           >
           {{ this.error[ k ] }}
         </div>

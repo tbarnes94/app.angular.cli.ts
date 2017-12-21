@@ -30,6 +30,7 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
     <form
       [formGroup]='this.model'
       (ngSubmit)='this.onComplete( this.model )'
+      role='form'
       >
       <!-- sections -->
       <forms-section
@@ -95,9 +96,16 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
         </div>
       </forms-section>
       <!-- divider -->
-      <hr *ngIf='( this.schemas.divider )' />
+      <hr
+        *ngIf='( this.schemas.divider )'
+        aria-hidden='true'
+        role='separator'
+        />
       <!-- actions -->
-      <div class='mat-form-actions' >
+      <nav
+        class='mat-form-actions'
+        role='navigation'
+        >
         <span
           *ngFor='let act of this.schemas.actions'
           >
@@ -166,14 +174,14 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
             </ng-container>
           </ng-container>
         </span>
-      </div>
+      </nav>
       <!-- footer -->
-      <div>
+      <footer>
         <ng-content
           select='.form-footer'
           >
         </ng-content>
-      </div>
+      </footer>
     </form>
   ` ,
 })

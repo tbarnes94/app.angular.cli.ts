@@ -11,6 +11,16 @@ export const Translations: any = {
   },
 
   'error': {},
+  'loads': {
+    'section': {
+      'complete': 'Content has loaded fr',
+      'start': 'Content is loading fr',
+    },
+    'roots': {
+      'complete': 'Page has loaded fr',
+      'start': 'Page is loading fr',
+    },
+  },
 
   'forms': {
     'datepicker': {
