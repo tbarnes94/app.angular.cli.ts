@@ -110,10 +110,12 @@ export class TemplateLoadsComponent extends CommonComponent {
 
     this.loads$
       .switchMap((o) => Observable.of(o).delay(5000))
+      .takeUntil(this.destroy$)
       .subscribe((o) => this.shown$.next(false))
       ;
 
     this.loads$
+      .takeUntil(this.destroy$)
       .subscribe((o) => this.shown$.next(true))
       ;
 

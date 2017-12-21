@@ -18,8 +18,7 @@ export class TemplateCommonEffects extends CommonEffects {
 
     this.common
       .select<string>([ 'translate', 'language' ])
-      .take(1)
-      .filter((o) => (!!o))
+      .take(1).filter((o) => (!!o))
       .subscribe((o) => h['Accept-Language'] = o)
       ;
 
