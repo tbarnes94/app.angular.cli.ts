@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Input } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
+import { Subject } from 'rxjs/Rx';
 
 import { CommonComponent } from '../../commons';
 import { ObjectAny } from '../../helpers';
@@ -12,24 +15,25 @@ import { ObjectAny } from '../../helpers';
   selector: 'template-loads',
   encapsulation: ViewEncapsulation.Emulated,
   styles: [ `` ],
-  template:`
+  template: `
     <!-- loads -->
     <div
       fxLayout='row'
       fxLayoutAlign='center center'
       class='loads'
-    >
+      >
       <!-- template -->
       <ng-container
         *ngIf='( this.loads ) ; then start else complete ;'
-      >
+        >
       </ng-container>
       <!-- complete -->
       <ng-template #complete>
         <span
+          *ngIf='( this.shown$ | async )'
           class='mat-aria-txt'
-          role='alert'
-        >
+          role='status'
+          >
           {{ this.modules.loads[this.key].complete }}
         </span>
       </ng-template>
@@ -38,19 +42,20 @@ import { ObjectAny } from '../../helpers';
         <!-- spinner -->
         <mat-spinner
           *ngIf='( this.style === "spinner" )'
-        >
+          >
         </mat-spinner>
         <!-- progress -->
         <mat-progress-bar
           *ngIf='( this.style === "progress" )'
           [mode]='"indeterminate"'
-        >
+          >
         </mat-progress-bar>
         <!-- texts -->
         <span
+          *ngIf='( this.shown$ | async )'
           class='mat-aria-txt'
-          role='alert'
-        >
+          role='status'
+          >
           {{ this.modules.loads[this.key].start }}
         </span>
       </ng-template>
@@ -78,5 +83,46 @@ export class TemplateLoadsComponent extends CommonComponent {
    * https://angular.io/api/core/Input
    */
   @Input() public readonly style: string = null;
+
+  /**
+   * http://reactivex.io/documentation/subject.html
+   */
+  public readonly loads$: Subject<boolean> = new Subject<boolean>();
+
+  /**
+   * http://reactivex.io/documentation/subject.html
+   */
+  public readonly shown$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  /**
+   * https://angular.io/api/core/OnChanges
+   * https://angular.io/api/core/OnChanges#ngOnChanges
+   */
+  public ngOnChanges(): void {
+    this.loads$.next(this.loads);
+  }
+
+  /**
+   * https://angular.io/api/core/OnInit
+   * https://angular.io/api/core/OnInit#ngOnInit
+   */
+  public ngOnInit(): void {
+
+    this.shown$.subscribe((o)=>console.log(o))
+
+    this.loads$
+      .switchMap((o) => Observable.of(o).delay(5000))
+      .subscribe((o) => {
+
+      console.log('next false');
+      this.shown$.next(false)
+      })
+      ;
+
+    this.loads$
+      .subscribe((o) => this.shown$.next(true))
+      ;
+
+  }
 
 }
