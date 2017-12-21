@@ -18,9 +18,9 @@ import { CommonComponent } from '../../commons' ;
     <!-- header -->
     <header>
       <!-- title -->
-      <p *ngIf='( this.title )' >
+      <h2 *ngIf='( this.title )' >
         {{ this.title }}
-      </p>
+      </h2>
       <!-- subtitle -->
       <p *ngIf='( this.subtitle )' >
         {{ this.subtitle }}
