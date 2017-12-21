@@ -57,7 +57,9 @@ export class AppRootComponent extends CommonComponent {
   /**
    * http://reactivex.io/documentation/observable.html
    */
-  public readonly token$: Observable<boolean> = this.auth.token$;
+  public readonly token$: Observable<boolean> = this.auth.token$
+    .takeUntil(this.destroy$)
+    ;
 
   /**
    * http://reactivex.io/documentation/observable.html
