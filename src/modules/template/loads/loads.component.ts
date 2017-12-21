@@ -108,15 +108,9 @@ export class TemplateLoadsComponent extends CommonComponent {
    */
   public ngOnInit(): void {
 
-    this.shown$.subscribe((o)=>console.log(o))
-
     this.loads$
       .switchMap((o) => Observable.of(o).delay(5000))
-      .subscribe((o) => {
-
-      console.log('next false');
-      this.shown$.next(false)
-      })
+      .subscribe((o) => this.shown$.next(false))
       ;
 
     this.loads$
