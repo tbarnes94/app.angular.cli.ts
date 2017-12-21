@@ -59,7 +59,7 @@ import { FormControl } from '../shared/types/basic/form.schemas' ;
             *ngIf='input.label'
             [id]='( this.id + "-" + input.key + "-label" )'
             [for]='( this.id + "-" + input.key )'
-            class='mat-aria-label'
+            class='mat-aria-txt'
             >
             {{ this.toAny( input.label , this.forms ) }}
           </label>
