@@ -3,6 +3,7 @@ import { Input } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
 
 import { CommonComponent } from '../../commons';
+import { StoreEvent } from '../../commons';
 
 /**
  * https://angular.io/api/core/Component
@@ -43,12 +44,12 @@ import { CommonComponent } from '../../commons';
         <ng-container
           *ngIf='( !this.loads )'
           >
-          <!-- content error -->
-          <template-error
-            [error]='( this.error )'
+          <!-- content event -->
+          <template-event
+            [event]='( this.event )'
             [modules]='( this.modules )'
             >
-          </template-error>
+          </template-event>
           <!-- content loads -->
           <ng-container>
             <ng-content select='.template-content-loads' ></ng-content>
@@ -92,7 +93,7 @@ export class TemplateBasicComponent extends CommonComponent {
   /**
    * https://angular.io/api/core/Input
    */
-  @Input() public readonly error: string = null;
+  @Input() public readonly event: StoreEvent = null;
 
   /**
    * https://angular.io/api/core/Input

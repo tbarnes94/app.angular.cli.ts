@@ -11,6 +11,7 @@ export * from './shared/store/common.effects' ;
 export * from './shared/store/common.reducer' ;
 export * from './shared/store/common.reducers' ;
 export * from './shared/types/store.cache' ;
+export * from './shared/types/store.event' ;
 export * from './shared/types/store.operator' ;
 export * from './shared/types/store.state' ;
 export * from './common.module' ;

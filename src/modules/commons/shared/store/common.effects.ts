@@ -8,6 +8,7 @@ import { ApiError } from '../../../api' ;
 import { ApiResponse } from '../../../api' ;
 import { Class } from '../../../helpers' ;
 import { CommonService } from '../service/common.service' ;
+import { StoreEvent } from '../types/store.event' ;
 import { CommonAction } from './common.action' ;
 
 /**
@@ -19,16 +20,16 @@ export class CommonEffects
 {
   /**
    * @param action
-   * @param Error
    * @param Loads
+   * @param Event
    * @param Complete
    * @param request
    * @returns http://reactivex.io/documentation/observable.html
    */
-  public build$< A , L extends CommonAction<boolean> , E extends CommonAction<string> , C extends CommonAction<S> , S >(
+  public build$< A , L extends CommonAction<boolean> , E extends CommonAction<StoreEvent> , C extends CommonAction<S> , S >(
     action : string ,
     Loads : Class<L> ,
-    Error : Class<E> ,
+    Event : Class<E> ,
     Complete : Class<C> ,
     request : Function ,
   )
@@ -38,7 +39,7 @@ export class CommonEffects
       .ofType( action )
       // .debounceTime( 100 )
       .map( ( o : any ) => o.payload )
-      .do( ( o ) => this.common.dispatch( new Error( null ) ) )
+      .do( ( o ) => this.common.dispatch( new Event( null ) ) )
       .do( ( o ) => this.common.dispatch( new Loads( true ) ) )
       .concatMap( request.bind( this ) )
       .do( ( o ) => this.common.dispatch( new Loads( false ) ) )
@@ -46,7 +47,7 @@ export class CommonEffects
       {
         return ( o.content )
           ? new Complete( new ApiResponse( o.content , null , o.timestamp ) )
-          : this.exception<E>( o , Error )
+          : this.exception<E>( o , Event )
           ;
       })
       ;
@@ -61,8 +62,8 @@ export class CommonEffects
   {
     this.common.totop() ;
     return ( r && r.error && r.error.message )
-      ? new Action( r.error.message )
-      : new Action( '00000' )
+      ? new Action( new StoreEvent( null , r.error.message , 'error' ) )
+      : new Action( new StoreEvent( null , '00000' , 'error' ) )
       ;
   }
 

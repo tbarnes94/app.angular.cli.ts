@@ -7,7 +7,7 @@ export const Translations: any = {
   'app': {
     'roots': {},
   },
-  'error': {},
+  'event': {},
   'loads': {
     'section': {
       'complete': 'Content has loaded',

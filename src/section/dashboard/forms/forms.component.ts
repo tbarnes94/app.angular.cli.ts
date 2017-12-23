@@ -18,7 +18,7 @@ import { FormSubmit } from './form.helpers';
   template: `
     <template-basic
       *ngIf='( this.translations$ | async ) as translations'
-      [error]='( this.error$ | async )'
+      [event]='( this.event$ | async )'
       [loads]='( this.loader$ | async )'
       [modules]='( this.modules$ | async )'
       [title]='translations.title'
@@ -69,14 +69,6 @@ export class DashboardFormsComponent extends TemplateContainerComponent {
    */
   public onLogout(): void {
     this.common.dispatch(new AuthLogout(null));
-  }
-
-  /**
-   * https://angular.io/api/core/OnInit
-   * https://angular.io/api/core/OnInit#ngOnInit
-   */
-  public ngOnInit(): void {
-    this.key$.next('dashboard.forms');
   }
 
 }

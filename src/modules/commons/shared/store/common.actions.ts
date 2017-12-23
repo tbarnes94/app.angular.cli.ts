@@ -1,5 +1,6 @@
 /** @imports */
 import { ApiResponse } from '../../../api' ;
+import { StoreEvent } from '../types/store.event' ;
 import { CommonAction } from './common.action' ;
 
 /**
@@ -8,7 +9,7 @@ import { CommonAction } from './common.action' ;
 const PREFIX : string = '<Common>' ;
 export const COMMON_RESET : string = `${PREFIX}.reset` ;
 export const COMMON_LOADS : string = `${PREFIX}.loads` ;
-export const COMMON_ERROR : string = `${PREFIX}.error` ;
+export const COMMON_EVENT : string = `${PREFIX}.event` ;
 export const COMMON_COMPLETE : string = `${PREFIX}.complete` ;
 
 /**
@@ -30,9 +31,9 @@ export class CommonLoads extends CommonAction<boolean>
 /**
  * https://github.com/ngrx/platform
  */
-export class CommonError extends CommonAction<string>
+export class CommonEvent extends CommonAction<StoreEvent>
 {
-  public readonly type : string = COMMON_ERROR ;
+  public readonly type : string = COMMON_EVENT ;
 }
 
 /**
@@ -49,6 +50,6 @@ export class CommonComplete extends CommonAction<ApiResponse<string>>
 export type CommonActions
   = CommonReset
   | CommonLoads
-  | CommonError
+  | CommonEvent
   | CommonComplete
   ;

@@ -28,6 +28,23 @@ export class TemplateContainerComponent extends CommonContainerComponent {
   /**
    * http://reactivex.io/documentation/observable.html
    */
+  public readonly key$: Observable<string> = this.route.data
+    .filter((o) => ( !!o ))
+    .map((o) => o.key)
+    .takeUntil(this.destroy$)
+  ;
+
+  /**
+   * http://reactivex.io/documentation/observable.html
+   */
+  public readonly keys$: Observable<Array<string>> = this.key$
+    .map((o) => o.split('.'))
+    .takeUntil(this.destroy$)
+  ;
+
+  /**
+   * http://reactivex.io/documentation/observable.html
+   */
   public readonly modules$: Observable<any> = this.translate.modules$
     .takeUntil(this.destroy$)
   ;
@@ -47,23 +64,10 @@ export class TemplateContainerComponent extends CommonContainerComponent {
   ;
 
   /**
-   * http://reactivex.io/documentation/subject.html
-   */
-  public readonly key$: BehaviorSubject<string> = new BehaviorSubject<string>('common');
-
-  /**
-   * http://reactivex.io/documentation/subject.html
-   */
-  public readonly keys$: Observable<Array<string>> = this.key$
-    .map((o) => o.split('.'))
-    .takeUntil(this.destroy$)
-  ;
-
-  /**
    * http://reactivex.io/documentation/observable.html
    */
-  public readonly error$: Observable<string> = this.keys$
-    .switchMap((o) => this.common.select<string>([ o[ 0 ], 'error' ]))
+  public readonly event$: Observable<string> = this.keys$
+    .switchMap((o) => this.common.select<string>([ o[ 0 ], 'event' ]))
     .takeUntil(this.destroy$)
   ;
 

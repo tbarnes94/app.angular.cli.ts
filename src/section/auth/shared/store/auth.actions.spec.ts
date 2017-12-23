@@ -1,10 +1,11 @@
 import { ApiResponse } from '../../../../modules/api';
+import { StoreEvent } from '../../../../modules/commons';
 import { TestAction } from '../../../../modules/tests/test.action.tests';
 import { TestSuite } from '../../../../modules/tests/test.suite.tests';
 import { AuthCredentials } from '../types/auth.credentials';
 import { AuthToken } from '../types/auth.token';
-import { AUTH_ERROR } from './auth.actions';
-import { AuthError } from './auth.actions';
+import { AUTH_EVENT } from './auth.actions';
+import { AuthEvent } from './auth.actions';
 import { AUTH_LOADER } from './auth.actions';
 import { AuthLoader } from './auth.actions';
 import { AUTH_LOGIN_START } from './auth.actions';
@@ -20,8 +21,8 @@ const samples: string = 'kuwas';
 const samplea: AuthCredentials = new AuthCredentials(null, null);
 const samplez: ApiResponse<AuthToken> = new ApiResponse(new AuthToken(null, null, 0));
 
-TestSuite(title, 'AuthError', '', () => {
-  TestAction<AuthError, typeof samples>(AuthError, AUTH_ERROR, samples);
+TestSuite(title, 'AuthEvent', '', () => {
+  TestAction<AuthEvent, StoreEvent>(AuthEvent, AUTH_EVENT, null);
 });
 
 TestSuite(title, 'AuthLoader', '', () => {

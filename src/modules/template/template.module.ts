@@ -15,7 +15,7 @@ import { TableModule } from '../table';
 import { TranslateModule } from '../translate';
 import { TemplateBasicComponent } from './basic/basic.component';
 import { TemplateContainerComponent } from './container/container.component';
-import { TemplateErrorComponent } from './error/error.component';
+import { TemplateEventComponent } from './event/event.component';
 import { TemplateLoadsComponent } from './loads/loads.component';
 
 /**
@@ -50,7 +50,7 @@ export class TemplateRootModule {
   declarations: [
     TemplateBasicComponent,
     TemplateContainerComponent,
-    TemplateErrorComponent,
+    TemplateEventComponent,
     TemplateLoadsComponent,
   ],
   exports: [
@@ -66,7 +66,7 @@ export class TemplateRootModule {
 
     TemplateBasicComponent,
     TemplateContainerComponent,
-    TemplateErrorComponent,
+    TemplateEventComponent,
     TemplateLoadsComponent,
 
     FormModule,

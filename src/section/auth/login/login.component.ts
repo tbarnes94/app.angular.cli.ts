@@ -17,7 +17,7 @@ import { FormSubmit } from './form.helpers';
   template: `
     <template-basic
       *ngIf='( this.translations$ | async ) as translations'
-      [error]='( this.error$ | async )'
+      [event]='( this.event$ | async )'
       [loads]='( this.loader$ | async )'
       [modules]='( this.modules$ | async )'
       [title]='translations.title'
@@ -58,14 +58,6 @@ export class AuthLoginComponent extends TemplateContainerComponent {
    */
   public onComplete(input: any): void {
     return FormSubmit(this.common, input);
-  }
-
-  /**
-   * https://angular.io/api/core/OnInit
-   * https://angular.io/api/core/OnInit#ngOnInit
-   */
-  public ngOnInit(): void {
-    this.key$.next('auth.login');
   }
 
 }

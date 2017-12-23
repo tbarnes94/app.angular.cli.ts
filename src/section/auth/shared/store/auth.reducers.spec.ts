@@ -1,12 +1,13 @@
 import { ApiResponse } from '../../../../modules/api';
+import { StoreEvent } from '../../../../modules/commons';
 import { TestReducer } from '../../../../modules/tests/test.reducer.tests';
 import { TestReducerAction } from '../../../../modules/tests/test.reducer.tests';
 import { TestSuite } from '../../../../modules/tests/test.suite.tests';
 import { AuthToken } from '../types/auth.token';
-import { AuthError } from './auth.actions';
+import { AuthEvent } from './auth.actions';
 import { AuthLoader } from './auth.actions';
 import { AuthLoginComplete } from './auth.actions';
-import { authErrorReducer } from './auth.reducers';
+import { authEventReducer } from './auth.reducers';
 import { authLoaderReducer } from './auth.reducers';
 import { authTokenReducer } from './auth.reducers';
 import { authReducers as reducers } from './auth.reducers';
@@ -20,20 +21,20 @@ const samplez: ApiResponse<AuthToken> = new ApiResponse(new AuthToken(null, null
 TestSuite(title, subtitle, '', () => {
   TestReducer<any>(
     reducers, {
-      error: null,
+      event: null,
       loader: false,
       token: null,
     },
   );
 });
 
-subtitle = 'authErrorReducer';
+subtitle = 'authEventReducer';
 TestSuite(title, subtitle, '', () => {
-  TestReducer<typeof samples>(authErrorReducer, null);
+  TestReducer<StoreEvent>(authEventReducer, null);
 });
 
-TestSuite(title, subtitle, 'for error', () => {
-  TestReducerAction<AuthError, typeof samples, typeof samples>(AuthError, authErrorReducer, samples, samples);
+TestSuite(title, subtitle, 'for event', () => {
+  TestReducerAction<AuthEvent, StoreEvent, StoreEvent>(AuthEvent, authEventReducer, null, null);
 });
 
 subtitle = 'authLoaderReducer';

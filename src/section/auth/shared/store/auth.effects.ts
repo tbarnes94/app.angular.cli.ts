@@ -8,7 +8,7 @@ import { CommonReset } from '../../../../modules/commons';
 import { TemplateCommonEffects } from '../../../../modules/template';
 import { AuthCredentials } from '../types/auth.credentials';
 import { AuthToken } from '../types/auth.token';
-import { AuthError } from './auth.actions';
+import { AuthEvent } from './auth.actions';
 import { AuthLoader } from './auth.actions';
 import { AUTH_LOGIN_START } from './auth.actions';
 import { AUTH_LOGIN_COMPLETE } from './auth.actions';
@@ -27,10 +27,10 @@ export class AuthEffects extends TemplateCommonEffects {
    * http://reactivex.io/documentation/observable.html
    */
   @Effect()
-  public readonly LoginStart$: Observable<Action> = this.build$<AuthActions, AuthLoader, AuthError, AuthLoginComplete, ApiResponse<AuthToken>>(
+  public readonly LoginStart$: Observable<Action> = this.build$<AuthActions, AuthLoader, AuthEvent, AuthLoginComplete, ApiResponse<AuthToken>>(
     AUTH_LOGIN_START,
     AuthLoader,
-    AuthError,
+    AuthEvent,
     AuthLoginComplete,
     (o: AuthCredentials) => {
       const auth: string = 'admin:secret!';
