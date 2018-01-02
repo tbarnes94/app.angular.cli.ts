@@ -30,7 +30,7 @@ export class FormService
   {
     return Observable
       .combineLatest( language$ , translations$ , modules$ , loads$ , datas$ , options$ )
-      .map( ( o ) => ({ language : o[0] , translations : o[1], modules : o[2] , loads : o[3] , datas : o[4] , options : o[5] }) )
+      .map( ( o ) => ({ language : o[0] , translations : o[1], modules : o[2] , loader : o[3] , datas : o[4] , options : o[5] }) )
       .filter( ( o ) => ( !isEmpty( o.language ) && !isEmpty( o.translations ) && !isEmpty( o.modules ) && !!o.options ) )
       .map( ( o : any ) =>
       {

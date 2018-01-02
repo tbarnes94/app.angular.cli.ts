@@ -21,7 +21,7 @@ import { ObjectAny } from '../../helpers' ;
     <div *ngIf=
       '(
         ( this.event ) &&
-        ( this.event.type === "error" )
+        ( this.event.key === "error" )
       )'
       class='mat-error-section'
       >

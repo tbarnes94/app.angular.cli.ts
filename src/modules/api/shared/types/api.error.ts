@@ -1,6 +1,5 @@
 /** @imports */
-import { HttpErrorResponse } from '@angular/common/http' ;
-
+import { HttpResponseBase } from '@angular/common/http' ;
 import { ApiErrorContent } from './api.error.content' ;
 
 /**
@@ -10,7 +9,7 @@ export class ApiError
 {
   public constructor(
     public readonly error : ApiErrorContent | any ,
-    public readonly response? : HttpErrorResponse ,
+    public readonly response? : HttpResponseBase ,
     public readonly timestamp? : Date ,
   ) {}
 
