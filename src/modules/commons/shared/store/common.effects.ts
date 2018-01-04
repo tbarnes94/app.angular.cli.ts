@@ -33,7 +33,7 @@ export class CommonEffects
     Complete : Class<C> ,
     request : Function ,
   )
-  : Observable< E | C >
+  : Observable<any>
   {
     return this.actions$
       .ofType( action )
@@ -43,11 +43,13 @@ export class CommonEffects
       .do( ( o ) => this.common.dispatch( new Loads( true ) ) )
       .concatMap( request.bind( this ) )
       .do( ( o ) => this.common.dispatch( new Loads( false ) ) )
-      .map( ( o : any | ApiError ) =>
+      .map( ( o : any ) =>
       {
-        return ( o.content )
-          ? new Complete( new ApiResponse( o.content , null , o.timestamp ) )
-          : this.exception<E>( o , Event )
+        this.common.totop() ;
+        this.common.dispatch( this.event<E>( o , Event ) ) ;
+        return ( !!o.content )
+          ? new Complete( o )
+          : new Complete( null )
           ;
       })
       ;
@@ -55,15 +57,18 @@ export class CommonEffects
 
   /**
    * @param r
-   * @param Action
+   * @param Event
    * @returns CommonAction
    */
-  public exception<T>( r : ApiError , Action : Class<T> ) : T
+  public event<E>( r : any /* ApiResponse<any> | ApiError */ , Event : Class<E> ) : E
   {
-    this.common.totop() ;
-    return ( r && r.error && r.error.message )
-      ? new Action( new StoreEvent( 'error' , r.response , r.timestamp , r.error.message ) )
-      : new Action( new StoreEvent( 'error' , r.response , r.timestamp , '00000' ) )
+    return ( !r.content )
+      ? ( !!r.error && !!r.error.message )
+        ? new Event( new StoreEvent( 'error' , r.response , r.timestamp , r.error.message ) )
+        : new Event( new StoreEvent( 'error' , r.response , r.timestamp , '00000' ) )
+      : ( !!r.content && !!r.content.message )
+        ? new Event( new StoreEvent( 'success' , r.response , r.timestamp , r.content.message ) )
+        : new Event( null )
       ;
   }
 
