@@ -56,7 +56,7 @@ export class AuthEffects extends TemplateCommonEffects {
   @Effect({ dispatch: false })
   public readonly LoginComplete$: Observable<Action> = this.actions$
     .ofType(AUTH_LOGIN_COMPLETE)
-    .map((o) => o.payload)
+    .map((o: any) => o.payload)
     .filter((o: any) => (!!o && !!o.content && !!o.content.access_token))
     .do((o) => this.common.redirect([ 'dashboard' ]))
   ;
