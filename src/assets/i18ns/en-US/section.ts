@@ -58,7 +58,6 @@ export const Translations: any = {
           'required': 'Selects required error.',
         },
         'options': [
-          { 'title': '(blank)', 'value': null },
           { 'title': 'One', 'value': 'one' },
           { 'title': 'Two', 'value': 'two' },
           { 'title': 'Three', 'value': 'three' },

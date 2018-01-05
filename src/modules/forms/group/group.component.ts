@@ -159,15 +159,12 @@ import { FormControl } from '../shared/types/basic/form.schemas' ;
                     (blur)='this.ngOnChanges()'
                     class='mat-select-element'
                     >
-                    <!--
                     <option
-                      *ngIf='( input.label )'
                       [disabled]='true'
                       [value]='null'
                       >
-                      {{ this.toAny( input.label , this.forms ) }}
+                      {{ ( input.hint ) ? this.toAny( input.label , this.forms ) : '' }}
                     </option>
-                    -->
                     <option
                       *ngFor='let option of ( this.toAny( input.options , this.forms ) )'
                       [value]='option.value'

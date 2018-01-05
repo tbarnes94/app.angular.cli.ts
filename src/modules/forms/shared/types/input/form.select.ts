@@ -21,6 +21,7 @@ export class FormSelect extends FormAbstractInput
     public readonly value : boolean | string = null ,
     public readonly width : string = null ,
     public readonly options : FormAny | Array<FormOption> = new Array() ,
+    public readonly hint : boolean = false ,
   ) {
     super
     (
