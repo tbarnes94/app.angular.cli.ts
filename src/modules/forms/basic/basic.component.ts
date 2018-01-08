@@ -309,7 +309,7 @@ export class FormsBasicComponent extends CommonComponent
     if ( keys.length > 0 ) {
 
       const first : any = input[ keys[ 0 ] ] ;
-      const keyz : Array<string> = ( isObject( first ) )
+      const keyz : Array<string> = ( isObject( first ) && !first._isAMomentObject )
         ? Object.keys( first )
         : new Array()
         ;
