@@ -3,7 +3,6 @@ import { DOCUMENT } from '@angular/common' ;
 import { Inject } from '@angular/core' ;
 import { Injectable } from '@angular/core' ;
 import { DateAdapter } from '@angular/material' ;
-import { NativeDateAdapter } from '@angular/material' ;
 import { Title } from '@angular/platform-browser' ;
 import { BehaviorSubject } from 'rxjs/Rx' ;
 import { Observable } from 'rxjs/Rx' ;
@@ -140,7 +139,7 @@ export class TranslateService
     protected readonly common : CommonService ,
     protected readonly options : TranslateOptions ,
     @Inject( DOCUMENT ) protected readonly document : any ,
-    protected readonly dates : DateAdapter<NativeDateAdapter> ,
+    protected readonly dates : DateAdapter<any> ,
     protected readonly title : Title ,
   ) {
     this.language$.filter( ( o ) => ( !o ) ).subscribe( this.onEmptyEvent.bind( this ) ) ;

@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms' ;
 import { ReactiveFormsModule } from '@angular/forms' ;
 import { MatButtonModule } from '@angular/material' ;
 import { MatCheckboxModule } from '@angular/material' ;
+import { MAT_DATE_FORMATS } from '@angular/material' ;
 import { MatDatepickerModule } from '@angular/material' ;
 import { MatInputModule } from '@angular/material' ;
 import { MatRadioModule } from '@angular/material' ;
@@ -19,6 +20,26 @@ import { FormsBasicComponent } from './basic/basic.component' ;
 import { FormsGroupComponent } from './group/group.component' ;
 import { FormsSectionComponent } from './section/section.component' ;
 import { FormService } from './shared/service/form.service' ;
+
+/**
+ * https://github.com/angular/material2/blob/master/src/material-moment-adapter/adapter/moment-date-formats.ts
+ */
+export const FORM_DATE_FORMATS : any =
+{
+  display :
+  {
+    monthYearLabel : 'MMM YYYY' ,
+    monthYearA11yLabel : 'MMMM YYYY' ,
+    dateA11yLabel : 'YYYY-MM-DD' ,
+    dateInput : 'YYYY-MM-DD' ,
+  } ,
+
+  parse :
+  {
+    dateInput : null ,
+  } ,
+
+} ;
 
 /**
  * https://angular.io/api/core/NgModule
@@ -72,6 +93,7 @@ export class FormModule
       ngModule : FormRootModule ,
       providers :
       [
+        { provide : MAT_DATE_FORMATS , useValue : FORM_DATE_FORMATS } ,
         FormService ,
       ] ,
     } ;

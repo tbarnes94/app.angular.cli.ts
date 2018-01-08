@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MatNativeDateModule } from '@angular/material';
+import { MatMomentDateModule } from '@angular/material-moment-adapter' ;
 
 import { CoreModule } from './core/core.module';
 import { AppRouteModule } from './root/app-route.module';
@@ -30,7 +30,7 @@ TranslateLocales();
   imports: [
 
     /** node_modules */
-    MatNativeDateModule,
+    MatMomentDateModule,
 
     /** application */
     AppRouteModule,
