@@ -67,7 +67,7 @@ export class CommonEffects
         ? new Event( new StoreEvent( 'error' , r.response , r.timestamp , r.error.message ) )
         : new Event( new StoreEvent( 'error' , r.response , r.timestamp , '00000' ) )
       : ( !!r.content && !!r.content.message )
-        ? new Event( new StoreEvent( 'success' , r.response , r.timestamp , r.content.message ) )
+        ? new Event( new StoreEvent( 'message' , r.response , r.timestamp , r.content.message ) )
         : new Event( null )
       ;
   }
