@@ -64,12 +64,41 @@ export class CommonEffects
   {
     return ( !r.content )
       ? ( !!r.error && !!r.error.message )
-        ? new Event( new StoreEvent( 'error' , r.response , r.timestamp , r.error.message ) )
-        : new Event( new StoreEvent( 'error' , r.response , r.timestamp , '00000' ) )
+        ? new Event( this.message( r , r.error.message ) )
+        : new Event( this.message( r , '00500' ) )
       : ( !!r.content && !!r.content.message )
-        ? new Event( new StoreEvent( 'message' , r.response , r.timestamp , r.content.message ) )
+        ? new Event( this.message( r , r.content.message ) )
         : new Event( null )
       ;
+  }
+
+  /**
+   * @param r
+   * @param m
+   * @returns StoreEvent
+   */
+  public message( r : any /* ApiResponse<any> | ApiError */ , m : string ) : StoreEvent
+  {
+    const t : string = m.substr( 2 , 1 ) ;
+    const n : number = parseInt( t , 10 ) ;
+    const key : string =
+      ( n >= 0 && n <= 1 )
+      ? 'info'
+      : ( n >= 2 && n <= 3 )
+        ? 'success'
+        : ( n >= 4 && n <= 9 )
+          ? 'error'
+          : 'error'
+      ;
+
+    return new StoreEvent
+      (
+        key ,
+        r.response ,
+        r.timestamp ,
+        m ,
+      ) ;
+
   }
 
   /**
