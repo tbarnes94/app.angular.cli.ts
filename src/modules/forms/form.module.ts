@@ -28,10 +28,10 @@ export const FORM_DATE_FORMATS : any =
 {
   display :
   {
-    monthYearLabel : 'MMM YYYY' ,
-    monthYearA11yLabel : 'MMMM YYYY' ,
-    dateA11yLabel : 'YYYY-MM-DD' ,
     dateInput : 'YYYY-MM-DD' ,
+    dateA11yLabel : 'YYYY-MM-DD' ,
+    monthYearA11yLabel : 'MMMM YYYY' ,
+    monthYearLabel : 'MMM YYYY' ,
   } ,
 
   parse :
