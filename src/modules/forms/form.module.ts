@@ -36,7 +36,7 @@ export const FORM_DATE_FORMATS : any =
 
   parse :
   {
-    dateInput : null ,
+    dateInput : 'YYYY-MM-DD' ,
   } ,
 
 } ;
