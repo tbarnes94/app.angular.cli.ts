@@ -1,7 +1,14 @@
 {
-  "version": "0.0.0",
-  "name": "app.angular.cli.ts",
+  "$schema": "./node_modules/ng-packagr/package.schema.json",
+  "version": "1.0.0",
+  "name": "@terrandominion/angular",
   "license": "MIT",
+  "ngPackage": {
+    "dest": "./dist",
+    "lib": {
+      "entryFile": "index.ts"
+    }
+  },
   "scripts": {
 
     "ng": "ng",
@@ -35,11 +42,12 @@
     "prebuild": "yarn run clean:dist",
     "build": "ng build --target \"production\"",
 
+    "version": "yarn run build",
     "preversion": "yarn run doc && yarn run lint && yarn run test:single",
-    "version": "yarn run build"
+    "package": "ng-packagr -p \"package.json\"",
+    "publish": "npm publish \"./dist\""
 
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "5.1.2",
     "@angular/cdk": "5.0.2",
@@ -87,6 +95,7 @@
     "karma-jasmine": "1.1.0",
     "karma-jasmine-html-reporter": "0.2.2",
     "karma-mocha-reporter": "2.2.5",
+    "ng-packagr": "2.0.0-rc.9",
     "protractor": "5.2.0",
     "ts-node": "3.3.0",
     "tslint": "5.8.0",

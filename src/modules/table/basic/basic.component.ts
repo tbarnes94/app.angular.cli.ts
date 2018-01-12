@@ -4,7 +4,7 @@ import { Input } from '@angular/core' ;
 import { ViewEncapsulation } from '@angular/core' ;
 import { CommonContainerComponent } from '@kuwas/angular' ;
 import { replace } from '@kuwas/angular' ;
-import * as firstBy from 'thenby' ;
+import * as firstby from 'thenby' ;
 import { BehaviorSubject } from 'rxjs/Rx' ;
 import { Observable } from 'rxjs/Rx' ;
 
@@ -16,6 +16,8 @@ import { TableControl } from '../shared/types/basic/table.schemas' ;
 import { TableSchemas } from '../shared/types/basic/table.schemas' ;
 import { TableHead } from '../shared/types/cell/table.head' ;
 import { TableRow } from '../shared/types/row/table.row' ;
+
+let firstBy = firstby ;
 
 /**
  * https://angular.io/api/core/Component
