@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/ng-packagr/package.schema.json",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "name": "@terrandominion/angular",
   "license": "MIT",
   "ngPackage": {
@@ -62,7 +62,7 @@
     "@angular/platform-browser": "5.1.2",
     "@angular/platform-browser-dynamic": "5.1.2",
     "@angular/router": "5.1.2",
-    "@kuwas/angular": "5.25.0",
+    "@kuwas/angular": "5.25.2",
     "@ngrx/effects": "4.1.1",
     "@ngrx/router-store": "4.1.1",
     "@ngrx/store": "4.1.1",
