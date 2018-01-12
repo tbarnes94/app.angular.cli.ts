@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Routes } from '@angular/router';
-
-import { CommonPreloadStrategy } from '../../modules/commons';
+import { CommonPreloadStrategy } from '@kuwas/angular';
 
 /**
  * https://angular.io/api/router/Routes

@@ -1,10 +1,9 @@
+import { CommonActionsTypes } from '@kuwas/angular';
 import { routerReducer } from '@ngrx/router-store';
 import { ActionReducer } from '@ngrx/store';
 import { ActionReducerMap } from '@ngrx/store';
 import { MetaReducer } from '@ngrx/store';
 import { combineReducers } from '@ngrx/store';
-
-import { COMMON_RESET } from '../../../modules/commons';
 
 /**
  * https://github.com/ngrx/platform
@@ -80,7 +79,7 @@ export function storage(reducer: ActionReducer<any>): ActionReducer<any> {
  */
 export function clear(reducer: ActionReducer<any>): ActionReducer<any> {
   return (state: any, action: any): any => {
-    return ( action.type === COMMON_RESET )
+    return ( action.type === CommonActionsTypes.Reset as string )
       ? reducer({ common: state.common, translate: state.translate }, action)
       : reducer(state, action)
       ;

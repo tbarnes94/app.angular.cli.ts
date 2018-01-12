@@ -1,8 +1,7 @@
 /** @imports */
 import { Injectable } from '@angular/core' ;
-
-import { CommonEffects } from '../../../commons' ;
-import { ObjectStrings } from '../../../helpers' ;
+import { CommonEffects } from '@kuwas/angular' ;
+import { ObjectStrings } from '@kuwas/angular' ;
 
 /**
  * https://angular.io/api/core/Injectable

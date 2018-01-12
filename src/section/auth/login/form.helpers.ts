@@ -1,6 +1,6 @@
 import { Validators } from '@angular/forms';
+import { CommonService } from '@kuwas/angular';
 
-import { CommonService } from '../../../modules/commons';
 import { FormAction } from '../../../modules/forms';
 import { FormGroup } from '../../../modules/forms';
 import { FormInput } from '../../../modules/forms';

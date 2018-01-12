@@ -1,19 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CommonContainerComponent } from '@kuwas/angular';
+import { CommonService } from '@kuwas/angular';
+import { ObjectAny } from '@kuwas/angular';
+import { ServerEventService } from '@kuwas/angular';
+import { TranslateService } from '@kuwas/angular';
+import { WebSocketService } from '@kuwas/angular';
+import { WebWorkerService } from '@kuwas/angular';
 import { BehaviorSubject } from 'rxjs/Rx';
 import { Observable } from 'rxjs/Rx';
 
 import { AuthService } from '../../../section/auth/shared/service/auth.service';
-import { CommonContainerComponent } from '../../commons/container/container.component';
-import { CommonService } from '../../commons/shared/service/common.service';
 import { FormService } from '../../forms/shared/service/form.service';
-import { ObjectAny } from '../../helpers/shared/types/object.any';
-import { ServerEventService } from '../../streams/shared/service/server.event.service';
-import { WebSocketService } from '../../streams/shared/service/web.socket.service';
-import { WebWorkerService } from '../../streams/shared/service/web.worker.service';
 import { TableService } from '../../table/shared/service/table.service';
-import { TranslateService } from '../../translate/shared/service/translate.service';
 
 /**
  * https://angular.io/api/core/Component

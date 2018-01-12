@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { ModuleWithProviders } from '@angular/core';
+import { CommonModule } from '@kuwas/angular';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
-import { CommonModule } from '../../modules/commons';
 import { TemplateModule } from '../../modules/template';
 import { AuthRouteModule } from './auth-route.module';
 import { AuthLoginComponent } from './login/login.component';

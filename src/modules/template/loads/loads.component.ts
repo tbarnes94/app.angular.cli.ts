@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { Input } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
+import { CommonComponent } from '@kuwas/angular';
+import { ObjectAny } from '@kuwas/angular';
 import { BehaviorSubject } from 'rxjs/Rx';
 import { Observable } from 'rxjs/Rx';
 import { Subject } from 'rxjs/Rx';
-
-import { CommonComponent } from '../../commons';
-import { ObjectAny } from '../../helpers';
 
 /**
  * https://angular.io/api/core/Component

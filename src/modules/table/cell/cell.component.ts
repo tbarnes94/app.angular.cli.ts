@@ -4,8 +4,8 @@ import { EventEmitter } from '@angular/core' ;
 import { Input } from '@angular/core' ;
 import { Output } from '@angular/core' ;
 import { ViewEncapsulation } from '@angular/core' ;
+import { CommonComponent } from '@kuwas/angular' ;
 
-import { CommonComponent } from '../../commons' ;
 import { TableSort } from '../shared/types/functions/table.sorts' ;
 
 /**

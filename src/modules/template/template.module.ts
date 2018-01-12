@@ -9,10 +9,10 @@ import { MatIconModule } from '@angular/material';
 import { MatProgressBarModule } from '@angular/material';
 import { MatProgressSpinnerModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@kuwas/angular';
 
 import { FormModule } from '../forms';
 import { TableModule } from '../table';
-import { TranslateModule } from '../translate';
 import { TemplateBasicComponent } from './basic/basic.component';
 import { TemplateContainerComponent } from './container/container.component';
 import { TemplateEventComponent } from './event/event.component';

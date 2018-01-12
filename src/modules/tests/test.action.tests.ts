@@ -1,6 +1,6 @@
 /** @imports */
-import { CommonAction } from '../commons/shared/store/common.action' ;
-import { Class } from '../helpers' ;
+import { Class } from '@kuwas/angular' ;
+import { CommonAction } from '@kuwas/angular' ;
 
 /** @exports */
 export function TestAction< A extends CommonAction<P> , P >( Action : Class<A> , type : string , payload : P ) : void

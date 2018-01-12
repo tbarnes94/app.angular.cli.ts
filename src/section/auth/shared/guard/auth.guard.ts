@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
+import { CommonGuard } from '@kuwas/angular';
+import { CommonService } from '@kuwas/angular';
 import { Observable } from 'rxjs/Rx';
 
-import { CommonGuard } from '../../../../modules/commons';
-import { CommonService } from '../../../../modules/commons';
 import { AuthService } from '../service/auth.service';
 
 /**

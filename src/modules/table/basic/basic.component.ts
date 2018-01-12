@@ -2,12 +2,12 @@
 import { Component } from '@angular/core' ;
 import { Input } from '@angular/core' ;
 import { ViewEncapsulation } from '@angular/core' ;
+import { CommonContainerComponent } from '@kuwas/angular' ;
+import { replace } from '@kuwas/angular' ;
 import * as firstBy from 'thenby' ;
 import { BehaviorSubject } from 'rxjs/Rx' ;
 import { Observable } from 'rxjs/Rx' ;
 
-import { CommonContainerComponent } from '../../commons' ;
-import { replace } from '../../helpers' ;
 import { TablePage } from '../shared/types/functions/table.pages' ;
 import { TablePages } from '../shared/types/functions/table.pages' ;
 import { TablePageSchemas } from '../shared/types/functions/table.pages' ;

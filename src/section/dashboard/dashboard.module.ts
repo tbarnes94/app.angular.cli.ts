@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ModuleWithProviders } from '@angular/core';
+import { CommonModule } from '@kuwas/angular';
 
-import { CommonModule } from '../../modules/commons';
 import { TemplateModule } from '../../modules/template';
 import { DashboardRouteModule } from './dashboard-route.module';
 import { DashboardFormsComponent } from './forms/forms.component';

@@ -5,11 +5,11 @@ import { Input } from '@angular/core' ;
 import { Output } from '@angular/core' ;
 import { ViewEncapsulation } from '@angular/core' ;
 import { FormGroup } from '@angular/forms' ;
+import { CommonComponent } from '@kuwas/angular' ;
+import { ObjectStrings } from '@kuwas/angular' ;
 import { BehaviorSubject } from 'rxjs/Rx' ;
 import { Observable } from 'rxjs/Rx' ;
 
-import { CommonComponent } from '../../commons' ;
-import { ObjectStrings } from '../../helpers' ;
 import { FormControl } from '../shared/types/basic/form.schemas' ;
 
 /**

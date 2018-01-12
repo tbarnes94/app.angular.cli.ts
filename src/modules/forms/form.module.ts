@@ -14,8 +14,8 @@ import { MatRadioModule } from '@angular/material' ;
 import { MatSelectModule } from '@angular/material' ;
 import { MatTooltipModule } from '@angular/material' ;
 import { RouterModule } from '@angular/router' ;
+import { CommonModule as CommonModuleExternal } from '@kuwas/angular' ;
 
-import { CommonModule as CommonModuleExternal } from '../commons' ;
 import { FormsBasicComponent } from './basic/basic.component' ;
 import { FormsGroupComponent } from './group/group.component' ;
 import { FormsSectionComponent } from './section/section.component' ;

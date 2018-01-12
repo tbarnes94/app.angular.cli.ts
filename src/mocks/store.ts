@@ -1,7 +1,6 @@
+import { CommonAction } from '@kuwas/angular';
 import { Observable } from 'rxjs/Rx';
 import { Subject } from 'rxjs/Rx';
-
-import { CommonAction } from '../modules/commons';
 
 /**
  * https://github.com/ngrx/store

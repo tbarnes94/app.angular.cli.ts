@@ -1,9 +1,9 @@
+import { ApiResponse } from '@kuwas/angular';
+import { CommonReducer } from '@kuwas/angular';
+import { StoreEvent } from '@kuwas/angular';
 import { ActionReducer } from '@ngrx/store';
 import { combineReducers } from '@ngrx/store';
 
-import { ApiResponse } from '../../../../modules/api';
-import { CommonReducer } from '../../../../modules/commons';
-import { StoreEvent } from '../../../../modules/commons';
 import { AuthToken } from '../types/auth.token';
 import { AUTH_EVENT } from './auth.actions';
 import { AuthEvent } from './auth.actions';
@@ -16,17 +16,17 @@ import { AuthActions } from './auth.actions';
 /**
  * https://github.com/ngrx/platform
  */
-export const authEventReducer: ActionReducer<StoreEvent, AuthEvent> = CommonReducer<StoreEvent, AuthEvent>(AUTH_EVENT, null);
+export const authEventReducer: ActionReducer<StoreEvent, AuthEvent> = CommonReducer<AuthEvent, StoreEvent>(AUTH_EVENT, null);
 
 /**
  * https://github.com/ngrx/platform
  */
-export const authLoaderReducer: ActionReducer<boolean, AuthLoader> = CommonReducer<boolean, AuthLoader>(AUTH_LOADER, false);
+export const authLoaderReducer: ActionReducer<boolean, AuthLoader> = CommonReducer<AuthLoader, boolean>(AUTH_LOADER, false);
 
 /**
  * https://github.com/ngrx/platform
  */
-export const authTokenReducer: ActionReducer<ApiResponse<AuthToken>, AuthLoginComplete> = CommonReducer<ApiResponse<AuthToken>, AuthLoginComplete>(AUTH_LOGIN_COMPLETE, null);
+export const authTokenReducer: ActionReducer<ApiResponse<AuthToken>, AuthLoginComplete> = CommonReducer<AuthLoginComplete, ApiResponse<AuthToken>>(AUTH_LOGIN_COMPLETE, null);
 
 /**
  * https://github.com/ngrx/platform

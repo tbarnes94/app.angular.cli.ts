@@ -1,8 +1,7 @@
 /** @imports */
+import { Class } from '@kuwas/angular' ;
+import { CommonAction } from '@kuwas/angular' ;
 import { ActionReducer } from '@ngrx/store' ;
-
-import { CommonAction } from '../commons/shared/store/common.action' ;
-import { Class } from '../helpers' ;
 
 /** @exports */
 export function TestReducer<S>( Reducer : any , results : S ) : void

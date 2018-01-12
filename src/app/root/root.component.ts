@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
+import { CommonComponent } from '@kuwas/angular';
+import { CommonService } from '@kuwas/angular';
+import { TranslateLanguage } from '@kuwas/angular';
+import { TranslateService } from '@kuwas/angular';
 import { Observable } from 'rxjs/Rx';
 
-import { CommonComponent } from '../../modules/commons';
-import { CommonService } from '../../modules/commons';
-import { TranslateLanguage } from '../../modules/translate';
-import { TranslateService } from '../../modules/translate';
 import { AuthService } from '../../section/auth';
 
 /**

@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { MatMomentDateModule } from '@angular/material-moment-adapter' ;
+import { ApiModule } from '@kuwas/angular';
+import { CommonModule } from '@kuwas/angular';
+import { StreamModule } from '@kuwas/angular';
+import { TranslateLocales } from '@kuwas/angular';
+import { TranslateModule } from '@kuwas/angular';
 
 import { CoreModule } from './core/core.module';
 import { AppRouteModule } from './root/app-route.module';
 import { AppRootComponent } from './root/root.component';
 import { StoreModule } from './shared/store.module';
 
+import { Translations } from '../assets/i18ns';
 import { environment } from '../environments/environment';
-import { TranslateLocales } from '../modules/translate';
-
-import { ApiModule } from '../modules/api';
-import { CommonModule } from '../modules/commons';
 import { FormModule } from '../modules/forms';
-import { StreamModule } from '../modules/streams';
 import { TableModule } from '../modules/table';
 import { TemplateModule } from '../modules/template';
-import { TranslateModule } from '../modules/translate';
 
 import { AuthModule } from '../section/auth';
 import { DashboardModule } from '../section/dashboard';
@@ -38,13 +38,18 @@ TranslateLocales();
     StoreModule,
 
     /** modules */
-    ApiModule.forRoot(environment.api),
+    ApiModule.forRoot(
+      environment.api,
+    ),
     CommonModule.forRoot(),
     FormModule.forRoot(),
     StreamModule.forRoot(),
     TableModule.forRoot(),
     TemplateModule.forRoot(),
-    TranslateModule.forRoot(environment.translate),
+    TranslateModule.forRoot(
+      environment.translate,
+      Translations,
+    ),
     CommonModule,
     TemplateModule,
 

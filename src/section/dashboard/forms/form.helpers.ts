@@ -1,6 +1,10 @@
 import { Validators } from '@angular/forms';
+import { AlphaAllPattern } from '@kuwas/angular';
+import { NumericAllPattern } from '@kuwas/angular';
+import { CommonService } from '@kuwas/angular';
+import { toRegex } from '@kuwas/angular';
+import { toRegexGroup } from '@kuwas/angular';
 
-import { CommonService } from '../../../modules/commons';
 import { FormAction } from '../../../modules/forms';
 import { FormCheck } from '../../../modules/forms';
 import { FormDatepicker } from '../../../modules/forms';
@@ -10,10 +14,6 @@ import { FormRadio } from '../../../modules/forms';
 import { FormSchemas } from '../../../modules/forms';
 import { FormSection } from '../../../modules/forms';
 import { FormSelect } from '../../../modules/forms';
-import { AlphaAllPattern } from '../../../modules/helpers';
-import { NumericAllPattern } from '../../../modules/helpers';
-import { toRegex } from '../../../modules/helpers';
-import { toRegexGroup } from '../../../modules/helpers';
 
 /**
  * https://angular.io/api/forms/FormGroup

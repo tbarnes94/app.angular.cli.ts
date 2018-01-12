@@ -1,8 +1,7 @@
 /** @imports */
 import { tick } from '@angular/core/testing' ;
-
-import { CommonGuard } from '../commons/shared/guard/common.guard' ;
-import { Class } from '../helpers' ;
+import { Class } from '@kuwas/angular' ;
+import { CommonGuard } from '@kuwas/angular' ;
 
 /** @exports */
 export function TestGuard< G extends CommonGuard , R >( Guard : Class<G> , results : R ) : void

@@ -2,8 +2,7 @@
 import { Component } from '@angular/core' ;
 import { Input } from '@angular/core' ;
 import { ViewEncapsulation } from '@angular/core' ;
-
-import { CommonComponent } from '../../commons' ;
+import { CommonComponent } from '@kuwas/angular' ;
 
 /**
  * https://angular.io/api/core/Component

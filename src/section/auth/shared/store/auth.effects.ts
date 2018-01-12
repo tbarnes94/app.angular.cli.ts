@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
+import { ApiResponse } from '@kuwas/angular';
+import { CommonReset } from '@kuwas/angular';
 import { Effect } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
-import { ApiResponse } from '../../../../modules/api';
-import { CommonReset } from '../../../../modules/commons';
 import { TemplateCommonEffects } from '../../../../modules/template';
 import { AuthCredentials } from '../types/auth.credentials';
 import { AuthToken } from '../types/auth.token';

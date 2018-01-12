@@ -1,6 +1,7 @@
-import { ApiResponse } from '../../../../modules/api';
-import { CommonAction } from '../../../../modules/commons';
-import { StoreEvent } from '../../../../modules/commons';
+import { ApiResponse } from '@kuwas/angular';
+import { CommonAction } from '@kuwas/angular';
+import { StoreEvent } from '@kuwas/angular';
+
 import { AuthCredentials } from '../types/auth.credentials';
 import { AuthToken } from '../types/auth.token';
 

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
+import { CommonService } from '@kuwas/angular';
+import { StoreOperator } from '@kuwas/angular';
+import { toProperty } from '@kuwas/angular';
 import { Observable } from 'rxjs/Rx';
 
-import { StoreOperator } from '../../../../modules/commons';
-import { toProperty } from '../../../../modules/helpers';
-import { CommonService } from '../../../../modules/commons/shared/service/common.service';
 import { AuthToken } from '../types/auth.token';
 
 /**

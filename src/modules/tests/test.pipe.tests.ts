@@ -1,6 +1,6 @@
 /** @imports */
-import { CommonPipe } from '../commons/shared/pipes/common.pipe' ;
-import { Class } from '../helpers' ;
+import { Class } from '@kuwas/angular' ;
+import { CommonPipe } from '@kuwas/angular' ;
 
 /** @exports */
 export function TestPipe< P extends CommonPipe , C , R >( Pipe : Class<P> , current : any , results : R , ...options : Array<any> ) : void

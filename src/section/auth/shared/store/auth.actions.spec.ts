@@ -1,5 +1,6 @@
-import { ApiResponse } from '../../../../modules/api';
-import { StoreEvent } from '../../../../modules/commons';
+import { ApiResponse } from '@kuwas/angular';
+import { StoreEvent } from '@kuwas/angular';
+
 import { TestAction } from '../../../../modules/tests/test.action.tests';
 import { TestSuite } from '../../../../modules/tests/test.suite.tests';
 import { AuthCredentials } from '../types/auth.credentials';

@@ -1,5 +1,6 @@
-import { ApiResponse } from '../../../../modules/api';
-import { StoreEvent } from '../../../../modules/commons';
+import { ApiResponse } from '@kuwas/angular';
+import { StoreEvent } from '@kuwas/angular';
+
 import { TestReducer } from '../../../../modules/tests/test.reducer.tests';
 import { TestReducerAction } from '../../../../modules/tests/test.reducer.tests';
 import { TestSuite } from '../../../../modules/tests/test.suite.tests';
