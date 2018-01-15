@@ -25,11 +25,13 @@ import { StoreEvent } from '@kuwas/angular' ;
       class='mat-error-section'
       >
       <mat-icon>error</mat-icon>
-      <span [innerHTML]=
+      <span
+        *ngFor='let message of this.event.message'
+        [innerHTML]=
         '
-          ( this.modules.event[ this.event.message ] )
-          ? this.modules.event[ this.event.message ]
-          : this.event.message
+          ( this.modules.event[ message ] )
+          ? this.modules.event[ message ]
+          : message
         '
         role='alert'
         >
