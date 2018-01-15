@@ -19,6 +19,9 @@ export const Translations: any = {
     },
   },
   'forms': {
+    'actions': {
+      'title': 'Form actions fr'
+    },
     'datepicker': {
       'label': 'Calendar label fr',
       'open': 'Press to open calendar. Press escape to close calendar. fr',

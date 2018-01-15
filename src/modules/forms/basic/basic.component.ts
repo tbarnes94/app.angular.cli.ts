@@ -104,6 +104,7 @@ import { FormSection as FormSectionSchema } from '../shared/types/group/form.sec
       <!-- actions -->
       <nav
         class='mat-form-actions'
+        [attr.aria-label]='this.schemas.translations.actions.title'
         role='navigation'
         >
         <span

@@ -17,7 +17,10 @@ import { CommonComponent } from '@kuwas/angular' ;
     <!-- header -->
     <header>
       <!-- title -->
-      <h2 *ngIf='( this.title )' >
+      <h2
+        *ngIf='( this.title )'
+        class='title2'
+        >
         {{ this.title }}
       </h2>
       <!-- subtitle -->
