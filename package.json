@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/ng-packagr/package.schema.json",
-  "version": "5.0.2",
+  "version": "5.0.3",
   "name": "@terrandominion/angular",
   "license": "MIT",
   "ngPackage": {
