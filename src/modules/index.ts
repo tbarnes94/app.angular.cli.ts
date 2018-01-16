@@ -1,3 +1,2 @@
-export * from './forms';
-export * from './table';
-export * from './template';
+export * from './forms/index';
+export * from './table/index';
