@@ -25,6 +25,7 @@ import { TableSort } from '../shared/types/functions/table.sorts' ;
     '[class.table-cell-body]' : '( this.type === "body" )' ,
     '[class.table-cell-right]' : '( this.align === "r" )' ,
     '[class.table-cell-left]' : '( this.align === "l" )' ,
+    '[class.table-cell-empty]' : '( !this.value )' ,
     '[class.table-cell-icon]' : '( !!this.icon )' ,
     '[style.width]' : 'this.width + "%"' ,
 
