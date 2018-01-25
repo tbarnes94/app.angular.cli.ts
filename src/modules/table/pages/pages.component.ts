@@ -95,12 +95,12 @@ export class TablePagesComponent extends CommonComponent
   /**
    * https://angular.io/api/core/Input
    */
-  @Input() public readonly translations : any = {} ;
+  @Input() public readonly schemas : TablePageSchemas = null ;
 
   /**
    * https://angular.io/api/core/Input
    */
-  @Input() public readonly schemas : TablePageSchemas = null ;
+  @Input() public readonly translations : any = {} ;
 
   /**
    * https://angular.io/api/core/Output

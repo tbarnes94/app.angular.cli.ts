@@ -10,14 +10,14 @@ export class TableRow<T> extends TableAbstractRow<T>
   (
     public readonly key : string = null ,
     public readonly raw : any = {} ,
-    public readonly route : Array<string> = null ,
+    public readonly click : string = null ,
     public readonly children : Array<T> = new Array() ,
   ) {
     super
     (
       key ,
       raw ,
-      route ,
+      click ,
       children ,
     ) ;
   }

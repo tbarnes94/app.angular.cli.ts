@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
+import { TableClick } from '../../../modules/table';
 import { TableSchemas } from '../../../modules/table';
 import { TemplateContainerComponent } from '../../../modules/template';
 import { TableBuild } from './table.helpers';
@@ -25,6 +26,7 @@ import { TableBuild } from './table.helpers';
       <div class='template-content' >
         <table-basic
           *ngIf='( this.schemas$ | async ) as schemas'
+          (onClickEvent)='this.onClickTable( $event )'
           [schemas]='schemas'
           >
           <div class='table-empty' >
@@ -51,5 +53,13 @@ export class DashboardTableComponent extends TemplateContainerComponent {
     )
     .takeUntil(this.destroy$)
     ;
+
+  /**
+   * https://angular.io/guide/user-input
+   * @param input
+   */
+  public onClickTable(input: TableClick): void {
+    console.log(input);
+  }
 
 }

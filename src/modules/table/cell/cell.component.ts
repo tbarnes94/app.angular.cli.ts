@@ -6,6 +6,8 @@ import { Output } from '@angular/core' ;
 import { ViewEncapsulation } from '@angular/core' ;
 import { CommonComponent } from '@kuwas/angular' ;
 
+import { TableControl } from '../shared/types/basic/table.schemas' ;
+import { TableClick } from '../shared/types/functions/table.click' ;
 import { TableSort } from '../shared/types/functions/table.sorts' ;
 
 /**
@@ -21,9 +23,9 @@ import { TableSort } from '../shared/types/functions/table.sorts' ;
     '[class.table-cell]' : 'true' ,
     '[class.table-cell-head]' : '( this.type === "head" )' ,
     '[class.table-cell-body]' : '( this.type === "body" )' ,
-    '[class.table-cell-click]' : '( this.type === "body-click" )' ,
     '[class.table-cell-right]' : '( this.align === "r" )' ,
     '[class.table-cell-left]' : '( this.align === "l" )' ,
+    '[class.table-cell-icon]' : '( !!this.icon )' ,
     '[style.width]' : 'this.width + "%"' ,
 
     '[attr.aria-sort]' : '( !!this.order ) ? ( this.order === "d" ) ? "descending" : "ascending" : null' ,
@@ -34,44 +36,89 @@ import { TableSort } from '../shared/types/functions/table.sorts' ;
   template :
   `
     <!-- th -->
-    <button
-      *ngIf='( this.type === "head" )'
+    <button *ngIf=
+      '(
+        this.value &&
+        this.type === "head"
+      )'
       (click)='this.onSorts( this.key , this.order )'
       >
       <span>
         {{ this.value }}
       </span>
-      <i
-        [ngClass]=
-        '{
-          "fa-sort" : ( !this.order ) ,
-          "fa-sort-down" : ( this.order === "d" ) ,
-          "fa-sort-up" : ( this.order === "a" )
-        }'
-        aria-hidden='true'
-        class='fa'
-        >
-      </i>
+      <span class='ico' >
+        <i
+          [ngClass]=
+          '{
+            "fa-sort" : ( !this.order ) ,
+            "fa-sort-down" : ( this.order === "d" ) ,
+            "fa-sort-up" : ( this.order === "a" )
+          }'
+          aria-hidden='true'
+          class='fa'
+          >
+        </i>
+      </span>
     </button>
     <!-- td -->
-    <div *ngIf=
-      '(
-        this.type === "body" ||
-        this.type === "body-click"
-      )'
+    <div
+      *ngIf='( this.type === "body" )'
       >
-      <span>
-        {{ this.value }}
-      </span>
-      <i *ngIf=
-        '(
-          this.last &&
-          this.type === "body-click"
-        )'
-        class='fa fa-chevron-right'
-        aria-hidden='true'
+      <!-- template -->
+      <ng-container
+        *ngIf='( this.click ) ; then clickenable else clickdisable ;'
         >
-      </i>
+      </ng-container>
+      <!-- clickenable -->
+      <ng-template #clickenable >
+        <a
+          [routerLink]=''
+          (click)='this.onClick( this.click , this.schemas )'
+          >
+          <ng-container *ngTemplateOutlet='content' ></ng-container>
+        </a>
+      </ng-template>
+      <!-- clickdisable -->
+      <ng-template #clickdisable >
+        <ng-container *ngTemplateOutlet='content' ></ng-container>
+      </ng-template>
+      <!-- content -->
+      <ng-template #content >
+        <span>
+          {{ ( this.value ) ? this.value : '&nbsp;' }}
+        </span>
+        <ng-container
+          *ngIf='( this.icon )'
+          >
+          <ng-container
+            *ngIf='( this.icon === "chevron-right" ) ; then contentbutton else contenticon ;'
+            >
+          </ng-container>
+        </ng-container>
+      </ng-template>
+      <!-- contentbutton -->
+      <ng-template #contentbutton >
+        <button
+          class='ico'
+          [attr.aria-label]='this.translations.click'
+          >
+          <ng-container *ngTemplateOutlet='icons' ></ng-container>
+        </button>
+      </ng-template>
+      <!-- contenticon -->
+      <ng-template #contenticon >
+        <span class='ico' >
+          <ng-container *ngTemplateOutlet='icons' ></ng-container>
+        </span>
+      </ng-template>
+      <!-- icons -->
+      <ng-template #icons >
+        <i 
+          class='fa fa-{{ this.icon }}'
+          aria-hidden='true'
+          >
+        </i>
+      </ng-template>
     </div>
   ` ,
 })
@@ -81,6 +128,16 @@ export class TableCellComponent extends CommonComponent
    * https://angular.io/api/core/Input
    */
   @Input() public readonly key : string = null ;
+
+  /**
+   * https://angular.io/api/core/Input
+   */
+  @Input() public readonly schemas : TableControl = null ;
+
+  /**
+   * https://angular.io/api/core/Input
+   */
+  @Input() public readonly translations : any = {} ;
 
   /**
    * https://angular.io/api/core/Input
@@ -105,7 +162,22 @@ export class TableCellComponent extends CommonComponent
   /**
    * https://angular.io/api/core/Input
    */
+  @Input() public readonly click : string = null ;
+
+  /**
+   * https://angular.io/api/core/Input
+   */
+  @Input() public readonly icon : string = null ;
+
+  /**
+   * https://angular.io/api/core/Input
+   */
   @Input() public readonly type : string = 'body' ;
+
+  /**
+   * https://angular.io/api/core/Output
+   */
+  @Output() public readonly onClickEvent : EventEmitter<TableClick> = new EventEmitter() ;
 
   /**
    * https://angular.io/api/core/Output
@@ -113,19 +185,14 @@ export class TableCellComponent extends CommonComponent
   @Output() public readonly onSortsEvent : EventEmitter<TableSort> = new EventEmitter() ;
 
   /**
-   * https://angular.io/api/core/Input
+   * https://angular.io/guide/user-input
+   * @param key
+   * @param datas
    */
-  @Input() public readonly index : number = 0 ;
-
-  /**
-   * https://angular.io/api/core/Input
-   */
-  @Input() public readonly first : boolean = false ;
-
-  /**
-   * https://angular.io/api/core/Input
-   */
-  @Input() public readonly last : boolean = false ;
+  public onClick( key : string , datas : TableControl ) : void
+  {
+    this.onClickEvent.next( new TableClick( key , datas ) ) ;
+  }
 
   /**
    * https://angular.io/guide/user-input
@@ -134,14 +201,14 @@ export class TableCellComponent extends CommonComponent
    */
   public onSorts( key : string , order : string ) : void
   {
-    this.onSortsEvent.next
-    ({
-      key : key ,
-      order : ( order )
+    this.onSortsEvent.next( new TableSort
+    (
+      key ,
+      ( order )
         ? ( order === 'a' ) ? 'd' : null
         : 'a'
         ,
-    }) ;
+    )) ;
   }
 
 }

@@ -8,6 +8,7 @@ export * from './shared/types/basic/table.schemas' ;
 export * from './shared/types/cell/table.abstract.cell' ;
 export * from './shared/types/cell/table.cell' ;
 export * from './shared/types/cell/table.head' ;
+export * from './shared/types/functions/table.click' ;
 export * from './shared/types/functions/table.pages' ;
 export * from './shared/types/functions/table.sorts' ;
 export * from './shared/types/row/table.abstract.row' ;

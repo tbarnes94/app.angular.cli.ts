@@ -22,21 +22,23 @@ export function TableBuild(o: any): TableSchemas {
       undefined,
       undefined, [
         new TableHead('id',     t.columns.id,     ( o.width > 1000 ), undefined,  10, undefined),
-        new TableHead('name',   t.columns.name,   undefined,          undefined,  30, undefined),
+        new TableHead('name',   t.columns.name,   undefined,          undefined,  25, undefined),
         new TableHead('gender', t.columns.gender, undefined,          undefined,  20, undefined),
         new TableHead('amount', t.columns.amount, undefined,          'r',        20, undefined),
         new TableHead('date',   t.columns.date,   undefined,          undefined,  20, undefined),
+        new TableHead(null,     null,             undefined,          undefined,   5, undefined),
       ],
     ),
     d.map((i) => new TableRow(
       i.id,
       i,
-      [ './', i.id ], [
-        new TableCell('id',     i.id,                           ( o.width > 1000 ), undefined,  undefined),
-        new TableCell('name',   i.name,                         undefined,          undefined,  undefined),
-        new TableCell('gender', i.gender,                       undefined,          undefined,  undefined),
-        new TableCell('amount', o.currency.transform(i.amount), undefined,          'r',        undefined),
-        new TableCell('date',   o.date.transform(i.date),       undefined,          undefined,  undefined),
+      'onClickRow', [
+        new TableCell('id',     i.id,                           ( o.width > 1000 ), undefined,  undefined,  'onClickCell',  undefined),
+        new TableCell('name',   i.name,                         undefined,          undefined,  undefined,  undefined,      undefined),
+        new TableCell('gender', i.gender,                       undefined,          undefined,  undefined,  undefined,      undefined),
+        new TableCell('amount', o.currency.transform(i.amount), undefined,          'r',        undefined,  undefined,      undefined),
+        new TableCell('date',   o.date.transform(i.date),       undefined,          undefined,  undefined,  undefined,      undefined),
+        new TableCell(null,     null,                           undefined,          undefined,  undefined,  undefined,      'chevron-right'),
       ],
     )),
     [

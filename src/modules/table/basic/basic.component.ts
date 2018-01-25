@@ -1,6 +1,8 @@
 /** @imports */
 import { Component } from '@angular/core' ;
+import { EventEmitter } from '@angular/core' ;
 import { Input } from '@angular/core' ;
+import { Output } from '@angular/core' ;
 import { ViewEncapsulation } from '@angular/core' ;
 import { CommonContainerComponent } from '@kuwas/angular' ;
 import { replace } from '@kuwas/angular' ;
@@ -11,6 +13,7 @@ import { Observable } from 'rxjs/Rx' ;
 import { TablePage } from '../shared/types/functions/table.pages' ;
 import { TablePages } from '../shared/types/functions/table.pages' ;
 import { TablePageSchemas } from '../shared/types/functions/table.pages' ;
+import { TableClick } from '../shared/types/functions/table.click' ;
 import { TableSort } from '../shared/types/functions/table.sorts' ;
 import { TableControl } from '../shared/types/basic/table.schemas' ;
 import { TableSchemas } from '../shared/types/basic/table.schemas' ;
@@ -54,6 +57,8 @@ let firstBy = firstby ;
           <tr
             *ngIf='( this.heads$ | async ) as heads'
             [key]='heads.key'
+            [schemas]='heads'
+            [translations]='this.schemas.translations'
             (onSortsEvent)='this.onSorts( $event )'
             [children]='heads.children'
             [type]='"head"'
@@ -64,34 +69,33 @@ let firstBy = firstby ;
         <!-- tbody -->
         <tbody>
           <ng-container
-            *ngFor='let one of bodys ; even as even ; index as index ; first as first ; last as last ;'
+            *ngFor='let one of bodys ; even as even ;'
             >
-            <!-- route -->
+            <!-- click -->
             <tr
-              *ngIf='( one.route )'
+              *ngIf='( one.click )'
               [key]='one.key'
-              [label]='this.schemas.translations.click'
-              (click)='this.onClick( $event , one.route )'
-              (keypress)='this.onClick( $event , one.route )'
+              [schemas]='one'
+              [translations]='this.schemas.translations'
+              (onClickEvent)='this.onClick( $event )'
+              (keypress)='this.onClickRow( $event , one.click , one )'
+              (click)='this.onClickRow( $event , one.click , one )'
               [children]='one.children'
               [type]='"body-click"'
               [sequence]='( even ) ? "e" : "o"'
-              [index]='index'
-              [first]='first'
-              [last]='last'
               table-row
               >
             </tr>
-            <!-- non-route -->
+            <!-- non-click -->
             <tr
-              *ngIf='( !one.route )'
+              *ngIf='( !one.click )'
               [key]='one.key'
+              [schemas]='one'
+              [translations]='this.schemas.translations'
+              (onClickEvent)='this.onClick( $event )'
               [children]='one.children'
               [type]='"body"'
               [sequence]='( even ) ? "e" : "o"'
-              [index]='index'
-              [first]='first'
-              [last]='last'
               table-row
               >
             </tr>
@@ -105,8 +109,8 @@ let firstBy = firstby ;
         <nav
           *ngIf='( this.pages$ | async ) as pages'
           [key]='"pages"'
-          [translations]='this.schemas.translations.pages'
           [schemas]='pages.schemas'
+          [translations]='this.schemas.translations.pages'
           (onPagesEvent)='this.onPages( $event )'
           [children]='pages.pages'
           table-pages
@@ -132,6 +136,11 @@ export class TableBasicComponent extends CommonContainerComponent
    * https://angular.io/api/core/Input
    */
   @Input() public readonly schemas : TableSchemas = null ;
+
+  /**
+   * https://angular.io/api/core/Output
+   */
+  @Output() public readonly onClickEvent : EventEmitter<TableClick> = new EventEmitter() ;
 
   /**
    * http://reactivex.io/documentation/subject.html
@@ -368,17 +377,27 @@ export class TableBasicComponent extends CommonContainerComponent
 
   /**
    * https://angular.io/guide/user-input
-   * @param event
    * @param input
    */
-  public onClick( event : any , input : Array<string> ) : void
+  public onClick( input : TableClick ) : void
+  {
+    this.onClickEvent.next( input ) ;
+  }
+
+  /**
+   * https://angular.io/guide/user-input
+   * @param event
+   * @param key
+   * @param value
+   */
+  public onClickRow( event : any , key : string , value : TableRow<TableControl> ) : void
   {
     if (
       ( !event.charCode ) ||
       ( event.charCode === 13 ) ||
       ( event.charCode === 32 )
     ) {
-      this.common.redirect( input ) ;
+      this.onClick( new TableClick( key , value ) ) ;
     }
   }
 

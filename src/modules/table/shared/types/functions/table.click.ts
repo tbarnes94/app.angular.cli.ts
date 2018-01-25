@@ -1,17 +1,17 @@
 /** @imports */
 import { TableAbstract } from '../basic/table.abstract' ;
+import { TableControl } from '../basic/table.schemas' ;
+import { TableRow } from '../row/table.row' ;
 
 /**
  * https://material.angular.io/components/table/overview
  */
-export abstract class TableAbstractRow<T> extends TableAbstract
+export class TableClick extends TableAbstract
 {
   public constructor
   (
     public readonly key : string = null ,
-    public readonly raw : any = {} ,
-    public readonly click : string = null ,
-    public readonly children : Array<T> = new Array() ,
+    public readonly datas : TableControl | TableRow<TableControl> = null ,
   ) {
     super( key ) ;
   }

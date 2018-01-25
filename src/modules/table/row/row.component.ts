@@ -7,7 +7,9 @@ import { ViewEncapsulation } from '@angular/core' ;
 import { CommonComponent } from '@kuwas/angular' ;
 
 import { TableControl } from '../shared/types/basic/table.schemas' ;
+import { TableClick } from '../shared/types/functions/table.click' ;
 import { TableSort } from '../shared/types/functions/table.sorts' ;
+import { TableRow } from '../shared/types/row/table.row' ;
 
 /**
  * https://angular.io/api/core/Component
@@ -27,7 +29,7 @@ import { TableSort } from '../shared/types/functions/table.sorts' ;
     '[class.table-row-odd]' : '( this.sequence === "o" )' ,
 
     '[attr.tabindex]' : '( this.type === "body-click" ) ? "0" : null' ,
-    '[attr.aria-label]' : '( this.type === "body-click" ) ? this.label : null' ,
+    '[attr.aria-label]' : '( this.type === "body-click" ) ? this.translations.click : null' ,
     '[attr.role]' : '"row"' ,
 
   } ,
@@ -35,22 +37,21 @@ import { TableSort } from '../shared/types/functions/table.sorts' ;
   `
     <!-- row -->
     <ng-container
-      *ngFor='let one of this.children ; index as index ; first as first ; last as last ;'
+      *ngFor='let one of this.children ;'
       >
       <ng-container *ngIf='one.shown' >
         <!-- th -->
         <th
           *ngIf='( this.type === "head" )'
           [key]='one.key'
+          [schemas]='one'
+          [translations]='this.translations'
+          (onSortsEvent)='this.onSorts( $event )'
           [value]='one.value'
           [align]='one.align'
           [width]='one.width'
           [order]='one.order'
-          [type]='this.type'
-          (onSortsEvent)='this.onSorts( $event )'
-          [index]='index'
-          [first]='first'
-          [last]='last'
+          [type]='"head"'
           table-cell
           >
         </th>
@@ -62,12 +63,14 @@ import { TableSort } from '../shared/types/functions/table.sorts' ;
             this.type === "body-click"
           )'
           [key]='one.key'
+          [schemas]='one'
+          [translations]='this.translations'
+          (onClickEvent)='this.onClick( $event )'
           [value]='one.value'
           [align]='one.align'
-          [type]='this.type'
-          [index]='index'
-          [first]='first'
-          [last]='last'
+          [click]='one.click'
+          [icon]='one.icon'
+          [type]='"body"'
           table-cell
           >
         </td>
@@ -85,7 +88,17 @@ export class TableRowComponent extends CommonComponent
   /**
    * https://angular.io/api/core/Input
    */
-  @Input() public readonly label : string = null ;
+  @Input() public readonly schemas : TableRow<TableControl> = null ;
+
+  /**
+   * https://angular.io/api/core/Input
+   */
+  @Input() public readonly translations : any = {} ;
+
+  /**
+   * https://angular.io/api/core/Output
+   */
+  @Output() public readonly onClickEvent : EventEmitter<TableClick> = new EventEmitter() ;
 
   /**
    * https://angular.io/api/core/Output
@@ -108,20 +121,13 @@ export class TableRowComponent extends CommonComponent
   @Input() public readonly sequence : string = null ;
 
   /**
-   * https://angular.io/api/core/Input
+   * https://angular.io/guide/user-input
+   * @param input
    */
-  @Input() public readonly index : number = 0 ;
-
-  /**
-   * https://angular.io/api/core/Input
-   */
-  @Input() public readonly first : boolean = false ;
-
-  /**
-   * https://angular.io/api/core/Input
-   */
-  @Input() public readonly last : boolean = false ;
-
+  public onClick( input : TableClick ) : void
+  {
+    this.onClickEvent.next( input ) ;
+  }
 
   /**
    * https://angular.io/guide/user-input

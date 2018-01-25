@@ -13,6 +13,8 @@ export class TableCell extends TableAbstractCell
     public readonly shown : boolean = true ,
     public readonly align : string = 'l' ,
     public readonly width : number = 0 ,
+    public readonly click : string = null ,
+    public readonly icon : string = null ,
   ) {
     super
     (
