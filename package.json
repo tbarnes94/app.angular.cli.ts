@@ -6,7 +6,7 @@
   "ngPackage": {
     "dest": "./dist",
     "lib": {
-      "entryFile": "index.ts"
+      "entryFile": "package.ts"
     }
   },
   "scripts": {
