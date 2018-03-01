@@ -160,7 +160,7 @@ import { FormControl } from '../shared/types/basic/form.schemas' ;
                     class='mat-select-element'
                     >
                     <option
-                      [disabled]='true'
+                      [disabled]='input.required'
                       [value]='null'
                       >
                       {{ ( input.hint ) ? this.toAny( input.label , this.forms ) : '' }}
