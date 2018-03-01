@@ -152,26 +152,26 @@ import { FormControl } from '../shared/types/basic/form.schemas' ;
             <div class='mat-form-field-wrapper' >
               <div class='mat-form-field-flex' >
                 <div class='mat-form-field-infix' >
-                  <select
+                  <mat-select
                     [id]='( this.id + "-" + input.key )'
                     [formControl]='this.model.controls[ input.key ]'
                     [attr.aria-labelledby]='( this.id + "-" + input.key + "-label" )'
                     (blur)='this.ngOnChanges()'
                     class='mat-select-element'
                     >
-                    <option
+                    <mat-option
                       [disabled]='input.required'
                       [value]='null'
                       >
                       {{ ( input.hint ) ? this.toAny( input.label , this.forms ) : '' }}
-                    </option>
-                    <option
+                    </mat-option>
+                    <mat-option
                       *ngFor='let option of ( this.toAny( input.options , this.forms ) )'
                       [value]='option.value'
                       >
                       {{ option.title }}
-                    </option>
-                  </select>
+                    </mat-option>
+                  </mat-select>
                   <div class='mat-form-field-suffix' >
                     <i
                       class='fa fa-caret-down'
